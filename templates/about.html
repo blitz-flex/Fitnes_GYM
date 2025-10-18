@@ -1,0 +1,98 @@
+{% extends "base.html" %}
+
+{% block title %}ჩვენს შესახებ{% endblock %}
+
+{% block content %}
+<header class="hero">
+    <div class="about-hero text-center py-5">
+        <h1 class="display-4 fw-bold mt-5 pt-5">ჩვენს შესახებ</h1>
+        <p class="lead">ჩვენი კლუბი აერთიანებს პროფესიონალებს და მოყვარულებს ჯანმრთელი ცხოვრებისათვის</p>
+    </div>
+</header>
+
+<main>
+    <!-- Basic information -->
+    <section class="container py-5">
+        <div class="row g-4 align-items-center">
+            <div class="col-md-6">
+                <h2 class="display-6 mb-4">ვინ ვართ ჩვენ?</h2>
+                <p class="lead mb-4">Fitness Club არის ადგილი, სადაც პროფესიონალიზმი ხვდება ინოვაციას.</p>
+                <p>ჩვენთან შეგიძლიათ:</p>
+                <ul class="list-unstyled">
+                    <li class="mb-2">✓ ივარჯიშოთ თანამედროვე აღჭურვილობით</li>
+                    <li class="mb-2">✓ მიიღოთ კვალიფიციური რჩევები</li>
+                    <li class="mb-2">✓ შეადგინოთ ინდივიდუალური პროგრამა</li>
+                    <li class="mb-2">✓ გახდეთ უკეთესი ვერსია საკუთარი თავის</li>
+                </ul>
+            </div>
+            <div class="col-md-6">
+                <div class="card border-0 shadow-lg">
+                    <img src="https://www.villagegym.co.uk/media/5825/jebson-101-min.jpg" class="card-img-top" alt="ფიტნეს კლუბი" style="height: 300px; object-fit: cover;">
+                    <div class="card-body text-center">
+                        <h3 class="card-title">ჩვენი გუნდი</h3>
+                        <p class="card-text">გამოცდილი და სერტიფიცირებული მწვრთნელები, რომლებიც დაგეხმარებიან მიზნების მიღწევაში.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Statistics -->
+    <section class="bg-light py-5">
+        <div class="container">
+            <div class="row text-center g-4">
+                <div class="col-md-3">
+                    <h3 class="display-4 fw-bold text-primary">5+</h3>
+                    <p class="text-muted">წელი ბაზარზე</p>
+                </div>
+                <div class="col-md-3">
+                    <h3 class="display-4 fw-bold text-primary">1000+</h3>
+                    <p class="text-muted">კმაყოფილი წევრი</p>
+                </div>
+                <div class="col-md-3">
+                    <h3 class="display-4 fw-bold text-primary">12</h3>
+                    <p class="text-muted">პროფესიონალი მწვრთნელი</p>
+                </div>
+                <div class="col-md-3">
+                    <h3 class="display-4 fw-bold text-primary">6</h3>
+                    <p class="text-muted"> სხვადასხვა პროგრამა</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Coaches Team -->
+    <section class="container py-5">
+        <h2 class="text-center mb-5">ჩვენი მწვრთნელები</h2>
+        <div class="row g-4">
+            <div class="col-md-4">
+                <div class="card border-0 shadow-sm">
+                    <img src="https://images.unsplash.com/photo-1599447292325-2cffaa79bcbb?q=80&w=1406&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" class="card-img-top" alt="იოგას მწვრთნელი" style="height: 250px; object-fit: cover;">
+                    <div class="card-body text-center">
+                        <h5 class="card-title">ანა მაისურაძე</h5>
+                        <p class="card-text text-muted">იოგას ინსტრუქტორი</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card border-0 shadow-sm">
+                    <img src="https://images.unsplash.com/photo-1660156049794-7f386c3013f4?q=80&w=1374&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" class="card-img-top" alt="კროსფიტის მწვრთნელი" style="height: 250px; object-fit: cover;">
+                    <div class="card-body text-center">
+                        <h5 class="card-title">გიორგი კახიძე</h5>
+                        <p class="card-text text-muted">კროსფიტის მწვრთნელი</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card border-0 shadow-sm">
+                    <img src="https://images.unsplash.com/photo-1585892478508-130c50eb7a69?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" class="card-img-top" alt="კრივის მწვრთნელი" style="height: 250px; object-fit: cover;">
+                    <div class="card-body text-center">
+                        <h5 class="card-title">დავით ნოზაძე</h5>
+                        <p class="card-text text-muted">კრივის მწვრთნელი</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
+{% endblock %}

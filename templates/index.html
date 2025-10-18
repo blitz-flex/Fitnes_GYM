@@ -1,0 +1,80 @@
+{% extends "base.html" %}
+
+{% block title %}მთავარი{% endblock %}
+
+{% block content %}
+<header class="hero">
+    <!-- Carousel/Slider -->
+    <div class="carousel-container" style="width: 80%; margin: 20px auto;">
+        <div id="fitnessCarousel" class="carousel slide" data-bs-ride="carousel" data-bs-interval="3000">
+            <!-- Indicators/dots -->
+            <div class="carousel-indicators">
+                <button type="button" data-bs-target="#fitnessCarousel" data-bs-slide-to="0" class="active"></button>
+                <button type="button" data-bs-target="#fitnessCarousel" data-bs-slide-to="1"></button>
+                <button type="button" data-bs-target="#fitnessCarousel" data-bs-slide-to="2"></button>
+            </div>
+
+            <!-- The slideshow/carousel -->
+            <div class="carousel-inner">
+                <div class="carousel-item active">
+                    <img src="https://media.ebony.com/sytwmfsyue/styles/article-hero/2022/11/18/GettyImages-1047643096-1.jpg.webp?t=63f4cd0b.webp" class="d-block w-100" alt="Fitness Image 1" style="height: 600px; object-fit: cover;">
+                    <div class="carousel-caption">
+                        <h3>გახდი უძლიერესი</h3>
+                        <p>დაიწყე ვარჯიში დღესვე</p>
+                    </div>
+                </div>
+                <div class="carousel-item">
+                    <img src="https://cpd.oxfordce.co.uk/wp-content/uploads/2022/09/fitness-diploma.jpg" class="d-block w-100" alt="Fitness Image 2" style="height: 600px; object-fit: cover;">
+                    <div class="carousel-caption">
+                        <h3>პროფესიონალი მწვრთნელები</h3>
+                        <p>ინდივიდუალური მიდგომა</p>
+                    </div>
+                </div>
+                <div class="carousel-item">
+                    <img src="https://www.formfactory.cz/wp-content/uploads/2024/05/vlnena_gym2-1536x864.jpg" class="d-block w-100" alt="Fitness Image 3" style="height: 600px; object-fit: cover;">
+                    <div class="carousel-caption">
+                        <h3>თანამედროვე აღჭურვილობა</h3>
+                        <p>საუკეთესო შედეგებისთვის</p>
+                    </div>
+                </div>
+            </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#fitnessCarousel" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon"></span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#fitnessCarousel" data-bs-slide="next">
+            <span class="carousel-control-next-icon"></span>
+        </button>
+    </div>
+</header>
+
+<main>
+    <!-- Flash Messages -->
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            <div class="container mt-3">
+                {% for category, message in messages %}
+                    <div class="alert alert-{{ 'success' if category == 'success' else 'danger' }} alert-dismissible fade show" role="alert">
+                        {{ message }}
+                        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                    </div>
+                {% endfor %}
+            </div>
+        {% endif %}
+    {% endwith %}
+
+    <section class="programs">
+        <h2 class="section-title">ჩვენი პროგრამები</h2>
+        <div class="workout-cards">
+            {% for program in programs %}
+            <div class="workout-card">
+                <img src="{{ url_for('static', filename='assets/' + program.image) }}" alt="{{ program.name }}" class="card-image">
+                <h3>{{ program.name }}</h3>
+                <p>{{ program.schedule }}</p>
+                <p>{{ program.time }}</p>
+                <span class="price">{{ program.price }} / თვე</span>
+            </div>
+            {% endfor %}
+        </div>
+    </section> 
+</main>
+{% endblock %}

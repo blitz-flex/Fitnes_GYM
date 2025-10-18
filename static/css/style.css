@@ -1,0 +1,207 @@
+/* Base Styles - Core typography and layout */
+body {
+    font-family: 'Poppins', sans-serif;
+    margin: 0;
+    line-height: 1.6;
+    background: #f4f4f4;
+}
+
+/* Navigation Styles - Main navigation bar and its components */
+.navbar {
+    transition: all 0.3s ease;
+    padding: 8px 0;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 1000;
+}
+
+.navbar .nav-link {
+    transition: color 0.3s ease;
+    font-size: 1.1rem;
+    padding: 0.7rem 1.2rem;
+    font-weight: 500;
+}
+
+.navbar .nav-link:hover {
+    color: #5c5656 !important;
+    transform: translateY(-1px);
+}
+
+.navbar-brand {
+    font-weight: 600;
+    font-size: 1.8rem;
+}
+
+.custom-navbar {
+    background: linear-gradient(to right, #4CAF50, #45a049) !important; /* Green gradient background */
+    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+}
+
+/* Main Content Area - Spacing and layout for main content */
+main {
+    padding-top: 80px; /* Increased padding to accommodate fixed navbar */
+}
+
+/* Programs Section - Layout for fitness programs display */
+.programs {
+    padding: 50px 20px;
+    max-width: 1200px;
+    margin: auto;
+}
+
+.section-title {
+    text-align: center;
+    color: #333;
+    margin-bottom: 40px;
+    font-weight: 600;
+}
+
+/* Card Grid Layout - Responsive grid for program cards */
+.workout-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+    padding: 0 20px;
+}
+
+/* Individual Program Card Styling */
+.workout-card {
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    height: 600px;
+    position: relative;
+}
+
+.workout-card:hover {
+    transform: translateY(-5px);
+}
+
+.card-image {
+    width: 100%;
+    height: 300px;
+    object-fit: cover;
+}
+
+.workout-card h3 {
+    color: #333;
+    margin: 15px 20px;
+    font-weight: 600;
+    font-size: 1.5em;
+}
+
+.workout-card p {
+    color: #666;
+    margin: 10px 20px;
+}
+
+.workout-card .price {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: inline-block;
+    text-align: center;
+    background: linear-gradient(135deg, #4CAF50, #45a049);
+    color: white;
+    font-weight: 600;
+    font-size: 1.25em;
+    padding: 12px 25px;
+    border-radius: 25px;
+    box-shadow: 0 4px 15px rgba(76, 175, 80, 0.2);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    white-space: nowrap;
+}
+
+.workout-card h3,
+.workout-card p {
+    text-align: center;
+}
+
+/* Buttons */
+.cta-button {
+    display: inline-block;
+    background: #4CAF50;
+    color: white;
+    padding: 15px 30px;
+    border-radius: 30px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: background 0.3s ease;
+}
+
+.cta-button:hover {
+    background: #253126;
+}
+
+footer {
+    text-align: center;
+    padding: 20px;
+    color: #666;
+    margin-top: 50px;
+}
+
+/* Carousel/Slider Styles - Homepage hero section */
+.carousel-container {
+    margin-top: 76px; /* Spacing below navbar */
+}
+
+.carousel-item img {
+    border-radius: 10px;
+    transition: transform 0.3s ease;
+}
+
+/* Carousel Caption Styling - Text overlay on slider */
+.carousel-caption {
+    background: rgba(0, 0, 0, 0.5);
+    border-radius: 10px;
+    padding: 20px;
+    backdrop-filter: blur(5px);
+}
+
+.carousel-caption h3 {
+    font-size: 2rem;
+    font-weight: 600;
+    margin-bottom: 10px;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+}
+
+.carousel-caption p {
+    font-size: 1.2rem;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+}
+
+/* About Page Styles */
+.about-hero {
+    background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('https://images.unsplash.com/photo-1599058917212-d750089bc07e?q=80&w=1469&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');
+    background-size: cover;
+    background-position: center;
+    color: white;
+    padding: 100px 0;
+    margin-bottom: 30px;
+}
+
+.about-hero h1 {
+    margin-bottom: 20px;
+}
+
+.card {
+    transition: transform 0.3s ease;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+}
+
+.text-primary {
+    color: #4CAF50 !important;
+}
+
+.bg-light {
+    background-color: #f8f9fa !important;
+}

@@ -1,0 +1,76 @@
+{% extends "base.html" %}
+
+{% block title %}რეგისტრაცია{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/form.css') }}">
+{% endblock %}
+
+{% block content %}
+<div class="form-page">
+    <div class="container pt-5">
+        <div class="row justify-content-center">
+            <div class="col-md-8 col-lg-6">
+                <div class="text-center mb-4">
+                    <h1>დაიწყე შენი მოგზაურობა ფიტნესში</h1>
+                    <p class="subtitle">შეავსე ფორმა და ჩვენი გუნდი დაგიკავშირდება</p>
+                </div>
+
+                <!-- Flash Messages -->
+                {% with messages = get_flashed_messages(with_categories=true) %}
+                    {% if messages %}
+                        {% for category, message in messages %}
+                            <div class="alert alert-{{ 'success' if category == 'success' else 'danger' }} alert-dismissible fade show" role="alert">
+                                {{ message }}
+                                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                            </div>
+                        {% endfor %}
+                    {% endif %}
+                {% endwith %}
+
+                <main class="form-container">
+                    <form class="register-form">
+                        <div class="form-group">
+                            <div class="input-with-icon">
+                                <i class="fas fa-user"></i>
+                                <input type="text" name="name" id="name" placeholder="სახელი და გვარი" required>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="input-with-icon">
+                                <i class="fas fa-dumbbell"></i>
+                                <select name="program" id="program" required>
+                                    <option value="" disabled selected>აირჩიეთ პროგრამა</option>
+                                    <option value="yoga">იოგა (₾80/თვე)</option>
+                                    <option value="crossfit">კროსფიტი (₾100/თვე)</option>
+                                    <option value="gym">ძალოსნობა (₾120/თვე)</option>
+                                    <option value="boxing">კრივი (₾90/თვე)</option>
+                                    <option value="pilates">პილატესი (₾85/თვე)</option>
+                                    <option value="swimming">ცურვა (₾150/თვე)</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="input-with-icon">
+                                <i class="fas fa-phone"></i>
+                                <input type="tel" name="phone" id="phone" placeholder="ტელეფონის ნომერი" 
+                                       pattern="[5][0-9]{8}" 
+                                       title="გთხოვთ შეიყვანოთ ქართული მობილურის ნომერი (9 ციფრი, იწყება 5-ით)" 
+                                       required>
+                            </div>
+                        </div>
+
+                        <button type="submit" class="submit-button">
+                            <span>დაიწყე ვარჯიში</span>
+                            <i class="fas fa-arrow-right"></i>
+                        </button>
+                    </form>
+                </main>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
