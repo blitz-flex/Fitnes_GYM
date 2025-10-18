@@ -62,14 +62,20 @@
 .input-with-icon i {
     position: absolute;
     left: 15px;
+    top: 50%;
+    transform: translateY(-50%);
     color: #4CAF50;
     font-size: 1.2em;
     transition: color 0.3s ease;
+    z-index: 1;
+    pointer-events: none;
 }
 
 /* Form Input and Select Styles - Custom form controls */
 .input-with-icon input,
-.input-with-icon select {
+.input-with-icon select,
+.input-with-icon input[type="date"],
+.input-with-icon input[type="file"] {
     width: 100%;
     padding: 15px 15px 15px 45px;
     border: 2px solid #dfe6e9;
@@ -78,6 +84,13 @@
     transition: all 0.3s ease;
     background: white;
     color: #2d3436;
+    height: auto;
+    line-height: normal;
+}
+
+.input-with-icon input[type="file"] {
+    padding-top: 12px;
+    padding-bottom: 12px;
 }
 
 /* Input Focus States - Enhanced visual feedback */
@@ -180,4 +193,93 @@ footer {
         padding: 14px;
         font-size: 1.1em;
     }
+}
+
+
+.form-group .input-with-icon input:not([type="radio"]):not([type="checkbox"]),
+.form-group .input-with-icon select {
+    padding-left: 45px !important;
+    line-height: 1.5;
+}
+
+.form-group .input-with-icon input[type="file"] {
+    color: #6c757d;
+}
+
+/* error style*/
+.form-group .input-with-icon input.is-invalid:not([type="radio"]):not([type="checkbox"]),
+.form-group .input-with-icon select.is-invalid,
+.gender-options.is-invalid {
+    border-color: red !important;
+}
+
+.form-group .invalid-feedback {
+    display: block;
+    color: red;
+    font-size: 0.875em;
+    margin-top: .25rem;
+}
+
+.gender-options.is-invalid + .invalid-feedback {
+    display: block;
+}
+
+/* Hide forms initially */
+#programForm, #simpleForm {
+    display: none;
+}
+
+.registration-choices {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    margin-bottom: 2rem;
+}
+
+.choice-button {
+    flex: 1;
+    max-width: 300px;
+    background-color: #2d302e;
+    color: white;
+    border: none;
+    padding: 20px 30px;
+    border-radius: 10px;
+    font-size: 1.1rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.3s ease;
+}
+
+.choice-button:hover {
+    background-color: #0b5ed7;
+}
+
+.choice-button i {
+    margin-right: 12px;
+}
+
+.gender-label {
+    display: block;
+    margin-bottom: 10px;
+    color: #555;
+}
+
+.gender-options {
+    display: flex;
+    gap: 20px;
+    margin-left: 15px;
+}
+
+.gender-option {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.gender-option label {
+    font-weight: normal;
+    cursor: pointer;
+    margin: 0;
 }
