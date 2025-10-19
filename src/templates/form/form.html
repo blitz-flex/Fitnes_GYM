@@ -1,0 +1,184 @@
+{% extends "partials/base.html" %}
+{% block title %}რეგისტრაცია{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/form.css') }}">
+{% endblock %}
+
+{% block content %}
+<div class="form-page">
+    <div class="form-header">
+        <h1>შემოგვიერთდი დღესვე</h1>
+        <p class="subtitle">აირჩიე რეგისტრაციის ტიპი და დაიწყე შენი ფიტნეს თავგადასავალი!</p>
+    </div>    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            <div class="alert-container">
+                {% for category, message in messages %}
+                    <div class="alert alert-{{ category }} alert-dismissible fade show" role="alert">
+                        <div class="alert-content">
+                            {% if category == 'success' %}
+                                <i class="fas fa-check-circle"></i>
+                            {% elif category == 'danger' %}
+                                <i class="fas fa-exclamation-circle"></i>
+                            {% elif category == 'warning' %}
+                                <i class="fas fa-exclamation-triangle"></i>
+                            {% elif category == 'info' %}
+                                <i class="fas fa-info-circle"></i>
+                            {% endif %}
+                            <span>{{ message }}</span>
+                        </div>
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
+                            <i class="fas fa-times"></i>
+                        </button>
+                    </div>
+                {% endfor %}
+            </div>
+        {% endif %}
+    {% endwith %}
+
+    <div class="registration-choices">
+        <button id="showProgramForm" class="choice-button"><i class="fas fa-calendar-check"></i> პროგრამაზე ჩაწერა</button>
+        <button id="showSimpleForm" class="choice-button"><i class="fas fa-user-plus"></i> ანგარიშის შექმნა</button>
+    </div>
+
+    <div class="form-container">
+        <form id="programForm" class="register-form" method="POST" action="{{ url_for('form.form') }}" novalidate>
+            {{ program_form.hidden_tag() }}
+            <input type="hidden" name="form_type" value="program">
+            <div class="form-group">
+                <div class="input-with-icon">
+                    <i class="fas fa-user"></i>
+                    {{ program_form.name(class="form-control" if not program_form.name.errors else "form-control is-invalid", placeholder="სახელი და გვარი") }}
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="input-with-icon">
+                    <i class="fas fa-dumbbell"></i>
+                     {{ program_form.program(class="form-control" if not program_form.program.errors else "form-control is-invalid") }}
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="input-with-icon">
+                    <i class="fas fa-phone"></i>
+                    {{ program_form.phone(class="form-control" if not program_form.phone.errors else "form-control is-invalid", placeholder="ტელეფონის ნომერი") }}
+                </div>
+            </div>
+            {{ program_form.submit(class="submit-button") }}
+        </form>
+
+        <form id="simpleForm" class="register-form" method="POST" action="{{ url_for('form.form') }}" enctype="multipart/form-data" novalidate>
+            {{ simple_form.hidden_tag() }}
+            <input type="hidden" name="form_type" value="simple">
+            <div class="form-group input-with-icon">
+                <i class="fas fa-user"></i>
+                {{ simple_form.name(class="form-control", placeholder="სახელი და გვარი") }}
+            </div>
+            <div class="form-group input-with-icon">
+                <i class="fas fa-at"></i>
+                {{ simple_form.username(class="form-control", placeholder="მომხმარებლის სახელი") }}
+            </div>
+            <div class="form-group input-with-icon">
+                <i class="fas fa-lock"></i>
+                {{ simple_form.password(class="form-control", placeholder="პაროლი") }}
+            </div>
+            <div class="form-group input-with-icon">
+                <i class="fas fa-lock"></i>
+                {{ simple_form.confirm_password(class="form-control", placeholder="გაიმეორეთ პაროლი") }}
+            </div>
+             <div class="form-group input-with-icon">
+                <i class="fas fa-calendar-alt"></i>
+                {{ simple_form.birthdate(class="form-control", placeholder="დაბადების თარიღი") }}
+            </div>             <div class="form-group input-with-icon">
+                <i class="fas fa-venus-mars"></i>
+                {{ simple_form.gender(class="form-control") }}
+            </div>
+            <div class="form-group input-with-icon">
+                <i class="fas fa-image"></i>
+                {{ simple_form.profile_image(class="form-control") }}
+            </div>
+            {{ simple_form.submit(class="submit-button") }}
+        </form>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const programForm = document.getElementById('programForm');
+        const simpleForm = document.getElementById('simpleForm');
+        const showProgramBtn = document.getElementById('showProgramForm');
+        const showSimpleBtn = document.getElementById('showSimpleForm');
+
+        // Reset to the initial state
+        programForm.style.display = 'none';
+        simpleForm.style.display = 'none';
+
+        function showForm(formToShow, formToHide) {
+            formToShow.style.display = 'block';
+            formToHide.style.display = 'none';
+            
+            // Updating button styles
+            if (formToShow === programForm) {
+                showProgramBtn.classList.add('active');
+                showSimpleBtn.classList.remove('active');
+            } else {
+                showSimpleBtn.classList.add('active');
+                showProgramBtn.classList.remove('active');
+            }
+
+            // animation effect
+            formToShow.classList.add('fade-in');
+            setTimeout(() => {
+                formToShow.classList.remove('fade-in');
+            }, 500);
+        }
+
+        // booton click events
+        showProgramBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            showForm(programForm, simpleForm);
+        });
+        
+        showSimpleBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            showForm(simpleForm, programForm);
+        });
+
+        // form validation
+        const forms = document.querySelectorAll('.register-form');
+        forms.forEach(form => {
+            form.addEventListener('submit', function(e) {
+                if (!this.checkValidity()) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                }
+                form.classList.add('was-validated');
+            });
+
+            // input validation
+            const inputs = form.querySelectorAll('input, select');
+            inputs.forEach(input => {
+                if (input.type !== 'file' && input.type !== 'hidden') {
+                    input.addEventListener('blur', () => {
+                        if (input.value) {
+                            input.classList.add('is-valid');
+                        } else {
+                            input.classList.remove('is-valid');
+                        }
+                    });
+                }
+            });
+        });
+
+
+        const initialFormId = "{{ active_form_id|default('programForm') }}";
+        if (initialFormId === 'simpleForm') {
+            showForm(simpleForm, programForm);
+        } else {
+            showForm(programForm, simpleForm);
+        }
+    });
+</script>
+{% endblock %}
