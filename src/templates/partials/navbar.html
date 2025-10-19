@@ -13,11 +13,26 @@
                     <a class="nav-link {% if request.endpoint == 'main.about' %}active{% endif %}" href="{{ url_for('main.about') }}">ჩვენს შესახებ</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link {% if request.endpoint == 'form.form' %}active{% endif %}" href="{{ url_for('form.form') }}">რეგისტრაცია</a>
+                    <a class="nav-link {% if request.endpoint == 'form.program_registration' %}active{% endif %}" href="{{ url_for('form.program_registration') }}">პროგრამაზე ჩაწერა </a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link {% if request.endpoint == 'main.faq' %}active{% endif %}" href="{{ url_for('main.faq') }}">FAQ</a>
                 </li>
+                {% if current_user.is_authenticated %}
+                    <li class="nav-item">
+                        <a class="nav-link {% if request.endpoint == 'user.profile' %}active{% endif %}" href="{{ url_for('user.profile') }}">პროფილი</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url_for('auth.logout') }}">გასვლა</a>
+                    </li>
+                {% else %}
+                    <li class="nav-item">
+                        <a class="nav-link {% if request.endpoint == 'auth.login' %}active{% endif %}" href="{{ url_for('auth.login') }}">შესვლა</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link {% if request.endpoint == 'auth.register' %}active{% endif %}" href="{{ url_for('auth.register') }}">რეგისტრაცია</a>
+                    </li>
+                {% endif %}
             </ul>
         </div>
     </div>

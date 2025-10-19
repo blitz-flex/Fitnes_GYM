@@ -1,0 +1,52 @@
+{% extends "partials/base.html" %}
+{% block title %}რეგისტრაციის რედაქტირება{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/form.css') }}">
+{% endblock %}
+
+{% block content %}
+<div class="form-page">
+    <div class="form-header">
+        <h1>რეგისტრაციის რედაქტირება</h1>
+        <p class="subtitle">შეცვალეთ თქვენი რეგისტრაციის მონაცემები.</p>
+    </div>
+
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            <div class="alert-container">
+                {% for category, message in messages %}
+                     <div class="alert alert-{{ category }} alert-dismissible fade show" role="alert">
+                        <span>{{ message }}</span>
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                {% endfor %}
+            </div>
+        {% endif %}
+    {% endwith %}
+
+    <div class="form-container">
+        {# The form sends data to the edit_registration route, with a specific registration ID #}
+        <form class="register-form" method="POST" action="{{ url_for('form.edit_registration', registration_id=registration_id) }}" novalidate>
+            {{ form.hidden_tag() }}
+
+            <div class="form-group">
+                {{ form.name.label(class="form-label") }}
+                {{ form.name(class="form-control") }}
+            </div>
+
+            <div class="form-group">
+                {{ form.program.label(class="form-label") }}
+                {{ form.program(class="form-control") }}
+            </div>
+
+            <div class="form-group">
+                {{ form.phone.label(class="form-label") }}
+                {{ form.phone(class="form-control") }}
+            </div>
+
+            {{ form.submit(class="submit-button") }}
+        </form>
+    </div>
+</div>
+{% endblock %}

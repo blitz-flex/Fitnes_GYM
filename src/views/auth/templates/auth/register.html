@@ -1,0 +1,65 @@
+{% extends "partials/base.html" %}
+{% block title %}რეგისტრაცია{% endblock %}
+{% block extra_css %}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/form.css') }}">
+{% endblock %}
+{% block content %}
+<div class="form-page">
+    <div class="form-header">
+        <h1>ანგარიშის შექმნა</h1>
+        <p class="subtitle">შემოგვიერთდი დღესვე და დაიწყე შენი ფიტნეს თავგადასავალი!</p>
+    </div>
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            <div class="alert-container">
+                {% for category, message in messages %}
+                     <div class="alert alert-{{ category }} alert-dismissible fade show" role="alert">
+                        <div class="alert-content">
+                            {% if category == 'success' %}<i class="fas fa-check-circle"></i>{% endif %}
+                            {% if category == 'danger' %}<i class="fas fa-exclamation-circle"></i>{% endif %}
+                            {% if category == 'info' %}<i class="fas fa-info-circle"></i>{% endif %}
+                            <span>{{ message }}</span>
+                        </div>
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"><i class="fas fa-times"></i></button>
+                    </div>
+                {% endfor %}
+            </div>
+        {% endif %}
+    {% endwith %}
+    <div class="form-container">
+        <form id="registrationForm" class="register-form" method="POST" action="{{ url_for('auth.register') }}" enctype="multipart/form-data" novalidate>
+            {{ form.hidden_tag() }}
+            <div class="form-group input-with-icon">
+                <i class="fas fa-user"></i>
+                {{ form.name(class="form-control", placeholder="სახელი და გვარი") }}
+            </div>
+            <div class="form-group input-with-icon">
+                <i class="fas fa-at"></i>
+                {{ form.username(class="form-control", placeholder="მომხმარებლის სახელი") }}
+            </div>
+            <div class="form-group input-with-icon">
+                <i class="fas fa-lock"></i>
+                {{ form.password(class="form-control", placeholder="პაროლი") }}
+            </div>
+            <div class="form-group input-with-icon">
+                <i class="fas fa-lock"></i>
+                {{ form.confirm_password(class="form-control", placeholder="გაიმეორეთ პაროლი") }}
+            </div>
+             <div class="form-group input-with-icon">
+                <i class="fas fa-calendar-alt"></i>
+                {{ form.birthdate(class="form-control", placeholder="დაბადების თარიღი") }}
+            </div>
+             <div class="form-group input-with-icon">
+                <i class="fas fa-venus-mars"></i>
+                {{ form.gender(class="form-control") }}
+            </div>
+            <div class="form-group input-with-icon">
+                <i class="fas fa-image"></i>
+                {{ form.profile_image(class="form-control") }}
+            </div>
+            {{ form.submit(class="submit-button") }}
+        </form>
+    </div>
+</div>
+{% endblock %}

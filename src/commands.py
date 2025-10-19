@@ -5,20 +5,31 @@ from .extensions import db
 from .models.user import UserAccount
 from .models.registration import ProgramRegistration
 
+
 @click.command('init-db')
 @with_appcontext
 def init_db_command():
-    # Clear existing data and create new tables with test data
     db.drop_all()
     db.create_all()
 
-    registrations_data = [{"name": "ნანა ნაცვლიშვილი", "program": "პილატესი", "phone": "555667788"}]
-    users_data = [{"name": "ლუკა ლუკაშვილი", "username": "luka.strong", "password": "password456", "birthdate": date(1995, 8, 15), "gender": "male"}]
-
-    for data in registrations_data:
-        db.session.add(ProgramRegistration(**data))
-    for data in users_data:
-        db.session.add(UserAccount(**data))
+    test_user = UserAccount(
+        name="ლუკა ლუკაშვილი",
+        username="luka.strong",
+        birthdate=date(1995, 8, 15),
+        gender="male"
+    )
+    test_user.set_password("password456")
+    db.session.add(test_user)
 
     db.session.commit()
-    click.echo('✅ ბაზის ინიციალიზაცია დასრულდა!')
+
+    registration = ProgramRegistration(
+        user_id=test_user.id,
+        full_name="ლუკა ლუკაშვილი",
+        program="pilates",
+        phone_number="555667788"
+    )
+    db.session.add(registration)
+
+    db.session.commit()
+    click.echo('✅ ბაზის ინიციალიზაცია დასრულდა! შეიქმნა ტესტ-მომხმარებელი "luka.strong".')
