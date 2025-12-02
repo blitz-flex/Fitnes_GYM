@@ -1,0 +1,122 @@
+/* Ensure content isn't hidden behind the fixed navbar */
+        html, body {
+            height: 100%;
+        }
+        body {
+            padding-top: 56px;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+        .main-content {
+            flex: 1 0 auto;
+        }
+
+        /* Minimalist Footer Styles */
+        .minimalist-footer {
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            color: #495057;
+            padding: 20px 0 15px;
+            text-align: center;
+            border-top: 3px solid #457545;
+            margin-top: auto;
+            box-shadow: 0 -2px 10px rgba(0,0,0,0.1);
+        }
+
+        .footer-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .footer-text {
+            font-size: 0.85rem;
+            margin: 0;
+            line-height: 1.4;
+            color: #6c757d;
+        }
+
+        .footer-brand {
+            color: #5d7e5f;
+            font-weight: 700;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            font-size: 1.05em;
+        }
+
+        .footer-brand:hover {
+            color: #80706f;
+            text-decoration: none;
+            transform: translateY(-1px);
+        }
+
+        .footer-divider {
+            width: 60px;
+            height: 2px;
+            background: linear-gradient(90deg, #e74c3c, #c0392b);
+            border: none;
+            margin: 10px 0;
+            border-radius: 1px;
+        }
+
+        .footer-georgian {
+            font-family: 'Noto Sans Georgian', 'DejaVu Sans', sans-serif;
+            font-size: 0.8rem;
+            color: #6c757d;
+            font-weight: 400;
+            letter-spacing: 0.2px;
+        }
+
+        .footer-social {
+            display: flex;
+            gap: 10px;
+            margin: 5px 0 0 0;
+        }
+
+        .social-link {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 30px;
+            height: 30px;
+            background: rgba(231, 76, 60, 0.1);
+            border: 1px solid rgba(231, 76, 60, 0.3);
+            border-radius: 50%;
+            color: #817270;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            font-size: 0.8rem;
+        }
+
+        .social-link:hover {
+            background: #569e45;
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(231, 76, 60, 0.3);
+        }
+
+        @media (max-width: 768px) {
+            .minimalist-footer {
+                padding: 15px 0 10px;
+            }
+
+            .footer-content {
+                gap: 6px;
+            }
+
+            .footer-text {
+                font-size: 0.8rem;
+            }
+
+            .footer-social {
+                gap: 8px;
+            }
+
+            .social-link {
+                width: 28px;
+                height: 28px;
+                font-size: 0.75rem;
+            }
+        }
+

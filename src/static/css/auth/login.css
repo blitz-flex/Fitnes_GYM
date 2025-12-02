@@ -1,0 +1,200 @@
+.form-page {
+        min-height: 100vh;
+        background: #f8f9fa;
+        padding: 25px 20px 20px;
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .register-form {
+        background: rgba(255, 255, 255, 0.95);
+        padding: 40px;
+        border-radius: 20px;
+        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+        backdrop-filter: blur(10px);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        max-width: 400px;
+        width: 100%;
+    }
+
+    .form-header h1 {
+        color: #333;
+        font-size: 2.2em;
+        margin-bottom: 10px;
+    }
+
+    .form-header .subtitle {
+        color: #666;
+        font-size: 1em;
+    }
+
+    .input-with-icon input {
+        border: 2px solid #e1e5e9;
+        border-radius: 12px;
+        padding: 15px 15px 15px 50px;
+        font-size: 1em;
+        transition: all 0.3s ease;
+    }
+
+    .input-with-icon input:focus {
+        border-color: #4CAF50;
+        box-shadow: 0 0 0 3px rgba(76, 175, 80, 0.1);
+    }
+
+    .submit-btn {
+        width: 100%;
+        padding: 15px;
+        background: #4CAF50;
+        color: white;
+        border: none;
+        border-radius: 12px;
+        font-size: 1.1em;
+        font-weight: 600;
+        cursor: pointer;
+        transition: transform 0.2s ease;
+    }
+
+    .submit-btn:hover {
+        transform: translateY(-2px);
+        background: #45a049;
+        box-shadow: 0 10px 25px rgba(76, 175, 80, 0.3);
+    }
+
+    .form-footer a {
+        color: #4CAF50;
+        font-weight: 600;
+    }
+
+    .flash-messages {
+        margin-bottom: 25px;
+        position: relative;
+    }
+
+    .flash-message {
+        padding: 16px 20px;
+        border-radius: 12px;
+        margin-bottom: 12px;
+        font-size: 0.95em;
+        display: flex;
+        align-items: flex-start;
+        gap: 12px;
+        font-weight: 500;
+        animation: slideDown 0.5s ease-out;
+        position: relative;
+        border-left: 4px solid;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    }
+
+    @keyframes slideDown {
+        from {
+            opacity: 0;
+            transform: translateY(-20px) scale(0.95);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+        }
+    }
+
+    @keyframes slideOut {
+        from {
+            opacity: 1;
+            transform: translateX(0) scale(1);
+            max-height: 100px;
+        }
+        to {
+            opacity: 0;
+            transform: translateX(100%) scale(0.95);
+            max-height: 0;
+            margin: 0;
+            padding: 0;
+        }
+    }
+
+    .flash-message.error {
+        background: linear-gradient(135deg, #fef2f2 0%, #fdf2f2 100%);
+        border-left-color: #ef4444;
+        color: #dc2626;
+    }
+
+    .flash-message.success {
+        background: linear-gradient(135deg, #f0fdf4 0%, #ecfdf5 100%);
+        border-left-color: #22c55e;
+        color: #16a34a;
+    }
+
+    .flash-message.warning {
+        background: linear-gradient(135deg, #fffbeb 0%, #fefce8 100%);
+        border-left-color: #f59e0b;
+        color: #d97706;
+    }
+
+    .flash-message.info {
+        background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%);
+        border-left-color: #3b82f6;
+        color: #1d4ed8;
+    }
+
+    .flash-icon {
+        font-size: 1.2em;
+        margin-top: 2px;
+        flex-shrink: 0;
+    }
+
+    .flash-content {
+        flex: 1;
+        line-height: 1.4;
+    }
+
+    .flash-close {
+        position: absolute;
+        top: 12px;
+        right: 12px;
+        background: none;
+        border: none;
+        font-size: 1.1em;
+        cursor: pointer;
+        color: inherit;
+        opacity: 0.6;
+        transition: opacity 0.2s ease;
+        padding: 4px;
+        border-radius: 4px;
+    }
+
+    .flash-close:hover {
+        opacity: 1;
+        background: rgba(0, 0, 0, 0.1);
+    }
+
+    .flash-progress {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        height: 3px;
+        background: rgba(255, 255, 255, 0.3);
+        border-radius: 0 0 12px 0;
+        animation: progress 5s linear forwards;
+    }
+
+    @keyframes progress {
+        from { width: 100%; }
+        to { width: 0%; }
+    }
+
+    .flash-message.error .flash-progress {
+        background: rgba(239, 68, 68, 0.6);
+    }
+
+    .flash-message.success .flash-progress {
+        background: rgba(34, 197, 94, 0.6);
+    }
+
+    .flash-message.warning .flash-progress {
+        background: rgba(245, 158, 11, 0.6);
+    }
+
+    .flash-message.info .flash-progress {
+        background: rgba(59, 130, 246, 0.6);
+    }

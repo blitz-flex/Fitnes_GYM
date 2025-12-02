@@ -4,177 +4,140 @@
 
 {% block extra_css %}
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-<link rel="stylesheet" href="{{ url_for('static', filename='css/form.css') }}">
-<style>
-    /*  style for user profile page */
-    .profile-page {
-        max-width: 900px;
-        margin: 40px auto;
-        padding: 20px;
-    }
+<link rel="stylesheet" href="{{ url_for('static', filename='css/user/profile.css') }}">
 
-    .profile-card {
-        background-color: #fff;
-        border-radius: 12px;
-        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-        padding: 30px;
-        display: flex;
-        align-items: center;
-        gap: 30px;
-        margin-bottom: 30px;
-    }
-
-    .profile-image-container {
-        flex-shrink: 0;
-    }
-
-    .profile-image {
-        width: 150px;
-        height: 150px;
-        border-radius: 50%;
-        object-fit: cover;
-        border: 4px solid #f0f0f0;
-    }
-
-    .profile-info h2 {
-        font-weight: 700;
-        color: #333;
-        margin-bottom: 15px;
-    }
-
-    .profile-info p {
-        font-size: 1rem;
-        color: #555;
-        margin-bottom: 10px;
-        display: flex;
-        align-items: center;
-    }
-
-    .profile-info p i {
-        margin-right: 12px;
-        color: #007bff;
-        width: 20px;
-        text-align: center;
-    }
-
-    .registrations-section h3 {
-        font-weight: 600;
-        margin-bottom: 20px;
-        color: #333;
-        border-bottom: 2px solid #007bff;
-        padding-bottom: 10px;
-    }
-
-    .registration-card {
-        background-color: #fff;
-        border-radius: 8px;
-        padding: 20px;
-        margin-bottom: 15px;
-        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
-        border-left: 5px solid #007bff;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-    }
-
-    .registration-card p {
-        margin: 0;
-        color: #444;
-    }
-    .registration-card strong {
-        color: #333;
-    }
-
-    /* botton style */
-    .registration-actions {
-        display: flex;
-        gap: 10px;
-    }
-    .action-btn {
-        padding: 8px 15px;
-        border: none;
-        border-radius: 5px;
-        color: white !important;
-        cursor: pointer;
-        text-decoration: none;
-        font-size: 0.9rem;
-        display: inline-flex;
-        align-items: center;
-        gap: 5px;
-        transition: background-color 0.2s ease-in-out;
-    }
-    .edit-btn {
-        background-color: #008000;
-    }
-    .delete-btn {
-        background-color: #dc3545;
-    }
-    .edit-btn:hover {
-        background-color: #e0a800;
-        color: white;
-    }
-    .delete-btn:hover {
-        background-color: #c82333;
-        color: white;
-    }
-
-    .no-registrations {
-        text-align: center;
-        padding: 40px;
-        background-color: #f9f9f9;
-        border-radius: 8px;
-    }
-</style>
 {% endblock %}
 
 {% block content %}
 <div class="profile-page">
-    <div class="profile-card">
-        <div class="profile-image-container">
-            {% if user.profile_image %}
-                <img src="{{ url_for('static', filename='uploads/' + user.profile_image) }}" alt="პროფილის სურათი" class="profile-image">
-            {% else %}
-                <img src="{{ url_for('static', filename='images/default_avatar.png') }}" alt="პროფილის სურათი" class="profile-image">
-            {% endif %}
+    <div class="profile-container">
+        <div class="page-header">
+            <h1>ჩემი პროფილი</h1>
+            <p>მართეთ თქვენი პირადი ინფორმაცია და რეგისტრაციები</p>
         </div>
-        <div class="profile-info">
-            <h2>{{ user.name }}</h2>
-            <p><i class="fas fa-at"></i><strong>მომხმარებელი:</strong> {{ user.username }}</p>
-            <p><i class="fas fa-calendar-alt"></i><strong>დაბადების თარიღი:</strong> {{ user.birthdate.strftime('%d / %m / %Y') }}</p>
-            <p><i class="fas fa-venus-mars"></i><strong>სქესი:</strong> {{ user.gender.capitalize() }}</p>
-        </div>
-    </div>
 
-    <div class="registrations-section">
-        <h3>ჩემი რეგისტრაციები</h3>
+        <div class="profile-card">
+            <div class="profile-header">
+                <div class="profile-image-container">
+                    {% if user.profile_image %}
+                        <img src="{{ url_for('static', filename='uploads/' + user.profile_image) }}" alt="პროფილის სურათი" class="profile-image">
+                    {% else %}
+                        <div class="profile-avatar-icon">
+                            <i class="fas fa-user"></i>
+                        </div>
+                    {% endif %}
+                </div>
 
-        {% if user.registrations %}
-            {% for reg in user.registrations %}
-                {# <<< განახლებული ბლოკი რეგისტრაციის ბარათისთვის #}
-                <div class="registration-card">
-                    <div class="registration-details">
-                        <p><strong>სრული სახელი:</strong> {{ reg.full_name }}</p>
-                        <p><strong>პროგრამა:</strong> {{ program_map.get(reg.program, reg.program) }}</p>
-                        <p><strong>საკონტაქტო ნომერი:</strong> {{ reg.phone_number }}</p>
+                <div class="profile-details">
+                    <h2>{{ user.name }}</h2>
+                </div>
+            </div>
+
+            <div class="profile-info-grid">
+                <div class="info-item">
+                    <div class="info-icon">
+                        <i class="fas fa-at"></i>
                     </div>
-
-                    <div class="registration-actions">
-                        <a href="{{ url_for('form.edit_registration', registration_id=reg.id) }}" class="action-btn edit-btn">
-                            <i class="fas fa-edit"></i> რედაქტირება
-                        </a>
-                        <form action="{{ url_for('form.delete_registration', registration_id=reg.id) }}" method="POST" onsubmit="return confirm('ნამდვილად გსურთ ამ რეგისტრაციის წაშლა?');" style="display: inline;">
-                            <button type="submit" class="action-btn delete-btn">
-                                <i class="fas fa-trash"></i> წაშლა
-                            </button>
-                        </form>
+                    <div class="info-content">
+                        <div class="info-label">მომხმარებელი</div>
+                        <div class="info-value">{{ user.username }}</div>
                     </div>
                 </div>
-            {% endfor %}
-        {% else %}
-            <div class="no-registrations">
-                <p>თქვენ ჯერ არ დარეგისტრირებულხართ არცერთ პროგრამაზე.</p>
-                <a href="{{ url_for('form.program_registration') }}" class="submit-button" style="text-decoration: none; display: inline-block;">პროგრამაზე ჩაწერა</a>
+
+                <div class="info-item">
+                    <div class="info-icon">
+                        <i class="fas fa-calendar-alt"></i>
+                    </div>
+                    <div class="info-content">
+                        <div class="info-label">დაბადების თარიღი</div>
+                        <div class="info-value">{{ user.birthdate.strftime('%d/%m/%Y') }}</div>
+                    </div>
+                </div>
+
+                <div class="info-item">
+                    <div class="info-icon">
+                        <i class="fas fa-venus-mars"></i>
+                    </div>
+                    <div class="info-content">
+                        <div class="info-label">სქესი</div>
+                        <div class="info-value">{{ 'მამრობითი' if user.gender == 'male' else 'მდედრობითი' }}</div>
+                    </div>
+                </div>
             </div>
+        </div>
+
+        {% if not (user.username in ['admin', 'administrator']) %}
+        <div class="registrations-section">
+            <div class="section-header">
+                <h3>
+                    <i class="fas fa-dumbbell"></i>
+                    ჩემი რეგისტრაციები
+                </h3>
+                <a href="{{ url_for('form.program_registration') }}" class="add-registration-btn">
+                    <i class="fas fa-plus"></i>
+                    ახალი რეგისტრაცია
+                </a>
+            </div>
+
+            {% if user.registrations %}
+                <div class="registrations-grid">
+                    {% for reg in user.registrations %}
+                        <div class="registration-card">
+                            <div class="registration-header">
+                                <div class="program-badge">
+                                    <i class="fas fa-fire"></i>
+                                    {{ program_map.get(reg.program, reg.program) }}
+                                </div>
+                                <div class="registration-date">
+                                    <i class="fas fa-clock"></i>
+                                    {{ reg.created_at.strftime('%d.%m.%Y') }}
+                                </div>
+                            </div>
+
+                            <div class="registration-details">
+                                <div class="detail-item">
+                                    <div class="detail-icon">
+                                        <i class="fas fa-user"></i>
+                                    </div>
+                                    <div class="detail-content">
+                                        <div class="detail-label">სახელი</div>
+                                        <div class="detail-value">{{ reg.full_name }}</div>
+                                    </div>
+                                </div>
+
+                                <div class="detail-item">
+                                    <div class="detail-icon">
+                                        <i class="fas fa-phone"></i>
+                                    </div>
+                                    <div class="detail-content">
+                                        <div class="detail-label">ტელეფონი</div>
+                                        <div class="detail-value">{{ reg.phone_number }}</div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="registration-actions">
+                                <form action="{{ url_for('form.delete_registration', registration_id=reg.id) }}" method="POST" style="display: inline;" onsubmit="return confirm('ნამდვილად გსურთ ამ რეგისტრაციის წაშლა?')">
+                                    <button type="submit" class="action-btn delete-btn">
+                                        <i class="fas fa-trash"></i>
+                                        წაშლა
+                                    </button>
+                                </form>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            {% else %}
+                <div class="no-registrations">
+                    <i class="fas fa-clipboard-list"></i>
+                    <p>თქვენ ჯერ არ გაქვთ არცერთი რეგისტრაცია</p>
+                    <a href="{{ url_for('form.program_registration') }}" class="add-registration-btn">
+                        <i class="fas fa-plus"></i>
+                        დაამატე პირველი რეგისტრაცია
+                    </a>
+                </div>
+            {% endif %}
+        </div>
         {% endif %}
     </div>
 </div>

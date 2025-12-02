@@ -1,74 +1,239 @@
-{% extends "partials/base.html" %}{% block title %}მთავარი{% endblock %}
+{% extends "partials/base.html" %}
+{% block title %}FitnessClub - მთავარი{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/main/index.css') }}">
+
+{% endblock %}
 
 {% block content %}
-<header class="hero">
-    <div class="carousel-container" style="width: 80%; margin: 20px auto;">
-        <div id="fitnessCarousel" class="carousel slide" data-bs-ride="carousel" data-bs-interval="3000">
-            <div class="carousel-indicators">
-                <button type="button" data-bs-target="#fitnessCarousel" data-bs-slide-to="0" class="active"></button>
-                <button type="button" data-bs-target="#fitnessCarousel" data-bs-slide-to="1"></button>
-                <button type="button" data-bs-target="#fitnessCarousel" data-bs-slide-to="2"></button>
-            </div>
-
-            <div class="carousel-inner">
-                <div class="carousel-item active">
-                    <img src="https://images.unsplash.com/photo-1571902943202-507ec2618e8f?fm=jpg&q=60&w=3000&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" class="d-block w-100" alt="Fitness Image 1" style="height: 600px; object-fit: cover;">
-                    <div class="carousel-caption">
-                        <h3>გახდი უძლიერესი</h3>
-                        <p>დაიწყე ვარჯიში დღესვე</p>
-                    </div>
-                </div>
-                <div class="carousel-item">
-                    <img src="https://cpd.oxfordce.co.uk/wp-content/uploads/2022/09/fitness-diploma.jpg" class="d-block w-100" alt="Fitness Image 2" style="height: 600px; object-fit: cover;">
-                    <div class="carousel-caption">
-                        <h3>პროფესიონალი მწვრთნელები</h3>
-                        <p>ინდივიდუალური მიდგომა</p>
-                    </div>
-                </div>
-                <div class="carousel-item">
-                    <img src="https://www.formfactory.cz/wp-content/uploads/2024/05/vlnena_gym2-1536x864.jpg" class="d-block w-100" alt="Fitness Image 3" style="height: 600px; object-fit: cover;">
-                    <div class="carousel-caption">
-                        <h3>თანამედროვე აღჭურვილობა</h3>
-                        <p>საუკეთესო შედეგებისთვის</p>
-                    </div>
-                </div>
-            </div>
-        <button class="carousel-control-prev" type="button" data-bs-target="#fitnessCarousel" data-bs-slide="prev">
-            <span class="carousel-control-prev-icon"></span>
-        </button>
-        <button class="carousel-control-next" type="button" data-bs-target="#fitnessCarousel" data-bs-slide="next">
-            <span class="carousel-control-next-icon"></span>
-        </button>
-    </div>
-</header>
-
-<main>
-    {% with messages = get_flashed_messages(with_categories=true) %}
-        {% if messages %}
-            <div class="container mt-3">
-                {% for category, message in messages %}
-                    <div class="alert alert-{{ 'success' if category == 'success' else 'danger' }} alert-dismissible fade show" role="alert">
-                        {{ message }}
-                        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-                    </div>
-                {% endfor %}
-            </div>
-        {% endif %}
-    {% endwith %}
-
-    <section class="programs">
-        <h2 class="section-title">ჩვენი პროგრამები</h2>
-        <div class="workout-cards">
-            {% for program in programs %}
-            <div class="workout-card">
-                <img src="{{ url_for('static', filename='images/' + program.image) }}" alt="{{ program.name }}" class="card-image">
-                <h3>{{ program.name }}</h3>
-                <p>{{ program.schedule }}</p>
-                <p>{{ program.time }}</p>
-                <span class="price">{{ program.price }} / თვე</span>
-            </div>
-            {% endfor %}
+<!-- Hero Section -->
+<section class="hero-section">
+    <div class="container">
+        <h1 class="hero-title">
+            <span class="hero-highlight">ჯანსაღი ცხოვრება</span><br>
+            იწყება აქ
+        </h1>
+        <p class="hero-subtitle">
+            გაამყარე სხეული, გაამტკიცე გონება და მიაღწიე თავის მიზნებს ჩვენს თანამედროვე ფიტნეს ცენტრში
+        </p>
+        <div class="hero-buttons">
+            <a href="{{ url_for('main.about') }}" class="btn-hero secondary">
+                გაიგე მეტი
+            </a>
         </div>
-    </section>
-</main>
+    </div>
+</section>
+
+<!-- Stats Section -->
+<section class="stats-section">
+    <div class="container">
+        <h2 class="section-title">ჩვენი მიღწევები</h2>
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-number">500+</div>
+                <div class="stat-label">კმაყოფილი კლიენტი</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">15</div>
+                <div class="stat-label">პროფესიონალი ტრენერი</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">6</div>
+                <div class="stat-label">სხვადასხვა პროგრამა</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">24/7</div>
+                <div class="stat-label">ღია ყოველდღე</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Programs Section -->
+<section class="programs-section">
+    <div class="container">
+        <h2 class="section-title">ჩვენი პროგრამები</h2>
+        <p class="section-subtitle">
+            აირჩიეთ თქვენთვის შესაფერისი პროგრამა
+        </p>
+
+        <div class="programs-grid">
+            <!-- Yoga -->
+            <div class="program-card">
+                <img src="{{ url_for('static', filename='images/yoga.jpg') }}" alt="იოგა" class="program-image">
+                <div class="program-content">
+                    <h3 class="program-title">იოგა</h3>
+                    <p class="program-description">
+                        სხეულისა და გონების ჰარმონია, მოქნილობის და სტრესის მოხსნა
+                    </p>
+                    <div class="program-details">
+                        <div class="program-detail">
+                            <div class="program-detail-label">განრიგი</div>
+                            <div class="program-detail-value">ორშ-ოთხ-პარ</div>
+                        </div>
+                        <div class="program-detail">
+                            <div class="program-detail-label">დრო</div>
+                            <div class="program-detail-value">09:00-10:30</div>
+                        </div>
+                    </div>
+                    <div class="program-footer">
+                        <div class="program-price">40₾</div>
+                        <a href="{{ url_for('form.program_registration') }}" class="btn-program">
+                            რეგისტრაცია
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Pilates -->
+            <div class="program-card">
+                <img src="{{ url_for('static', filename='images/pilates.jpeg') }}" alt="პილატესი" class="program-image">
+                <div class="program-content">
+                    <h3 class="program-title">პილატესი</h3>
+                    <p class="program-description">
+                        კუნთების გამაგრება და სხეულის კორექცია
+                    </p>
+                    <div class="program-details">
+                        <div class="program-detail">
+                            <div class="program-detail-label">განრიგი</div>
+                            <div class="program-detail-value">ორშ-ოთხ-პარ</div>
+                        </div>
+                        <div class="program-detail">
+                            <div class="program-detail-label">დრო</div>
+                            <div class="program-detail-value">18:00-19:00</div>
+                        </div>
+                    </div>
+                    <div class="program-footer">
+                        <div class="program-price">50₾</div>
+                        <a href="{{ url_for('form.program_registration') }}" class="btn-program">
+                            რეგისტრაცია
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- CrossFit -->
+            <div class="program-card">
+                <img src="{{ url_for('static', filename='images/cros.jpg') }}" alt="CrossFit" class="program-image">
+                <div class="program-content">
+                    <h3 class="program-title">CrossFit</h3>
+                    <p class="program-description">
+                        ინტენსიური ვარჯიშები ძალისა და გამძლეობისთვის
+                    </p>
+                    <div class="program-details">
+                        <div class="program-detail">
+                            <div class="program-detail-label">განრიგი</div>
+                            <div class="program-detail-value">ყოველდღე</div>
+                        </div>
+                        <div class="program-detail">
+                            <div class="program-detail-label">დრო</div>
+                            <div class="program-detail-value">07:00-20:00</div>
+                        </div>
+                    </div>
+                    <div class="program-footer">
+                        <div class="program-price">70₾</div>
+                        <a href="{{ url_for('form.program_registration') }}" class="btn-program">
+                            რეგისტრაცია
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Swimming -->
+            <div class="program-card">
+                <img src="{{ url_for('static', filename='images/sw.jpg') }}" alt="ცურვა" class="program-image">
+                <div class="program-content">
+                    <h3 class="program-title">ცურვა</h3>
+                    <p class="program-description">
+                        წყლის ვარჯიშები ყველა კუნთის ჯგუფისთვის
+                    </p>
+                    <div class="program-details">
+                        <div class="program-detail">
+                            <div class="program-detail-label">განრიგი</div>
+                            <div class="program-detail-value">ყოველდღე</div>
+                        </div>
+                        <div class="program-detail">
+                            <div class="program-detail-label">დრო</div>
+                            <div class="program-detail-value">06:00-22:00</div>
+                        </div>
+                    </div>
+                    <div class="program-footer">
+                        <div class="program-price">60₾</div>
+                        <a href="{{ url_for('form.program_registration') }}" class="btn-program">
+                            რეგისტრაცია
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Boxing -->
+            <div class="program-card">
+                <img src="{{ url_for('static', filename='images/box.jpeg') }}" alt="კრივი" class="program-image">
+                <div class="program-content">
+                    <h3 class="program-title">კრივი</h3>
+                    <p class="program-description">
+                        თვითდაცვა და ფიზიკური მომზადება
+                    </p>
+                    <div class="program-details">
+                        <div class="program-detail">
+                            <div class="program-detail-label">განრიგი</div>
+                            <div class="program-detail-value">სამ-ხუთ-შაბ</div>
+                        </div>
+                        <div class="program-detail">
+                            <div class="program-detail-label">დრო</div>
+                            <div class="program-detail-value">19:00-20:30</div>
+                        </div>
+                    </div>
+                    <div class="program-footer">
+                        <div class="program-price">80₾</div>
+                        <a href="{{ url_for('form.program_registration') }}" class="btn-program">
+                            რეგისტრაცია
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Athletics -->
+            <div class="program-card">
+                <img src="{{ url_for('static', filename='images/Athletics.jpeg') }}" alt="ატლეტიკა" class="program-image">
+                <div class="program-content">
+                    <h3 class="program-title">ატლეტიკა</h3>
+                    <p class="program-description">
+                        კლასიკური ატლეტური ვარჯიშები
+                    </p>
+                    <div class="program-details">
+                        <div class="program-detail">
+                            <div class="program-detail-label">განრიგი</div>
+                            <div class="program-detail-value">ორშ-ოთხ-პარ</div>
+                        </div>
+                        <div class="program-detail">
+                            <div class="program-detail-label">დრო</div>
+                            <div class="program-detail-value">17:00-18:30</div>
+                        </div>
+                    </div>
+                    <div class="program-footer">
+                        <div class="program-price">65₾</div>
+                        <a href="{{ url_for('form.program_registration') }}" class="btn-program">
+                            რეგისტრაცია
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- CTA Section -->
+<section class="cta-section">
+    <div class="container">
+        <h2 class="cta-title">მზად ხართ დასაწყებად?</h2>
+        <p class="cta-text">
+            შემოგვიერთდით ჩვენს ფიტნეს ცენტრში და დაიწყეთ ჯანსაღი ცხოვრება
+        </p>
+        <a href="{{ url_for('form.program_registration') }}" class="btn-cta">
+            დარეგისტრირდით ახლავე
+        </a>
+    </div>
+</section>
 {% endblock %}

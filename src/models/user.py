@@ -21,6 +21,11 @@ class UserAccount(db.Model, UserMixin):
     def check_password(self, password):
         return check_password_hash(self.password_hash, password)
 
+    @property
+    def is_admin(self):
+        """admin user is determined by username"""
+        return self.username in ['admin', 'administrator']
+
     def __repr__(self):
         return f'<User {self.username}>'
 

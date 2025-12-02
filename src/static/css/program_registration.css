@@ -1,0 +1,32 @@
+/* Additional styles specific to program registration */
+    .form-group {
+        margin-bottom: 20px;
+    }
+
+    .form-label {
+        display: block;
+        margin-bottom: 8px;
+        color: #333;
+        font-weight: 500;
+        font-size: 0.95em;
+    }
+
+    .error-message {
+        color: #e74c3c;
+        font-size: 0.9em;
+        margin-top: 8px;
+        display: block;
+        animation: fadeIn 0.3s ease-in;
+    }
+
+    @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(-5px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+
+    .phone-helper {
+        color: #666;
+        font-size: 0.85em;
+        margin-top: 5px;
+        font-style: italic;
+    }

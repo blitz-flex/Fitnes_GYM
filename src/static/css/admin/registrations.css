@@ -1,0 +1,61 @@
+.program-badge {
+    background: linear-gradient(135deg, var(--admin-accent) 0%, #2980b9 100%);
+    color: white;
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.action-buttons {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+}
+
+.badge {
+    padding: 8px 12px;
+    font-size: 12px;
+    font-weight: 500;
+}
+
+.pagination {
+    margin: 0;
+}
+
+.page-link {
+    color: var(--admin-accent);
+    border-color: #dee2e6;
+    padding: 8px 12px;
+}
+
+.page-link:hover {
+    color: #2980b9;
+    background-color: #f8f9fa;
+    border-color: #dee2e6;
+}
+
+.page-item.active .page-link {
+    background-color: var(--admin-accent);
+    border-color: var(--admin-accent);
+}
+
+.empty-state {
+    text-align: center;
+    padding: 60px 20px;
+}
+
+.empty-icon {
+    font-size: 48px;
+    color: #dee2e6;
+    margin-bottom: 16px;
+}
+
+.empty-text {
+    color: #6c757d;
+    font-size: 16px;
+    margin: 0;
+    font-weight: 500;
+}

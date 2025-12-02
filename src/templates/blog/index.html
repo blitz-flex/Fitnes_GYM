@@ -1,0 +1,195 @@
+{% extends "partials/base.html" %}
+
+{% block title %}ბლოგი - Fitness Center{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/blog/index.css') }}">
+
+{% endblock %}
+
+{% block content %}
+<div class="blog-container">
+    <div class="blog-header">
+        <h1>ფიტნეს ბლოგი</h1>
+        <p>იპოვნეთ სასარგებლო რჩევები და ინფორმაცია ჯანმრთელობისა და ფიტნესის შესახებ</p>
+        <div class="header-decoration"></div>
+    </div>
+
+    <div class="blog-content">
+        {% if posts %}
+        <div class="posts-grid" id="posts-container">
+            {% for post in posts %}
+            <article class="post-card" style="animation-delay: {{ loop.index0 * 0.1 }}s;">
+                <div class="post-image-container">
+                    {% if post.featured_image %}
+                    <img src="{{ url_for('static', filename='images/blog/' + post.featured_image) }}"
+                         alt="{{ post.title }}"
+                         class="post-image">
+                    <div class="image-overlay">
+                        <div class="overlay-badge">
+                            <i class="fas fa-image"></i>
+                            {{ post.reading_time or 1 }} წუთი
+                        </div>
+                    </div>
+                    {% else %}
+                    <div class="post-image post-placeholder">
+                        <i class="fas fa-newspaper"></i>
+                    </div>
+                    {% endif %}
+                </div>
+
+                <div class="post-body">
+                    <h2 class="post-title">
+                        <a href="{{ url_for('blog.post_detail', slug=post.slug) }}">{{ post.title }}</a>
+                    </h2>
+
+                    <p class="post-excerpt">{{ post.excerpt or (post.content[:150] + '...' if post.content|length > 150 else post.content) }}</p>
+
+                    <div class="post-meta">
+                        <div class="meta-left">
+                            <div class="meta-item">
+                                <i class="fas fa-user"></i>
+                                <span>{{ post.author.name if post.author else 'Admin' }}</span>
+                            </div>
+                            <div class="meta-item">
+                                <i class="fas fa-calendar-alt"></i>
+                                <span>{{ post.created_at.strftime('%d.%m.%Y') }}</span>
+                            </div>
+                            <div class="meta-item">
+                                <i class="fas fa-eye"></i>
+                                <span>{{ post.views or 0 }}</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <a href="{{ url_for('blog.post_detail', slug=post.slug) }}" class="read-more">
+                        წაკითხვა
+                        <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
+            </article>
+            {% endfor %}
+        </div>
+
+        {% if has_more %}
+        <div class="load-more-container">
+            <button class="load-more-btn" id="load-more-btn" data-page="{{ current_page + 1 }}">
+                <span class="loading-spinner" id="loading-spinner"></span>
+                <span class="btn-text">მეტის ჩვენება</span>
+            </button>
+        </div>
+        {% endif %}
+
+        {% else %}
+        <div class="empty-state">
+            <div class="empty-state-icon">
+                <i class="fas fa-newspaper"></i>
+            </div>
+            <h3>ბლოგ პოსტები ჯერ არ არის</h3>
+            <p>ჩვენ მუშაობას ვიწყებთ და მალე დაგხვდებით საინტერესო კონტენტი!</p>
+        </div>
+        {% endif %}
+    </div>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const loadMoreBtn = document.getElementById('load-more-btn');
+    const postsContainer = document.getElementById('posts-container');
+    const loadingSpinner = document.getElementById('loading-spinner');
+    const btnText = loadMoreBtn?.querySelector('.btn-text');
+
+    if (loadMoreBtn) {
+        loadMoreBtn.addEventListener('click', function() {
+            const currentPage = parseInt(this.dataset.page);
+
+            // Show loading state
+            loadingSpinner.style.display = 'inline-block';
+            btnText.textContent = 'იტვირთება...';
+            loadMoreBtn.disabled = true;
+
+            // Make AJAX request
+            fetch(`{{ url_for('blog.index') }}?page=${currentPage}`, {
+                headers: {
+                    'X-Requested-With': 'XMLHttpRequest'
+                }
+            })
+            .then(response => response.json())
+            .then(data => {
+                // Add new posts to the container
+                data.posts.forEach((post, index) => {
+                    const postCard = createPostCard(post, index);
+                    postsContainer.appendChild(postCard);
+                });
+
+                // Update button state
+                if (data.has_more) {
+                    this.dataset.page = data.next_page;
+                    loadingSpinner.style.display = 'none';
+                    btnText.textContent = 'მეტის ჩვენება';
+                    loadMoreBtn.disabled = false;
+                } else {
+                    this.style.display = 'none';
+                }
+            })
+            .catch(error => {
+                console.error('Error loading posts:', error);
+                loadingSpinner.style.display = 'none';
+                btnText.textContent = 'მეტის ჩვენება';
+                loadMoreBtn.disabled = false;
+            });
+        });
+    }
+
+    function createPostCard(post, index) {
+        const card = document.createElement('article');
+        card.className = 'post-card';
+        card.style.animationDelay = `${index * 0.1}s`;
+
+        const imageHtml = post.featured_image
+            ? `<img src="{{ url_for('static', filename='images/blog/') }}${post.featured_image}" alt="${post.title}" class="post-image">`
+            : `<div class="post-image post-placeholder"><i class="fas fa-newspaper"></i></div>`;
+
+        card.innerHTML = `
+            <div class="post-image-container">
+                ${imageHtml}
+                <div class="image-overlay">
+                    <div class="overlay-badge">
+                        <i class="fas fa-image"></i>
+                        ${post.reading_time || 1} წუთი
+                    </div>
+                </div>
+            </div>
+            <div class="post-body">
+                <h2 class="post-title">
+                    <a href="{{ url_for('blog.post_detail', slug='') }}${post.slug}">${post.title}</a>
+                </h2>
+                <p class="post-excerpt">${post.excerpt}</p>
+                <div class="post-meta">
+                    <div class="meta-left">
+                        <div class="meta-item">
+                            <i class="fas fa-user"></i>
+                            <span>${post.author_name}</span>
+                        </div>
+                        <div class="meta-item">
+                            <i class="fas fa-calendar-alt"></i>
+                            <span>${post.created_at}</span>
+                        </div>
+                        <div class="meta-item">
+                            <i class="fas fa-eye"></i>
+                            <span>${post.views}</span>
+                        </div>
+                    </div>
+                </div>
+                <a href="{{ url_for('blog.post_detail', slug='') }}${post.slug}" class="read-more">
+                    წაკითხვა
+                    <i class="fas fa-arrow-right"></i>
+                </a>
+            </div>
+        `;
+
+        return card;
+    }
+});
+</script>
+{% endblock %}

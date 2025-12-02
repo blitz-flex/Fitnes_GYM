@@ -1,65 +1,431 @@
 {% extends "partials/base.html" %}
-{% block title %}რეგისტრაცია{% endblock %}
+
+{% block title %}რეგისტრაცია - Fitness Center{% endblock %}
+
 {% block extra_css %}
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-<link rel="stylesheet" href="{{ url_for('static', filename='css/form.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/auth/register.css') }}">
+
 {% endblock %}
+
 {% block content %}
-<div class="form-page">
-    <div class="form-header">
-        <h1>ანგარიშის შექმნა</h1>
-        <p class="subtitle">შემოგვიერთდი დღესვე და დაიწყე შენი ფიტნეს თავგადასავალი!</p>
-    </div>
-    {% with messages = get_flashed_messages(with_categories=true) %}
-        {% if messages %}
-            <div class="alert-container">
-                {% for category, message in messages %}
-                     <div class="alert alert-{{ category }} alert-dismissible fade show" role="alert">
-                        <div class="alert-content">
-                            {% if category == 'success' %}<i class="fas fa-check-circle"></i>{% endif %}
-                            {% if category == 'danger' %}<i class="fas fa-exclamation-circle"></i>{% endif %}
-                            {% if category == 'info' %}<i class="fas fa-info-circle"></i>{% endif %}
-                            <span>{{ message }}</span>
+<div class="register-container">
+    <div class="register-card">
+        <div class="register-header">
+            <div class="register-icon">
+                <i class="fas fa-user-plus"></i>
+            </div>
+            <h1>რეგისტრაცია</h1>
+            <p>შექმენით ანგარიში ფიტნეს ცენტრში</p>
+        </div>
+
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                <div class="flash-messages">
+                    {% for category, message in messages %}
+                        <div class="flash-message {{ category }}">
+                            <div class="flash-icon">
+                                {% if category == 'error' %}
+                                    <i class="fas fa-exclamation-triangle"></i>
+                                {% elif category == 'success' %}
+                                    <i class="fas fa-check-circle"></i>
+                                {% elif category == 'info' %}
+                                    <i class="fas fa-info-circle"></i>
+                                {% else %}
+                                    <i class="fas fa-bell"></i>
+                                {% endif %}
+                            </div>
+                            <div class="flash-content">{{ message }}</div>
+                            <button class="flash-close" onclick="this.parentElement.remove()">
+                                <i class="fas fa-times"></i>
+                            </button>
                         </div>
-                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"><i class="fas fa-times"></i></button>
-                    </div>
-                {% endfor %}
-            </div>
-        {% endif %}
-    {% endwith %}
-    <div class="form-container">
-        <form id="registrationForm" class="register-form" method="POST" action="{{ url_for('auth.register') }}" enctype="multipart/form-data" novalidate>
+                    {% endfor %}
+                </div>
+            {% endif %}
+        {% endwith %}
+
+        <form method="POST" enctype="multipart/form-data" id="registerForm" novalidate>
             {{ form.hidden_tag() }}
-            <div class="form-group input-with-icon">
-                <i class="fas fa-user"></i>
-                {{ form.name(class="form-control", placeholder="სახელი და გვარი") }}
+
+            <div class="form-group">
+                <label class="form-label">
+                    <i class="fas fa-user"></i>
+                    სახელი
+                    <span class="required-mark">*</span>
+                </label>
+                <div class="input-wrapper">
+                    {{ form.name(class="form-control" + (" is-invalid" if form.name.errors else ""), placeholder="სახელი და გვარი  ") }}
+                    <i class="input-icon fas fa-user"></i>
+                </div>
+                {% if form.name.errors %}
+                    {% for error in form.name.errors %}
+                        <div class="invalid-feedback">
+                            <i class="fas fa-exclamation-circle"></i>
+                            {{ error }}
+                        </div>
+                    {% endfor %}
+                {% endif %}
             </div>
-            <div class="form-group input-with-icon">
-                <i class="fas fa-at"></i>
-                {{ form.username(class="form-control", placeholder="მომხმარებლის სახელი") }}
+
+            <div class="form-group">
+                <label class="form-label">
+                    <i class="fas fa-at"></i>
+                    მომხმარებლის სახელი
+                    <span class="required-mark">*</span>
+                </label>
+                <div class="input-wrapper">
+                    {{ form.username(class="form-control" + (" is-invalid" if form.username.errors else ""), placeholder="მაგ: ნინო_ნათადზე") }}
+                    <i class="input-icon fas fa-at"></i>
+                </div>
+                {% if form.username.errors %}
+                    {% for error in form.username.errors %}
+                        <div class="invalid-feedback">
+                            <i class="fas fa-exclamation-circle"></i>
+                            {{ error }}
+                        </div>
+                    {% endfor %}
+                {% endif %}
             </div>
-            <div class="form-group input-with-icon">
-                <i class="fas fa-lock"></i>
-                {{ form.password(class="form-control", placeholder="პაროლი") }}
+
+            <div class="form-group">
+                <label class="form-label">
+                    <i class="fas fa-lock"></i>
+                    პაროლი
+                    <span class="required-mark">*</span>
+                </label>
+                <div class="password-wrapper">
+                    <div class="input-wrapper">
+                        {{ form.password(class="form-control" + (" is-invalid" if form.password.errors else ""), placeholder="შეიყვანეთ უსაფრთხო პაროლი", id="password") }}
+                        <i class="input-icon fas fa-lock"></i>
+                    </div>
+                    <button type="button" class="password-toggle" onclick="togglePassword('password', this)">
+                        <i class="fas fa-eye"></i>
+                    </button>
+                </div>
+                {% if form.password.errors %}
+                    {% for error in form.password.errors %}
+                        <div class="invalid-feedback">
+                            <i class="fas fa-exclamation-circle"></i>
+                            {{ error }}
+                        </div>
+                    {% endfor %}
+                {% endif %}
+                <div class="password-strength" id="passwordStrength">
+                    <div class="strength-label">
+                        <span>პაროლის სიძლიერე:</span>
+                        <span id="strengthText">-</span>
+                    </div>
+                    <div class="strength-bar">
+                        <div class="strength-fill"></div>
+                    </div>
+                    <div class="password-requirements">
+                        <ul id="passwordRequirements">
+                            <li data-requirement="length">
+                                <i class="fas fa-circle"></i>
+                                მინიმუმ 8 სიმბოლო
+                            </li>
+                            <li data-requirement="uppercase">
+                                <i class="fas fa-circle"></i>
+                                მინიმუმ ერთი დიდი ასო (A-Z)
+                            </li>
+                            <li data-requirement="lowercase">
+                                <i class="fas fa-circle"></i>
+                                მინიმუმ ერთი პატარა ასო (a-z)
+                            </li>
+                            <li data-requirement="number">
+                                <i class="fas fa-circle"></i>
+                                მინიმუმ ერთი ციფრი (0-9)
+                            </li>
+                            <li data-requirement="special">
+                                <i class="fas fa-circle"></i>
+                                მინიმუმ ერთი სპეციალური სიმბოლო (!@#$%^&*)
+                            </li>
+                        </ul>
+                    </div>
+                </div>
             </div>
-            <div class="form-group input-with-icon">
-                <i class="fas fa-lock"></i>
-                {{ form.confirm_password(class="form-control", placeholder="გაიმეორეთ პაროლი") }}
+
+            <div class="form-group">
+                <label class="form-label">
+                    <i class="fas fa-lock"></i>
+                    პაროლის დადასტურება
+                    <span class="required-mark">*</span>
+                </label>
+                <div class="password-wrapper">
+                    <div class="input-wrapper">
+                        {{ form.confirm_password(class="form-control" + (" is-invalid" if form.confirm_password.errors else ""), placeholder="გაიმეორეთ პაროლი", id="confirmPassword") }}
+                        <i class="input-icon fas fa-lock"></i>
+                    </div>
+                    <button type="button" class="password-toggle" onclick="togglePassword('confirmPassword', this)">
+                        <i class="fas fa-eye"></i>
+                    </button>
+                </div>
+                {% if form.confirm_password.errors %}
+                    {% for error in form.confirm_password.errors %}
+                        <div class="invalid-feedback">
+                            <i class="fas fa-exclamation-circle"></i>
+                            {{ error }}
+                        </div>
+                    {% endfor %}
+                {% endif %}
             </div>
-             <div class="form-group input-with-icon">
-                <i class="fas fa-calendar-alt"></i>
-                {{ form.birthdate(class="form-control", placeholder="დაბადების თარიღი") }}
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label class="form-label">
+                        <i class="fas fa-calendar"></i>
+                        დაბადების თარიღი
+                        <span class="required-mark">*</span>
+                    </label>
+                    <div class="input-wrapper">
+                        {{ form.birthdate(class="form-control" + (" is-invalid" if form.birthdate.errors else "")) }}
+                        <i class="input-icon fas fa-calendar"></i>
+                    </div>
+                    {% if form.birthdate.errors %}
+                        {% for error in form.birthdate.errors %}
+                            <div class="invalid-feedback">
+                                <i class="fas fa-exclamation-circle"></i>
+                                {{ error }}
+                            </div>
+                        {% endfor %}
+                    {% endif %}
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">
+                        <i class="fas fa-venus-mars"></i>
+                        სქესი
+                        <span class="required-mark">*</span>
+                    </label>
+                    <div class="input-wrapper">
+                        {{ form.gender(class="form-select" + (" is-invalid" if form.gender.errors else "")) }}
+                        <i class="input-icon fas fa-venus-mars"></i>
+                    </div>
+                    {% if form.gender.errors %}
+                        {% for error in form.gender.errors %}
+                            <div class="invalid-feedback">
+                                <i class="fas fa-exclamation-circle"></i>
+                                {{ error }}
+                            </div>
+                        {% endfor %}
+                    {% endif %}
+                </div>
             </div>
-             <div class="form-group input-with-icon">
-                <i class="fas fa-venus-mars"></i>
-                {{ form.gender(class="form-control") }}
+
+            <div class="form-group">
+                <label class="form-label">
+                    <i class="fas fa-image"></i>
+                    პროფილის სურათი (არასავალდებულო)
+                </label>
+                <div class="file-upload-area" id="fileUploadArea">
+                    {{ form.profile_image(class="file-input", id="profile_image", accept="image/*") }}
+                    <div class="file-upload-icon">
+                        <i class="fas fa-cloud-upload-alt"></i>
+                    </div>
+                    <div class="file-upload-text">
+                        <strong>დააჭირეთ ან ჩააგდეთ ფაილი</strong><br>
+                        PNG, JPG, GIF (მაქს. 5MB)
+                    </div>
+                </div>
+                <div class="file-preview" id="filePreview">
+                    <img src="" alt="Preview" class="preview-image" id="previewImage">
+                    <div class="preview-info">
+                        <div class="preview-name" id="previewName"></div>
+                        <div class="preview-size" id="previewSize"></div>
+                    </div>
+                    <button type="button" class="preview-remove" onclick="removeFile()">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+                {% if form.profile_image.errors %}
+                    {% for error in form.profile_image.errors %}
+                        <div class="invalid-feedback">
+                            <i class="fas fa-exclamation-circle"></i>
+                            {{ error }}
+                        </div>
+                    {% endfor %}
+                {% endif %}
             </div>
-            <div class="form-group input-with-icon">
-                <i class="fas fa-image"></i>
-                {{ form.profile_image(class="form-control") }}
-            </div>
-            {{ form.submit(class="submit-button") }}
+
+            <button type="submit" class="submit-btn" id="submitBtn">
+                <span class="btn-text">
+                    <i class="fas fa-user-plus"></i>
+                    რეგისტრაცია
+                </span>
+                <div class="spinner"></div>
+            </button>
         </form>
+
+        <div class="login-link">
+            <p>უკვე გაქვთ ანგარიში? <a href="{{ url_for('auth.login') }}">შესვლა</a></p>
+        </div>
     </div>
 </div>
+
+<script>
+// Password visibility toggle
+function togglePassword(fieldId, button) {
+    const field = document.getElementById(fieldId);
+    const icon = button.querySelector('i');
+
+    if (field.type === 'password') {
+        field.type = 'text';
+        icon.classList.remove('fa-eye');
+        icon.classList.add('fa-eye-slash');
+    } else {
+        field.type = 'password';
+        icon.classList.remove('fa-eye-slash');
+        icon.classList.add('fa-eye');
+    }
+}
+
+// Password strength checker
+const passwordInput = document.getElementById('password');
+const strengthContainer = document.getElementById('passwordStrength');
+const strengthText = document.getElementById('strengthText');
+const requirements = document.getElementById('passwordRequirements');
+
+passwordInput.addEventListener('input', function() {
+    const password = this.value;
+
+    // Check requirements
+    const checks = {
+        length: password.length >= 8,
+        uppercase: /[A-Z]/.test(password),
+        lowercase: /[a-z]/.test(password),
+        number: /[0-9]/.test(password),
+        special: /[!@#$%^&*(),.?":{}|<>]/.test(password)
+    };
+
+    // Update requirement items
+    Object.keys(checks).forEach(key => {
+        const item = requirements.querySelector(`[data-requirement="${key}"]`);
+        const icon = item.querySelector('i');
+        if (checks[key]) {
+            item.classList.add('met');
+            icon.classList.remove('fa-circle');
+            icon.classList.add('fa-check-circle');
+        } else {
+            item.classList.remove('met');
+            icon.classList.remove('fa-check-circle');
+            icon.classList.add('fa-circle');
+        }
+    });
+
+    // Calculate strength
+    const metCount = Object.values(checks).filter(v => v).length;
+
+    strengthContainer.classList.remove('strength-weak', 'strength-medium', 'strength-strong');
+
+    if (password.length === 0) {
+        strengthText.textContent = '-';
+    } else if (metCount <= 2) {
+        strengthContainer.classList.add('strength-weak');
+        strengthText.textContent = 'სუსტი';
+    } else if (metCount <= 4) {
+        strengthContainer.classList.add('strength-medium');
+        strengthText.textContent = 'საშუალო';
+    } else {
+        strengthContainer.classList.add('strength-strong');
+        strengthText.textContent = 'ძლიერი';
+    }
+});
+
+// File upload handling
+const fileInput = document.getElementById('profile_image');
+const fileUploadArea = document.getElementById('fileUploadArea');
+const filePreview = document.getElementById('filePreview');
+const previewImage = document.getElementById('previewImage');
+const previewName = document.getElementById('previewName');
+const previewSize = document.getElementById('previewSize');
+
+// Drag and drop
+['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
+    fileUploadArea.addEventListener(eventName, preventDefaults, false);
+});
+
+function preventDefaults(e) {
+    e.preventDefault();
+    e.stopPropagation();
+}
+
+['dragenter', 'dragover'].forEach(eventName => {
+    fileUploadArea.addEventListener(eventName, () => {
+        fileUploadArea.classList.add('drag-over');
+    }, false);
+});
+
+['dragleave', 'drop'].forEach(eventName => {
+    fileUploadArea.addEventListener(eventName, () => {
+        fileUploadArea.classList.remove('drag-over');
+    }, false);
+});
+
+fileUploadArea.addEventListener('drop', function(e) {
+    const dt = e.dataTransfer;
+    const files = dt.files;
+
+    if (files.length) {
+        fileInput.files = files;
+        handleFileSelect(files[0]);
+    }
+});
+
+fileInput.addEventListener('change', function(e) {
+    if (this.files.length) {
+        handleFileSelect(this.files[0]);
+    }
+});
+
+function handleFileSelect(file) {
+    if (!file.type.match('image.*')) {
+        alert('გთხოვთ აირჩიოთ სურათი');
+        return;
+    }
+
+    // Show preview
+    const reader = new FileReader();
+    reader.onload = function(e) {
+        previewImage.src = e.target.result;
+        previewName.textContent = file.name;
+        previewSize.textContent = formatFileSize(file.size);
+        filePreview.classList.add('active');
+    };
+    reader.readAsDataURL(file);
+}
+
+function removeFile() {
+    fileInput.value = '';
+    filePreview.classList.remove('active');
+}
+
+function formatFileSize(bytes) {
+    if (bytes === 0) return '0 Bytes';
+    const k = 1024;
+    const sizes = ['Bytes', 'KB', 'MB', 'GB'];
+    const i = Math.floor(Math.log(bytes) / Math.log(k));
+    return Math.round(bytes / Math.pow(k, i) * 100) / 100 + ' ' + sizes[i];
+}
+
+// Form submission
+const form = document.getElementById('registerForm');
+const submitBtn = document.getElementById('submitBtn');
+
+form.addEventListener('submit', function(e) {
+    submitBtn.classList.add('loading');
+    submitBtn.disabled = true;
+});
+
+// Auto-dismiss flash messages
+setTimeout(function() {
+    const flashMessages = document.querySelectorAll('.flash-message');
+    flashMessages.forEach(function(msg) {
+        msg.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+        msg.style.opacity = '0';
+        msg.style.transform = 'translateX(100%)';
+        setTimeout(() => msg.remove(), 500);
+    });
+}, 5000);
+</script>
 {% endblock %}

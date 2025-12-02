@@ -20,3 +20,4 @@ def about():
 @main_bp.route("/faq")
 def faq():
     return render_template("main/faq.html")
+

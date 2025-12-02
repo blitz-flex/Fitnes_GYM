@@ -1,95 +1,295 @@
 {% extends "partials/base.html" %}
 {% block title %}ჩვენს შესახებ{% endblock %}
 
+{% block extra_css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/about.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/main/about.css') }}">
+
+{% endblock %}
+
 {% block content %}
-<header class="hero">
-    <div class="about-hero text-center py-5">
-        <h1 class="display-4 fw-bold mt-5 pt-5">ჩვენს შესახებ</h1>
-        <p class="lead">ჩვენი კლუბი აერთიანებს პროფესიონალებს და მოყვარულებს ჯანმრთელი ცხოვრებისათვის</p>
-    </div>
-</header>
-
 <main>
-    <!-- Basic information -->
-    <section class="container py-5">
-        <div class="row g-4 align-items-center">
-            <div class="col-md-6">
-                <h2 class="display-6 mb-4">ვინ ვართ ჩვენ?</h2>
-                <p class="lead mb-4">Fitness Club არის ადგილი, სადაც პროფესიონალიზმი ხვდება ინოვაციას.</p>
-                <p>ჩვენთან შეგიძლიათ:</p>
-                <ul class="list-unstyled">
-                    <li class="mb-2">✓ ივარჯიშოთ თანამედროვე აღჭურვილობით</li>
-                    <li class="mb-2">✓ მიიღოთ კვალიფიციური რჩევები</li>
-                    <li class="mb-2">✓ შეადგინოთ ინდივიდუალური პროგრამა</li>
-                    <li class="mb-2">✓ გახდეთ უკეთესი ვერსია საკუთარი თავის</li>
-                </ul>
-            </div>
-            <div class="col-md-6">
-                <div class="card border-0 shadow-lg">
-                    <img src="https://www.villagegym.co.uk/media/5825/jebson-101-min.jpg" class="card-img-top" alt="ფიტნეს კლუბი" style="height: 300px; object-fit: cover;">
-                    <div class="card-body text-center">
-                        <h3 class="card-title">ჩვენი გუნდი</h3>
-                        <p class="card-text">გამოცდილი და სერტიფიცირებული მწვრთნელები, რომლებიც დაგეხმარებიან მიზნების მიღწევაში.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Statistics -->
-    <section class="bg-light py-5">
+    <!-- Clean Hero Section -->
+    <section class="about-hero">
+        <div class="about-hero-overlay"></div>
         <div class="container">
-            <div class="row text-center g-4">
-                <div class="col-md-3">
-                    <h3 class="display-4 fw-bold text-primary">5+</h3>
-                    <p class="text-muted">წელი ბაზარზე</p>
+            <h1>ჩვენს შესახებ</h1>
+            <p>
+                ჩვენ ვართ თანამედროვე ფიტნეს ცენტრი, რომელიც აერთიანებს ინოვაციურ ტექნოლოგიებს, პროფესიონალურ მიდგომას და ინდივიდუალურ ზრუნვას.
+                ჩვენი მისიაა თითოეული კლიენტისთვის შევქმნათ ოპტიმალური გარემო ჯანმრთელი ცხოვრების სტილის ჩამოსაყალიბებლად და მიზნების მისაღწევად.
+            </p>
+            <div class="hero-stats">
+                <div class="hero-stats-grid">
+                    <div class="hero-stat">
+                        <div class="hero-stat-number">7+</div>
+                        <div class="hero-stat-label">წელი გამოცდილება</div>
+                    </div>
+                    <div class="hero-stat">
+                        <div class="hero-stat-number">2500+</div>
+                        <div class="hero-stat-label">კმაყოფილი კლიენტი</div>
+                    </div>
+                    <div class="hero-stat">
+                        <div class="hero-stat-number">96%</div>
+                        <div class="hero-stat-label">წარმატების მაჩვენებელი</div>
+                    </div>
                 </div>
-                <div class="col-md-3">
-                    <h3 class="display-4 fw-bold text-primary">1000+</h3>
-                    <p class="text-muted">კმაყოფილი წევრი</p>
+            </div>
+        </div>
+        <!-- Decorative elements -->
+        <div class="hero-decorative"></div>
+    </section>
+
+    <!-- Company Info Section -->
+    <section class="company-info">
+        <div class="container">
+            <div class="company-info-grid">
+                <!-- Vision -->
+                <div class="company-vision">
+                    <h2>ჩვენი ხედვა და ღირებულებები</h2>
+                    <p>
+                        ჩვენი ფილოსოფია ემყარება იმ რწმენას, რომ ყველა ადამიანს აქვს უნარი მიაღწიოს უკეთეს ცხოვრებას სწორი მხარდაჭერითა და
+                        მოტივაციით. ვქმნით ინკლუზიურ, მხარდაჭერ გარემოს, სადაც თითოეული წევრი გრძნობს თავს კომფორტულად და ყოველდღიურად
+                        ვითარდება როგორც ფიზიკურად, ასევე გონებრივად.
+                    </p>
+                    <ul class="vision-list">
+                        <li>
+                            <div class="bullet"></div>
+                            მეცნიერულად დამტკიცებული მეთოდები
+                        </li>
+                        <li>
+                            <div class="bullet"></div>
+                            სერტიფიცირებული პროფესიონალური გუნდი
+                        </li>
+                        <li>
+                            <div class="bullet"></div>
+                            ბოლო თაობის ევროპული აღჭურვილობა
+                        </li>
+                        <li>
+                            <div class="bullet"></div>
+                            მუდმივი მონიტორინგი და შედეგების ანალიზი
+                        </li>
+                        <li>
+                            <div class="bullet"></div>
+                            კომფორტული და უსაფრთხო გარემო
+                        </li>
+                    </ul>
                 </div>
-                <div class="col-md-3">
-                    <h3 class="display-4 fw-bold text-primary">12</h3>
-                    <p class="text-muted">პროფესიონალი მწვრთნელი</p>
-                </div>
-                <div class="col-md-3">
-                    <h3 class="display-4 fw-bold text-primary">6</h3>
-                    <p class="text-muted"> სხვადასხვა პროგრამა</p>
+
+                <!-- Stats -->
+                <div class="company-stats-card">
+                    <h3>ჩვენი მიღწევები და ფაქტები</h3>
+                    <div class="stats-grid">
+                        <div class="stat-item">
+                            <h4 class="stat-blue">7+</h4>
+                            <p>წელი ბაზარზე</p>
+                        </div>
+                        <div class="stat-item">
+                            <h4 class="stat-blue">2500+</h4>
+                            <p>კმაყოფილი წევრი</p>
+                        </div>
+                        <div class="stat-item">
+                            <h4 class="stat-green">15</h4>
+                            <p>სხვადასხვა პროგრამა</p>
+                        </div>
+                        <div class="stat-item">
+                            <h4 class="stat-orange">50+</h4>
+                            <p>ჯგუფური კლასი კვირაში</p>
+                        </div>
+                    </div>
+                    <div class="stats-center">
+                        <div class="stat-item">
+                            <h4 class="stat-blue">96%</h4>
+                            <p>კლიენტების კმაყოფილების მაჩვენებელი</p>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Coaches Team -->
-    <section class="container py-5">
-        <h2 class="text-center mb-5">ჩვენი მწვრთნელები</h2>
-        <div class="row g-4">
-            <div class="col-md-4">
-                <div class="card border-0 shadow-sm">
-                    <img src="https://images.unsplash.com/photo-1599447292325-2cffaa79bcbb?q=80&w=1406&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" class="card-img-top" alt="იოგას მწვრთნელი" style="height: 250px; object-fit: cover;">
-                    <div class="card-body text-center">
-                        <h5 class="card-title">ანა მაისურაძე</h5>
-                        <p class="card-text text-muted">იოგას ინსტრუქტორი</p>
+    <!-- Services Section -->
+    <section class="services-section">
+        <div class="container">
+            <div class="section-header">
+                <h2>ჩვენი სერვისები და პროგრამები</h2>
+                <p>მრავალფეროვანი და ინოვაციური მიდგომები ყველა ასაკისა და ფიზიკური მომზადების დონისთვის</p>
+            </div>
+
+            <div class="services-grid">
+                <!-- Personal Training -->
+                <div class="service-card">
+                    <div class="service-icon blue">
+                        <svg viewBox="0 0 24 24">
+                            <path d="M20.57 14.86L22 13.43 20.57 12 17 15.57 8.43 7 12 3.43 10.57 2 9.14 3.43 7.71 2 5.57 4.14 4.14 2.71 2.71 4.14l1.43 1.43L2 7.71l1.43 1.43L2 10.57 3.43 12 7 8.43 15.57 17 12 20.57 13.43 22l1.43-1.43L16.29 22l2.14-2.14 1.43 1.43 1.43-1.43-1.43-1.43L22 16.29l-1.43-1.43z"/>
+                        </svg>
                     </div>
+                    <h3>პერსონალური ვარჯიშები</h3>
+                    <p>სრულად ინდივიდუალური მიდგომა სერტიფიცირებულ ტრენერთან, რომელიც ითვალისწინებს თქვენს მიზნებს, ჯანმრთელობის მდგომარეობას და პირად ტემპს. პროგრამა მუდმივად ადაპტირდება თქვენი პროგრესის მიხედვით.</p>
+                </div>
+
+                <!-- Group Classes -->
+                <div class="service-card">
+                    <div class="service-icon green">
+                        <svg viewBox="0 0 24 24">
+                            <path d="M16 4c0-1.11.89-2 2-2s2 .89 2 2-.89 2-2 2-2-.89-2-2M4 1v6h6V1H4m0 8v6h6V9H4m8 8v6h6v-6h-6M9.5 7.5c0 .83-.67 1.5-1.5 1.5S6.5 8.33 6.5 7.5 7.17 6 8 6s1.5.67 1.5 1.5M4.5 11.5c0 .83-.67 1.5-1.5 1.5S1.5 12.33 1.5 11.5 2.17 10 3 10s1.5.67 1.5 1.5M15 12.5c0-.83.67-1.5 1.5-1.5s1.5.67 1.5 1.5-.67 1.5-1.5 1.5-1.5-.67-1.5-1.5"/>
+                        </svg>
+                    </div>
+                    <h3>ჯგუფური კლასები</h3>
+                    <p>მრავალფეროვანი ჯგუფური ვარჯიშები: ზუმბა, პილატესი, იოგა, ფუნქციური ვარჯიშები, ძლიერება და გამძლეობა. თითოეული კლასი შექმნილია განსხვავებული ფიტნეს დონისთვის და უზრუნველყოფს კოლექტიური მოტივაციას.</p>
+                </div>
+
+                <!-- Digital Tracking -->
+                <div class="service-card">
+                    <div class="service-icon teal">
+                        <svg viewBox="0 0 24 24">
+                            <path d="M17,3H7A2,2 0 0,0 5,5V19A2,2 0 0,0 7,21H17A2,2 0 0,0 19,19V5A2,2 0 0,0 17,3M17,19H7V5H17V19M16,10V12H14V10H16M10,10V12H8V10H10M16,6V8H14V6H16M10,6V8H8V6H10M16,14V16H14V14H16M10,14V16H8V14H10M12,6V8H10V6H12M12,10V12H10V10H12M12,14V16H10V14H12"/>
+                        </svg>
+                    </div>
+                    <h3>ციფრული ტრექინგი</h3>
+                    <p>ინოვაციური ტექნოლოგიები თქვენი პროგრესის ზუსტი მონიტორინგისთვის: ვარჯიშის ინტენსივობა, გულისცემის რეჟიმი, კალორიების დამწვრობა და ფიზიკური ფორმის ზოგადი მაჩვენებლები. ყველა მონაცემი ხელმისაწვდომია აპლიკაციაში.</p>
+                </div>
+
+                <!-- Wellness Programs -->
+                <div class="service-card">
+                    <div class="service-icon purple">
+                        <svg viewBox="0 0 24 24">
+                            <path d="M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2M12,4A8,8 0 0,1 20,12A8,8 0 0,1 12,20A8,8 0 0,1 4,12A8,8 0 0,1 12,4M12,6A6,6 0 0,0 6,12A6,6 0 0,0 12,18A6,6 0 0,0 18,12A6,6 0 0,0 12,6M12,8A4,4 0 0,1 16,12A4,4 0 0,1 12,16A4,4 0 0,1 8,12A4,4 0 0,1 12,8M12,10A2,2 0 0,0 10,12A2,2 0 0,0 12,14A2,2 0 0,0 14,12A2,2 0 0,0 12,10Z"/>
+                        </svg>
+                    </div>
+                    <h3>კეთილდღეობის პროგრამები</h3>
+                    <p>ჰოლისტური მიდგომა სიჯანსაღისთვის: მედიტაცია, რელაქსაცია, ღია ჰაერზე აქტივობები, სტრესის მართვის ტექნიკები. ეს პროგრამები ფოკუსირებულია როგორც ფიზიკურ, ასევე ფსიქოლოგიურ კეთილდღეობაზე.</p>
+                </div>
+
+                <!-- Nutrition -->
+                <div class="service-card">
+                    <div class="service-icon orange">
+                        <svg viewBox="0 0 24 24">
+                            <path d="M18.5 12A6.5 6.5 0 0 1 12 18.5A6.5 6.5 0 0 1 5.5 12A6.5 6.5 0 0 1 12 5.5A6.5 6.5 0 0 1 18.5 12M12 16A4 4 0 0 0 16 12A4 4 0 0 0 12 8A4 4 0 0 0 8 12A4 4 0 0 0 12 16M12 2L13.09 8.26L22 9L13.09 9.74L12 16L10.91 9.74L2 9L10.91 8.26L12 2Z"/>
+                        </svg>
+                    </div>
+                    <h3>კვების კონსულტაცია</h3>
+                    <p>სერტიფიცირებული დიეტოლოგები შეიმუშავებენ პერსონალიზებულ კვების გეგმებს თქვენი მიზნების, ალერგიებისა და გემოვნების მიხედვით. ჩვენ გვწამს, რომ სწორი კვება ფიტნესის 70%-ია.</p>
+                </div>
+
+                <!-- 24/7 Access -->
+                <div class="service-card">
+                    <div class="service-icon mint">
+                        <svg viewBox="0 0 24 24">
+                            <path d="M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2M16.2,16.2L11,13V7H12.5V12.2L17,15.4L16.2,16.2Z"/>
+                        </svg>
+                    </div>
+                    <h3>24/7 წვდომა</h3>
+                    <p>სრული მოქნილობა - ცენტრი ღიაა 24 საათის განმავლობაში, 7 დღე კვირაში. თანამედროვე უსაფრთხოების სისტემა და კლიმატკონტროლი უზრუნველყოფს კომფორტულ გარემოს ნებისმიერ დროს.</p>
                 </div>
             </div>
-            <div class="col-md-4">
-                <div class="card border-0 shadow-sm">
-                    <img src="https://images.unsplash.com/photo-1660156049794-7f386c3013f4?q=80&w=1374&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" class="card-img-top" alt="კროსფიტის მწვრთნელი" style="height: 250px; object-fit: cover;">
-                    <div class="card-body text-center">
-                        <h5 class="card-title">გიორგი კახიძე</h5>
-                        <p class="card-text text-muted">კროსფიტის მწვრთნელი</p>
+        </div>
+    </section>
+
+    <!-- Team Section -->
+    <section class="team-section">
+        <div class="container">
+            <div class="section-header">
+                <h2>ჩვენი ექსპერტების გუნდი</h2>
+                <p>სერტიფიცირებული სპეციალისტები, რომლებიც ერთვებიან თქვენს წარმატების მისაღწევად</p>
+            </div>
+
+            <div class="team-grid">
+                <!-- Team Member 1 -->
+                <div class="team-member">
+                    <div class="team-photo">
+                        <img src="https://images.unsplash.com/photo-1599447292325-2cffaa79bcbb?q=80&w=400&auto=format&fit=crop" alt="ანა მაისურაძე">
                     </div>
+                    <h3>ანა მაისურაძე</h3>
+                    <p class="team-role">მთავარი იოგას ინსტრუქტორი</p>
+                    <p class="team-description">
+                        8+ წლის გამოცდილება ჰათა და ვინიასა იოგაში. მედიტაციის პრაქტიკოსი და რელაქსაციის თერაპიის სპეციალისტი.
+                        ინტერნაციონალური სერტიფიკატები Yoga Alliance-დან.
+                    </p>
+                </div>
+
+                <!-- Team Member 2 -->
+                <div class="team-member">
+                    <div class="team-photo">
+                        <img src="https://images.unsplash.com/photo-1660156049794-7f386c3013f4?q=80&w=400&auto=format&fit=crop" alt="გიორგი კახიძე">
+                    </div>
+                    <h3>გიორგი კახიძე</h3>
+                    <p class="team-role">CrossFit L2 მწვრთნელი</p>
+                    <p class="team-description">
+                        პროფესიონალური ატლეტი და სერტიფიცირებული ტრენერი ფუნქციური ვარჯიშებისა და კონდიციის სფეროში.
+                        ჩემპიონი რეგიონალურ შეჯიბრებებში, სპორტული კვების სპეციალისტი.
+                    </p>
+                </div>
+
+                <!-- Team Member 3 -->
+                <div class="team-member">
+                    <div class="team-photo">
+                        <img src="https://images.unsplash.com/photo-1585892478508-130c50eb7a69?q=80&w=400&auto=format&fit=crop" alt="დავით ნოზაძე">
+                    </div>
+                    <h3>დავით ნოზაძე</h3>
+                    <p class="team-role">ბოქსისა და ერთობრივი ხელოვნების მწვრთნელი</p>
+                    <p class="team-description">
+                        ყოფილი პროფესიონალური ბოქსორი, მსოფლიო დონის შეჯიბრებების მონაწილე.
+                        სპეციალიზირდება თავდაცვის ხელოვნებაზე და ფიზიკური მომზადების ინტენსიურ პროგრამებზე.
+                    </p>
+                </div>
+
+                <!-- Team Member 4 -->
+                <div class="team-member">
+                    <div class="team-photo">
+                        <img src="https://images.unsplash.com/photo-1706565029539-d09af5896340?q=80&w=387&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="ნინო ღვინაძე">
+                    </div>
+                    <h3>ნინო ღვინაძე</h3>
+                    <p class="team-role">დიეტოლოგი და კვების სპეციალისტი</p>
+                    <p class="team-description">
+                        სერტიფიცირებული კლინიკური დიეტოლოგი 10+ წლის გამოცდილებით.
+                        სპეციალიზირდება სპორტულ კვებაზე, წონის მართვასა და მეტაბოლური ჯანმრთელობის პროგრამებზე.
+                    </p>
+                </div>
+
+                <!-- Team Member 5 -->
+                <div class="team-member">
+                    <div class="team-photo">
+                        <img src="https://images.unsplash.com/photo-1742518424609-7d6b0b4107b6?q=80&w=523&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="ლევან შარიქაძე">
+                    </div>
+                    <h3>ლევან შარიქაძე</h3>
+                    <p class="team-role">პილატესისა და რეაბილიტაციის თერაპისტი</p>
+                    <p class="team-description">
+                        ფიზიკური თერაპიის დოქტორი და პილატესის სერტიფიცირებული ინსტრუქტორი.
+                        სპეციალიზირდება ზურგისა და კუნთების რეაბილიტაციაზე, დაზიანებების პრევენციაზე.
+                    </p>
+                </div>
+
+                <!-- Team Member 6 -->
+                <div class="team-member">
+                    <div class="team-photo">
+                        <img src="https://images.unsplash.com/photo-1617085606162-1c21b7a7e7b4?q=80&w=387&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="მარიამ ბერიძე">
+                    </div>
+                    <h3>მარიამ ბერიძე</h3>
+                    <p class="team-role">ზუმბასა და კარდიო-ვარჯიშების ინსტრუქტორი</p>
+                    <p class="team-description">
+                        ცეკვის პროფესიონალი და ფიტნეს ინსტრუქტორი 6+ წლის გამოცდილებით.
+                        ზუმბა, აეროვიქსი და HIIT ვარჯიშების სპეციალისტი. ენერგიული და მოტივაციური მიდგომით განთქმული.
+                    </p>
                 </div>
             </div>
-            <div class="col-md-4">
-                <div class="card border-0 shadow-sm">
-                    <img src="https://images.unsplash.com/photo-1585892478508-130c50eb7a69?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" class="card-img-top" alt="კრივის მწვრთნელი" style="height: 250px; object-fit: cover;">
-                    <div class="card-body text-center">
-                        <h5 class="card-title">დავით ნოზაძე</h5>
-                        <p class="card-text text-muted">კრივის მწვრთნელი</p>
-                    </div>
-                </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section">
+        <div class="container">
+            <h2>მზად ხართ ჯანსაღი ცხოვრების დასაწყებად?</h2>
+            <p>
+                შემოგვიერთდით ჩვენს ფიტნეს კომუნიტას და დაიწყეთ თქვენი ტრანსფორმაციის მოგზაურობა დღესვე.
+                ჩვენი ექსპერტები მზად არიან, გამოიყენონ ყველა ცოდნა და გამოცდილება, რომ თქვენ მიაღწიოთ სასურველ შედეგებს.
+            </p>
+            <div class="cta-buttons">
+                <a href="{{ url_for('form.program_registration') }}" class="btn-primary-cta">
+                    რეგისტრაცია პროგრამაზე
+                </a>
+                <a href="{{ url_for('main.faq') }}" class="btn-secondary-cta">
+                    ხშირად დასმული კითხვები
+                </a>
             </div>
         </div>
     </section>

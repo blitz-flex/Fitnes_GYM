@@ -1,39 +1,356 @@
-<nav class="navbar navbar-expand-lg navbar-dark bg-success">
+<nav class="navbar navbar-expand-lg navbar-dark bg-success fixed-top">
     <div class="container">
-        <a class="navbar-brand" href="{{ url_for('main.index') }}">Fitness Club</a>
+        <!-- Brand -->
+        <a class="navbar-brand fw-bold" href="{{ url_for('main.index') }}">
+            <i class="fas fa-dumbbell me-2"></i>GYM
+        </a>
+
+        <!-- Mobile Toggle Button -->
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
             <span class="navbar-toggler-icon"></span>
         </button>
+
+        <!-- Navigation Links -->
         <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav me-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ url_for('main.index') }}">
+                        <i class="fas fa-home me-1"></i>მთავარი
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ url_for('main.about') }}">
+                        <i class="fas fa-info-circle me-1"></i>ჩვენს შესახებ
+                    </a>
+                </li>
+                <!-- Registration - Hide for admin users -->
+                {% if not (current_user.is_authenticated and current_user.is_admin) %}
+
+                {% endif %}
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ url_for('blog.index') }}">
+                        <i class="fas fa-blog me-1"></i>ბლოგი
+                    </a>
+                </li>
+                <!-- FAQ - Hide for all authenticated users -->
+                {% if not current_user.is_authenticated %}
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ url_for('main.faq') }}">
+                        <i class="fas fa-question-circle me-1"></i>FAQ
+                    </a>
+                </li>
+                {% endif %}
+            </ul>
+
+            <!-- Right Side Menu -->
             <ul class="navbar-nav ms-auto">
-                <li class="nav-item">
-                    <a class="nav-link {% if request.endpoint == 'main.index' %}active{% endif %}" href="{{ url_for('main.index') }}">მთავარი</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link {% if request.endpoint == 'main.about' %}active{% endif %}" href="{{ url_for('main.about') }}">ჩვენს შესახებ</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link {% if request.endpoint == 'form.program_registration' %}active{% endif %}" href="{{ url_for('form.program_registration') }}">პროგრამაზე ჩაწერა </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link {% if request.endpoint == 'main.faq' %}active{% endif %}" href="{{ url_for('main.faq') }}">FAQ</a>
-                </li>
                 {% if current_user.is_authenticated %}
-                    <li class="nav-item">
-                        <a class="nav-link {% if request.endpoint == 'user.profile' %}active{% endif %}" href="{{ url_for('user.profile') }}">პროფილი</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ url_for('auth.logout') }}">გასვლა</a>
-                    </li>
+                    {% if current_user.is_admin %}
+                        <!-- Admin Dropdown Menu -->
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle admin-dropdown" href="#" id="adminDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                <div class="admin-avatar">
+                                    <i class="fas fa-user-shield"></i>
+                                </div>
+                                <span class="admin-name">{{ current_user.name }}</span>
+                            </a>
+                            <ul class="dropdown-menu dropdown-menu-end admin-menu" aria-labelledby="adminDropdown">
+                                <li class="dropdown-header">
+                                    <i class="fas fa-crown me-2 text-warning"></i>ადმინისტრატორი
+                                </li>
+                                <li><hr class="dropdown-divider"></li>
+                                <li>
+                                    <a class="dropdown-item" href="{{ url_for('admin.dashboard') }}">
+                                        <i class="fas fa-tachometer-alt me-2"></i>ადმინ პანელი
+                                    </a>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item" href="{{ url_for('user.profile') }}">
+                                        <i class="fas fa-user me-2"></i>პროფილი
+                                    </a>
+                                </li>
+                                <li><hr class="dropdown-divider"></li>
+                                <li>
+                                    <a class="dropdown-item text-danger" href="{{ url_for('auth.logout') }}">
+                                        <i class="fas fa-sign-out-alt me-2"></i>გასვლა
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                    {% else %}
+                        <!-- Regular User Menu -->
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle user-dropdown" href="#" id="userDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                <div class="user-avatar">
+                                    <i class="fas fa-user"></i>
+                                </div>
+                                <span class="user-name">{{ current_user.name }}</span>
+                            </a>
+                            <ul class="dropdown-menu dropdown-menu-end user-menu" aria-labelledby="userDropdown">
+                                <li class="dropdown-header">
+                                    <i class="fas fa-user-circle me-2"></i>{{ current_user.name }}
+                                </li>
+                                <li><hr class="dropdown-divider"></li>
+                                <li>
+                                    <a class="dropdown-item" href="{{ url_for('user.profile') }}">
+                                        <i class="fas fa-user me-2"></i>პროფილი
+                                    </a>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item" href="{{ url_for('main.faq') }}">
+                                        <i class="fas fa-question-circle me-2"></i>FAQ
+                                    </a>
+                                </li>
+                                <li><hr class="dropdown-divider"></li>
+                                <li>
+                                    <a class="dropdown-item text-danger" href="{{ url_for('auth.logout') }}">
+                                        <i class="fas fa-sign-out-alt me-2"></i>გასვლა
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                    {% endif %}
                 {% else %}
+                    <!-- Guest User Links -->
                     <li class="nav-item">
-                        <a class="nav-link {% if request.endpoint == 'auth.login' %}active{% endif %}" href="{{ url_for('auth.login') }}">შესვლა</a>
+                        <a class="nav-link" href="{{ url_for('auth.login') }}">
+                            <i class="fas fa-sign-in-alt me-1"></i>შესვლა
+                        </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link {% if request.endpoint == 'auth.register' %}active{% endif %}" href="{{ url_for('auth.register') }}">რეგისტრაცია</a>
+                        <a class="nav-link" href="{{ url_for('auth.register') }}">
+                            <i class="fas fa-user-plus me-1"></i>რეგისტრაცია
+                        </a>
                     </li>
                 {% endif %}
             </ul>
         </div>
     </div>
 </nav>
+
+<style>
+/* Navbar Enhancements */
+.navbar-dark .navbar-brand {
+    font-size: 1.5rem;
+    color: #ffffff !important;
+}
+
+.navbar-dark .navbar-brand:hover {
+    color: #f8f9fa !important;
+}
+
+.navbar-nav .nav-link {
+    transition: all 0.3s ease;
+    border-radius: 6px;
+    margin: 0 2px;
+    padding: 8px 12px !important;
+}
+
+.navbar-nav .nav-link:hover {
+    background: rgba(255, 255, 255, 0.2);
+    transform: translateY(-1px);
+}
+
+/* Admin Dropdown Styles */
+.admin-dropdown {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 6px 12px !important;
+    border-radius: 8px;
+
+}
+
+.admin-dropdown:hover {
+    background: linear-gradient(135deg, #20c997, #17a2b8);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(40, 167, 69, 0.3);
+}
+
+.admin-avatar {
+    width: 32px;
+    height: 32px;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    font-size: 14px;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+}
+
+.admin-name {
+    color: #fff;
+    font-weight: 600;
+    font-size: 0.9rem;
+}
+
+/* User Dropdown Styles */
+.user-dropdown {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+
+}
+
+.user-dropdown:hover {
+    background: linear-gradient(135deg, #2980b9, #1f618d);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(52, 152, 219, 0.3);
+}
+
+.user-avatar {
+    width: 32px;
+    height: 32px;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    font-size: 14px;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+}
+
+.user-name {
+    color: #fff;
+    font-weight: 600;
+    font-size: 0.9rem;
+}
+
+/* Dropdown Menu Styles */
+.admin-menu,
+.user-menu {
+    background: #fff;
+    border: none;
+    border-radius: 12px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
+    padding: 8px 0;
+    min-width: 220px;
+    margin-top: 8px;
+}
+
+.admin-menu::before,
+.user-menu::before {
+    content: '';
+    position: absolute;
+    top: -8px;
+    right: 20px;
+    width: 0;
+    height: 0;
+    border-left: 8px solid transparent;
+    border-right: 8px solid transparent;
+    border-bottom: 8px solid #fff;
+}
+
+.dropdown-header {
+    padding: 12px 20px 8px;
+    font-size: 0.9rem;
+    font-weight: 700;
+    color: #495057;
+    background: #f8f9fa;
+    margin-bottom: 0;
+    border-radius: 12px 12px 0 0;
+}
+
+.admin-menu .dropdown-header {
+    background: linear-gradient(135deg, #f8fff8, #e8f8e8);
+    color: #28a745;
+}
+
+.dropdown-item {
+    padding: 10px 20px;
+    font-size: 0.9rem;
+    color: #495057;
+    transition: all 0.3s ease;
+    border-radius: 0;
+}
+
+.dropdown-item:hover {
+    background: #f8f9fa;
+    color: #212529;
+    padding-left: 25px;
+}
+
+.dropdown-item.text-danger:hover {
+    background: #fff5f5;
+    color: #e74c3c;
+}
+
+.dropdown-item i {
+    width: 16px;
+    text-align: center;
+}
+
+.dropdown-divider {
+    margin: 8px 16px;
+    border-color: #e9ecef;
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 991px) {
+    .admin-dropdown,
+    .user-dropdown {
+        background: none;
+        border: none;
+        padding: 8px 16px !important;
+    }
+
+    .admin-name,
+    .user-name {
+        display: none;
+    }
+
+    .admin-avatar,
+    .user-avatar {
+        margin-right: 0;
+    }
+
+    .dropdown-menu {
+        position: static !important;
+        float: none;
+        width: 100%;
+        margin-top: 0;
+        border-radius: 0;
+        box-shadow: none;
+        border: none;
+        background: rgba(255, 255, 255, 0.05);
+    }
+
+    .dropdown-item {
+        color: #fff;
+        padding: 12px 20px;
+    }
+
+    .dropdown-item:hover {
+        background: rgba(255, 255, 255, 0.1);
+        color: #fff;
+    }
+
+    .dropdown-header {
+        background: rgba(255, 255, 255, 0.1);
+        color: #fff;
+    }
+}
+
+/* Navbar Active States */
+.navbar-nav .nav-item.active .nav-link,
+.navbar-nav .nav-link.active {
+    background: rgba(40, 167, 69, 0.3);
+    color: #fff !important;
+}
+
+/* Badge for Admin */
+.admin-dropdown::after {
+    content: '';
+    position: absolute;
+    top: -2px;
+    right: -2px;
+    width: 12px;
+    height: 12px;
+    background: #ffd700;
+    border: 2px solid #fff;
+    border-radius: 50%;
+}
+</style>

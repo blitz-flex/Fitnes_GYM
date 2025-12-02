@@ -1,0 +1,230 @@
+user-info {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.user-avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid #e9ecef;
+}
+
+.user-avatar-icon {
+    font-size: 40px;
+    color: #6c757d;
+    width: 40px;
+    text-align: center;
+}
+
+.username {
+    font-weight: 600;
+    color: #2c3e50;
+    font-size: 14px;
+}
+
+.user-id {
+    font-size: 12px;
+    color: #6c757d;
+}
+
+.gender-badge {
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 11px;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.gender-badge.male,
+.gender-badge.მამრობითი {
+    background: linear-gradient(135deg, #3498db 0%, #2980b9 100%);
+    color: white;
+}
+
+.gender-badge.female,
+.gender-badge.მდედრობითი {
+    background: linear-gradient(135deg, #e91e63 0%, #c2185b 100%);
+    color: white;
+}
+
+.role-badge {
+    padding: 6px 14px;
+    border-radius: 25px;
+    font-size: 11px;
+    font-weight: 600;
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.role-badge.admin {
+    background: linear-gradient(135deg, #e74c3c 0%, #c0392b 100%);
+    color: white;
+    box-shadow: 0 2px 8px rgba(231, 76, 60, 0.3);
+}
+
+.role-badge.user {
+    background: linear-gradient(135deg, #95a5a6 0%, #7f8c8d 100%);
+    color: white;
+}
+
+.registration-count {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: #f8f9fa;
+    padding: 6px 12px;
+    border-radius: 16px;
+    font-size: 13px;
+    font-weight: 500;
+    color: #495057;
+}
+
+.action-buttons {
+    display: flex;
+    gap: 6px;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+.badge {
+    padding: 8px 15px;
+    font-size: 12px;
+    font-weight: 600;
+    border-radius: 20px;
+}
+
+.pagination {
+    margin: 0;
+}
+
+.page-link {
+    color: var(--admin-accent);
+    border-color: #dee2e6;
+    padding: 10px 15px;
+    font-weight: 500;
+}
+
+.page-link:hover {
+    color: #2980b9;
+    background-color: #f8f9fa;
+    border-color: #dee2e6;
+    transform: translateY(-1px);
+}
+
+.page-item.active .page-link {
+    background-color: var(--admin-accent);
+    border-color: var(--admin-accent);
+    box-shadow: 0 2px 8px rgba(52, 152, 219, 0.3);
+}
+
+.empty-state {
+    text-align: center;
+    padding: 80px 20px;
+}
+
+.empty-icon {
+    font-size: 64px;
+    color: #dee2e6;
+    margin-bottom: 20px;
+}
+
+.empty-title {
+    color: #495057;
+    font-size: 20px;
+    margin-bottom: 12px;
+    font-weight: 600;
+}
+
+.empty-text {
+    color: #6c757d;
+    font-size: 16px;
+    margin: 0;
+    max-width: 400px;
+    margin: 0 auto;
+    line-height: 1.5;
+}
+
+.card-header {
+    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+    border-bottom: 2px solid #dee2e6;
+}
+
+.card-title {
+    color: #2c3e50;
+    font-weight: 700;
+}
+
+/* Table enhancements */
+.table th {
+    background: #f8f9fa;
+    color: #495057;
+    font-weight: 600;
+    border-bottom: 2px solid #dee2e6;
+    font-size: 13px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.table td {
+    vertical-align: middle;
+    border-bottom: 1px solid #f1f3f4;
+    padding: 16px 15px;
+}
+
+.table tbody tr:hover {
+    background: linear-gradient(135deg, #f8f9fa 0%, #f1f3f4 100%);
+    transform: translateY(-1px);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+    .action-buttons {
+        flex-direction: column;
+        gap: 4px;
+        width: 100%;
+    }
+
+    .action-buttons .btn {
+        width: 100%;
+        justify-content: center;
+        font-size: 12px;
+        padding: 6px 8px;
+    }
+
+    .user-info {
+        flex-direction: column;
+        gap: 8px;
+        text-align: center;
+    }
+
+    .table-container {
+        overflow-x: auto;
+    }
+
+    .table {
+        min-width: 800px;
+    }
+}
+
+@media (max-width: 576px) {
+    .card-header {
+        flex-direction: column;
+        gap: 10px;
+        text-align: center;
+    }
+
+    .header-stats {
+        align-self: center;
+    }
+}

@@ -2,6 +2,7 @@
 {% block title %}პროგრამაზე რეგისტრაცია{% endblock %}
 
 {% block extra_css %}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 <link rel="stylesheet" href="{{ url_for('static', filename='css/form.css') }}">
 {% endblock %}
 
@@ -16,23 +17,45 @@
         <form class="register-form" method="POST" action="{{ url_for('form.program_registration') }}" novalidate>
             {{ form.hidden_tag() }}
 
-            <div class="form-group input-with-icon">
-                <i class="fas fa-user"></i>
-                {{ form.name(class="form-control", placeholder="სრული სახელი") }}
+
+            <!-- Program Field -->
+            <div class="form-group">
+                <label for="{{ form.program.id }}" class="form-label">პროგრამა</label>
+                <div class="input-with-icon">
+                    <i class="fas fa-dumbbell"></i>
+                    {{ form.program(class="form-control" + (" error" if form.program.errors else "")) }}
+                </div>
+                {% if form.program.errors %}
+                    {% for error in form.program.errors %}
+                        <span class="error-message">
+                            <i class="fas fa-exclamation-circle"></i>
+                            {{ error }}
+                        </span>
+                    {% endfor %}
+                {% endif %}
             </div>
 
-            <div class="form-group input-with-icon">
-                <i class="fas fa-dumbbell"></i>
-                {{ form.program(class="form-control") }}
+            <!-- Phone Field -->
+            <div class="form-group">
+                <label for="{{ form.phone.id }}" class="form-label">ტელეფონის ნომერი</label>
+                <div class="input-with-icon">
+                    <i class="fas fa-phone"></i>
+                    {{ form.phone(class="form-control" + (" error" if form.phone.errors else ""), placeholder="5XX XXX XXX") }}
+                </div>
+                <div class="phone-helper">მაგალითი: 599 XX XX XX</div>
+                {% if form.phone.errors %}
+                    {% for error in form.phone.errors %}
+                        <span class="error-message">
+                            <i class="fas fa-exclamation-circle"></i>
+                            {{ error }}
+                        </span>
+                    {% endfor %}
+                {% endif %}
             </div>
 
-            <div class="form-group input-with-icon">
-                <i class="fas fa-phone"></i>
-                {{ form.phone(class="form-control", placeholder="ტელეფონის ნომერი") }}
-            </div>
-
-            {{ form.submit(class="submit-button") }}
+            {{ form.submit(class="submit-btn") }}
         </form>
     </div>
 </div>
+
 {% endblock %}

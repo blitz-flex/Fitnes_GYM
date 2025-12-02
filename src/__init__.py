@@ -25,11 +25,15 @@ def create_app():
     from .views.form import form_bp
     from .views.auth import auth_bp
     from .views.user import user_bp
+    from .views.blog import blog_bp
+    from .views.admin import admin_bp
 
     app.register_blueprint(main_bp)
     app.register_blueprint(form_bp)
     app.register_blueprint(auth_bp, url_prefix='/auth')
     app.register_blueprint(user_bp)
+    app.register_blueprint(blog_bp)
+    app.register_blueprint(admin_bp, url_prefix='/admin')
 
     # CLI Commands
     from .commands import init_db_command

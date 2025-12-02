@@ -1,206 +1,282 @@
-body {
-    font-family: 'Poppins', sans-serif;
+/* ===== CSS VARIABLES ===== */
+:root {
+    /* Colors */
+    --primary-color: #6c757d;
+    --primary-dark: #495057;
+    --secondary-color: #343a40;
+    --text-dark: #212529;
+    --text-muted: #6c757d;
+    --text-light: #f8f9fa;
+    --white: #ffffff;
+    --light-bg: #f8f9fa;
+    --card-bg: #ffffff;
+
+    /* Spacing */
+    --spacing-sm: 10px;
+    --spacing-md: 15px;
+    --spacing-lg: 20px;
+    --spacing-xl: 30px;
+
+    /* Typography */
+    --font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    --font-size-sm: 0.875rem;
+    --font-size-base: 1rem;
+    --font-size-lg: 1.125rem;
+    --font-size-xl: 1.25rem;
+    --font-size-2xl: 1.5rem;
+    --font-size-3xl: 2rem;
+
+    /* Effects */
+    --transition: 0.3s ease;
+    --shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    --radius: 8px;
+}
+
+/* ===== BASE STYLES ===== */
+* {
     margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: var(--font-family);
     line-height: 1.6;
-    background: #f4f4f4;
+    background: var(--light-bg);
+    color: var(--text-dark);
 }
 
-/* Navigation Styles - Main navigation bar and its components */
+img {
+    max-width: 100%;
+    height: auto;
+}
+
+/* ===== LAYOUT ===== */
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 var(--spacing-md);
+}
+
+/* ===== NAVIGATION ===== */
 .navbar {
-    transition: all 0.3s ease;
-    padding: 8px 0;
     position: fixed;
-    width: 100%;
     top: 0;
+    left: 0;
+    right: 0;
     z-index: 1000;
-}
-
-.navbar .nav-link {
-    transition: color 0.3s ease;
-    font-size: 1.1rem;
-    padding: 0.7rem 1.2rem;
-    font-weight: 500;
-}
-
-.navbar .nav-link:hover {
-    color: #5c5656 !important;
-    transform: translateY(-1px);
-}
-
-.navbar-brand {
-    font-weight: 600;
-    font-size: 1.8rem;
+    padding: var(--spacing-sm) 0;
+    transition: var(--transition);
 }
 
 .custom-navbar {
-    background: linear-gradient(to right, #4CAF50, #45a049) !important; /* Green gradient background */
-    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
-    border-bottom: 1px solid rgba(255,255,255,0.1);
+    background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-dark) 100%);
+    box-shadow: var(--shadow);
 }
 
-/* Main Content Area - Spacing and layout for main content */
+.navbar-brand {
+    font-weight: 700;
+    font-size: var(--font-size-2xl);
+    color: var(--white);
+    text-decoration: none;
+}
+
+.navbar .nav-link {
+    font-size: var(--font-size-lg);
+    padding: 0.6rem 1rem;
+    font-weight: 500;
+    border-radius: var(--radius);
+    margin: 0 2px;
+    transition: var(--transition);
+    text-decoration: none;
+    color: var(--white);
+}
+
+.navbar .nav-link:hover {
+    background: rgba(255, 255, 255, 0.1);
+    color: var(--white);
+}
+
+.navbar .nav-link.active {
+    background: rgba(255, 255, 255, 0.2);
+    color: var(--white);
+    font-weight: 600;
+}
+
+/* ===== MAIN CONTENT ===== */
 main {
-    padding-top: 80px; /* Increased padding to accommodate fixed navbar */
+    min-height: calc(100vh - 200px);
 }
 
-/* Programs Section - Layout for fitness programs display */
-.programs {
-    padding: 50px 20px;
+/* ===== CAROUSEL ===== */
+.carousel-container {
+    margin: 5px auto var(--spacing-xl);
     max-width: 1200px;
-    margin: auto;
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    overflow: hidden;
+}
+
+.carousel-item img {
+    width: 100%;
+    height: 450px;
+    object-fit: cover;
+}
+
+.carousel-caption {
+    background: rgba(0, 0, 0, 0.5);
+    border-radius: var(--radius);
+    padding: var(--spacing-lg);
+    bottom: var(--spacing-lg);
+    left: var(--spacing-lg);
+    right: var(--spacing-lg);
+}
+
+.carousel-caption h3 {
+    font-size: var(--font-size-3xl);
+    font-weight: 700;
+    margin-bottom: var(--spacing-md);
+    color: var(--white);
+}
+
+.carousel-caption p {
+    font-size: var(--font-size-xl);
+    color: var(--text-light);
+}
+
+.carousel-control-prev,
+.carousel-control-next {
+    width: 50px;
+    height: 50px;
+    background: rgba(0, 0, 0, 0.5);
+    border-radius: 50%;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.carousel-control-prev {
+    left: var(--spacing-lg);
+}
+
+.carousel-control-next {
+    right: var(--spacing-lg);
+}
+
+/* ===== PROGRAMS SECTION ===== */
+.programs {
+    padding: var(--spacing-xl) var(--spacing-lg);
+    max-width: 1200px;
+    margin: 0 auto;
+    background: var(--card-bg);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
 }
 
 .section-title {
     text-align: center;
-    color: #333;
-    margin-bottom: 40px;
-    font-weight: 600;
+    color: var(--text-dark);
+    margin-bottom: var(--spacing-xl);
+    font-size: var(--font-size-3xl);
+    font-weight: 700;
 }
 
-/* Card Grid Layout - Responsive grid for program cards */
-.workout-cards {
+.programs-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 30px;
-    padding: 0 20px;
+    gap: var(--spacing-lg);
 }
 
-/* Individual Program Card Styling */
-.workout-card {
-    background: white;
-    border-radius: 10px;
-    box-shadow: 0 3px 10px rgba(0,0,0,0.1);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    display: flex;
-    flex-direction: column;
-    height: 600px;
-    position: relative;
+.program-card {
+    background: var(--card-bg);
+    border-radius: var(--radius);
+    padding: var(--spacing-lg);
+    box-shadow: var(--shadow);
+    transition: var(--transition);
+    border: 1px solid #e9ecef;
 }
 
-.workout-card:hover {
+.program-card:hover {
     transform: translateY(-5px);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
 }
 
-.card-image {
+.program-card img {
+    border-radius: var(--radius);
+    margin-bottom: var(--spacing-md);
     width: 100%;
-    height: 300px;
+    height: 200px;
     object-fit: cover;
 }
 
-.workout-card h3 {
-    color: #333;
-    margin: 15px 20px;
+.program-card h4 {
+    font-size: var(--font-size-xl);
     font-weight: 600;
-    font-size: 1.5em;
+    margin-bottom: var(--spacing-sm);
+    color: var(--text-dark);
 }
 
-.workout-card p {
-    color: #666;
-    margin: 10px 20px;
+.program-card p {
+    color: var(--text-muted);
+    margin-bottom: var(--spacing-md);
 }
 
-.workout-card .price {
-    position: absolute;
-    bottom: 20px;
-    left: 50%;
-    transform: translateX(-50%);
+.program-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: var(--spacing-md);
+    padding-top: var(--spacing-md);
+    border-top: 1px solid #e9ecef;
+}
+
+.program-info span {
+    font-size: var(--font-size-sm);
+    color: var(--text-muted);
+}
+
+/* ===== BUTTONS ===== */
+.btn {
     display: inline-block;
+    padding: 12px 24px;
+    font-size: var(--font-size-base);
+    font-weight: 500;
     text-align: center;
-    background: linear-gradient(135deg, #4CAF50, #45a049);
-    color: white;
-    font-weight: 600;
-    font-size: 1.25em;
-    padding: 12px 25px;
-    border-radius: 25px;
-    box-shadow: 0 4px 15px rgba(76, 175, 80, 0.2);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    white-space: nowrap;
-}
-
-.workout-card h3,
-.workout-card p {
-    text-align: center;
-}
-
-/* Buttons */
-.cta-button {
-    display: inline-block;
-    background: #4CAF50;
-    color: white;
-    padding: 15px 30px;
-    border-radius: 30px;
     text-decoration: none;
-    font-weight: bold;
-    transition: background 0.3s ease;
+    border: none;
+    border-radius: var(--radius);
+    cursor: pointer;
+    transition: var(--transition);
 }
 
-.cta-button:hover {
-    background: #253126;
+.btn-primary {
+    background: var(--primary-color);
+    color: var(--white);
 }
 
-footer {
-    text-align: center;
-    padding: 20px;
-    color: #666;
-    margin-top: 50px;
+.btn-primary:hover {
+    background: var(--primary-dark);
+    color: var(--white);
 }
 
-/* Carousel/Slider Styles - Homepage hero section */
-.carousel-container {
-    margin-top: 76px; /* Spacing below navbar */
+/* ===== RESPONSIVE ===== */
+@media (max-width: 768px) {
+    .container {
+        padding: 0 var(--spacing-sm);
+    }
+
+    .programs {
+        padding: var(--spacing-lg) var(--spacing-sm);
+    }
+
+    .programs-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .carousel-caption h3 {
+        font-size: var(--font-size-2xl);
+    }
+
+    .carousel-caption p {
+    }
 }
 
-.carousel-item img {
-    border-radius: 10px;
-    transition: transform 0.3s ease;
-}
-
-/* Carousel Caption Styling - Text overlay on slider */
-.carousel-caption {
-    background: rgba(0, 0, 0, 0.5);
-    border-radius: 10px;
-    padding: 20px;
-    backdrop-filter: blur(5px);
-}
-
-.carousel-caption h3 {
-    font-size: 2rem;
-    font-weight: 600;
-    margin-bottom: 10px;
-    text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
-}
-
-.carousel-caption p {
-    font-size: 1.2rem;
-    text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
-}
-
-/* About Page Styles */
-.about-hero {
-    background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('https://images.unsplash.com/photo-1599058917212-d750089bc07e?q=80&w=1469&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');
-    background-size: cover;
-    background-position: center;
-    color: white;
-    padding: 100px 0;
-    margin-bottom: 30px;
-}
-
-.about-hero h1 {
-    margin-bottom: 20px;
-}
-
-.card {
-    transition: transform 0.3s ease;
-}
-
-.card:hover {
-    transform: translateY(-5px);
-}
-
-.text-primary {
-    color: #4CAF50 !important;
-}
-
-.bg-light {
-    background-color: #f8f9fa !important;
-}
