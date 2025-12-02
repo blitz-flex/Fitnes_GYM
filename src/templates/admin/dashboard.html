@@ -1,0 +1,104 @@
+    {% extends "admin/base.html" %}
+
+{% block title %}Dashboard - Admin Panel{% endblock %}
+{% block page_title %}Dashboard{% endblock %}
+
+{% block content %}
+<div class="stats-grid">
+    <div class="stat-card">
+        <div class="stat-number">{{ stats.total_users }}</div>
+        <div class="stat-label">მომხმარებლები</div>
+    </div>
+    <div class="stat-card">
+        <div class="stat-number">{{ stats.total_registrations }}</div>
+        <div class="stat-label">რეგისტრაციები</div>
+    </div>
+    <div class="stat-card">
+        <div class="stat-number">{{ stats.total_blog_posts if stats.total_blog_posts else 0 }}</div>
+        <div class="stat-label">ბლოგ პოსტები</div>
+    </div>
+</div>
+
+<div class="card">
+    <div class="card-header">
+        <h3 class="card-title">ბოლო აქტივობა</h3>
+    </div>
+    <div class="card-body">
+        {% if stats.recent_users or stats.recent_registrations %}
+        <div class="activity-grid">
+            <!-- Left Column - Recent Users -->
+            <div class="activity-column">
+                <div class="column-header">
+                    <i class="fas fa-user"></i>
+                    <h4>ახალი მომხმარებლები</h4>
+                </div>
+                <div class="activity-list">
+                    {% if stats.recent_users %}
+                        {% for user in stats.recent_users %}
+                        <div class="activity-item">
+                            <div class="activity-icon user-icon">
+                                <i class="fas fa-user"></i>
+                            </div>
+                            <div class="activity-content">
+                                <div class="activity-title">{{ user.username }}</div>
+                                <div class="activity-meta">{{ user.name if user.name else user.email }}</div>
+                            </div>
+                            <div class="activity-time">
+                                {% if user.created_at %}
+                                    {{ user.created_at.strftime('%d.%m') }}
+                                {% endif %}
+                            </div>
+                        </div>
+                        {% endfor %}
+                    {% else %}
+                        <div class="empty-state-small">
+                            <i class="fas fa-user-slash"></i>
+                            <p>ახალი მომხმარებლები არ არის</p>
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+
+            <!-- Right Column - Recent Registrations -->
+            <div class="activity-column">
+                <div class="column-header">
+                    <i class="fas fa-dumbbell"></i>
+                    <h4>ახალი რეგისტრაციები</h4>
+                </div>
+                <div class="activity-list">
+                    {% if stats.recent_registrations %}
+                        {% for reg in stats.recent_registrations %}
+                        <div class="activity-item">
+                            <div class="activity-icon registration-icon">
+                                <i class="fas fa-dumbbell"></i>
+                            </div>
+                            <div class="activity-content">
+                                <div class="activity-title">{{ reg.full_name }}</div>
+                                <div class="activity-meta">{{ reg.program }}</div>
+                            </div>
+                            <div class="activity-time">{{ reg.created_at.strftime('%d.%m') }}</div>
+                        </div>
+                        {% endfor %}
+                    {% else %}
+                        <div class="empty-state-small">
+                            <i class="fas fa-clipboard"></i>
+                            <p>ახალი რეგისტრაციები არ არის</p>
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+        {% else %}
+        <div class="empty-state">
+            <i class="fas fa-inbox empty-icon"></i>
+            <p class="empty-text">ბოლო აქტივობები არ არის</p>
+        </div>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/admin/dashboard.css') }}">
+
+{% endblock %}

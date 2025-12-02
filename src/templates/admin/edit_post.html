@@ -1,0 +1,145 @@
+{% extends "admin/base.html" %}
+
+{% block title %}პოსტის რედაქტირება - Admin Panel{% endblock %}
+{% block page_title %}პოსტის რედაქტირება{% endblock %}
+
+{% block content %}
+<div class="post-form-container">
+    <div class="form-header">
+        <h2 class="form-title">პოსტის რედაქტირება</h2>
+        <p class="form-subtitle">განაახლეთ თქვენი ბლოგის პოსტი</p>
+    </div>
+
+    <div class="form-card">
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                {% for category, message in messages %}
+                    <div class="alert alert-{{ 'danger' if category == 'error' else category }}" role="alert">
+                        <i class="fas fa-{{ 'exclamation-circle' if category == 'danger' else 'check-circle' }}"></i>
+                        {{ message }}
+                    </div>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+
+        <form method="POST" enctype="multipart/form-data" class="post-form">
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="title" class="form-label">
+                        <i class="fas fa-heading"></i>
+                        სათაური *
+                    </label>
+                    <input type="text" class="form-control" id="title" name="title" value="{{ post.title }}" required>
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="featured_image" class="form-label">
+                        <i class="fas fa-image"></i>
+                        მთავარი სურათი
+                    </label>
+                    {% if post.featured_image %}
+                    <div class="current-image">
+                        <div class="current-image-preview">
+                            <img src="{{ url_for('static', filename='images/blog/' + post.featured_image) }}"
+                                 alt="Current image" class="preview-img">
+                            <div class="image-overlay">
+                                <span class="current-label">მიმდინარე სურათი</span>
+                            </div>
+                        </div>
+                    </div>
+                    {% endif %}
+                    <div class="file-upload-area">
+                        <input type="file" class="form-control-file" id="featured_image" name="featured_image" accept="image/*">
+                        <div class="upload-placeholder">
+                            <i class="fas fa-cloud-upload-alt"></i>
+                            <span>{{ 'ახალი სურათის ატვირთვა' if post.featured_image else 'აირჩიეთ სურათი ან გადმოიტანეთ აქ' }}</span>
+                            <small>JPG, PNG, GIF - მაქსიმუმ 5MB</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="content" class="form-label">
+                        <i class="fas fa-align-left"></i>
+                        შიგთავსი *
+                    </label>
+                    <textarea class="form-control" id="content" name="content" rows="12" required>{{ post.content }}</textarea>
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="excerpt" class="form-label">
+                        <i class="fas fa-quote-left"></i>
+                        მოკლე აღწერა
+                    </label>
+                    <textarea class="form-control" id="excerpt" name="excerpt" rows="3">{{ post.excerpt }}</textarea>
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group">
+                    <div class="checkbox-wrapper">
+                        <input class="form-check-input" type="checkbox" id="published" name="published" {{ 'checked' if post.published else '' }}>
+                        <label class="checkbox-label" for="published">
+                            <span class="checkbox-text">გამოქვეყნებული</span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Post Info Section -->
+            <div class="post-info-section">
+                <h3 class="info-title">
+                    <i class="fas fa-info-circle"></i>
+                    პოსტის ინფორმაცია
+                </h3>
+                <div class="info-grid">
+                    <div class="info-item">
+                        <span class="info-label">შექმნილია:</span>
+                        <span class="info-value">{{ post.created_at.strftime('%d.%m.%Y %H:%M') }}</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-label">ავტორი:</span>
+                        <span class="info-value">{{ post.author.name if post.author else 'Admin' }}</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-label">ნახვები:</span>
+                        <span class="info-value">{{ post.views }}</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-label">წაკითხვის დრო:</span>
+                        <span class="info-value">{{ post.reading_time }} წუთი</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-actions">
+                <button type="submit" class="btn btn-primary">
+                    <i class="fas fa-save"></i>
+                    ცვლილებების შენახვა
+                </button>
+                <a href="{{ url_for('admin.blog_management') }}" class="btn btn-secondary">
+                    <i class="fas fa-arrow-left"></i>
+                    უკან დაბრუნება
+                </a>
+                {% if post.published %}
+                <a href="{{ url_for('blog.post_detail', slug=post.slug) }}" class="btn btn-success" target="_blank">
+                    <i class="fas fa-eye"></i>
+                    პოსტის ნახვა
+                </a>
+                {% endif %}
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/admin/edit_post.css') }}">
+
+{% endblock %}

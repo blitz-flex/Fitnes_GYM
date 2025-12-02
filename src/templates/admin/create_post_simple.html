@@ -1,0 +1,106 @@
+{% extends "admin/base.html" %}
+
+{% block title %}ახალი პოსტის შექმნა - Admin Panel{% endblock %}
+{% block page_title %}ახალი პოსტის შექმნა{% endblock %}
+
+{% block content %}
+<div class="post-form-container">
+    <div class="form-header">
+        <h2 class="form-title">ახალი ბლოგ პოსტის შექმნა</h2>
+        <p class="form-subtitle">შექმენით საინტერესო და ინფორმაციული კონტენტი</p>
+    </div>
+
+    <div class="form-card">
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                {% for category, message in messages %}
+                    <div class="alert alert-{{ 'danger' if category == 'error' else category }}" role="alert">
+                        <i class="fas fa-{{ 'exclamation-circle' if category == 'danger' else 'check-circle' }}"></i>
+                        {{ message }}
+                    </div>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+
+        <form method="POST" enctype="multipart/form-data" class="post-form">
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="title" class="form-label">
+                        <i class="fas fa-heading"></i>
+                        სათაური *
+                    </label>
+                    <input type="text" class="form-control" id="title" name="title" required
+                           placeholder="შეიყვანეთ პოსტის სათაური">
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="featured_image" class="form-label">
+                        <i class="fas fa-image"></i>
+                        მთავარი სურათი
+                    </label>
+                    <div class="file-upload-area">
+                        <input type="file" class="form-control-file" id="featured_image" name="featured_image" accept="image/*">
+                        <div class="upload-placeholder">
+                            <i class="fas fa-cloud-upload-alt"></i>
+                            <span>აირჩიეთ სურათი ან გადმოიტანეთ აქ</span>
+                            <small>JPG, PNG, GIF - მაქსიმუმ 5MB</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="content" class="form-label">
+                        <i class="fas fa-align-left"></i>
+                        შიგთავსი *
+                    </label>
+                    <textarea class="form-control" id="content" name="content" rows="12" required
+                              placeholder="დაწერეთ თქვენი პოსტის შიგთავსი..."></textarea>
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="excerpt" class="form-label">
+                        <i class="fas fa-quote-left"></i>
+                        მოკლე აღწერა
+                    </label>
+                    <textarea class="form-control" id="excerpt" name="excerpt" rows="3"
+                              placeholder="მოკლე აღწერა პოსტისთვის (არასავალდებულო)"></textarea>
+                    <small class="form-hint">თუ არ შეავსებთ, ავტომატურად შეიქმნება შიგთავსიდან</small>
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group">
+                    <div class="checkbox-wrapper">
+                        <input class="form-check-input" type="checkbox" id="published" name="published" checked>
+                        <label class="checkbox-label" for="published">
+                            <span class="checkbox-text">დაუყოვნებლივ გამოაქვეყნე</span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-actions">
+                <button type="submit" class="btn btn-primary">
+                    <i class="fas fa-save"></i>
+                    პოსტის შენახვა
+                </button>
+                <a href="{{ url_for('admin.blog_management') }}" class="btn btn-secondary">
+                    <i class="fas fa-arrow-left"></i>
+                    უკან დაბრუნება
+                </a>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/admin/create_post_simple.css') }}">
+
+{% endblock %}

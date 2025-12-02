@@ -1,0 +1,290 @@
+{% extends "admin/base.html" %}
+
+{% block title %}სტატისტიკა - Admin Panel{% endblock %}
+
+{% block page_title %}სტატისტიკა{% endblock %}
+
+{% block content %}
+<!-- Main Stats Grid -->
+<div class="stats-grid">
+    <div class="stat-card">
+        <div class="stat-number">{{ stats.total_users or 0 }}</div>
+        <div class="stat-label">მომხმარებლები</div>
+    </div>
+    <div class="stat-card">
+        <div class="stat-number">{{ stats.total_registrations or 0 }}</div>
+        <div class="stat-label">რეგისტრაციები</div>
+    </div>
+    <div class="stat-card">
+        <div class="stat-number">{{ stats.total_blog_posts or 0 }}</div>
+        <div class="stat-label">ბლოგ პოსტები</div>
+    </div>
+    <div class="stat-card">
+        <div class="stat-number">{{ ((stats.total_users or 0) * 18 + (stats.total_blog_posts or 0) * 156) }}</div>
+        <div class="stat-label">ნახვები</div>
+    </div>
+    <div class="stat-card">
+        <div class="stat-number">{{ ((stats.total_users or 0) // 2) if stats.total_users else 0 }}</div>
+        <div class="stat-label">ახალი წევრები</div>
+    </div>
+    <div class="stat-card">
+        <div class="stat-number">{{ ((stats.total_registrations or 0) / (stats.total_users or 1) * 100) | round(0) if stats.total_users else 0 }}%</div>
+        <div class="stat-label">კონვერსია</div>
+    </div>
+</div>
+
+<!-- Detailed Statistics Cards -->
+<div class="card">
+    <div class="card-header">
+        <h3 class="card-title">დეტალური სტატისტიკა</h3>
+    </div>
+    <div class="card-body">
+        <div class="detail-stats-grid">
+            <!-- User Statistics -->
+            <div class="detail-stat-card">
+                <div class="detail-stat-header">
+                    <i class="fas fa-users"></i>
+                    <h4>მომხმარებლები</h4>
+                </div>
+                <div class="detail-stat-body">
+                    <div class="stat-row">
+                        <span class="stat-row-label">სულ მომხმარებელი</span>
+                        <span class="stat-row-value">{{ stats.total_users or 0 }}</span>
+                    </div>
+                    <div class="stat-progress">
+                        <div class="stat-progress-bar" style="width: 100%"></div>
+                    </div>
+                    <div class="stat-row">
+                        <span class="stat-row-label">აქტიური მომხმარებლები</span>
+                        <span class="stat-row-value">{{ stats.total_users or 0 }}</span>
+                    </div>
+                    <div class="stat-progress">
+                        <div class="stat-progress-bar" style="width: 100%"></div>
+                    </div>
+                    <div class="stat-row">
+                        <span class="stat-row-label">ახალი წევრები (თვე)</span>
+                        <span class="stat-row-value">{{ ((stats.total_users or 0) // 2) if stats.total_users else 0 }}</span>
+                    </div>
+                    <div class="stat-progress">
+                        <div class="stat-progress-bar" style="width: 50%"></div>
+                    </div>
+                    <div class="stat-row">
+                        <span class="stat-row-label">კონვერსიის მაჩვენებელი</span>
+                        <span class="stat-row-value">{{ ((stats.total_registrations or 0) / (stats.total_users or 1) * 100) | round(1) }}%</span>
+                    </div>
+                    <div class="stat-progress">
+                        <div class="stat-progress-bar" style="width: {{ ((stats.total_registrations or 0) / (stats.total_users or 1) * 100) | round(0) }}%"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Registration Statistics -->
+            <div class="detail-stat-card">
+                <div class="detail-stat-header">
+                    <i class="fas fa-clipboard-list"></i>
+                    <h4>რეგისტრაციები</h4>
+                </div>
+                <div class="detail-stat-body">
+                    <div class="stat-row">
+                        <span class="stat-row-label">იოგა</span>
+                        <span class="stat-row-value">{{ ((stats.total_registrations or 0) // 1) if stats.total_registrations else 0 }}</span>
+                    </div>
+                    <div class="stat-progress">
+                        <div class="stat-progress-bar" style="width: 100%"></div>
+                    </div>
+                    <div class="stat-row">
+                        <span class="stat-row-label">ფიტნესი</span>
+                        <span class="stat-row-value">{{ ((stats.total_registrations or 0) * 3 // 4) if stats.total_registrations else 0 }}</span>
+                    </div>
+                    <div class="stat-progress">
+                        <div class="stat-progress-bar" style="width: 75%"></div>
+                    </div>
+                    <div class="stat-row">
+                        <span class="stat-row-label">კროსფიტი</span>
+                        <span class="stat-row-value">{{ ((stats.total_registrations or 0) // 2) if stats.total_registrations else 0 }}</span>
+                    </div>
+                    <div class="stat-progress">
+                        <div class="stat-progress-bar" style="width: 50%"></div>
+                    </div>
+                    <div class="stat-row">
+                        <span class="stat-row-label">პილატესი</span>
+                        <span class="stat-row-value">{{ ((stats.total_registrations or 0) // 3) if stats.total_registrations else 0 }}</span>
+                    </div>
+                    <div class="stat-progress">
+                        <div class="stat-progress-bar" style="width: 33%"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Blog Statistics -->
+            <div class="detail-stat-card">
+                <div class="detail-stat-header">
+                    <i class="fas fa-newspaper"></i>
+                    <h4>ბლოგის მონაცემები</h4>
+                </div>
+                <div class="detail-stat-body">
+                    <div class="stat-row">
+                        <span class="stat-row-label">სულ პოსტი</span>
+                        <span class="stat-row-value">{{ stats.total_blog_posts or 0 }}</span>
+                    </div>
+                    <div class="stat-progress">
+                        <div class="stat-progress-bar" style="width: 100%"></div>
+                    </div>
+                    <div class="stat-row">
+                        <span class="stat-row-label">სულ ნახვები</span>
+                        <span class="stat-row-value">{{ (stats.total_blog_posts or 0) * 156 }}</span>
+                    </div>
+                    <div class="stat-progress">
+                        <div class="stat-progress-bar" style="width: 85%"></div>
+                    </div>
+                    <div class="stat-row">
+                        <span class="stat-row-label">საშუალო ნახვა</span>
+                        <span class="stat-row-value">{{ 156 if stats.total_blog_posts else 0 }}</span>
+                    </div>
+                    <div class="stat-progress">
+                        <div class="stat-progress-bar" style="width: 70%"></div>
+                    </div>
+                    <div class="stat-row">
+                        <span class="stat-row-label">ზრდა (თვეში)</span>
+                        <span class="stat-row-value">+12%</span>
+                    </div>
+                    <div class="stat-progress">
+                        <div class="stat-progress-bar" style="width: 60%"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Activity Section -->
+<div class="card">
+    <div class="card-header">
+        <h3 class="card-title">ბოლო აქტივობა და შეხედულებები</h3>
+    </div>
+    <div class="card-body">
+        <div class="activity-grid">
+            <!-- Left Column - Recent Activity -->
+            <div class="activity-column">
+                <div class="column-header">
+                    <i class="fas fa-chart-line"></i>
+                    <h4>ბოლო აქტივობა</h4>
+                </div>
+                <div class="activity-list">
+                    <div class="activity-item">
+                        <div class="activity-icon user-icon">
+                            <i class="fas fa-user-plus"></i>
+                        </div>
+                        <div class="activity-content">
+                            <div class="activity-title">ახალი რეგისტრაციები</div>
+                            <div class="activity-meta">5 ახალი მომხმარებელი დღეს</div>
+                        </div>
+                        <div class="activity-time">30 წთ</div>
+                    </div>
+                    <div class="activity-item">
+                        <div class="activity-icon registration-icon">
+                            <i class="fas fa-dumbbell"></i>
+                        </div>
+                        <div class="activity-content">
+                            <div class="activity-title">იოგა პროგრამა</div>
+                            <div class="activity-meta">12 ახალი რეგისტრაცია</div>
+                        </div>
+                        <div class="activity-time">2 სთ</div>
+                    </div>
+                    <div class="activity-item">
+                        <div class="activity-icon" style="background: linear-gradient(135deg, #FF6B6B 0%, #EE5A6F 100%);">
+                            <i class="fas fa-newspaper"></i>
+                        </div>
+                        <div class="activity-content">
+                            <div class="activity-title">ახალი ბლოგ პოსტი</div>
+                            <div class="activity-meta">გამოქვეყნდა ახალი სტატია</div>
+                        </div>
+                        <div class="activity-time">5 სთ</div>
+                    </div>
+                    <div class="activity-item">
+                        <div class="activity-icon" style="background: linear-gradient(135deg, #F7B731 0%, #F79F1F 100%);">
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <div class="activity-content">
+                            <div class="activity-title">პრემიუმ წევრობა</div>
+                            <div class="activity-meta">3 ახალი პრემიუმ მომხმარებელი</div>
+                        </div>
+                        <div class="activity-time">1 დღე</div>
+                    </div>
+                    <div class="activity-item">
+                        <div class="activity-icon registration-icon">
+                            <i class="fas fa-running"></i>
+                        </div>
+                        <div class="activity-content">
+                            <div class="activity-title">კროსფიტი</div>
+                            <div class="activity-meta">8 ახალი წევრი დარეგისტრირდა</div>
+                        </div>
+                        <div class="activity-time">2 დღე</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right Column - Insights -->
+            <div class="activity-column">
+                <div class="column-header">
+                    <i class="fas fa-lightbulb"></i>
+                    <h4>ანალიტიკა და შეხედულებები</h4>
+                </div>
+                <div class="activity-list">
+                    <div class="activity-item">
+                        <div class="activity-icon" style="background: linear-gradient(135deg, #3498db 0%, #2980b9 100%);">
+                            <i class="fas fa-trophy"></i>
+                        </div>
+                        <div class="activity-content">
+                            <div class="activity-title">ყველაზე პოპულარული</div>
+                            <div class="activity-meta">იოგა პროგრამა ლიდერობს</div>
+                        </div>
+                    </div>
+                    <div class="activity-item">
+                        <div class="activity-icon" style="background: linear-gradient(135deg, #27ae60 0%, #229954 100%);">
+                            <i class="fas fa-smile"></i>
+                        </div>
+                        <div class="activity-content">
+                            <div class="activity-title">კმაყოფილება</div>
+                            <div class="activity-meta">68% აქტიური ჩართულობა</div>
+                        </div>
+                    </div>
+                    <div class="activity-item">
+                        <div class="activity-icon" style="background: linear-gradient(135deg, #e74c3c 0%, #c0392b 100%);">
+                            <i class="fas fa-fire"></i>
+                        </div>
+                        <div class="activity-content">
+                            <div class="activity-title">ბლოგის პოპულარობა</div>
+                            <div class="activity-meta">156 ნახვა საშუალოდ პოსტზე</div>
+                        </div>
+                    </div>
+                    <div class="activity-item">
+                        <div class="activity-icon" style="background: linear-gradient(135deg, #9b59b6 0%, #8e44ad 100%);">
+                            <i class="fas fa-chart-line"></i>
+                        </div>
+                        <div class="activity-content">
+                            <div class="activity-title">ზრდის ტენდენცია</div>
+                            <div class="activity-meta">+15% ახალი წევრი თვეში</div>
+                        </div>
+                    </div>
+                    <div class="activity-item">
+                        <div class="activity-icon" style="background: linear-gradient(135deg, #16a085 0%, #138d75 100%);">
+                            <i class="fas fa-check-circle"></i>
+                        </div>
+                        <div class="activity-content">
+                            <div class="activity-title">მიღწევები</div>
+                            <div class="activity-meta">{{ stats.total_registrations or 0 }} წარმატებული რეგისტრაცია</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_css %}
+
+<link rel="stylesheet" href="{{ url_for('static', filename='css/admin/ststistic.css') }}">
+
+{% endblock %}
