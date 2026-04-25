@@ -1,6 +1,6 @@
 {% extends "partials/base.html" %}
 
-{% block title %}ავტორიზაცია{% endblock %}
+{% block title %}Login{% endblock %}
 
 {% block extra_css %}
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
@@ -10,8 +10,8 @@
 {% block content %}
 <div class="form-page">
     <div class="form-header">
-        <h1>სისტემაში შესვლა</h1>
-        <p class="subtitle">შეიყვანეთ თქვენი მონაცემები გასაგრძელებლად.</p>
+        <h1>Log In</h1>
+        <p class="subtitle">Enter your details to continue.</p>
     </div>
     {% with messages = get_flashed_messages(with_categories=true) %}
         {% if messages %}
@@ -35,11 +35,11 @@
             {{ form.hidden_tag() }}
             <div class="form-group input-with-icon">
                 <i class="fas fa-at"></i>
-                {{ form.username(class="form-control", placeholder="მომხმარებლის სახელი") }}
+                {{ form.username(class="form-control", placeholder="Username") }}
             </div>
             <div class="form-group input-with-icon">
                 <i class="fas fa-lock"></i>
-                {{ form.password(class="form-control", placeholder="პაროლი") }}
+                {{ form.password(class="form-control", placeholder="Password") }}
             </div>
 
             <div class="form-group remember-me">
@@ -49,7 +49,7 @@
             {{ form.submit(class="submit-button") }}
         </form>
         <p class="form-switch">
-            არ გაქვთ ანგარიში? <a href="{{ url_for('auth.register') }}">შექმენით ახალი</a>
+            Don't have an account? <a href="{{ url_for('auth.register') }}">Create one</a>
         </p>
     </div>
 </div>

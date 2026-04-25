@@ -1,155 +1,83 @@
 {% extends "admin/base.html" %}
 
-{% block title %}სტატისტიკა - Admin Panel{% endblock %}
+{% block title %}Statistics - Admin Panel{% endblock %}
+{% block page_title %}Advanced Analytics{% endblock %}
 
-{% block page_title %}სტატისტიკა{% endblock %}
-
-{% block content %}
-<!-- Main Stats Grid -->
-<div class="stats-grid">
-    <div class="stat-card">
-        <div class="stat-number">{{ stats.total_users or 0 }}</div>
-        <div class="stat-label">მომხმარებლები</div>
+{% block admin_content %}
+<!-- Analytics Summary Grid -->
+<div class="row g-4 mb-4">
+    <div class="col-md-3">
+        <div class="card border-0 shadow-sm p-3 text-center" style="border-radius: 20px !important;">
+            <p class="text-muted small fw-bold text-uppercase mb-1">Monthly Growth</p>
+            <h3 class="fw-bold text-success mb-0">+12%</h3>
+            <div class="progress mt-2" style="height: 4px;">
+                <div class="progress-bar bg-success" style="width: 70%"></div>
+            </div>
+        </div>
     </div>
-    <div class="stat-card">
-        <div class="stat-number">{{ stats.total_registrations or 0 }}</div>
-        <div class="stat-label">რეგისტრაციები</div>
+    <div class="col-md-3">
+        <div class="card border-0 shadow-sm p-3 text-center" style="border-radius: 20px !important;">
+            <p class="text-muted small fw-bold text-uppercase mb-1">Retention Rate</p>
+            <h3 class="fw-bold text-primary mb-0">84%</h3>
+            <div class="progress mt-2" style="height: 4px;">
+                <div class="progress-bar bg-primary" style="width: 84%"></div>
+            </div>
+        </div>
     </div>
-    <div class="stat-card">
-        <div class="stat-number">{{ stats.total_blog_posts or 0 }}</div>
-        <div class="stat-label">ბლოგ პოსტები</div>
+    <div class="col-md-3">
+        <div class="card border-0 shadow-sm p-3 text-center" style="border-radius: 20px !important;">
+            <p class="text-muted small fw-bold text-uppercase mb-1">Avg. Booking/User</p>
+            <h3 class="fw-bold text-info mb-0">1.8</h3>
+            <div class="progress mt-2" style="height: 4px;">
+                <div class="progress-bar bg-info" style="width: 60%"></div>
+            </div>
+        </div>
     </div>
-    <div class="stat-card">
-        <div class="stat-number">{{ ((stats.total_users or 0) * 18 + (stats.total_blog_posts or 0) * 156) }}</div>
-        <div class="stat-label">ნახვები</div>
-    </div>
-    <div class="stat-card">
-        <div class="stat-number">{{ ((stats.total_users or 0) // 2) if stats.total_users else 0 }}</div>
-        <div class="stat-label">ახალი წევრები</div>
-    </div>
-    <div class="stat-card">
-        <div class="stat-number">{{ ((stats.total_registrations or 0) / (stats.total_users or 1) * 100) | round(0) if stats.total_users else 0 }}%</div>
-        <div class="stat-label">კონვერსია</div>
+    <div class="col-md-3">
+        <div class="card border-0 shadow-sm p-3 text-center" style="border-radius: 20px !important;">
+            <p class="text-muted small fw-bold text-uppercase mb-1">Content Impact</p>
+            <h3 class="fw-bold text-warning mb-0">4.2k</h3>
+            <div class="progress mt-2" style="height: 4px;">
+                <div class="progress-bar bg-warning" style="width: 45%"></div>
+            </div>
+        </div>
     </div>
 </div>
 
-<!-- Detailed Statistics Cards -->
-<div class="card">
-    <div class="card-header">
-        <h3 class="card-title">დეტალური სტატისტიკა</h3>
+<div class="row g-4 mb-4">
+    <!-- User Engagement Chart (Bar) -->
+    <div class="col-lg-8">
+        <div class="card border-0 shadow-sm" style="border-radius: 24px !important;">
+            <div class="card-header bg-transparent border-0 pt-4 px-4 d-flex justify-content-between align-items-center">
+                <h5 class="fw-bold text-white mb-0">Monthly Engagement Index</h5>
+                <i class="fas fa-ellipsis-h text-muted"></i>
+            </div>
+            <div class="card-body p-4">
+                <div style="height: 350px;">
+                    <canvas id="engagementChart"></canvas>
+                </div>
+            </div>
+        </div>
     </div>
-    <div class="card-body">
-        <div class="detail-stats-grid">
-            <!-- User Statistics -->
-            <div class="detail-stat-card">
-                <div class="detail-stat-header">
-                    <i class="fas fa-users"></i>
-                    <h4>მომხმარებლები</h4>
-                </div>
-                <div class="detail-stat-body">
-                    <div class="stat-row">
-                        <span class="stat-row-label">სულ მომხმარებელი</span>
-                        <span class="stat-row-value">{{ stats.total_users or 0 }}</span>
-                    </div>
-                    <div class="stat-progress">
-                        <div class="stat-progress-bar" style="width: 100%"></div>
-                    </div>
-                    <div class="stat-row">
-                        <span class="stat-row-label">აქტიური მომხმარებლები</span>
-                        <span class="stat-row-value">{{ stats.total_users or 0 }}</span>
-                    </div>
-                    <div class="stat-progress">
-                        <div class="stat-progress-bar" style="width: 100%"></div>
-                    </div>
-                    <div class="stat-row">
-                        <span class="stat-row-label">ახალი წევრები (თვე)</span>
-                        <span class="stat-row-value">{{ ((stats.total_users or 0) // 2) if stats.total_users else 0 }}</span>
-                    </div>
-                    <div class="stat-progress">
-                        <div class="stat-progress-bar" style="width: 50%"></div>
-                    </div>
-                    <div class="stat-row">
-                        <span class="stat-row-label">კონვერსიის მაჩვენებელი</span>
-                        <span class="stat-row-value">{{ ((stats.total_registrations or 0) / (stats.total_users or 1) * 100) | round(1) }}%</span>
-                    </div>
-                    <div class="stat-progress">
-                        <div class="stat-progress-bar" style="width: {{ ((stats.total_registrations or 0) / (stats.total_users or 1) * 100) | round(0) }}%"></div>
-                    </div>
-                </div>
-            </div>
 
-            <!-- Registration Statistics -->
-            <div class="detail-stat-card">
-                <div class="detail-stat-header">
-                    <i class="fas fa-clipboard-list"></i>
-                    <h4>რეგისტრაციები</h4>
-                </div>
-                <div class="detail-stat-body">
-                    <div class="stat-row">
-                        <span class="stat-row-label">იოგა</span>
-                        <span class="stat-row-value">{{ ((stats.total_registrations or 0) // 1) if stats.total_registrations else 0 }}</span>
-                    </div>
-                    <div class="stat-progress">
-                        <div class="stat-progress-bar" style="width: 100%"></div>
-                    </div>
-                    <div class="stat-row">
-                        <span class="stat-row-label">ფიტნესი</span>
-                        <span class="stat-row-value">{{ ((stats.total_registrations or 0) * 3 // 4) if stats.total_registrations else 0 }}</span>
-                    </div>
-                    <div class="stat-progress">
-                        <div class="stat-progress-bar" style="width: 75%"></div>
-                    </div>
-                    <div class="stat-row">
-                        <span class="stat-row-label">კროსფიტი</span>
-                        <span class="stat-row-value">{{ ((stats.total_registrations or 0) // 2) if stats.total_registrations else 0 }}</span>
-                    </div>
-                    <div class="stat-progress">
-                        <div class="stat-progress-bar" style="width: 50%"></div>
-                    </div>
-                    <div class="stat-row">
-                        <span class="stat-row-label">პილატესი</span>
-                        <span class="stat-row-value">{{ ((stats.total_registrations or 0) // 3) if stats.total_registrations else 0 }}</span>
-                    </div>
-                    <div class="stat-progress">
-                        <div class="stat-progress-bar" style="width: 33%"></div>
-                    </div>
-                </div>
+    <!-- Demographics Chart (Doughnut) -->
+    <div class="col-lg-4">
+        <div class="card border-0 shadow-sm h-100" style="border-radius: 24px !important;">
+            <div class="card-header bg-transparent border-0 pt-4 px-4">
+                <h5 class="fw-bold text-white mb-0">Gender Split</h5>
             </div>
-
-            <!-- Blog Statistics -->
-            <div class="detail-stat-card">
-                <div class="detail-stat-header">
-                    <i class="fas fa-newspaper"></i>
-                    <h4>ბლოგის მონაცემები</h4>
+            <div class="card-body p-4 d-flex flex-column justify-content-center">
+                <div style="height: 250px;">
+                    <canvas id="genderChart"></canvas>
                 </div>
-                <div class="detail-stat-body">
-                    <div class="stat-row">
-                        <span class="stat-row-label">სულ პოსტი</span>
-                        <span class="stat-row-value">{{ stats.total_blog_posts or 0 }}</span>
+                <div class="mt-4">
+                    <div class="d-flex justify-content-between mb-2">
+                        <span class="small fw-medium text-muted"><i class="fas fa-mars text-primary me-2"></i>Male</span>
+                        <span class="small fw-bold text-white">62%</span>
                     </div>
-                    <div class="stat-progress">
-                        <div class="stat-progress-bar" style="width: 100%"></div>
-                    </div>
-                    <div class="stat-row">
-                        <span class="stat-row-label">სულ ნახვები</span>
-                        <span class="stat-row-value">{{ (stats.total_blog_posts or 0) * 156 }}</span>
-                    </div>
-                    <div class="stat-progress">
-                        <div class="stat-progress-bar" style="width: 85%"></div>
-                    </div>
-                    <div class="stat-row">
-                        <span class="stat-row-label">საშუალო ნახვა</span>
-                        <span class="stat-row-value">{{ 156 if stats.total_blog_posts else 0 }}</span>
-                    </div>
-                    <div class="stat-progress">
-                        <div class="stat-progress-bar" style="width: 70%"></div>
-                    </div>
-                    <div class="stat-row">
-                        <span class="stat-row-label">ზრდა (თვეში)</span>
-                        <span class="stat-row-value">+12%</span>
-                    </div>
-                    <div class="stat-progress">
-                        <div class="stat-progress-bar" style="width: 60%"></div>
+                    <div class="d-flex justify-content-between">
+                        <span class="small fw-medium text-muted"><i class="fas fa-venus text-danger me-2"></i>Female</span>
+                        <span class="small fw-bold text-white">38%</span>
                     </div>
                 </div>
             </div>
@@ -157,125 +85,57 @@
     </div>
 </div>
 
-<!-- Activity Section -->
-<div class="card">
-    <div class="card-header">
-        <h3 class="card-title">ბოლო აქტივობა და შეხედულებები</h3>
-    </div>
-    <div class="card-body">
-        <div class="activity-grid">
-            <!-- Left Column - Recent Activity -->
-            <div class="activity-column">
-                <div class="column-header">
-                    <i class="fas fa-chart-line"></i>
-                    <h4>ბოლო აქტივობა</h4>
-                </div>
-                <div class="activity-list">
-                    <div class="activity-item">
-                        <div class="activity-icon user-icon">
-                            <i class="fas fa-user-plus"></i>
-                        </div>
-                        <div class="activity-content">
-                            <div class="activity-title">ახალი რეგისტრაციები</div>
-                            <div class="activity-meta">5 ახალი მომხმარებელი დღეს</div>
-                        </div>
-                        <div class="activity-time">30 წთ</div>
-                    </div>
-                    <div class="activity-item">
-                        <div class="activity-icon registration-icon">
-                            <i class="fas fa-dumbbell"></i>
-                        </div>
-                        <div class="activity-content">
-                            <div class="activity-title">იოგა პროგრამა</div>
-                            <div class="activity-meta">12 ახალი რეგისტრაცია</div>
-                        </div>
-                        <div class="activity-time">2 სთ</div>
-                    </div>
-                    <div class="activity-item">
-                        <div class="activity-icon" style="background: linear-gradient(135deg, #FF6B6B 0%, #EE5A6F 100%);">
-                            <i class="fas fa-newspaper"></i>
-                        </div>
-                        <div class="activity-content">
-                            <div class="activity-title">ახალი ბლოგ პოსტი</div>
-                            <div class="activity-meta">გამოქვეყნდა ახალი სტატია</div>
-                        </div>
-                        <div class="activity-time">5 სთ</div>
-                    </div>
-                    <div class="activity-item">
-                        <div class="activity-icon" style="background: linear-gradient(135deg, #F7B731 0%, #F79F1F 100%);">
-                            <i class="fas fa-star"></i>
-                        </div>
-                        <div class="activity-content">
-                            <div class="activity-title">პრემიუმ წევრობა</div>
-                            <div class="activity-meta">3 ახალი პრემიუმ მომხმარებელი</div>
-                        </div>
-                        <div class="activity-time">1 დღე</div>
-                    </div>
-                    <div class="activity-item">
-                        <div class="activity-icon registration-icon">
-                            <i class="fas fa-running"></i>
-                        </div>
-                        <div class="activity-content">
-                            <div class="activity-title">კროსფიტი</div>
-                            <div class="activity-meta">8 ახალი წევრი დარეგისტრირდა</div>
-                        </div>
-                        <div class="activity-time">2 დღე</div>
-                    </div>
+<div class="row g-4">
+    <!-- Program Performance (Radar or Polar Area) -->
+    <div class="col-lg-6">
+        <div class="card border-0 shadow-sm h-100" style="border-radius: 24px !important;">
+            <div class="card-header bg-transparent border-0 pt-4 px-4">
+                <h5 class="fw-bold text-white mb-0">Program Popularity</h5>
+            </div>
+            <div class="card-body p-4">
+                <div style="height: 300px;">
+                    <canvas id="programRadarChart"></canvas>
                 </div>
             </div>
+        </div>
+    </div>
 
-            <!-- Right Column - Insights -->
-            <div class="activity-column">
-                <div class="column-header">
-                    <i class="fas fa-lightbulb"></i>
-                    <h4>ანალიტიკა და შეხედულებები</h4>
+    <!-- Goal Tracking -->
+    <div class="col-lg-6">
+        <div class="card border-0 shadow-sm h-100" style="border-radius: 24px !important;">
+            <div class="card-header bg-transparent border-0 pt-4 px-4">
+                <h5 class="fw-bold text-white mb-0">Monthly Business Goals</h5>
+            </div>
+            <div class="card-body p-4">
+                <div class="mb-4">
+                    <div class="d-flex justify-content-between mb-2">
+                        <h6 class="fw-bold text-white mb-0">Member Acquisition</h6>
+                        <span class="text-success fw-bold">75%</span>
+                    </div>
+                    <div class="progress" style="height: 12px; border-radius: 6px;">
+                        <div class="progress-bar bg-success" style="width: 75%"></div>
+                    </div>
+                    <p class="text-muted small mt-2">Target: 200 new members (Current: {{ stats.total_users }})</p>
                 </div>
-                <div class="activity-list">
-                    <div class="activity-item">
-                        <div class="activity-icon" style="background: linear-gradient(135deg, #3498db 0%, #2980b9 100%);">
-                            <i class="fas fa-trophy"></i>
-                        </div>
-                        <div class="activity-content">
-                            <div class="activity-title">ყველაზე პოპულარული</div>
-                            <div class="activity-meta">იოგა პროგრამა ლიდერობს</div>
-                        </div>
+                <div class="mb-4">
+                    <div class="d-flex justify-content-between mb-2">
+                        <h6 class="fw-bold text-white mb-0">Class Bookings</h6>
+                        <span class="text-primary fw-bold">60%</span>
                     </div>
-                    <div class="activity-item">
-                        <div class="activity-icon" style="background: linear-gradient(135deg, #27ae60 0%, #229954 100%);">
-                            <i class="fas fa-smile"></i>
-                        </div>
-                        <div class="activity-content">
-                            <div class="activity-title">კმაყოფილება</div>
-                            <div class="activity-meta">68% აქტიური ჩართულობა</div>
-                        </div>
+                    <div class="progress" style="height: 12px; border-radius: 6px;">
+                        <div class="progress-bar bg-primary" style="width: 60%"></div>
                     </div>
-                    <div class="activity-item">
-                        <div class="activity-icon" style="background: linear-gradient(135deg, #e74c3c 0%, #c0392b 100%);">
-                            <i class="fas fa-fire"></i>
-                        </div>
-                        <div class="activity-content">
-                            <div class="activity-title">ბლოგის პოპულარობა</div>
-                            <div class="activity-meta">156 ნახვა საშუალოდ პოსტზე</div>
-                        </div>
+                    <p class="text-muted small mt-2">Target: 500 bookings (Current: {{ stats.total_registrations }})</p>
+                </div>
+                <div class="mb-0">
+                    <div class="d-flex justify-content-between mb-2">
+                        <h6 class="fw-bold text-white mb-0">Blog Content Plan</h6>
+                        <span class="text-warning fw-bold">40%</span>
                     </div>
-                    <div class="activity-item">
-                        <div class="activity-icon" style="background: linear-gradient(135deg, #9b59b6 0%, #8e44ad 100%);">
-                            <i class="fas fa-chart-line"></i>
-                        </div>
-                        <div class="activity-content">
-                            <div class="activity-title">ზრდის ტენდენცია</div>
-                            <div class="activity-meta">+15% ახალი წევრი თვეში</div>
-                        </div>
+                    <div class="progress" style="height: 12px; border-radius: 6px;">
+                        <div class="progress-bar bg-warning" style="width: 40%"></div>
                     </div>
-                    <div class="activity-item">
-                        <div class="activity-icon" style="background: linear-gradient(135deg, #16a085 0%, #138d75 100%);">
-                            <i class="fas fa-check-circle"></i>
-                        </div>
-                        <div class="activity-content">
-                            <div class="activity-title">მიღწევები</div>
-                            <div class="activity-meta">{{ stats.total_registrations or 0 }} წარმატებული რეგისტრაცია</div>
-                        </div>
-                    </div>
+                    <p class="text-muted small mt-2">Target: 20 articles/mo (Current: {{ stats.total_blog_posts or 0 }})</p>
                 </div>
             </div>
         </div>
@@ -283,8 +143,81 @@
 </div>
 {% endblock %}
 
-{% block extra_css %}
+{% block extra_js %}
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        // Engagement Chart (Bar)
+        const ctxBar = document.getElementById('engagementChart').getContext('2d');
+        new Chart(ctxBar, {
+            type: 'bar',
+            data: {
+                labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+                datasets: [{
+                    label: 'Daily Check-ins',
+                    data: [65, 59, 80, 81, 56, 95, 40],
+                    backgroundColor: '#3498db',
+                    borderRadius: 8,
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: { legend: { display: false } },
+                scales: {
+                    y: { grid: { borderDash: [5, 5], color: '#f0f2f5' } },
+                    x: { grid: { display: false } }
+                }
+            }
+        });
 
-<link rel="stylesheet" href="{{ url_for('static', filename='css/admin/ststistic.css') }}">
+        // Gender Split (Doughnut)
+        const ctxDoughnut = document.getElementById('genderChart').getContext('2d');
+        new Chart(ctxDoughnut, {
+            type: 'doughnut',
+            data: {
+                labels: ['Male', 'Female'],
+                datasets: [{
+                    data: [62, 38],
+                    backgroundColor: ['#3498db', '#e74c3c'],
+                    borderWidth: 0,
+                    cutout: '75%'
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: { legend: { display: false } }
+            }
+        });
 
+        // Program Radar Chart
+        const ctxRadar = document.getElementById('programRadarChart').getContext('2d');
+        new Chart(ctxRadar, {
+            type: 'radar',
+            data: {
+                labels: ['Yoga', 'Fitness', 'Crossfit', 'Pilates', 'Boxing', 'Zumba'],
+                datasets: [{
+                    label: 'Popularity',
+                    data: [90, 85, 70, 60, 75, 50],
+                    fill: true,
+                    backgroundColor: 'rgba(46, 204, 113, 0.2)',
+                    borderColor: '#2ecc71',
+                    pointBackgroundColor: '#2ecc71',
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: { legend: { display: false } },
+                scales: {
+                    r: {
+                        suggestedMin: 0,
+                        suggestedMax: 100,
+                        ticks: { display: false }
+                    }
+                }
+            }
+        });
+    });
+</script>
 {% endblock %}

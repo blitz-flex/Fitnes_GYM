@@ -1,6 +1,6 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, PasswordField, SubmitField, DateField, SelectField, FileField, BooleanField
-from wtforms.validators import DataRequired, EqualTo, Length, ValidationError
+from wtforms import StringField, PasswordField, SubmitField, DateField, SelectField, FileField, BooleanField, EmailField
+from wtforms.validators import DataRequired, EqualTo, Length, ValidationError, Email
 from flask_wtf.file import FileAllowed
 import re
 
@@ -8,52 +8,80 @@ def validate_password_strength(form, field):
     """Custom validator for strong password requirements"""
     password = field.data
     if not password:
-        return  # DataRequired will handle empty passwords
+        return 
 
     errors = []
-
     if len(password) < 8:
-        errors.append("პაროლი მინიმუმ 8 სიმბოლო უნდა იყოს")
-
+        errors.append("Password must be at least 8 characters long")
     if not re.search(r'[A-Z]', password):
-        errors.append("უნდა შეიცავდეს მინიმუმ ერთ დიდ ასოს")
-
+        errors.append("Must contain at least one uppercase letter")
     if not re.search(r'[a-z]', password):
-        errors.append("უნდა შეიცავდეს მინიმუმ ერთ პატარა ასოს")
-
+        errors.append("Must contain at least one lowercase letter")
     if not re.search(r'[0-9]', password):
-        errors.append("უნდა შეიცავდეს მინიმუმ ერთ ციფრს")
-
+        errors.append("Must contain at least one digit")
     if not re.search(r'[!@#$%^&*(),.?":{}|<>]', password):
-        errors.append("უნდა შეიცავდეს მინიმუმ ერთ სპეციალურ სიმბოლოს (!@#$%^&*)")
+        errors.append("Must contain at least one special character (!@#$%^&*)")
 
     if errors:
         raise ValidationError(' | '.join(errors))
 
 class RegistrationForm(FlaskForm):
-    name = StringField('სახელი და გვარი', validators=[DataRequired(message="ეს ველი აუცილებელია.")])
-    username = StringField('მომხმარებლის სახელი', validators=[DataRequired(message="ეს ველი აუცილებელია.")])
-    password = PasswordField('პაროლი', validators=[
-        DataRequired(message="ეს ველი აუცილებელია."),
+    first_name = StringField('First Name', validators=[DataRequired(message="First name is required.")])
+    last_name = StringField('Last Name', validators=[DataRequired(message="Last name is required.")])
+    email = EmailField('Email Address', validators=[
+        DataRequired(message="Email is required."),
+        Email(message="Invalid email address.")
+    ])
+    username = StringField('Username', validators=[
+        DataRequired(message="Username is required."),
+        Length(min=3, max=20, message="Username must be between 3 and 20 characters.")
+    ])
+    password = PasswordField('Password', validators=[
+        DataRequired(message="Password is required."),
         validate_password_strength
     ])
-    confirm_password = PasswordField('გაიმეორეთ პაროლი', validators=[
-        DataRequired(message="ეს ველი აუცილებელია."),
-        EqualTo('password', message='პაროლები არ ემთხვევა.')
+    confirm_password = PasswordField('Confirm Password', validators=[
+        DataRequired(message="Please confirm your password."),
+        EqualTo('password', message='Passwords must match.')
     ])
-    birthdate = DateField('დაბადების თარიღი', format='%Y-%m-%d', validators=[DataRequired(message="ეს ველი აუცილებელია.")])
-    gender = SelectField('სქესი', choices=[('', 'აირჩიეთ სქესი'), ('male', 'მამაკაცი'), ('female', 'ქალი'), ('other', 'სხვა')], validators=[DataRequired(message="ეს ველი აუცილებელია.")])
-    profile_image = FileField('პროფილის სურათი', validators=[FileAllowed(['jpg', 'png', 'jpeg', 'gif'], 'დაშვებულია მხოლოდ სურათები!')])
-    submit = SubmitField('რეგისტრაცია')
+    birthdate = DateField('Birthdate', format='%Y-%m-%d', validators=[DataRequired(message="Birthdate is required.")])
+    gender = SelectField('Gender', choices=[
+        ('', 'Select Gender'), 
+        ('male', 'Male'), 
+        ('female', 'Female'), 
+        ('other', 'Other')
+    ], validators=[DataRequired(message="Please select your gender.")])
+    profile_image = FileField('Profile Image', validators=[
+        FileAllowed(['jpg', 'png', 'jpeg', 'gif'], 'Only images are allowed!')
+    ])
+    submit = SubmitField('Register')
 
 class LoginForm(FlaskForm):
-    username = StringField('მომხმარებლის სახელი', validators=[
-        DataRequired(message="შეიყვანეთ მომხმარებლის სახელი"),
-        Length(min=3, max=20, message="მომხმარებლის სახელი უნდა იყოს 3-20 სიმბოლო")
+    username = StringField('Username', validators=[
+        DataRequired(message="Please enter your username"),
+        Length(min=3, max=20, message="Username must be 3-20 characters")
     ])
-    password = PasswordField('პაროლი', validators=[
-        DataRequired(message="შეიყვანეთ პაროლი"),
-        Length(min=4, message="პაროლი მინიმუმ 4 სიმბოლო ")
+    password = PasswordField('Password', validators=[
+        DataRequired(message="Please enter your password"),
+        Length(min=4, message="Password must be at least 4 characters")
     ])
-    remember = BooleanField('დამიმახსოვრე')
-    submit = SubmitField('შესვლა')
+    remember = BooleanField('Remember Me')
+    submit = SubmitField('Login')
+
+class RequestResetForm(FlaskForm):
+    email = EmailField('Email Address', validators=[
+        DataRequired(message="Email is required."),
+        Email(message="Invalid email address.")
+    ])
+    submit = SubmitField('Request Password Reset')
+
+class ResetPasswordForm(FlaskForm):
+    password = PasswordField('New Password', validators=[
+        DataRequired(message="Password is required."),
+        validate_password_strength
+    ])
+    confirm_password = PasswordField('Confirm New Password', validators=[
+        DataRequired(message="Please confirm your password."),
+        EqualTo('password', message='Passwords must match.')
+    ])
+    submit = SubmitField('Reset Password')

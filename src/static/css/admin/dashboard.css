@@ -210,3 +210,13 @@
 
 
 
+
+/* Extracted from HTML */
+
+    .bg-zinc-dark { background-color: #09090b !important; }
+    .border-zinc-light { border-color: #27272a !important; }
+    .btn-zinc-light { background: #1c1c1f; }
+    .btn-zinc-light:hover { background: #27272a; color: white; }
+    .dropdown-item:hover { background-color: rgba(255,255,255,0.05) !important; color: #fff !important; }
+    .dropdown-item.active, .dropdown-item:active { background-color: #3f3f46 !important; }
+

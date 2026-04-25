@@ -228,3 +228,10 @@ user-info {
         align-self: center;
     }
 }
+/* Extracted from HTML */
+
+    .avatar-sm { width: 40px; height: 40px; object-fit: cover; border-radius: 50%; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+    .avatar-icon-sm { width: 40px; height: 40px; border-radius: 50%; background: #f0f2f5; display: flex; align-items: center; justify-content: center; color: #8798a4; font-size: 1.2rem; }
+    .action-btn { width: 32px; height: 32px; padding: 0; display: inline-flex; align-items: center; justify-content: center; border-radius: 8px; transition: 0.2s; }
+    .action-btn:hover { transform: translateY(-2px); }
+

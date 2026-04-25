@@ -1,195 +1,197 @@
 {% extends "partials/base.html" %}
 
-{% block title %}ბლოგი - Fitness Center{% endblock %}
+{% block title %}Fitness Insights - FitnessClub{% endblock %}
 
 {% block extra_css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/exercise/style.css', v='2.1') }}">
 <link rel="stylesheet" href="{{ url_for('static', filename='css/blog/index.css') }}">
 
 {% endblock %}
 
 {% block content %}
-<div class="blog-container">
-    <div class="blog-header">
-        <h1>ფიტნეს ბლოგი</h1>
-        <p>იპოვნეთ სასარგებლო რჩევები და ინფორმაცია ჯანმრთელობისა და ფიტნესის შესახებ</p>
-        <div class="header-decoration"></div>
+{% if current_user.is_authenticated and current_user.is_admin %}
+<section class="admin-ai-dashboard" style="background: #111; padding: 60px 0; border-bottom: 1px solid rgba(255,255,255,0.1);">
+    <div class="container">
+        <div style="background: #000; padding: 40px; border-radius: 20px; border: 1px solid var(--primary-color); box-shadow: 0 20px 40px rgba(0,0,0,0.5);">
+            <h3 style="margin-top:0; font-weight: 900; letter-spacing: -1px; color: #fff;"><i class="fas fa-robot" style="color: var(--primary-color);"></i> AI Content Expert</h3>
+            <p style="color: rgba(255,255,255,0.5); font-size: 0.95rem;">Enter a fitness topic and our AI will generate a high-quality article.</p>
+            <div style="display: flex; gap: 15px; margin-top: 25px;">
+                <input type="text" id="ai-topic" placeholder="e.g. Advanced Yoga Techniques" style="flex-grow: 1; padding: 18px 25px; border-radius: 12px; border: 1px solid #333; background: #1a1a1a; color: #fff; font-size: 1rem; outline: none;">
+                <button id="generate-btn" style="background: var(--primary-color); color: #000; border: none; padding: 0 40px; border-radius: 12px; font-weight: 800; cursor: pointer; transition: all 0.3s; text-transform: uppercase; letter-spacing: 1px;">
+                    <span id="btn-text">Generate</span>
+                    <i id="btn-spinner" class="fas fa-circle-notch fa-spin" style="display: none;"></i>
+                </button>
+            </div>
+            <div id="gen-status" style="margin-top: 20px; font-weight: 600; font-size: 0.9rem; display: none; padding: 15px; border-radius: 8px; background: rgba(255,255,255,0.05);"></div>
+        </div>
     </div>
+</section>
 
-    <div class="blog-content">
-        {% if posts %}
-        <div class="posts-grid" id="posts-container">
+<script>
+    document.getElementById('generate-btn').addEventListener('click', async function() {
+        const topic = document.getElementById('ai-topic').value;
+        const btn = this;
+        const btnText = document.getElementById('btn-text');
+        const spinner = document.getElementById('btn-spinner');
+        const status = document.getElementById('gen-status');
+
+        if (!topic) return alert('Please enter a topic');
+
+        btn.disabled = true;
+        btnText.style.display = 'none';
+        spinner.style.display = 'inline-block';
+        status.style.display = 'block';
+        status.style.color = 'var(--primary-color)';
+        status.textContent = 'AI is crafting your masterpiece...';
+
+        try {
+            const response = await fetch("{{ url_for('blog.generate_ai_post') }}", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ topic: topic })
+            });
+            const data = await response.json();
+
+            if (data.success) {
+                status.style.color = '#2ecc71';
+                status.textContent = 'Done! Refreshing feed...';
+                setTimeout(() => window.location.reload(), 1500);
+            } else {
+                status.style.color = '#e74c3c';
+                status.textContent = 'Error: ' + (data.error || 'Failed to generate');
+                btn.disabled = false;
+                btnText.style.display = 'inline-block';
+                spinner.style.display = 'none';
+            }
+        } catch (e) {
+            status.style.color = '#e74c3c';
+            status.textContent = 'Connection lost. Try again.';
+            btn.disabled = false;
+            btnText.style.display = 'inline-block';
+            spinner.style.display = 'none';
+        }
+    });
+</script>
+{% endif %}
+
+<header class="blog-header-section">
+    <div class="container">
+        <h1 class="blog-title">Fitness Insights</h1>
+        <p class="blog-subtitle">Expert advice on training, nutrition, and lifestyle to help you reach your peak performance.</p>
+    </div>
+</header>
+
+<!-- Filter Bar -->
+<section style="background:#f8fafc; border-bottom:1px solid #e5e7eb; padding:20px 0; margin-bottom:40px;">
+    <div class="container">
+        <form method="GET" action="{{ url_for('blog.index') }}" id="filterForm">
+            <div style="display:flex; gap:16px; align-items:center; flex-wrap:wrap;">
+
+                <!-- Search -->
+                <div style="flex:1; min-width:220px; position:relative;">
+                    <i class="fas fa-search" style="position:absolute; left:14px; top:50%; transform:translateY(-50%); color:#9ca3af;"></i>
+                    <input type="text" name="search" value="{{ search }}"
+                        placeholder="Search articles..."
+                        style="width:100%; padding:11px 16px 11px 40px; border:2px solid #e5e7eb; border-radius:12px; font-size:0.95rem; outline:none; background:white; transition:border-color 0.2s;"
+                        onfocus="this.style.borderColor='var(--primary-color)'"
+                        onblur="this.style.borderColor='#e5e7eb'">
+                </div>
+
+                <!-- Category -->
+                <div style="display:flex; gap:8px; flex-wrap:wrap;">
+                    <span style="font-weight:700; font-size:0.85rem; color:#6b7280; align-self:center;">Category:</span>
+                    {% set cat_icons = {'Training':'🏋️','Nutrition':'🥗','Cardio':'🏃','Recovery':'💆','Lifestyle':'🌿'} %}
+                    {% for cat in all_categories %}
+                    <button type="submit" name="category" value="{{ '' if category==cat else cat }}"
+                        style="padding:8px 16px; border-radius:20px; font-size:0.82rem; font-weight:700; cursor:pointer; border:2px solid {{ 'var(--primary-color)' if category==cat else '#e5e7eb' }}; background:{{ '#f0fdf4' if category==cat else 'white' }}; color:{{ 'var(--primary-color)' if category==cat else '#374151' }}; transition:all 0.2s;">
+                        {{ cat_icons.get(cat,'📌') }} {{ cat }}
+                    </button>
+                    {% endfor %}
+                </div>
+
+                <!-- Clear -->
+                {% if search or reading or category %}
+                <a href="{{ url_for('blog.index') }}"
+                    style="padding:9px 16px; border-radius:10px; font-size:0.85rem; font-weight:700; background:#fee2e2; color:#dc2626; border:2px solid #fca5a5; text-decoration:none; transition:all 0.2s; white-space:nowrap;">
+                    <i class="fas fa-times"></i> Clear
+                </a>
+                {% endif %}
+
+                <!-- Hidden fields to carry other params -->
+                {% if reading %}<input type="hidden" name="reading" value="{{ reading }}">{% endif %}
+
+            </div>
+        </form>
+    </div>
+</section>
+
+<section class="blog-grid-section">
+    <div class="container">
+        <div class="posts-grid">
             {% for post in posts %}
-            <article class="post-card" style="animation-delay: {{ loop.index0 * 0.1 }}s;">
-                <div class="post-image-container">
-                    {% if post.featured_image %}
-                    <img src="{{ url_for('static', filename='images/blog/' + post.featured_image) }}"
-                         alt="{{ post.title }}"
-                         class="post-image">
-                    <div class="image-overlay">
-                        <div class="overlay-badge">
-                            <i class="fas fa-image"></i>
-                            {{ post.reading_time or 1 }} წუთი
-                        </div>
-                    </div>
-                    {% else %}
-                    <div class="post-image post-placeholder">
-                        <i class="fas fa-newspaper"></i>
-                    </div>
-                    {% endif %}
+            <a href="{{ url_for('blog.post_detail', slug=post.slug) }}" class="post-card">
+                <div class="post-image-box">
+                    <img src="{{ post.featured_image }}" alt="{{ post.title }}">
+                    <span class="post-badge">{{ post.reading_time }} min read</span>
                 </div>
-
-                <div class="post-body">
-                    <h2 class="post-title">
-                        <a href="{{ url_for('blog.post_detail', slug=post.slug) }}">{{ post.title }}</a>
-                    </h2>
-
-                    <p class="post-excerpt">{{ post.excerpt or (post.content[:150] + '...' if post.content|length > 150 else post.content) }}</p>
-
-                    <div class="post-meta">
-                        <div class="meta-left">
-                            <div class="meta-item">
-                                <i class="fas fa-user"></i>
-                                <span>{{ post.author.name if post.author else 'Admin' }}</span>
-                            </div>
-                            <div class="meta-item">
-                                <i class="fas fa-calendar-alt"></i>
-                                <span>{{ post.created_at.strftime('%d.%m.%Y') }}</span>
-                            </div>
-                            <div class="meta-item">
-                                <i class="fas fa-eye"></i>
-                                <span>{{ post.views or 0 }}</span>
-                            </div>
-                        </div>
+                <div class="post-content-box">
+                    <div class="post-meta-top">
+                        <span>{{ post.created_at }}</span>
+                        <span>•</span>
+                        <span>{{ post.category }}</span>
                     </div>
-
-                    <a href="{{ url_for('blog.post_detail', slug=post.slug) }}" class="read-more">
-                        წაკითხვა
-                        <i class="fas fa-arrow-right"></i>
-                    </a>
+                    <h2 class="post-card-title">{{ post.title }}</h2>
+                    <p class="post-card-excerpt">{{ post.excerpt }}</p>
+                    <div class="post-footer">
+                        <div class="author-info">
+                            <div class="author-avatar">{{ post.author_name[0] }}</div>
+                            <span class="author-name">{{ post.author_name }}</span>
+                        </div>
+                        <span class="read-link">Read More <i class="fas fa-arrow-right"></i></span>
+                    </div>
                 </div>
-            </article>
+            </a>
             {% endfor %}
         </div>
 
-        {% if has_more %}
-        <div class="load-more-container">
-            <button class="load-more-btn" id="load-more-btn" data-page="{{ current_page + 1 }}">
-                <span class="loading-spinner" id="loading-spinner"></span>
-                <span class="btn-text">მეტის ჩვენება</span>
-            </button>
+        <!-- Pagination -->
+        {% if pagination and pagination.pages > 1 %}
+        <div class="blog-pagination">
+            {% if pagination.has_prev %}
+                <a href="{{ url_for('blog.index', page=pagination.prev_num, search=search, sort=sort, reading=reading) }}"><i class="fas fa-chevron-left"></i></a>
+            {% else %}
+                <span class="disabled"><i class="fas fa-chevron-left"></i></span>
+            {% endif %}
+
+            {% for p in pagination.iter_pages(left_edge=1, right_edge=1, left_current=2, right_current=2) %}
+                {% if p %}
+                    {% if p == pagination.page %}
+                        <span class="active-page">{{ p }}</span>
+                    {% else %}
+                        <a href="{{ url_for('blog.index', page=p, search=search, sort=sort, reading=reading) }}">{{ p }}</a>
+                    {% endif %}
+                {% else %}
+                    <span style="border:none;width:auto;padding:0 4px;">…</span>
+                {% endif %}
+            {% endfor %}
+
+            {% if pagination.has_next %}
+                <a href="{{ url_for('blog.index', page=pagination.next_num, search=search, sort=sort, reading=reading) }}"><i class="fas fa-chevron-right"></i></a>
+            {% else %}
+                <span class="disabled"><i class="fas fa-chevron-right"></i></span>
+            {% endif %}
         </div>
         {% endif %}
 
-        {% else %}
-        <div class="empty-state">
-            <div class="empty-state-icon">
-                <i class="fas fa-newspaper"></i>
-            </div>
-            <h3>ბლოგ პოსტები ჯერ არ არის</h3>
-            <p>ჩვენ მუშაობას ვიწყებთ და მალე დაგხვდებით საინტერესო კონტენტი!</p>
+        <!-- Empty State -->
+        {% if not posts %}
+        <div style="text-align:center; padding:80px 20px;">
+            <div style="font-size:4rem; margin-bottom:20px;">🔍</div>
+            <h3 style="font-weight:800; color:#1e293b; margin-bottom:10px;">No articles found</h3>
+            <p style="color:#64748b; margin-bottom:24px;">Try adjusting your search or filters.</p>
+            <a href="{{ url_for('blog.index') }}" style="display:inline-block; padding:12px 28px; background:var(--primary-color); color:white; border-radius:12px; font-weight:700; text-decoration:none;">Clear Filters</a>
         </div>
         {% endif %}
     </div>
-</div>
-
-<script>
-document.addEventListener('DOMContentLoaded', function() {
-    const loadMoreBtn = document.getElementById('load-more-btn');
-    const postsContainer = document.getElementById('posts-container');
-    const loadingSpinner = document.getElementById('loading-spinner');
-    const btnText = loadMoreBtn?.querySelector('.btn-text');
-
-    if (loadMoreBtn) {
-        loadMoreBtn.addEventListener('click', function() {
-            const currentPage = parseInt(this.dataset.page);
-
-            // Show loading state
-            loadingSpinner.style.display = 'inline-block';
-            btnText.textContent = 'იტვირთება...';
-            loadMoreBtn.disabled = true;
-
-            // Make AJAX request
-            fetch(`{{ url_for('blog.index') }}?page=${currentPage}`, {
-                headers: {
-                    'X-Requested-With': 'XMLHttpRequest'
-                }
-            })
-            .then(response => response.json())
-            .then(data => {
-                // Add new posts to the container
-                data.posts.forEach((post, index) => {
-                    const postCard = createPostCard(post, index);
-                    postsContainer.appendChild(postCard);
-                });
-
-                // Update button state
-                if (data.has_more) {
-                    this.dataset.page = data.next_page;
-                    loadingSpinner.style.display = 'none';
-                    btnText.textContent = 'მეტის ჩვენება';
-                    loadMoreBtn.disabled = false;
-                } else {
-                    this.style.display = 'none';
-                }
-            })
-            .catch(error => {
-                console.error('Error loading posts:', error);
-                loadingSpinner.style.display = 'none';
-                btnText.textContent = 'მეტის ჩვენება';
-                loadMoreBtn.disabled = false;
-            });
-        });
-    }
-
-    function createPostCard(post, index) {
-        const card = document.createElement('article');
-        card.className = 'post-card';
-        card.style.animationDelay = `${index * 0.1}s`;
-
-        const imageHtml = post.featured_image
-            ? `<img src="{{ url_for('static', filename='images/blog/') }}${post.featured_image}" alt="${post.title}" class="post-image">`
-            : `<div class="post-image post-placeholder"><i class="fas fa-newspaper"></i></div>`;
-
-        card.innerHTML = `
-            <div class="post-image-container">
-                ${imageHtml}
-                <div class="image-overlay">
-                    <div class="overlay-badge">
-                        <i class="fas fa-image"></i>
-                        ${post.reading_time || 1} წუთი
-                    </div>
-                </div>
-            </div>
-            <div class="post-body">
-                <h2 class="post-title">
-                    <a href="{{ url_for('blog.post_detail', slug='') }}${post.slug}">${post.title}</a>
-                </h2>
-                <p class="post-excerpt">${post.excerpt}</p>
-                <div class="post-meta">
-                    <div class="meta-left">
-                        <div class="meta-item">
-                            <i class="fas fa-user"></i>
-                            <span>${post.author_name}</span>
-                        </div>
-                        <div class="meta-item">
-                            <i class="fas fa-calendar-alt"></i>
-                            <span>${post.created_at}</span>
-                        </div>
-                        <div class="meta-item">
-                            <i class="fas fa-eye"></i>
-                            <span>${post.views}</span>
-                        </div>
-                    </div>
-                </div>
-                <a href="{{ url_for('blog.post_detail', slug='') }}${post.slug}" class="read-more">
-                    წაკითხვა
-                    <i class="fas fa-arrow-right"></i>
-                </a>
-            </div>
-        `;
-
-        return card;
-    }
-});
-</script>
+</section>
 {% endblock %}

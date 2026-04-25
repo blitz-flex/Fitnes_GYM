@@ -1,11 +1,10 @@
 {% extends "partials/base.html" %}
 
-{% block title %}რეგისტრაცია - Fitness Center{% endblock %}
+{% block title %}Register - Fitness Center{% endblock %}
 
 {% block extra_css %}
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-<link rel="stylesheet" href="{{ url_for('static', filename='css/auth/register.css') }}">
-
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/auth/register.css') }}">
 {% endblock %}
 
 {% block content %}
@@ -15,8 +14,8 @@
             <div class="register-icon">
                 <i class="fas fa-user-plus"></i>
             </div>
-            <h1>რეგისტრაცია</h1>
-            <p>შექმენით ანგარიში ფიტნეს ცენტრში</p>
+            <h1>Create Account</h1>
+            <p>Join our fitness community today</p>
         </div>
 
         {% with messages = get_flashed_messages(with_categories=true) %}
@@ -48,22 +47,52 @@
         <form method="POST" enctype="multipart/form-data" id="registerForm" novalidate>
             {{ form.hidden_tag() }}
 
+            <div class="form-row">
+                <div class="form-group">
+                    <label class="form-label">
+                        <i class="fas fa-user"></i>
+                        First Name <span class="required-mark">*</span>
+                    </label>
+                    <div class="input-wrapper">
+                        {{ form.first_name(class="form-control" + (" is-invalid" if form.first_name.errors else ""), placeholder="e.g. John") }}
+                        <i class="input-icon fas fa-user"></i>
+                    </div>
+                    {% if form.first_name.errors %}
+                        {% for error in form.first_name.errors %}
+                            <div class="invalid-feedback">{{ error }}</div>
+                        {% endfor %}
+                    {% endif %}
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">
+                        <i class="fas fa-user"></i>
+                        Last Name <span class="required-mark">*</span>
+                    </label>
+                    <div class="input-wrapper">
+                        {{ form.last_name(class="form-control" + (" is-invalid" if form.last_name.errors else ""), placeholder="e.g. Doe") }}
+                        <i class="input-icon fas fa-user"></i>
+                    </div>
+                    {% if form.last_name.errors %}
+                        {% for error in form.last_name.errors %}
+                            <div class="invalid-feedback">{{ error }}</div>
+                        {% endfor %}
+                    {% endif %}
+                </div>
+            </div>
+
             <div class="form-group">
                 <label class="form-label">
-                    <i class="fas fa-user"></i>
-                    სახელი
-                    <span class="required-mark">*</span>
+                    <i class="fas fa-envelope"></i>
+                    Email Address <span class="required-mark">*</span>
                 </label>
                 <div class="input-wrapper">
-                    {{ form.name(class="form-control" + (" is-invalid" if form.name.errors else ""), placeholder="სახელი და გვარი  ") }}
-                    <i class="input-icon fas fa-user"></i>
+                    {{ form.email(class="form-control" + (" is-invalid" if form.email.errors else ""), placeholder="john.doe@example.com") }}
+                    <i class="input-icon fas fa-envelope"></i>
                 </div>
-                {% if form.name.errors %}
-                    {% for error in form.name.errors %}
-                        <div class="invalid-feedback">
-                            <i class="fas fa-exclamation-circle"></i>
-                            {{ error }}
-                        </div>
+                {% if form.email.errors %}
+                    {% for error in form.email.errors %}
+                        <div class="invalid-feedback">{{ error }}</div>
                     {% endfor %}
                 {% endif %}
             </div>
@@ -71,19 +100,15 @@
             <div class="form-group">
                 <label class="form-label">
                     <i class="fas fa-at"></i>
-                    მომხმარებლის სახელი
-                    <span class="required-mark">*</span>
+                    Username <span class="required-mark">*</span>
                 </label>
                 <div class="input-wrapper">
-                    {{ form.username(class="form-control" + (" is-invalid" if form.username.errors else ""), placeholder="მაგ: ნინო_ნათადზე") }}
+                    {{ form.username(class="form-control" + (" is-invalid" if form.username.errors else ""), placeholder="choose a unique username") }}
                     <i class="input-icon fas fa-at"></i>
                 </div>
                 {% if form.username.errors %}
                     {% for error in form.username.errors %}
-                        <div class="invalid-feedback">
-                            <i class="fas fa-exclamation-circle"></i>
-                            {{ error }}
-                        </div>
+                        <div class="invalid-feedback">{{ error }}</div>
                     {% endfor %}
                 {% endif %}
             </div>
@@ -91,12 +116,11 @@
             <div class="form-group">
                 <label class="form-label">
                     <i class="fas fa-lock"></i>
-                    პაროლი
-                    <span class="required-mark">*</span>
+                    Password <span class="required-mark">*</span>
                 </label>
                 <div class="password-wrapper">
                     <div class="input-wrapper">
-                        {{ form.password(class="form-control" + (" is-invalid" if form.password.errors else ""), placeholder="შეიყვანეთ უსაფრთხო პაროლი", id="password") }}
+                        {{ form.password(class="form-control" + (" is-invalid" if form.password.errors else ""), placeholder="create a strong password", id="password") }}
                         <i class="input-icon fas fa-lock"></i>
                     </div>
                     <button type="button" class="password-toggle" onclick="togglePassword('password', this)">
@@ -105,15 +129,12 @@
                 </div>
                 {% if form.password.errors %}
                     {% for error in form.password.errors %}
-                        <div class="invalid-feedback">
-                            <i class="fas fa-exclamation-circle"></i>
-                            {{ error }}
-                        </div>
+                        <div class="invalid-feedback">{{ error }}</div>
                     {% endfor %}
                 {% endif %}
                 <div class="password-strength" id="passwordStrength">
                     <div class="strength-label">
-                        <span>პაროლის სიძლიერე:</span>
+                        <span>Strength:</span>
                         <span id="strengthText">-</span>
                     </div>
                     <div class="strength-bar">
@@ -121,26 +142,11 @@
                     </div>
                     <div class="password-requirements">
                         <ul id="passwordRequirements">
-                            <li data-requirement="length">
-                                <i class="fas fa-circle"></i>
-                                მინიმუმ 8 სიმბოლო
-                            </li>
-                            <li data-requirement="uppercase">
-                                <i class="fas fa-circle"></i>
-                                მინიმუმ ერთი დიდი ასო (A-Z)
-                            </li>
-                            <li data-requirement="lowercase">
-                                <i class="fas fa-circle"></i>
-                                მინიმუმ ერთი პატარა ასო (a-z)
-                            </li>
-                            <li data-requirement="number">
-                                <i class="fas fa-circle"></i>
-                                მინიმუმ ერთი ციფრი (0-9)
-                            </li>
-                            <li data-requirement="special">
-                                <i class="fas fa-circle"></i>
-                                მინიმუმ ერთი სპეციალური სიმბოლო (!@#$%^&*)
-                            </li>
+                            <li data-requirement="length"><i class="fas fa-circle"></i> Min 8 characters</li>
+                            <li data-requirement="uppercase"><i class="fas fa-circle"></i> One uppercase (A-Z)</li>
+                            <li data-requirement="lowercase"><i class="fas fa-circle"></i> One lowercase (a-z)</li>
+                            <li data-requirement="number"><i class="fas fa-circle"></i> One number (0-9)</li>
+                            <li data-requirement="special"><i class="fas fa-circle"></i> One special char (!@#$...)</li>
                         </ul>
                     </div>
                 </div>
@@ -148,13 +154,12 @@
 
             <div class="form-group">
                 <label class="form-label">
-                    <i class="fas fa-lock"></i>
-                    პაროლის დადასტურება
-                    <span class="required-mark">*</span>
+                    <i class="fas fa-check-double"></i>
+                    Confirm Password <span class="required-mark">*</span>
                 </label>
                 <div class="password-wrapper">
                     <div class="input-wrapper">
-                        {{ form.confirm_password(class="form-control" + (" is-invalid" if form.confirm_password.errors else ""), placeholder="გაიმეორეთ პაროლი", id="confirmPassword") }}
+                        {{ form.confirm_password(class="form-control" + (" is-invalid" if form.confirm_password.errors else ""), placeholder="repeat your password", id="confirmPassword") }}
                         <i class="input-icon fas fa-lock"></i>
                     </div>
                     <button type="button" class="password-toggle" onclick="togglePassword('confirmPassword', this)">
@@ -163,10 +168,7 @@
                 </div>
                 {% if form.confirm_password.errors %}
                     {% for error in form.confirm_password.errors %}
-                        <div class="invalid-feedback">
-                            <i class="fas fa-exclamation-circle"></i>
-                            {{ error }}
-                        </div>
+                        <div class="invalid-feedback">{{ error }}</div>
                     {% endfor %}
                 {% endif %}
             </div>
@@ -175,8 +177,7 @@
                 <div class="form-group">
                     <label class="form-label">
                         <i class="fas fa-calendar"></i>
-                        დაბადების თარიღი
-                        <span class="required-mark">*</span>
+                        Birthdate <span class="required-mark">*</span>
                     </label>
                     <div class="input-wrapper">
                         {{ form.birthdate(class="form-control" + (" is-invalid" if form.birthdate.errors else "")) }}
@@ -184,10 +185,7 @@
                     </div>
                     {% if form.birthdate.errors %}
                         {% for error in form.birthdate.errors %}
-                            <div class="invalid-feedback">
-                                <i class="fas fa-exclamation-circle"></i>
-                                {{ error }}
-                            </div>
+                            <div class="invalid-feedback">{{ error }}</div>
                         {% endfor %}
                     {% endif %}
                 </div>
@@ -195,8 +193,7 @@
                 <div class="form-group">
                     <label class="form-label">
                         <i class="fas fa-venus-mars"></i>
-                        სქესი
-                        <span class="required-mark">*</span>
+                        Gender <span class="required-mark">*</span>
                     </label>
                     <div class="input-wrapper">
                         {{ form.gender(class="form-select" + (" is-invalid" if form.gender.errors else "")) }}
@@ -204,10 +201,7 @@
                     </div>
                     {% if form.gender.errors %}
                         {% for error in form.gender.errors %}
-                            <div class="invalid-feedback">
-                                <i class="fas fa-exclamation-circle"></i>
-                                {{ error }}
-                            </div>
+                            <div class="invalid-feedback">{{ error }}</div>
                         {% endfor %}
                     {% endif %}
                 </div>
@@ -216,7 +210,7 @@
             <div class="form-group">
                 <label class="form-label">
                     <i class="fas fa-image"></i>
-                    პროფილის სურათი (არასავალდებულო)
+                    Profile Image (Optional)
                 </label>
                 <div class="file-upload-area" id="fileUploadArea">
                     {{ form.profile_image(class="file-input", id="profile_image", accept="image/*") }}
@@ -224,8 +218,8 @@
                         <i class="fas fa-cloud-upload-alt"></i>
                     </div>
                     <div class="file-upload-text">
-                        <strong>დააჭირეთ ან ჩააგდეთ ფაილი</strong><br>
-                        PNG, JPG, GIF (მაქს. 5MB)
+                        <strong>Click or drag and drop</strong><br>
+                        PNG, JPG, GIF (Max 5MB)
                     </div>
                 </div>
                 <div class="file-preview" id="filePreview">
@@ -240,10 +234,7 @@
                 </div>
                 {% if form.profile_image.errors %}
                     {% for error in form.profile_image.errors %}
-                        <div class="invalid-feedback">
-                            <i class="fas fa-exclamation-circle"></i>
-                            {{ error }}
-                        </div>
+                        <div class="invalid-feedback">{{ error }}</div>
                     {% endfor %}
                 {% endif %}
             </div>
@@ -251,14 +242,14 @@
             <button type="submit" class="submit-btn" id="submitBtn">
                 <span class="btn-text">
                     <i class="fas fa-user-plus"></i>
-                    რეგისტრაცია
+                    Create Account
                 </span>
                 <div class="spinner"></div>
             </button>
         </form>
 
         <div class="login-link">
-            <p>უკვე გაქვთ ანგარიში? <a href="{{ url_for('auth.login') }}">შესვლა</a></p>
+            <p>Already have an account? <a href="{{ url_for('auth.login') }}">Log In</a></p>
         </div>
     </div>
 </div>
@@ -289,7 +280,6 @@ const requirements = document.getElementById('passwordRequirements');
 passwordInput.addEventListener('input', function() {
     const password = this.value;
 
-    // Check requirements
     const checks = {
         length: password.length >= 8,
         uppercase: /[A-Z]/.test(password),
@@ -298,7 +288,6 @@ passwordInput.addEventListener('input', function() {
         special: /[!@#$%^&*(),.?":{}|<>]/.test(password)
     };
 
-    // Update requirement items
     Object.keys(checks).forEach(key => {
         const item = requirements.querySelector(`[data-requirement="${key}"]`);
         const icon = item.querySelector('i');
@@ -313,22 +302,20 @@ passwordInput.addEventListener('input', function() {
         }
     });
 
-    // Calculate strength
     const metCount = Object.values(checks).filter(v => v).length;
-
     strengthContainer.classList.remove('strength-weak', 'strength-medium', 'strength-strong');
 
     if (password.length === 0) {
         strengthText.textContent = '-';
     } else if (metCount <= 2) {
         strengthContainer.classList.add('strength-weak');
-        strengthText.textContent = 'სუსტი';
+        strengthText.textContent = 'Weak';
     } else if (metCount <= 4) {
         strengthContainer.classList.add('strength-medium');
-        strengthText.textContent = 'საშუალო';
+        strengthText.textContent = 'Medium';
     } else {
         strengthContainer.classList.add('strength-strong');
-        strengthText.textContent = 'ძლიერი';
+        strengthText.textContent = 'Strong';
     }
 });
 
@@ -340,32 +327,21 @@ const previewImage = document.getElementById('previewImage');
 const previewName = document.getElementById('previewName');
 const previewSize = document.getElementById('previewSize');
 
-// Drag and drop
 ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
-    fileUploadArea.addEventListener(eventName, preventDefaults, false);
+    fileUploadArea.addEventListener(eventName, e => { e.preventDefault(); e.stopPropagation(); }, false);
 });
 
-function preventDefaults(e) {
-    e.preventDefault();
-    e.stopPropagation();
-}
-
 ['dragenter', 'dragover'].forEach(eventName => {
-    fileUploadArea.addEventListener(eventName, () => {
-        fileUploadArea.classList.add('drag-over');
-    }, false);
+    fileUploadArea.addEventListener(eventName, () => { fileUploadArea.classList.add('drag-over'); }, false);
 });
 
 ['dragleave', 'drop'].forEach(eventName => {
-    fileUploadArea.addEventListener(eventName, () => {
-        fileUploadArea.classList.remove('drag-over');
-    }, false);
+    fileUploadArea.addEventListener(eventName, () => { fileUploadArea.classList.remove('drag-over'); }, false);
 });
 
-fileUploadArea.addEventListener('drop', function(e) {
+fileUploadArea.addEventListener('drop', e => {
     const dt = e.dataTransfer;
     const files = dt.files;
-
     if (files.length) {
         fileInput.files = files;
         handleFileSelect(files[0]);
@@ -373,20 +349,16 @@ fileUploadArea.addEventListener('drop', function(e) {
 });
 
 fileInput.addEventListener('change', function(e) {
-    if (this.files.length) {
-        handleFileSelect(this.files[0]);
-    }
+    if (this.files.length) { handleFileSelect(this.files[0]); }
 });
 
 function handleFileSelect(file) {
     if (!file.type.match('image.*')) {
-        alert('გთხოვთ აირჩიოთ სურათი');
+        alert('Please select an image file');
         return;
     }
-
-    // Show preview
     const reader = new FileReader();
-    reader.onload = function(e) {
+    reader.onload = e => {
         previewImage.src = e.target.result;
         previewName.textContent = file.name;
         previewSize.textContent = formatFileSize(file.size);
@@ -408,19 +380,17 @@ function formatFileSize(bytes) {
     return Math.round(bytes / Math.pow(k, i) * 100) / 100 + ' ' + sizes[i];
 }
 
-// Form submission
 const form = document.getElementById('registerForm');
 const submitBtn = document.getElementById('submitBtn');
 
-form.addEventListener('submit', function(e) {
+form.addEventListener('submit', () => {
     submitBtn.classList.add('loading');
     submitBtn.disabled = true;
 });
 
-// Auto-dismiss flash messages
-setTimeout(function() {
+setTimeout(() => {
     const flashMessages = document.querySelectorAll('.flash-message');
-    flashMessages.forEach(function(msg) {
+    flashMessages.forEach(msg => {
         msg.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
         msg.style.opacity = '0';
         msg.style.transform = 'translateX(100%)';

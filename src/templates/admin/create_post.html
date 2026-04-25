@@ -1,14 +1,14 @@
 {% extends "admin/base.html" %}
 
-{% block title %}ახალი პოსტის შექმნა - Admin Panel{% endblock %}
-{% block page_title %}ახალი პოსტის შექმნა{% endblock %}
+{% block title %}Create New Post - Admin Panel{% endblock %}
+{% block page_title %}Create New Post{% endblock %}
 
 {% block content %}
 <div class="card">
     <div class="card-header">
         <h3 class="card-title">
             <i class="fas fa-plus-circle"></i>
-            ახალი ბლოგ პოსტის შექმნა
+            Create New Blog Post
         </h3>
     </div>
 
@@ -30,13 +30,13 @@
                     <div class="form-group">
                         <label for="title" class="form-label">
                             <i class="fas fa-heading"></i>
-                            სათაური <span class="required">*</span>
+                            Title <span class="required">*</span>
                         </label>
                         <input type="text"
                                class="form-control"
                                id="title"
                                name="title"
-                               placeholder="შეიყვანეთ ბლოგ პოსტის სათაური"
+                               placeholder="Enter blog post title"
                                required>
                     </div>
 
@@ -44,7 +44,7 @@
                     <div class="form-group">
                         <label for="content" class="form-label">
                             <i class="fas fa-align-left"></i>
-                            შიგთავსი <span class="required">*</span>
+                            Content <span class="required">*</span>
                         </label>
                         <div class="editor-container">
                             <div id="editor"></div>
@@ -56,14 +56,14 @@
                     <div class="form-group">
                         <label for="excerpt" class="form-label">
                             <i class="fas fa-quote-left"></i>
-                            მოკლე აღწერა
+                            Excerpt
                         </label>
                         <textarea class="form-control"
                                   id="excerpt"
                                   name="excerpt"
                                   rows="3"
-                                  placeholder="პოსტის მოკლე აღწერა (არასავალდებულო)"></textarea>
-                        <small class="form-text">თუ არ შეიყვანთ, ავტომატურად შეიქმნება შიგთავსიდან</small>
+                                  placeholder="Short description (optional)"></textarea>
+                        <small class="form-text">If left blank, it will be automatically generated from content</small>
                     </div>
                 </div>
 
@@ -72,13 +72,13 @@
                     <div class="form-group">
                         <label for="featured_image" class="form-label">
                             <i class="fas fa-image"></i>
-                            მთავარი სურათი
+                            Featured Image
                         </label>
                         <div class="image-upload-area" onclick="document.getElementById('featured_image').click()">
                             <div class="upload-placeholder" id="uploadPlaceholder">
                                 <i class="fas fa-cloud-upload-alt"></i>
-                                <p>სურათის ატვირთვა</p>
-                                <small>JPG, PNG, GIF (მაქს. 5MB)</small>
+                                <p>Upload Image</p>
+                                <small>JPG, PNG, GIF (max. 5MB)</small>
                             </div>
                             <div class="image-preview" id="imagePreview" style="display: none;">
                                 <img id="previewImg" src="" alt="Preview">
@@ -100,14 +100,14 @@
                     <div class="form-group">
                         <label class="form-label">
                             <i class="fas fa-eye"></i>
-                            გამოქვეყნების პარამეტრები
+                            Publish Options
                         </label>
                         <div class="publish-options">
                             <div class="form-check">
                                 <input class="form-check-input" type="checkbox" id="published" name="published" checked>
                                 <label class="form-check-label" for="published">
-                                    <strong>დაუყოვნებლივ გამოაქვეყნე</strong>
-                                    <br><small>თუ გამორთავთ, პოსტი შენახული იქნება როგორც მონახაზი</small>
+                                    <strong>Publish Immediately</strong>
+                                    <br><small>If disabled, post will be saved as a draft</small>
                                 </label>
                             </div>
                         </div>
@@ -119,11 +119,11 @@
             <div class="form-actions">
                 <button type="submit" class="btn btn-primary" id="saveBtn">
                     <i class="fas fa-save"></i>
-                    პოსტის შენახვა
+                    Save Post
                 </button>
                 <a href="{{ url_for('admin.blog_management') }}" class="btn btn-secondary">
                     <i class="fas fa-arrow-left"></i>
-                    უკან დაბრუნება
+                    Go Back
                 </a>
             </div>
         </form>
@@ -144,7 +144,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // Initialize Quill editor
     const quill = new Quill('#editor', {
         theme: 'snow',
-        placeholder: 'დაწერეთ ბლოგ პოსტის შიგთავსი...',
+        placeholder: 'Write your blog post content here...',
         modules: {
             toolbar: [
                 [{ 'header': [1, 2, 3, false] }],
@@ -192,7 +192,7 @@ document.addEventListener('DOMContentLoaded', function() {
         const textContent = quill.getText().trim();
         if (textContent.length === 0) {
             e.preventDefault();
-            alert('შიგთავსის შეყვანა აუცილებელია!');
+            alert('Content is required!');
             return false;
         }
 

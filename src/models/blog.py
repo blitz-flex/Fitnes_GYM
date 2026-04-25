@@ -10,11 +10,13 @@ class BlogPost(db.Model):
     content = db.Column(db.Text, nullable=False)
     excerpt = db.Column(db.String(300))
     slug = db.Column(db.String(200), unique=True, nullable=False)
-    featured_image = db.Column(db.String(100))
+    featured_image = db.Column(db.String(500))
+    category = db.Column(db.String(50), default='Training')
     created_at = db.Column(db.DateTime, default=datetime.utcnow)
     updated_at = db.Column(db.DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
     published = db.Column(db.Boolean, default=True)
     author_id = db.Column(db.Integer, db.ForeignKey('user_accounts.id'), nullable=False)
+    author_name = db.Column(db.String(100))
     views = db.Column(db.Integer, default=0)
 
     # Relationship with User

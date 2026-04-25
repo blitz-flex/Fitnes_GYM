@@ -13,6 +13,10 @@ class ProgramRegistration(db.Model):
     full_name = Column(String(100), nullable=False)
     program = Column(String(100), nullable=False)
     phone_number = Column(String(20), nullable=False)
+    preferred_time = Column(String(50), nullable=True) # New Field
+    start_date = Column(String(50), nullable=True) # New Field
+    fitness_goal = Column(String(200), nullable=True) 
+    experience_level = Column(String(50), nullable=True) 
     created_at = Column(DateTime, default=datetime.utcnow, nullable=False)
 
     # Two-way connection to the UserAccount model

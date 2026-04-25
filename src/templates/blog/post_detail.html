@@ -1,43 +1,51 @@
 {% extends "partials/base.html" %}
 
-{% block title %}{{ post.title }} - Fitness Center{% endblock %}
+{% block title %}{{ post.title }} - Fitness Insights{% endblock %}
 
 {% block extra_css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/exercise/style.css', v='2.2') }}">
 <link rel="stylesheet" href="{{ url_for('static', filename='css/blog/post_detail.css') }}">
 
 {% endblock %}
 
 {% block content %}
-<div class="blog-wrapper">
-    <div class="blog-container">
-        <div class="blog-card">
-            <header class="blog-header">
-                <h1 class="blog-title">{{ post.title }}</h1>
-            </header>
-
-            {% if post.featured_image %}
-            <img src="{{ url_for('static', filename='images/blog/' + post.featured_image) }}"
-                 alt="{{ post.title }}"
-                 class="featured-image">
-            {% endif %}
-
-            <main class="content-card">
-                <div class="article-content">
-                    {{ post.content|safe }}
+<article class="premium-article">
+    <header class="article-hero">
+        <div class="container">
+            <div class="article-header">
+                <span class="article-category">Training & Nutrition</span>
+                <h1 class="article-title">{{ post.title }}</h1>
+                <div class="article-meta">
+                    <div class="meta-user">
+                        <div class="meta-avatar">{{ post.author_name[0] }}</div>
+                        <span>{{ post.author_name }}</span>
+                    </div>
+                    <span>•</span>
+                    <span>{{ post.created_at }}</span>
+                    <span>•</span>
+                    <span>{{ post.reading_time }} min read</span>
                 </div>
-            </main>
+            </div>
+        </div>
+    </header>
 
-            <div class="divider"></div>
+    <div class="container">
+        <div class="article-image-container">
+            <img src="{{ post.featured_image }}" alt="{{ post.title }}">
+        </div>
 
-            <footer class="blog-footer">
-                <a href="{{ url_for('blog.index') }}" class="back-link">
-                    <svg viewBox="0 0 24 24" fill="currentColor">
-                        <path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/>
-                    </svg>
-                    ბლოგზე დაბრუნება
+        <div class="article-body-wrapper">
+            <div class="article-content">
+                {{ post.content|safe }}
+            </div>
+
+            <footer class="article-footer">
+                <a href="{{ url_for('blog.index') }}" class="btn-back">
+                    <i class="fas fa-arrow-left"></i>
+                    Back to Fitness Insights
                 </a>
             </footer>
         </div>
     </div>
-</div>
+</article>
 {% endblock %}

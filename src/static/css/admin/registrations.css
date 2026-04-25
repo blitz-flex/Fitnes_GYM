@@ -59,3 +59,9 @@
     margin: 0;
     font-weight: 500;
 }
+/* Extracted from HTML */
+
+    .program-badge { padding: 8px 12px; border-radius: 8px; font-weight: 600; font-size: 0.8rem; box-shadow: 0 2px 5px rgba(0,0,0,0.05); }
+    .action-btn { width: 32px; height: 32px; padding: 0; display: inline-flex; align-items: center; justify-content: center; border-radius: 8px; transition: 0.2s; }
+    .action-btn:hover { transform: translateY(-2px); }
+

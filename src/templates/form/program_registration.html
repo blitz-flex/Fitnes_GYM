@@ -1,5 +1,5 @@
 {% extends "partials/base.html" %}
-{% block title %}პროგრამაზე რეგისტრაცია{% endblock %}
+{% block title %}Program Registration{% endblock %}
 
 {% block extra_css %}
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
@@ -8,54 +8,153 @@
 
 {% block content %}
 <div class="form-page">
-    <div class="form-header">
-        <h1>პროგრამაზე რეგისტრაცია</h1>
-        <p class="subtitle">შეავსეთ ფორმა და დაჯავშნეთ ადგილი თქვენთვის სასურველ პროგრამაზე.</p>
-    </div>
-
-    <div class="form-container">
-        <form class="register-form" method="POST" action="{{ url_for('form.program_registration') }}" novalidate>
-            {{ form.hidden_tag() }}
-
-
-            <!-- Program Field -->
-            <div class="form-group">
-                <label for="{{ form.program.id }}" class="form-label">პროგრამა</label>
-                <div class="input-with-icon">
-                    <i class="fas fa-dumbbell"></i>
-                    {{ form.program(class="form-control" + (" error" if form.program.errors else "")) }}
+    <div class="form-card">
+        <div class="form-header">
+            {% if success %}
+                <div class="success-icon-header">
+                    <i class="fas fa-check-circle"></i>
                 </div>
-                {% if form.program.errors %}
-                    {% for error in form.program.errors %}
-                        <span class="error-message">
-                            <i class="fas fa-exclamation-circle"></i>
-                            {{ error }}
-                        </span>
-                    {% endfor %}
-                {% endif %}
-            </div>
+                <h1>Registration Successful!</h1>
+                <p>You have successfully registered for the program. Visit your profile to see the details.</p>
+            {% else %}
+                <h1>Program Registration</h1>
+                <p>Please fill out the form below to join the program</p>
+            {% endif %}
+        </div>
 
-            <!-- Phone Field -->
-            <div class="form-group">
-                <label for="{{ form.phone.id }}" class="form-label">ტელეფონის ნომერი</label>
-                <div class="input-with-icon">
-                    <i class="fas fa-phone"></i>
-                    {{ form.phone(class="form-control" + (" error" if form.phone.errors else ""), placeholder="5XX XXX XXX") }}
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                <div class="form-messages">
+                    {% for category, message in messages %}
+                        <div class="alert alert-{{ category if category != 'message' else 'info' }}">
+                            {{ message }}
+                        </div>
+                    {% endfor %}
                 </div>
-                <div class="phone-helper">მაგალითი: 599 XX XX XX</div>
-                {% if form.phone.errors %}
-                    {% for error in form.phone.errors %}
-                        <span class="error-message">
-                            <i class="fas fa-exclamation-circle"></i>
-                            {{ error }}
-                        </span>
-                    {% endfor %}
-                {% endif %}
-            </div>
+            {% endif %}
+        {% endwith %}
 
-            {{ form.submit(class="submit-btn") }}
-        </form>
+        {% if success %}
+            <div class="success-actions">
+                <a href="{{ url_for('user.registrations') }}" class="submit-btn profile-link">
+                    <i class="fas fa-user-circle"></i>
+                    My Registrations
+                </a>
+                <a href="{{ url_for('main.index') }}" class="back-link">
+                    <i class="fas fa-arrow-left"></i>
+                    Back to Homepage
+                </a>
+            </div>
+        {% else %}
+            <form class="register-form" method="POST" action="{{ url_for('form.program_registration') }}" novalidate>
+                {{ form.hidden_tag() }}
+
+                <!-- Program Field -->
+                <div class="form-group">
+                    <label for="{{ form.program.id }}" class="form-label">Program</label>
+                    <div class="input-with-icon">
+                        <i class="fas fa-dumbbell"></i>
+                        {{ form.program(class="form-control" + (" error" if form.program.errors else "")) }}
+                    </div>
+                    {% if form.program.errors %}
+                        {% for error in form.program.errors %}
+                            <span class="error-message">
+                                <i class="fas fa-exclamation-circle"></i>
+                                {{ error }}
+                            </span>
+                        {% endfor %}
+                    {% endif %}
+                </div>
+
+                <!-- Preferred Time Field -->
+                <div class="form-group">
+                    <label for="{{ form.preferred_time.id }}" class="form-label">Preferred Time</label>
+                    <div class="input-with-icon">
+                        <i class="fas fa-clock"></i>
+                        {{ form.preferred_time(class="form-control" + (" error" if form.preferred_time.errors else "")) }}
+                    </div>
+                    {% if form.preferred_time.errors %}
+                        {% for error in form.preferred_time.errors %}
+                            <span class="error-message">
+                                <i class="fas fa-exclamation-circle"></i>
+                                {{ error }}
+                            </span>
+                        {% endfor %}
+                    {% endif %}
+                </div>
+
+                <!-- Start Date Field -->
+                <div class="form-group">
+                    <label for="{{ form.start_date.id }}" class="form-label">When would you like to start?</label>
+                    <div class="input-with-icon">
+                        <i class="fas fa-calendar-alt"></i>
+                        {{ form.start_date(class="form-control" + (" error" if form.start_date.errors else "")) }}
+                    </div>
+                    {% if form.start_date.errors %}
+                        {% for error in form.start_date.errors %}
+                            <span class="error-message">
+                                <i class="fas fa-exclamation-circle"></i>
+                                {{ error }}
+                            </span>
+                        {% endfor %}
+                    {% endif %}
+                </div>
+
+                <!-- Fitness Goal Field -->
+                <div class="form-group">
+                    <label for="{{ form.fitness_goal.id }}" class="form-label">Your Fitness Goal</label>
+                    <div class="input-with-icon">
+                        <i class="fas fa-bullseye"></i>
+                        {{ form.fitness_goal(class="form-control" + (" error" if form.fitness_goal.errors else "")) }}
+                    </div>
+                    {% if form.fitness_goal.errors %}
+                        {% for error in form.fitness_goal.errors %}
+                            <span class="error-message">
+                                <i class="fas fa-exclamation-circle"></i>
+                                {{ error }}
+                            </span>
+                        {% endfor %}
+                    {% endif %}
+                </div>
+
+                <!-- Experience Level Field -->
+                <div class="form-group">
+                    <label for="{{ form.experience_level.id }}" class="form-label">Experience Level</label>
+                    <div class="input-with-icon">
+                        <i class="fas fa-layer-group"></i>
+                        {{ form.experience_level(class="form-control" + (" error" if form.experience_level.errors else "")) }}
+                    </div>
+                    {% if form.experience_level.errors %}
+                        {% for error in form.experience_level.errors %}
+                            <span class="error-message">
+                                <i class="fas fa-exclamation-circle"></i>
+                                {{ error }}
+                            </span>
+                        {% endfor %}
+                    {% endif %}
+                </div>
+
+                <!-- Phone Field -->
+                <div class="form-group">
+                    <label for="{{ form.phone.id }}" class="form-label">Phone Number</label>
+                    <div class="input-with-icon">
+                        <i class="fas fa-phone"></i>
+                        {{ form.phone(class="form-control" + (" error" if form.phone.errors else ""), placeholder="5XX XXX XXX") }}
+                    </div>
+                    <div class="phone-helper">Example: 599 XX XX XX</div>
+                    {% if form.phone.errors %}
+                        {% for error in form.phone.errors %}
+                            <span class="error-message">
+                                <i class="fas fa-exclamation-circle"></i>
+                                {{ error }}
+                            </span>
+                        {% endfor %}
+                    {% endif %}
+                </div>
+
+                {{ form.submit(class="submit-btn") }}
+            </form>
+        {% endif %}
     </div>
 </div>
-
 {% endblock %}

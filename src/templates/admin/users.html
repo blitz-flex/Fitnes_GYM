@@ -1,97 +1,91 @@
 {% extends "admin/base.html" %}
 
-{% block title %}მომხმარებლები - Admin Panel{% endblock %}
-{% block page_title %}მომხმარებლები{% endblock %}
+{% block title %}Users - Admin Panel{% endblock %}
+{% block page_title %}User Management{% endblock %}
 
 {% block extra_css %}
 <link rel="stylesheet" href="{{ url_for('static', filename='css/admin/users.css') }}">
+
 {% endblock %}
 
-{% block content %}
-<div class="card">
-    <div class="card-header d-flex justify-content-between align-items-center">
-        <h3 class="card-title">მომხმარებელთა სია</h3>
-        <div class="header-stats">
-            <span class="badge bg-primary">ჯამი: {{ users.total if users else 0 }}</span>
-        </div>
+{% block admin_content %}
+<div class="card border-0 shadow-sm">
+    <div class="card-header bg-transparent border-bottom-0 pt-4 pb-2 px-4 d-flex justify-content-between align-items-center">
+        <h5 class="fw-bold text-white mb-0">Registered Members</h5>
+        <span class="badge bg-primary rounded-pill px-3 py-2 fs-6 shadow-sm">Total: {{ users.total if users else 0 }}</span>
     </div>
 
     {% if users and users.items %}
-    <div class="table-container">
-        <table class="table">
-            <thead>
+    <div class="table-responsive px-2">
+        <table class="table table-hover align-middle mb-0">
+            <thead class="bg-zinc">
                 <tr>
-                    <th>მომხმარებელი</th>
-                    <th>სახელი</th>
-                    <th>სქესი</th>
-                    <th>როლი</th>
-                    <th>რეგისტრაციები</th>
-                    <th>მოქმედება</th>
+                    <th class="ps-4">User Details</th>
+                    <th>Full Name</th>
+                    <th>Gender</th>
+                    <th>Role</th>
+                    <th class="text-center">Regs</th>
+                    <th class="text-end pe-4">Actions</th>
                 </tr>
             </thead>
             <tbody>
                 {% for user in users.items %}
                 <tr>
-                    <td>
-                        <div class="user-info">
+                    <td class="ps-4">
+                        <div class="d-flex align-items-center">
                             {% if user.profile_image %}
-                                <img src="{{ url_for('static', filename='uploads/' + user.profile_image) }}"
-                                     alt="Profile" class="user-avatar">
+                                {% if user.profile_image.startswith('http') %}
+                                    <img src="{{ user.profile_image }}" alt="Avatar" class="avatar-sm me-3">
+                                {% else %}
+                                    <img src="{{ url_for('static', filename='uploads/' + user.profile_image) }}" alt="Avatar" class="avatar-sm me-3">
+                                {% endif %}
                             {% else %}
-                                <i class="fas fa-user-circle user-avatar-icon"></i>
+                                <div class="avatar-icon-sm me-3"><i class="fas fa-user"></i></div>
                             {% endif %}
                             <div>
-                                <div class="username">{{ user.username }}</div>
-                                <div class="user-id">{{ user.email }}</div>
+                                <h6 class="mb-0 fw-bold text-white">{{ user.username }}</h6>
+                                <small class="text-muted">{{ user.email }}</small>
                             </div>
                         </div>
                     </td>
-                    <td>
-                        <strong>{{ user.name }}</strong>
-                    </td>
+                    <td><span class="fw-medium text-white">{{ 'Administrator' if user.is_admin else user.name }}</span></td>
                     <td>
                         {% if user.gender %}
-                            <span class="gender-badge {{ user.gender.lower() }}">
-                                {% if user.gender.lower() == 'male' or user.gender.lower() == 'მამრობითი' %}
-                                    <i class="fas fa-mars"></i> მამრ.
-                                {% elif user.gender.lower() == 'female' or user.gender.lower() == 'მდედრობითი' %}
-                                    <i class="fas fa-venus"></i> ქალ.
-                                {% else %}
-                                    <i class="fas fa-user"></i> {{ user.gender }}
-                                {% endif %}
-                            </span>
+                            {% set g = user.gender.lower() %}
+                            {% if g == 'male' %}
+                                <span class="badge bg-zinc text-primary border border-primary-subtle"><i class="fas fa-mars me-1"></i> Male</span>
+                            {% elif g == 'female' %}
+                                <span class="badge bg-zinc text-danger border border-danger-subtle"><i class="fas fa-venus me-1"></i> Female</span>
+                            {% else %}
+                                <span class="badge bg-zinc text-secondary border">{{ user.gender }}</span>
+                            {% endif %}
                         {% else %}
                             <span class="text-muted">-</span>
                         {% endif %}
                     </td>
                     <td>
-                        <span class="role-badge {{ 'admin' if user.is_admin else 'user' }}">
-                            {% if user.is_admin %}
-                                <i class="fas fa-shield-alt"></i> ადმინი
-                            {% else %}
-                                <i class="fas fa-user"></i> მომხმარებელი
-                            {% endif %}
-                        </span>
+                        {% if user.is_admin %}
+                            <span class="badge bg-success shadow-sm"><i class="fas fa-shield-alt me-1"></i> Admin</span>
+                        {% else %}
+                            <span class="badge bg-secondary shadow-sm"><i class="fas fa-user me-1"></i> User</span>
+                        {% endif %}
                     </td>
-                    <td>
-                        <span class="registration-count">
-                            <i class="fas fa-clipboard-list"></i>
-                            {{ user.registrations|length if user.registrations else 0 }}
-                        </span>
+                    <td class="text-center">
+                        {% if not user.is_admin %}
+                            <span class="badge bg-dark rounded-pill">{{ user.registrations|length if user.registrations else 0 }}</span>
+                        {% endif %}
                     </td>
-                    <td>
-                        <div class="action-buttons">
-                            <a href="{{ url_for('user.view_user_profile', user_id=user.id) }}" class="btn btn-sm btn-success">
-                                <i class="fas fa-eye"></i> ნახვა
+                    <td class="text-end pe-4">
+                        {% if not user.is_admin %}
+                            <a href="{{ url_for('admin.edit_user', user_id=user.id) }}" class="btn btn-light text-primary border action-btn shadow-sm" title="Edit User">
+                                <i class="fas fa-edit"></i>
                             </a>
-                            {% if not user.is_admin or current_user.id != user.id %}
                             <form method="POST" action="{{ url_for('admin.delete_user', user_id=user.id) }}" class="d-inline">
-                                <button type="submit" class="btn btn-sm btn-danger" onclick="return confirm('დარწმუნებული ხართ მომხმარებლის წაშლაში?\\n\\nმომხმარებელი: {{ user.username }}\\nსახელი: {{ user.name }}')">
-                                    <i class="fas fa-trash"></i> წაშლა
+                                <button type="submit" class="btn btn-light text-danger border action-btn shadow-sm ms-1" title="Delete User" onclick="return confirm('Delete user {{ user.username }}?')">
+                                    <i class="fas fa-trash"></i>
                                 </button>
                             </form>
-                            {% endif %}
-                        </div>
+                        {% endif %}
                     </td>
                 </tr>
                 {% endfor %}
@@ -101,52 +95,41 @@
 
     <!-- Pagination -->
     {% if users.pages > 1 %}
-    <div class="card-footer">
-        <nav aria-label="მომხმარებლების გვერდები">
-            <ul class="pagination justify-content-center">
+    <div class="card-footer bg-transparent border-top-0 py-4">
+        <nav aria-label="User pagination">
+            <ul class="pagination justify-content-center mb-0">
                 {% if users.has_prev %}
-                    <li class="page-item">
-                        <a class="page-link" href="{{ url_for('admin.users', page=users.prev_num) }}">
-                            <i class="fas fa-chevron-left"></i> წინა
-                        </a>
-                    </li>
+                    <li class="page-item"><a class="page-link shadow-sm text-white" href="{{ url_for('admin.users', page=users.prev_num) }}">Prev</a></li>
                 {% endif %}
 
                 {% for page_num in users.iter_pages() %}
                     {% if page_num %}
                         {% if page_num != users.page %}
-                            <li class="page-item">
-                                <a class="page-link" href="{{ url_for('admin.users', page=page_num) }}">{{ page_num }}</a>
-                            </li>
+                            <li class="page-item"><a class="page-link shadow-sm text-white" href="{{ url_for('admin.users', page=page_num) }}">{{ page_num }}</a></li>
                         {% else %}
-                            <li class="page-item active">
-                                <span class="page-link">{{ page_num }}</span>
-                            </li>
+                            <li class="page-item active"><span class="page-link shadow-sm bg-success border-success">{{ page_num }}</span></li>
                         {% endif %}
                     {% else %}
-                        <li class="page-item disabled">
-                            <span class="page-link">…</span>
-                        </li>
+                        <li class="page-item disabled"><span class="page-link border-0">…</span></li>
                     {% endif %}
                 {% endfor %}
 
                 {% if users.has_next %}
-                    <li class="page-item">
-                        <a class="page-link" href="{{ url_for('admin.users', page=users.next_num) }}">
-                            შემდეგი <i class="fas fa-chevron-right"></i>
-                        </a>
-                    </li>
+                    <li class="page-item"><a class="page-link shadow-sm text-white" href="{{ url_for('admin.users', page=users.next_num) }}">Next</a></li>
                 {% endif %}
             </ul>
         </nav>
     </div>
     {% endif %}
+    
     {% else %}
-    <div class="card-body">
-        <div class="empty-state">
-            <i class="fas fa-users empty-icon"></i>
-            <h4 class="empty-title">მომხმარებლები ვერ მოიძებნა</h4>
-            <p class="empty-text">სისტემაში ჯერ არცერთი მომხმარებელი არ არის რეგისტრირებული.</p>
+    <div class="card-body text-center py-5">
+        <div class="py-5">
+            <div class="bg-zinc rounded-circle d-inline-flex p-4 mb-3">
+                <i class="fas fa-users fa-3x text-muted opacity-50"></i>
+            </div>
+            <h4 class="text-white fw-bold">No Users Found</h4>
+            <p class="text-muted">There are currently no registered users in the system.</p>
         </div>
     </div>
     {% endif %}

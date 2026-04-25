@@ -107,7 +107,7 @@ function showFlashMessage(message, category = 'info') {
             <i class="fas ${iconMap[category] || 'fa-bell'}"></i>
         </div>
         <div class="flash-content">${message}</div>
-        <button class="flash-close" onclick="closeFlashMessage(this)" title="დახურვა">
+        <button class="flash-close" onclick="closeFlashMessage(this)" title="Close">
             <i class="fas fa-times"></i>
         </button>
         <div class="flash-progress"></div>

@@ -478,3 +478,118 @@ body::after {
         display: none;
     }
 }
+/* Extracted from HTML */
+
+    .article-hero {
+        padding: 100px 0 60px;
+        background: #ffffff;
+        border-bottom: 1px solid rgba(0,0,0,0.05);
+    }
+    .article-header {
+        max-width: 800px;
+        margin: 0 auto;
+        text-align: center;
+    }
+    .article-category {
+        display: inline-block;
+        background: var(--bg-alt);
+        color: var(--primary-color);
+        padding: 6px 16px;
+        border-radius: 20px;
+        font-size: 0.8rem;
+        font-weight: 800;
+        text-transform: uppercase;
+        margin-bottom: 25px;
+        letter-spacing: 1px;
+    }
+    .article-title {
+        font-size: 3.5rem;
+        font-weight: 900;
+        line-height: 1.1;
+        margin-bottom: 30px;
+        color: var(--text-main);
+        letter-spacing: -2px;
+    }
+    .article-meta {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 30px;
+        color: var(--text-muted);
+        font-weight: 600;
+        font-size: 0.95rem;
+    }
+    .meta-user {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+    .meta-avatar {
+        width: 35px;
+        height: 35px;
+        background: var(--bg-alt);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: var(--text-main);
+        font-weight: 800;
+    }
+
+    .article-image-container {
+        max-width: 1000px;
+        margin: -40px auto 60px;
+        border-radius: 40px;
+        overflow: hidden;
+        box-shadow: 0 40px 80px rgba(0,0,0,0.15);
+    }
+    .article-image-container img {
+        width: 100%;
+        height: auto;
+        display: block;
+    }
+
+    .article-body-wrapper {
+        max-width: 800px;
+        margin: 0 auto 120px;
+    }
+    .article-content {
+        font-size: 1.2rem;
+        line-height: 1.8;
+        color: #333;
+    }
+    .article-content h3 {
+        font-size: 2rem;
+        font-weight: 800;
+        margin: 50px 0 20px;
+        color: var(--text-main);
+        letter-spacing: -0.5px;
+    }
+    .article-content p {
+        margin-bottom: 25px;
+    }
+
+    .article-footer {
+        padding-top: 60px;
+        border-top: 1px solid rgba(0,0,0,0.05);
+        display: flex;
+        justify-content: center;
+    }
+    .btn-back {
+        display: inline-flex;
+        align-items: center;
+        gap: 12px;
+        padding: 16px 35px;
+        background: var(--bg-alt);
+        color: var(--text-main);
+        text-decoration: none;
+        border-radius: 20px;
+        font-weight: 800;
+        transition: all 0.3s ease;
+    }
+    .btn-back:hover {
+        background: var(--primary-color);
+        color: #ffffff;
+        transform: translateX(-10px);
+    }
+

@@ -16,11 +16,11 @@ def admin_required(f):
     @wraps(f)
     def decorated_function(*args, **kwargs):
         if not current_user.is_authenticated:
-            flash("ადმინისტრაციული უფლებები საჭიროა.", "danger")
+            flash("Administrative rights required.", "danger")
             return redirect(url_for('auth.login'))
         # Check if user is admin (you can add admin field to User model later)
         if current_user.username not in ['admin', 'administrator']:  # Simple check for now
-            flash("ადმინისტრაციული უფლებები არ გაქვთ.", "danger")
+            flash("You do not have administrative permissions.", "danger")
             return redirect(url_for('main.index'))
         return f(*args, **kwargs)
     return decorated_function
@@ -69,12 +69,12 @@ def delete_user(user_id):
 
     # Prevent admin from deleting themselves
     if user.id == current_user.id:
-        flash("საკუთარი ანგარიშის წაშლა შეუძლებელია.", "danger")
+        flash("You cannot delete your own account.", "danger")
         return redirect(url_for('admin.users'))
 
     # Prevent deleting other admins (optional safety measure)
     if user.is_admin:
-        flash("ადმინისტრატორის წაშლა შეუძლებელია.", "danger")
+        flash("Administrators cannot be deleted.", "danger")
         return redirect(url_for('admin.users'))
 
     try:
@@ -84,12 +84,39 @@ def delete_user(user_id):
         # Delete the user
         db.session.delete(user)
         db.session.commit()
-        flash(f"მომხმარებელი '{user.username}' წარმატებით წაიშალა.", "success")
+        flash(f"User '{user.username}' has been successfully deleted.", "success")
     except Exception as e:
         db.session.rollback()
-        flash("მომხმარებლის წაშლისას შეცდომა მოხდა.", "danger")
+        flash("An error occurred while deleting the user.", "danger")
 
     return redirect(url_for('admin.users'))
+
+@admin_bp.route('/users/edit/<int:user_id>', methods=['GET', 'POST'])
+@login_required
+@admin_required
+def edit_user(user_id):
+    """Edit user details as admin"""
+    user = UserAccount.query.get_or_404(user_id)
+    
+    if request.method == 'POST':
+        user.first_name = request.form.get('first_name', user.first_name)
+        user.last_name = request.form.get('last_name', user.last_name)
+        user.email = request.form.get('email', user.email)
+        user.username = request.form.get('username', user.username)
+        user.subscription_plan = request.form.get('subscription_plan', user.subscription_plan)
+        
+        # Admin status (based on username list)
+        new_username = request.form.get('username', user.username)
+        
+        try:
+            db.session.commit()
+            flash(f"User '{user.username}' updated successfully.", "success")
+            return redirect(url_for('admin.users'))
+        except Exception as e:
+            db.session.rollback()
+            flash(f"Error: {str(e)}", "danger")
+            
+    return render_template('admin/edit_user.html', user=user)
 
 @admin_bp.route('/registrations')
 @login_required
@@ -111,10 +138,10 @@ def delete_registration(reg_id):
     try:
         db.session.delete(registration)
         db.session.commit()
-        flash(f"რეგისტრაცია '{registration.full_name}' წარმატებით წაიშალა.", "success")
+        flash(f"Registration for '{registration.full_name}' has been successfully deleted.", "success")
     except Exception as e:
         db.session.rollback()
-        flash("რეგისტრაციის წაშლისას შეცდომა მოხდა.", "danger")
+        flash("An error occurred while deleting the registration.", "danger")
 
     return redirect(url_for('admin.registrations'))
 
@@ -138,10 +165,10 @@ def delete_post(id):
         post = BlogPost.query.get_or_404(id)
         db.session.delete(post)
         db.session.commit()
-        flash(f"ბლოგ პოსტი '{post.title}' წარმატებით წაიშალა.", "success")
+        flash(f"Blog post '{post.title}' has been successfully deleted.", "success")
     except Exception as e:
         db.session.rollback()
-        flash("ბლოგ პოსტის წაშლისას შეცდომა მოხდა.", "danger")
+        flash("An error occurred while deleting the blog post.", "danger")
 
     return redirect(url_for('admin.blog_management'))
 
@@ -166,11 +193,11 @@ def create_post():
 
         # Simple validation
         if not title:
-            flash('სათაური აუცილებელია!', 'danger')
+            flash('Title is required!', 'danger')
             return render_template('admin/create_post_simple.html')
 
         if not content:
-            flash('შიგთავსი აუცილებელია!', 'danger')
+            flash('Content is required!', 'danger')
             return render_template('admin/create_post_simple.html')
 
         try:
@@ -218,7 +245,7 @@ def create_post():
 
             print(f"Post saved successfully with ID: {post.id}")
 
-            flash(f'ბლოგ პოსტი "{title}" წარმატებით შეიქმნა!', 'success')
+            flash(f'Blog post "{title}" has been successfully created!', 'success')
             return redirect(url_for('admin.blog_management'))
 
         except Exception as e:
@@ -226,7 +253,7 @@ def create_post():
             import traceback
             traceback.print_exc()
             db.session.rollback()
-            flash(f'შეცდომა: {str(e)}', 'danger')
+            flash(f'Error: {str(e)}', 'danger')
 
     return render_template('admin/create_post_simple.html')
 
@@ -246,11 +273,11 @@ def edit_post(post_id):
 
         # Simple validation
         if not title:
-            flash('სათაური აუცილებელია!', 'danger')
+            flash('Title is required!', 'danger')
             return render_template('admin/edit_post.html', post=post)
 
         if not content:
-            flash('შიგთავსი აუცილებელია!', 'danger')
+            flash('Content is required!', 'danger')
             return render_template('admin/edit_post.html', post=post)
 
         try:
@@ -288,12 +315,12 @@ def edit_post(post_id):
             post.slug = f"{slugify(title) or 'post'}-{timestamp}"
 
             db.session.commit()
-            flash(f'ბლოგ პოსტი "{title}" წარმატებით განახლდა!', 'success')
+            flash(f'Blog post "{title}" has been successfully updated!', 'success')
             return redirect(url_for('admin.blog_management'))
 
         except Exception as e:
             db.session.rollback()
-            flash(f'შეცდომა: {str(e)}', 'danger')
+            flash(f'Error: {str(e)}', 'danger')
 
     return render_template('admin/edit_post.html', post=post)
 

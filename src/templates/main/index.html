@@ -1,26 +1,234 @@
 {% extends "partials/base.html" %}
-{% block title %}FitnessClub - მთავარი{% endblock %}
+{% block title %}Fitness Club | Transform Your Life{% endblock %}
 
 {% block extra_css %}
 <link rel="stylesheet" href="{{ url_for('static', filename='css/main/index.css') }}">
-
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 {% endblock %}
 
 {% block content %}
 <!-- Hero Section -->
 <section class="hero-section">
-    <div class="container">
+    <div class="hero-overlay"></div>
+    <div class="container hero-content">
+
         <h1 class="hero-title">
-            <span class="hero-highlight">ჯანსაღი ცხოვრება</span><br>
-            იწყება აქ
+            Push Your Limits.<br>
+            <span class="hero-highlight">Exceed Your Goals.</span>
         </h1>
         <p class="hero-subtitle">
-            გაამყარე სხეული, გაამტკიცე გონება და მიაღწიე თავის მიზნებს ჩვენს თანამედროვე ფიტნეს ცენტრში
+            Join an elite community dedicated to transforming bodies and minds. Access state-of-the-art equipment, world-class trainers, and science-backed programs.
         </p>
         <div class="hero-buttons">
-            <a href="{{ url_for('main.about') }}" class="btn-hero secondary">
-                გაიგე მეტი
+            <a href="{{ url_for('form.program_registration') }}" class="btn-premium">
+                <span>Start Your Journey</span>
+                <i class="fas fa-arrow-right"></i>
             </a>
+            <a href="#programs" class="btn-outline">
+                Explore Programs
+            </a>
+        </div>
+        
+        <div class="hero-stats-mini">
+            <div class="mini-stat-card">
+                <div class="stat-icon"><i class="fas fa-users"></i></div>
+                <div class="stat-info">
+                    <strong>500+</strong>
+                    <span>Active Members</span>
+                </div>
+            </div>
+            <div class="mini-stat-card">
+                <div class="stat-icon"><i class="fas fa-clock"></i></div>
+                <div class="stat-info">
+                    <strong>24/7</strong>
+                    <span>Facility Access</span>
+                </div>
+            </div>
+            <div class="mini-stat-card">
+                <div class="stat-icon"><i class="fas fa-award"></i></div>
+                <div class="stat-info">
+                    <strong>15+</strong>
+                    <span>Expert Coaches</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Features Section -->
+<section class="features-section">
+    <div class="container">
+        <div class="section-header">
+            <h2 class="section-title">Why Choose Us</h2>
+            <p class="section-subtitle">We provide an unmatched fitness experience tailored to your unique goals.</p>
+        </div>
+        
+        <div class="features-grid">
+            <div class="feature-card">
+                <div class="feature-icon"><i class="fas fa-dumbbell"></i></div>
+                <h3>Modern Equipment</h3>
+                <p>Train with industry-leading, biomechanically perfected machines designed for maximum results.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon"><i class="fas fa-users"></i></div>
+                <h3>Expert Trainers</h3>
+                <p>Our certified professionals create customized plans and guide you through every step.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon"><i class="fas fa-apple-alt"></i></div>
+                <h3>Nutrition Plans</h3>
+                <p>Fuel your body correctly with personalized dietary strategies formulated by our experts.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon"><i class="fas fa-spa"></i></div>
+                <h3>Recovery Zone</h3>
+                <p>Accelerate muscle repair with our premium saunas, massage therapies, and ice baths.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Programs Section -->
+<section id="programs" class="programs-section">
+    <div class="container">
+        <div class="section-header">
+            <h2 class="section-title">Elite Programs</h2>
+            <p class="section-subtitle">Discover our specialized training modules designed for all fitness levels.</p>
+        </div>
+
+        <div class="programs-grid">
+            <!-- Yoga -->
+            <div class="program-card">
+                <div class="program-image-wrapper">
+                    <img src="{{ url_for('static', filename='images/yoga.jpg') }}" alt="Yoga" class="program-image">
+                </div>
+                <div class="program-content">
+                    <h3 class="program-title">Yoga</h3>
+                    <p class="program-description">Harmony of body and mind, flexibility and stress relief.</p>
+                    <div class="program-meta">
+                        <span><i class="fas fa-clock"></i> 90 Min</span>
+                        <span><i class="fas fa-leaf"></i> Low Impact</span>
+                    </div>
+                    <div class="program-footer">
+                        <div class="program-price">45₾ <span>/mo</span></div>
+                        <div class="program-actions">
+                            <button class="icon-btn quick-view-btn" data-program-id="yoga" title="Quick View"><i class="fas fa-eye"></i></button>
+                            <a href="{{ url_for('form.program_registration', program='Yoga') }}" class="btn-sm">Join</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Pilates -->
+            <div class="program-card">
+                <div class="program-image-wrapper">
+                    <img src="{{ url_for('static', filename='images/pilates.jpeg') }}" alt="Pilates" class="program-image">
+                    <div class="program-badge">Popular</div>
+                </div>
+                <div class="program-content">
+                    <h3 class="program-title">Pilates</h3>
+                    <p class="program-description">Muscle strengthening, core stability and body correction.</p>
+                    <div class="program-meta">
+                        <span><i class="fas fa-clock"></i> 60 Min</span>
+                        <span><i class="fas fa-dumbbell"></i> Medium Intensity</span>
+                    </div>
+                    <div class="program-footer">
+                        <div class="program-price">60₾ <span>/mo</span></div>
+                        <div class="program-actions">
+                            <button class="icon-btn quick-view-btn" data-program-id="pilates" title="Quick View"><i class="fas fa-eye"></i></button>
+                            <a href="{{ url_for('form.program_registration', program='Pilates') }}" class="btn-sm">Join</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- CrossFit -->
+            <div class="program-card">
+                <div class="program-image-wrapper">
+                    <img src="{{ url_for('static', filename='images/cros.jpg') }}" alt="CrossFit" class="program-image">
+                </div>
+                <div class="program-content">
+                    <h3 class="program-title">CrossFit</h3>
+                    <p class="program-description">High-intensity functional workouts for strength and endurance.</p>
+                    <div class="program-meta">
+                        <span><i class="fas fa-clock"></i> 45 Min</span>
+                        <span><i class="fas fa-fire"></i> Extreme</span>
+                    </div>
+                    <div class="program-footer">
+                        <div class="program-price">80₾ <span>/mo</span></div>
+                        <div class="program-actions">
+                            <button class="icon-btn quick-view-btn" data-program-id="crossfit" title="Quick View"><i class="fas fa-eye"></i></button>
+                            <a href="{{ url_for('form.program_registration', program='CrossFit') }}" class="btn-sm">Join</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Swimming -->
+            <div class="program-card">
+                <div class="program-image-wrapper">
+                    <img src="{{ url_for('static', filename='images/sw.jpg') }}" alt="Swimming" class="program-image">
+                </div>
+                <div class="program-content">
+                    <h3 class="program-title">Swimming</h3>
+                    <p class="program-description">Water exercises engaging all muscle groups with zero joint impact.</p>
+                    <div class="program-meta">
+                        <span><i class="fas fa-clock"></i> 60 Min</span>
+                        <span><i class="fas fa-water"></i> Full Body</span>
+                    </div>
+                    <div class="program-footer">
+                        <div class="program-price">70₾ <span>/mo</span></div>
+                        <div class="program-actions">
+                            <button class="icon-btn quick-view-btn" data-program-id="swimming" title="Quick View"><i class="fas fa-eye"></i></button>
+                            <a href="{{ url_for('form.program_registration', program='Swimming') }}" class="btn-sm">Join</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Boxing -->
+            <div class="program-card">
+                <div class="program-image-wrapper">
+                    <img src="{{ url_for('static', filename='images/box.jpeg') }}" alt="Boxing" class="program-image">
+                </div>
+                <div class="program-content">
+                    <h3 class="program-title">Boxing</h3>
+                    <p class="program-description">Self-defense, footwork, and intense physical conditioning.</p>
+                    <div class="program-meta">
+                        <span><i class="fas fa-clock"></i> 90 Min</span>
+                        <span><i class="fas fa-fire"></i> Intense Cardio</span>
+                    </div>
+                    <div class="program-footer">
+                        <div class="program-price">95₾ <span>/mo</span></div>
+                        <div class="program-actions">
+                            <button class="icon-btn quick-view-btn" data-program-id="boxing" title="Quick View"><i class="fas fa-eye"></i></button>
+                            <a href="{{ url_for('form.program_registration', program='Boxing') }}" class="btn-sm">Join</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Athletics -->
+            <div class="program-card">
+                <div class="program-image-wrapper">
+                    <img src="{{ url_for('static', filename='images/Athletics.jpeg') }}" alt="Athletics" class="program-image">
+                </div>
+                <div class="program-content">
+                    <h3 class="program-title">Athletics</h3>
+                    <p class="program-description">Classic athletic exercises focused on speed, agility, and stamina.</p>
+                    <div class="program-meta">
+                        <span><i class="fas fa-clock"></i> 90 Min</span>
+                        <span><i class="fas fa-running"></i> High Energy</span>
+                    </div>
+                    <div class="program-footer">
+                        <div class="program-price">75₾ <span>/mo</span></div>
+                        <div class="program-actions">
+                            <button class="icon-btn quick-view-btn" data-program-id="athletics" title="Quick View"><i class="fas fa-eye"></i></button>
+                            <a href="{{ url_for('form.program_registration', program='Athletics') }}" class="btn-sm">Join</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </section>
@@ -28,195 +236,125 @@
 <!-- Stats Section -->
 <section class="stats-section">
     <div class="container">
-        <h2 class="section-title">ჩვენი მიღწევები</h2>
-        <div class="stats-grid">
-            <div class="stat-card">
-                <div class="stat-number">500+</div>
-                <div class="stat-label">კმაყოფილი კლიენტი</div>
+        <div class="stats-wrapper">
+            <div class="stat-box">
+                <div class="stat-value">25K+</div>
+                <div class="stat-label">Square Feet Facility</div>
             </div>
-            <div class="stat-card">
-                <div class="stat-number">15</div>
-                <div class="stat-label">პროფესიონალი ტრენერი</div>
+            <div class="stat-box">
+                <div class="stat-value">50+</div>
+                <div class="stat-label">Classes Per Week</div>
             </div>
-            <div class="stat-card">
-                <div class="stat-number">6</div>
-                <div class="stat-label">სხვადასხვა პროგრამა</div>
-            </div>
-            <div class="stat-card">
-                <div class="stat-number">24/7</div>
-                <div class="stat-label">ღია ყოველდღე</div>
+            <div class="stat-box">
+                <div class="stat-value">100%</div>
+                <div class="stat-label">Client Satisfaction</div>
             </div>
         </div>
     </div>
 </section>
 
-<!-- Programs Section -->
-<section class="programs-section">
+<!-- Pricing Section -->
+<section class="pricing-section">
     <div class="container">
-        <h2 class="section-title">ჩვენი პროგრამები</h2>
-        <p class="section-subtitle">
-            აირჩიეთ თქვენთვის შესაფერისი პროგრამა
-        </p>
+        <div class="section-header">
+            <h2 class="section-title">Membership Plans</h2>
+            <p class="section-subtitle">Choose the perfect plan to achieve your fitness goals.</p>
+        </div>
 
-        <div class="programs-grid">
-            <!-- Yoga -->
-            <div class="program-card">
-                <img src="{{ url_for('static', filename='images/yoga.jpg') }}" alt="იოგა" class="program-image">
-                <div class="program-content">
-                    <h3 class="program-title">იოგა</h3>
-                    <p class="program-description">
-                        სხეულისა და გონების ჰარმონია, მოქნილობის და სტრესის მოხსნა
-                    </p>
-                    <div class="program-details">
-                        <div class="program-detail">
-                            <div class="program-detail-label">განრიგი</div>
-                            <div class="program-detail-value">ორშ-ოთხ-პარ</div>
-                        </div>
-                        <div class="program-detail">
-                            <div class="program-detail-label">დრო</div>
-                            <div class="program-detail-value">09:00-10:30</div>
-                        </div>
-                    </div>
-                    <div class="program-footer">
-                        <div class="program-price">40₾</div>
-                        <a href="{{ url_for('form.program_registration') }}" class="btn-program">
-                            რეგისტრაცია
-                        </a>
+        <div class="pricing-grid">
+            <!-- Basic Plan -->
+            <div class="pricing-card">
+                <div class="pricing-header">
+                    <h3>Basic</h3>
+                    <div class="price">80₾<span>/mo</span></div>
+                </div>
+                <ul class="pricing-features">
+                    <li><i class="fas fa-check"></i> Gym Access (07:00 - 15:00)</li>
+                    <li><i class="fas fa-check"></i> 1 Basic Program</li>
+                    <li><i class="fas fa-check"></i> Locker Room Access</li>
+                    <li class="disabled"><i class="fas fa-times"></i> Personal Trainer</li>
+                    <li class="disabled"><i class="fas fa-times"></i> Spa & Sauna</li>
+                </ul>
+                <a href="{{ url_for('user.checkout', plan_name='basic') }}" class="btn-outline w-100">Get Started</a>
+            </div>
+
+            <!-- Pro Plan (Popular) -->
+            <div class="pricing-card popular">
+                <div class="popular-badge">Most Popular</div>
+                <div class="pricing-header">
+                    <h3>Pro</h3>
+                    <div class="price">120₾<span>/mo</span></div>
+                </div>
+                <ul class="pricing-features">
+                    <li><i class="fas fa-check"></i> 24/7 Gym Access</li>
+                    <li><i class="fas fa-check"></i> All Programs Included</li>
+                    <li><i class="fas fa-check"></i> Premium Locker Room</li>
+                    <li><i class="fas fa-check"></i> 1 PT Session / Month</li>
+                    <li class="disabled"><i class="fas fa-times"></i> Spa & Sauna</li>
+                </ul>
+                <a href="{{ url_for('user.checkout', plan_name='pro') }}" class="btn-premium w-100">Get Started</a>
+            </div>
+
+            <!-- Elite Plan -->
+            <div class="pricing-card">
+                <div class="pricing-header">
+                    <h3>Elite</h3>
+                    <div class="price">200₾<span>/mo</span></div>
+                </div>
+                <ul class="pricing-features">
+                    <li><i class="fas fa-check"></i> 24/7 VIP Access</li>
+                    <li><i class="fas fa-check"></i> All Programs Included</li>
+                    <li><i class="fas fa-check"></i> Private Locker</li>
+                    <li><i class="fas fa-check"></i> Unlimited PT Sessions</li>
+                    <li><i class="fas fa-check"></i> Spa & Sauna Access</li>
+                </ul>
+                <a href="{{ url_for('user.checkout', plan_name='elite') }}" class="btn-outline w-100">Get Started</a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Testimonials Section -->
+<section class="testimonials-section">
+    <div class="container">
+        <div class="section-header">
+            <h2 class="section-title">Success Stories</h2>
+            <p class="section-subtitle">Hear from our members who have transformed their lives with us.</p>
+        </div>
+
+        <div class="testimonials-grid">
+            <div class="testimonial-card">
+                <div class="quote-icon"><i class="fas fa-quote-right"></i></div>
+                <p class="testimonial-text">"Joining this club was the best decision of my life. The trainers are incredibly supportive, and the facilities are always spotless. I've lost 15kg in 4 months!"</p>
+                <div class="testimonial-author">
+                    <img src="https://ui-avatars.com/api/?name=David+R&background=random" alt="David R." class="author-img">
+                    <div>
+                        <h4>David R.</h4>
+                        <span>Member since 2023</span>
                     </div>
                 </div>
             </div>
-
-            <!-- Pilates -->
-            <div class="program-card">
-                <img src="{{ url_for('static', filename='images/pilates.jpeg') }}" alt="პილატესი" class="program-image">
-                <div class="program-content">
-                    <h3 class="program-title">პილატესი</h3>
-                    <p class="program-description">
-                        კუნთების გამაგრება და სხეულის კორექცია
-                    </p>
-                    <div class="program-details">
-                        <div class="program-detail">
-                            <div class="program-detail-label">განრიგი</div>
-                            <div class="program-detail-value">ორშ-ოთხ-პარ</div>
-                        </div>
-                        <div class="program-detail">
-                            <div class="program-detail-label">დრო</div>
-                            <div class="program-detail-value">18:00-19:00</div>
-                        </div>
-                    </div>
-                    <div class="program-footer">
-                        <div class="program-price">50₾</div>
-                        <a href="{{ url_for('form.program_registration') }}" class="btn-program">
-                            რეგისტრაცია
-                        </a>
+            
+            <div class="testimonial-card">
+                <div class="quote-icon"><i class="fas fa-quote-right"></i></div>
+                <p class="testimonial-text">"As a professional athlete, I need top-tier equipment. This gym provides everything I need and more. The recovery zone is a game changer for my performance."</p>
+                <div class="testimonial-author">
+                    <img src="https://ui-avatars.com/api/?name=Sarah+M&background=random" alt="Sarah M." class="author-img">
+                    <div>
+                        <h4>Sarah M.</h4>
+                        <span>Pro Athlete</span>
                     </div>
                 </div>
             </div>
-
-            <!-- CrossFit -->
-            <div class="program-card">
-                <img src="{{ url_for('static', filename='images/cros.jpg') }}" alt="CrossFit" class="program-image">
-                <div class="program-content">
-                    <h3 class="program-title">CrossFit</h3>
-                    <p class="program-description">
-                        ინტენსიური ვარჯიშები ძალისა და გამძლეობისთვის
-                    </p>
-                    <div class="program-details">
-                        <div class="program-detail">
-                            <div class="program-detail-label">განრიგი</div>
-                            <div class="program-detail-value">ყოველდღე</div>
-                        </div>
-                        <div class="program-detail">
-                            <div class="program-detail-label">დრო</div>
-                            <div class="program-detail-value">07:00-20:00</div>
-                        </div>
-                    </div>
-                    <div class="program-footer">
-                        <div class="program-price">70₾</div>
-                        <a href="{{ url_for('form.program_registration') }}" class="btn-program">
-                            რეგისტრაცია
-                        </a>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Swimming -->
-            <div class="program-card">
-                <img src="{{ url_for('static', filename='images/sw.jpg') }}" alt="ცურვა" class="program-image">
-                <div class="program-content">
-                    <h3 class="program-title">ცურვა</h3>
-                    <p class="program-description">
-                        წყლის ვარჯიშები ყველა კუნთის ჯგუფისთვის
-                    </p>
-                    <div class="program-details">
-                        <div class="program-detail">
-                            <div class="program-detail-label">განრიგი</div>
-                            <div class="program-detail-value">ყოველდღე</div>
-                        </div>
-                        <div class="program-detail">
-                            <div class="program-detail-label">დრო</div>
-                            <div class="program-detail-value">06:00-22:00</div>
-                        </div>
-                    </div>
-                    <div class="program-footer">
-                        <div class="program-price">60₾</div>
-                        <a href="{{ url_for('form.program_registration') }}" class="btn-program">
-                            რეგისტრაცია
-                        </a>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Boxing -->
-            <div class="program-card">
-                <img src="{{ url_for('static', filename='images/box.jpeg') }}" alt="კრივი" class="program-image">
-                <div class="program-content">
-                    <h3 class="program-title">კრივი</h3>
-                    <p class="program-description">
-                        თვითდაცვა და ფიზიკური მომზადება
-                    </p>
-                    <div class="program-details">
-                        <div class="program-detail">
-                            <div class="program-detail-label">განრიგი</div>
-                            <div class="program-detail-value">სამ-ხუთ-შაბ</div>
-                        </div>
-                        <div class="program-detail">
-                            <div class="program-detail-label">დრო</div>
-                            <div class="program-detail-value">19:00-20:30</div>
-                        </div>
-                    </div>
-                    <div class="program-footer">
-                        <div class="program-price">80₾</div>
-                        <a href="{{ url_for('form.program_registration') }}" class="btn-program">
-                            რეგისტრაცია
-                        </a>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Athletics -->
-            <div class="program-card">
-                <img src="{{ url_for('static', filename='images/Athletics.jpeg') }}" alt="ატლეტიკა" class="program-image">
-                <div class="program-content">
-                    <h3 class="program-title">ატლეტიკა</h3>
-                    <p class="program-description">
-                        კლასიკური ატლეტური ვარჯიშები
-                    </p>
-                    <div class="program-details">
-                        <div class="program-detail">
-                            <div class="program-detail-label">განრიგი</div>
-                            <div class="program-detail-value">ორშ-ოთხ-პარ</div>
-                        </div>
-                        <div class="program-detail">
-                            <div class="program-detail-label">დრო</div>
-                            <div class="program-detail-value">17:00-18:30</div>
-                        </div>
-                    </div>
-                    <div class="program-footer">
-                        <div class="program-price">65₾</div>
-                        <a href="{{ url_for('form.program_registration') }}" class="btn-program">
-                            რეგისტრაცია
-                        </a>
+            
+            <div class="testimonial-card">
+                <div class="quote-icon"><i class="fas fa-quote-right"></i></div>
+                <p class="testimonial-text">"I was intimidated by gyms before coming here. The CrossFit community here is so welcoming. Every workout is scalable to my level. Highly recommended!"</p>
+                <div class="testimonial-author">
+                    <img src="https://ui-avatars.com/api/?name=George+K&background=random" alt="George K." class="author-img">
+                    <div>
+                        <h4>George K.</h4>
+                        <span>CrossFit Enthusiast</span>
                     </div>
                 </div>
             </div>
@@ -226,14 +364,211 @@
 
 <!-- CTA Section -->
 <section class="cta-section">
-    <div class="container">
-        <h2 class="cta-title">მზად ხართ დასაწყებად?</h2>
-        <p class="cta-text">
-            შემოგვიერთდით ჩვენს ფიტნეს ცენტრში და დაიწყეთ ჯანსაღი ცხოვრება
-        </p>
-        <a href="{{ url_for('form.program_registration') }}" class="btn-cta">
-            დარეგისტრირდით ახლავე
-        </a>
+    <div class="container cta-container">
+        <div class="cta-glass-card">
+            <div class="cta-content">
+                <span class="cta-badge">Limited Time Offer</span>
+                <h2>Ready to Transform Your Life?</h2>
+                <p>Join today and get your first personal training session absolutely free. No commitment required, just results.</p>
+                
+                <div class="cta-actions">
+                    <a href="{{ url_for('form.free_session') }}" class="btn-premium">
+                        <span>Start Free Session</span>
+                        <i class="fas fa-bolt"></i>
+                    </a>
+                    <a href="{{ url_for('main.contact') }}" class="btn-glass-outline">
+                        Contact Support
+                    </a>
+                </div>
+
+                <div class="cta-benefits">
+                    <div class="benefit-item"><i class="fas fa-check-circle"></i> No Contracts</div>
+                    <div class="benefit-item"><i class="fas fa-check-circle"></i> Expert Support</div>
+                    <div class="benefit-item"><i class="fas fa-check-circle"></i> All-Access Pass</div>
+                </div>
+            </div>
+        </div>
     </div>
 </section>
+
+<!-- FAQ Section -->
+<section id="faq" class="faq-section">
+    <div class="container">
+        <div class="section-header">
+            <h2 class="section-title">Frequently Asked Questions</h2>
+            <p class="section-subtitle">Everything you need to know about our memberships and facilities.</p>
+        </div>
+        
+        <div class="faq-container">
+            <div class="faq-item">
+                <div class="faq-question">
+                    <h3>How do I register at the club?</h3>
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="faq-answer">
+                    <p>Registration is simple - fill out the online form on our website or visit our center in person. Our team will contact you within 24 hours to help you choose the most suitable program.</p>
+                </div>
+            </div>
+            
+            <div class="faq-item">
+                <div class="faq-question">
+                    <h3>What is the minimum age to train?</h3>
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="faq-answer">
+                    <p>Our center accepts members from 14 years old. For teenagers aged 14-18, parental consent is required. We have specially designed safe programs for all ages.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">
+                    <h3>Can I get a personalized training program?</h3>
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="faq-answer">
+                    <p>Yes, our certified instructors will develop a fully personalized workout plan taking into account your goals, physical preparation, and health condition.</p>
+                </div>
+            </div>
+            
+            <div class="faq-item">
+                <div class="faq-question">
+                    <h3>How does payment work and what are the prices?</h3>
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="faq-answer">
+                    <p>Payment can be made in cash, by card on-site, or via online transfer. Prices start from 40₾ per month and depend on the chosen program. We also offer student and family discounts.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">
+                    <h3>Can I transfer my membership to another person?</h3>
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="faq-answer">
+                    <p>No, for security reasons, memberships are strictly personal and cannot be transferred to anyone else. Progress and health metrics are tracked individually for each member.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">
+                    <h3>Can I bring a guest?</h3>
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="faq-answer">
+                    <p>Yes, permanent members can bring a guest for free once a month. The guest must complete a health questionnaire and sign a safety declaration before training.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">
+                    <h3>What programs are recommended for beginners?</h3>
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="faq-answer">
+                    <p>For beginners, we recommend Yoga, Pilates, General Fitness, and Swimming. We offer a free consultation with a trainer for all new members, along with supervision for the first 3 sessions.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Exercise Quick View Modal -->
+<div id="quickViewModal" class="modal-overlay" style="display: none;">
+    <div class="modal-container">
+        <div class="modal-glass-card">
+            <div class="modal-header">
+                <div class="header-title-area">
+                    <div class="icon-glow"><i class="fas fa-bolt"></i></div>
+                    <div>
+                        <h2 id="modalTitle">Program Details</h2>
+                        <p class="modal-subtitle">Curriculum & Techniques</p>
+                    </div>
+                </div>
+                <button class="close-modal-btn">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            
+            <div class="modal-body custom-scrollbar">
+                <div id="exercisesContainer" class="premium-exercise-grid">
+                    <!-- Dynamic Content -->
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+document.querySelectorAll('.quick-view-btn').forEach(button => {
+    button.addEventListener('click', async () => {
+        const programId = button.dataset.programId;
+        const modal = document.getElementById('quickViewModal');
+        const container = document.getElementById('exercisesContainer');
+        const title = document.getElementById('modalTitle');
+
+        // Reset and show modal
+        container.innerHTML = `
+            <div class="premium-loader">
+                <div class="spinner"></div>
+                <p>Loading curriculum data...</p>
+            </div>
+        `;
+        modal.style.display = 'flex';
+        // Add a slight delay for smooth entrance
+        setTimeout(() => modal.classList.add('active'), 10);
+        document.body.style.overflow = 'hidden'; 
+        
+        try {
+            const response = await fetch(`/api/program/${programId}`);
+            const data = await response.json();
+            
+            title.innerText = data.title;
+            
+            container.innerHTML = data.exercises.map((ex, index) => `
+                <div class="premium-mini-card" style="animation-delay: ${index * 0.08}s">
+                    <div class="card-icon-wrapper">
+                        <i class="fas ${ex.icon}"></i>
+                    </div>
+                    <div class="card-info-compact">
+                        <h4>${ex.name}</h4>
+                        <p class="ex-desc">${ex.desc}</p>
+                    </div>
+                </div>
+            `).join('');
+        } catch (error) {
+            container.innerHTML = '<div class="no-data-msg">Error loading curriculum data. Please try again.</div>';
+        }
+    });
+});
+
+const closeModal = () => {
+    const modal = document.getElementById('quickViewModal');
+    modal.classList.remove('active');
+    setTimeout(() => {
+        modal.style.display = 'none';
+        document.body.style.overflow = 'auto';
+    }, 300); // match transition duration
+};
+
+document.querySelector('.close-modal-btn').addEventListener('click', closeModal);
+window.onclick = (e) => { if (e.target.classList.contains('modal-overlay')) closeModal(); };
+
+// FAQ Accordion Logic
+document.querySelectorAll('.faq-question').forEach(question => {
+    question.addEventListener('click', () => {
+        const item = question.parentElement;
+        
+        // Close others
+        document.querySelectorAll('.faq-item').forEach(otherItem => {
+            if (otherItem !== item) {
+                otherItem.classList.remove('active');
+            }
+        });
+        
+        // Toggle current
+        item.classList.toggle('active');
+    });
+});
+</script>
 {% endblock %}

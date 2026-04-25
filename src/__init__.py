@@ -10,10 +10,19 @@ def create_app():
     if not os.path.exists(app.config['UPLOAD_FOLDER']):
         os.makedirs(app.config['UPLOAD_FOLDER'])
 
-    from .extensions import db, migrate, login_manager
+    from .extensions import db, migrate, login_manager, oauth, mail
     db.init_app(app)
     migrate.init_app(app, db)
     login_manager.init_app(app)
+    mail.init_app(app)
+    
+    if oauth:
+        oauth.init_app(app)
+        oauth.register(
+            name='google',
+            server_metadata_url='https://accounts.google.com/.well-known/openid-configuration',
+            client_kwargs={'scope': 'openid email profile'}
+        )
 
     from .models.user import UserAccount
     @login_manager.user_loader
@@ -27,6 +36,7 @@ def create_app():
     from .views.user import user_bp
     from .views.blog import blog_bp
     from .views.admin import admin_bp
+    from .views.exercise import exercise_bp
 
     app.register_blueprint(main_bp)
     app.register_blueprint(form_bp)
@@ -34,9 +44,11 @@ def create_app():
     app.register_blueprint(user_bp)
     app.register_blueprint(blog_bp)
     app.register_blueprint(admin_bp, url_prefix='/admin')
+    app.register_blueprint(exercise_bp)
 
     # CLI Commands
-    from .commands import init_db_command
+    from .commands import init_db_command, init_exercises_command
     app.cli.add_command(init_db_command)
+    app.cli.add_command(init_exercises_command)
 
     return app
