@@ -10,4 +10,4 @@ Pillow==11.3.0
 gunicorn
 python-slugify
 email-validator
-
+flask_mail
