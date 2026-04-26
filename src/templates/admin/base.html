@@ -1,0 +1,48 @@
+{% extends "partials/base.html" %}
+
+{% block title %}⚙️ Admin Panel{% endblock %}
+
+{% block admin_css %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/admin/base.css', v='5.0') }}">
+{% endblock %}
+
+{% block content %}
+<div class="admin-wrapper">
+    <!-- Sidebar -->
+    <aside class="admin-sidebar" id="adminSidebar">
+        <nav class="sidebar-nav">
+            <a href="{{ url_for('admin.dashboard') }}" class="sidebar-link {% if request.endpoint == 'admin.dashboard' %}active{% endif %}">
+                <i class="fas fa-th-large"></i> <span>Dashboard</span>
+            </a>
+            <a href="{{ url_for('admin.statistics') }}" class="sidebar-link {% if request.endpoint == 'admin.statistics' %}active{% endif %}">
+                <i class="fas fa-chart-pie"></i> <span>Analytics</span>
+            </a>
+            <a href="{{ url_for('admin.users') }}" class="sidebar-link {% if 'user' in request.endpoint %}active{% endif %}">
+                <i class="fas fa-user-friends"></i> <span>Users</span>
+            </a>
+            <a href="{{ url_for('admin.registrations') }}" class="sidebar-link {% if request.endpoint == 'admin.registrations' %}active{% endif %}">
+                <i class="fas fa-file-signature"></i> <span>Bookings</span>
+            </a>
+            <a href="{{ url_for('admin.blog_management') }}" class="sidebar-link {% if 'blog' in request.endpoint or 'post' in request.endpoint %}active{% endif %}">
+                <i class="fas fa-newspaper"></i> <span>Blog Portal</span>
+            </a>
+        </nav>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="admin-main">
+        <div class="admin-content-container">
+            {% block admin_content %}{% endblock %}
+        </div>
+    </main>
+</div>
+
+<!-- Mobile Toggle (if needed) -->
+<div class="sidebar-overlay" id="sidebarOverlay"></div>
+{% endblock %}
+
+{% block footer %}{% endblock %}
+
+{% block admin_js %}
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+{% endblock %}

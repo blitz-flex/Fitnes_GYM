@@ -1,0 +1,87 @@
+{% extends "partials/base.html" %}
+
+{% block title %}Contact Us | Premium Fitness Club{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/main/contact.css') }}">
+
+{% endblock %}
+
+{% block content %}
+<div class="contact-page">
+    <div class="contact-container">
+        <header class="contact-header">
+            <h1>Get In Touch</h1>
+            <p>Ready to transform your life? Our team is here to support your fitness journey every step of the way.</p>
+        </header>
+
+        <div class="contact-wrapper">
+            <!-- Left Side: Info -->
+            <div class="contact-info-list">
+                <a href="tel:+995555123456" class="contact-info-item">
+                    <div class="contact-icon-box"><i class="fas fa-phone-alt"></i></div>
+                    <div class="info-text-box">
+                        <h4>Direct Line</h4>
+                        <p>+995 555 12 34 56</p>
+                    </div>
+                </a>
+
+                <a href="mailto:info@fitnessclub.ge" class="contact-info-item">
+                    <div class="contact-icon-box"><i class="fas fa-envelope-open-text"></i></div>
+                    <div class="info-text-box">
+                        <h4>Email Support</h4>
+                        <p>info@fitnessclub.ge</p>
+                    </div>
+                </a>
+
+                <div class="contact-info-item">
+                    <div class="contact-icon-box"><i class="fas fa-map-marked-alt"></i></div>
+                    <div class="info-text-box">
+                        <h4>Our Location</h4>
+                        <p>Tbilisi, Georgia</p>
+                    </div>
+                </div>
+
+                <div class="contact-info-item">
+                    <div class="contact-icon-box"><i class="fas fa-clock"></i></div>
+                    <div class="info-text-box">
+                        <h4>Working Hours</h4>
+                        <p>09:00 - 22:00 Daily</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right Side: Form -->
+            <div class="contact-glass-card">
+                <form class="contact-form" method="POST" action="#">
+                    <div class="custom-input-box">
+                        <label>FULL NAME</label>
+                        <input type="text" name="name" placeholder="John Doe" {% if current_user.is_authenticated %}value="{{ current_user.name }}"{% endif %} required>
+                    </div>
+
+                    <div class="custom-input-box">
+                        <label>EMAIL ADDRESS</label>
+                        <input type="email" name="email" placeholder="john@example.com" {% if current_user.is_authenticated %}value="{{ current_user.email }}"{% endif %} required>
+                    </div>
+
+                    <div class="custom-input-box form-group-full">
+                        <label>SUBJECT</label>
+                        <input type="text" name="subject" placeholder="How can we help you?" required>
+                    </div>
+
+                    <div class="custom-input-box form-group-full">
+                        <label>MESSAGE</label>
+                        <textarea name="message" placeholder="Describe your inquiry in detail..." required></textarea>
+                    </div>
+
+                    <button type="submit" class="contact-btn">
+                        <i class="fas fa-paper-plane"></i>
+                        Send Message
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

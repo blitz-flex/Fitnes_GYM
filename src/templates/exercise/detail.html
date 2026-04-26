@@ -1,0 +1,193 @@
+{% extends "partials/base.html" %}
+{% block title %}{{ exercise.name }} - FitnessClub{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/exercise/style.css', v='2.0') }}">
+{% endblock %}
+
+{% block content %}
+<section class="exercise-detail-section">
+    <div class="container">
+        <!-- Breadcrumb -->
+        <nav class="premium-breadcrumb">
+            <a href="{{ url_for('exercise.index') }}">Library</a> 
+            <i class="fas fa-chevron-right separator"></i>
+            <span>{{ exercise.name }}</span>
+        </nav>
+
+        <div class="exercise-detail-layout">
+            <!-- Left: Visuals -->
+            <div class="detail-visuals">
+                <div class="premium-image-gallery">
+                    {% for img in exercise.images %}
+                    <div class="gallery-card">
+                        <img src="https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/{{ img }}" alt="{{ exercise.name }} Step {{ loop.index }}">
+                    </div>
+                    {% endfor %}
+                </div>
+                
+                <div class="muscle-info-card">
+                    <h3 class="section-heading">Target Muscles</h3>
+                    <div class="muscle-groups">
+                        <div class="muscle-group">
+                            <span class="group-label">Primary</span>
+                            <div class="muscle-tags">
+                                {% for muscle in exercise.primary_muscles %}
+                                <span class="muscle-tag primary">{{ muscle|title }}</span>
+                                {% endfor %}
+                            </div>
+                        </div>
+                        {% if exercise.secondary_muscles %}
+                        <div class="muscle-group">
+                            <span class="group-label">Secondary</span>
+                            <div class="muscle-tags">
+                                {% for muscle in exercise.secondary_muscles %}
+                                <span class="muscle-tag secondary">{{ muscle|title }}</span>
+                                {% endfor %}
+                            </div>
+                        </div>
+                        {% endif %}
+                    </div>
+                </div>
+
+                <!-- Dynamic Muscle-Specific Pro Tips -->
+                <div class="premium-tips-card">
+                    <h3 class="section-heading">Pro Performance</h3>
+                    <ul class="tips-list">
+                        {% if 'chest' in exercise.primary_muscles or 'shoulders' in exercise.primary_muscles or 'triceps' in exercise.primary_muscles %}
+                            <li><i class="fas fa-bullseye"></i> <span>Focus on the "squeeze" at the top of the movement.</span></li>
+                            <li><i class="fas fa-shield-alt"></i> <span>Keep your shoulder blades retracted for stability.</span></li>
+                            <li><i class="fas fa-redo"></i> <span>Control the eccentric (lowering) phase completely.</span></li>
+                        {% elif 'lats' in exercise.primary_muscles or 'middle back' in exercise.primary_muscles or 'biceps' in exercise.primary_muscles %}
+                            <li><i class="fas fa-hand-rock"></i> <span>Think of your hands as hooks; pull with your elbows.</span></li>
+                            <li><i class="fas fa-expand-arrows-alt"></i> <span>Focus on a full stretch at the bottom of the rep.</span></li>
+                            <li><i class="fas fa-check-circle"></i> <span>Avoid using momentum to "swing" the weight up.</span></li>
+                        {% elif 'quadriceps' in exercise.primary_muscles or 'hamstrings' in exercise.primary_muscles or 'glutes' in exercise.primary_muscles %}
+                            <li><i class="fas fa-shoe-prints"></i> <span>Keep your weight distributed through your mid-foot/heels.</span></li>
+                            <li><i class="fas fa-align-center"></i> <span>Ensure your knees track in line with your toes.</span></li>
+                            <li><i class="fas fa-user-check"></i> <span>Maintain an upright chest to protect your lower back.</span></li>
+                        {% else %}
+                            <li><i class="fas fa-tachometer-alt"></i> <span>Maintain a consistent, controlled tempo.</span></li>
+                            <li><i class="fas fa-lungs"></i> <span>Exhale during the exertion (push/pull) phase.</span></li>
+                            <li><i class="fas fa-brain"></i> <span>Focus on the mind-muscle connection.</span></li>
+                        {% endif %}
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Right: Information -->
+            <div class="detail-information">
+                <div class="title-header">
+                    <h1 class="premium-title">{{ exercise.name }}</h1>
+                    <div class="premium-badges">
+                        <span class="badge {{ exercise.level }}">{{ exercise.level|title }}</span>
+                        <span class="badge category">{{ exercise.category|title }}</span>
+                    </div>
+                </div>
+
+                <div class="premium-stats-grid">
+                    <div class="stat-box">
+                        <i class="fas fa-dumbbell stat-icon"></i>
+                        <span class="stat-label">Equipment</span>
+                        <span class="stat-value">{{ exercise.equipment|title }}</span>
+                    </div>
+                    {% if exercise.force %}
+                    <div class="stat-box">
+                        <i class="fas fa-bolt stat-icon"></i>
+                        <span class="stat-label">Force</span>
+                        <span class="stat-value">{{ exercise.force|title }}</span>
+                    </div>
+                    {% endif %}
+                    {% if exercise.mechanic %}
+                    <div class="stat-box">
+                        <i class="fas fa-cogs stat-icon"></i>
+                        <span class="stat-label">Mechanic</span>
+                        <span class="stat-value">{{ exercise.mechanic|title }}</span>
+                    </div>
+                    {% endif %}
+                </div>
+
+                <div class="premium-instructions">
+                    <h3 class="section-heading">Instructions</h3>
+                    <ol class="premium-list">
+                        {% for step in exercise.instructions %}
+                        <li><span>{{ step }}</span></li>
+                        {% endfor %}
+                    </ol>
+                </div>
+
+                <!-- Removed Enroll Button per user request -->
+            </div>
+        </div>
+
+        {% if related %}
+        <div class="related-section">
+            <div class="section-header">
+                <h2 class="section-title">Related Exercises</h2>
+                <div class="carousel-nav">
+                    <button class="nav-btn prev-btn"><i class="fas fa-chevron-left"></i></button>
+                    <button class="nav-btn next-btn"><i class="fas fa-chevron-right"></i></button>
+                </div>
+            </div>
+            
+            <div class="swiper related-carousel">
+                <div class="swiper-wrapper">
+                    {% for item in related %}
+                    <div class="swiper-slide">
+                        <div class="exercise-card">
+                            <div class="card-image-container">
+                                {% if item.images %}
+                                <img src="https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/{{ item.images[0] }}" alt="{{ item.name }}" class="exercise-img">
+                                {% endif %}
+                                <span class="card-badge">{{ item.level|title }}</span>
+                            </div>
+                            <div class="card-content">
+                                <h4 class="exercise-name">{{ item.name }}</h4>
+                                <div class="exercise-meta">
+                                    <span class="meta-item"><i class="fas fa-dumbbell"></i> {{ item.equipment|title }}</span>
+                                </div>
+                                <div class="muscle-tags">
+                                    {% for muscle in item.primary_muscles %}
+                                    <span class="muscle-tag">{{ muscle|title }}</span>
+                                    {% endfor %}
+                                </div>
+                            </div>
+                            <a href="{{ url_for('exercise.detail', exercise_id=item.id) }}" class="card-link-overlay"></a>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+        {% endif %}
+    </div>
+</section>
+
+<!-- Swiper SDK -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const swiper = new Swiper('.related-carousel', {
+            slidesPerView: 1,
+            spaceBetween: 20,
+            loop: false,
+            navigation: {
+                nextEl: '.next-btn',
+                prevEl: '.prev-btn',
+            },
+            breakpoints: {
+                640: {
+                    slidesPerView: 2,
+                    spaceBetween: 20,
+                },
+                1024: {
+                    slidesPerView: 3,
+                    spaceBetween: 30,
+                },
+            },
+        });
+    });
+</script>
+{% endblock %}

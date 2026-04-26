@@ -1,0 +1,105 @@
+<!-- Secondary grid: Programs + Subscription + Demographics -->
+<div class="dash-grid-secondary mb-4">
+    <!-- Popular Programs -->
+    <div class="dash-card">
+        <div class="dash-card-header">
+            <div>
+                <h6 class="dash-card-title">Popular Programs</h6>
+                <p class="dash-card-sub">Bookings per class</p>
+            </div>
+        </div>
+        <div class="dash-card-body">
+            {% set prog_colors = ['#3b82f6', '#10b981', '#a78bfa', '#fbbf24', '#f472b6'] %}
+            {% if stats.program_counts %}
+                {% set max_cnt = stats.program_counts[0][1] if stats.program_counts else 1 %}
+                {% for prog, cnt in stats.program_counts %}
+                <div class="prog-item">
+                    <div class="prog-top">
+                        <span class="prog-name">{{ prog }}</span>
+                        <span class="prog-count">{{ cnt }}</span>
+                    </div>
+                    <div class="prog-track">
+                        <div class="prog-fill" style="width: {{ (cnt / max_cnt * 100)|round|int }}%; background: {{ prog_colors[loop.index0 % 5] }};"></div>
+                    </div>
+                </div>
+                {% endfor %}
+            {% else %}
+                <div class="empty-feed"><i class="fas fa-dumbbell"></i><span>No bookings yet</span></div>
+            {% endif %}
+        </div>
+    </div>
+
+    <!-- Subscription Plans -->
+    <div class="dash-card">
+        <div class="dash-card-header">
+            <div>
+                <h6 class="dash-card-title">Subscription Plans</h6>
+                <p class="dash-card-sub">Member tier distribution</p>
+            </div>
+        </div>
+        <div class="dash-card-body">
+            <div class="plans-doughnut-wrap">
+                <canvas id="plansChart"></canvas>
+            </div>
+            <div class="plans-legend">
+                {% for plan, cnt in stats.plan_counts %}
+                <div class="plan-legend-item">
+                    <span class="plan-dot plan-dot-{{ loop.index }}"></span>
+                    <span class="plan-name">{{ (plan or 'free')|capitalize }}</span>
+                    <span class="plan-count">{{ cnt }}</span>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+
+    <!-- Gender Split -->
+    <div class="dash-card">
+        <div class="dash-card-header">
+            <div>
+                <h6 class="dash-card-title">Member Demographics</h6>
+                <p class="dash-card-sub">Gender distribution</p>
+            </div>
+        </div>
+        <div class="dash-card-body">
+            {% set total_gendered = stats.male_count + stats.female_count %}
+            {% set m_pct = (stats.male_count / total_gendered * 100)|round|int if total_gendered > 0 else 50 %}
+            {% set f_pct = (stats.female_count / total_gendered * 100)|round|int if total_gendered > 0 else 50 %}
+            <div class="gender-vis">
+                <div class="gender-ring-wrap">
+                    <canvas id="genderChart"></canvas>
+                    <div class="gender-ring-center">
+                        <span class="gender-total">{{ total_gendered }}</span>
+                        <span class="gender-total-label">members</span>
+                    </div>
+                </div>
+                <div class="gender-breakdown">
+                    <div class="gender-stat">
+                        <div class="gender-icon male"><i class="fas fa-mars"></i></div>
+                        <div>
+                            <span class="gender-pct">{{ m_pct }}%</span>
+                            <span class="gender-label">Male ({{ stats.male_count }})</span>
+                        </div>
+                    </div>
+                    <div class="gender-stat">
+                        <div class="gender-icon female"><i class="fas fa-venus"></i></div>
+                        <div>
+                            <span class="gender-pct">{{ f_pct }}%</span>
+                            <span class="gender-label">Female ({{ stats.female_count }})</span>
+                        </div>
+                    </div>
+                    {% set unknown = stats.total_users - total_gendered %}
+                    {% if unknown > 0 %}
+                    <div class="gender-stat">
+                        <div class="gender-icon neutral"><i class="fas fa-user"></i></div>
+                        <div>
+                            <span class="gender-pct">{{ (unknown / stats.total_users * 100)|round|int }}%</span>
+                            <span class="gender-label">Not set ({{ unknown }})</span>
+                        </div>
+                    </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

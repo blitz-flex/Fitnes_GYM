@@ -1,0 +1,291 @@
+/* Ensure content isn't hidden behind the fixed navbar */
+        html, body {
+            height: 100%;
+        }
+        body {
+            padding-top: 56px;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+        .main-content {
+            flex: 1 0 auto;
+        }
+
+        /* Premium Footer Styles */
+        .premium-footer {
+            background-color: #0d0f14;
+            color: #fff;
+            padding: 80px 0 40px;
+            border-top: 1px solid rgba(46, 204, 113, 0.1);
+            margin-top: auto;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr;
+            gap: 60px;
+            margin-bottom: 60px;
+        }
+
+        .footer-logo {
+            font-size: 1.8rem;
+            font-weight: 900;
+            color: #fff;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            margin-bottom: 25px;
+            letter-spacing: 2px;
+        }
+
+        .footer-logo i {
+            color: #56ab75;
+            filter: drop-shadow(0 0 8px rgba(46, 204, 113, 0.4));
+        }
+
+        .footer-desc {
+            color: rgba(255, 255, 255, 0.6);
+            line-height: 1.8;
+            margin-bottom: 30px;
+            font-size: 1rem;
+            max-width: 400px;
+        }
+
+        .footer-social-new {
+            display: flex;
+            gap: 15px;
+        }
+
+        .social-icon-btn {
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+
+        .social-icon-btn:hover {
+            background: #56ab75;
+            color: #000;
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(46, 204, 113, 0.3);
+        }
+
+        .footer-links-section h4, 
+        .footer-contact-section h4 {
+            font-size: 1.2rem;
+            font-weight: 700;
+            margin-bottom: 30px;
+            color: #fff;
+            position: relative;
+        }
+
+        .footer-links-section h4::after,
+        .footer-contact-section h4::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: -10px;
+            width: 30px;
+            height: 2px;
+            background: #56ab75;
+        }
+
+        .footer-links-section ul,
+        .footer-contact-section ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .footer-links-section ul li {
+            margin-bottom: 15px;
+        }
+
+        .footer-links-section ul li a {
+            color: rgba(255, 255, 255, 0.6);
+            text-decoration: none;
+            transition: all 0.3s;
+            font-size: 0.95rem;
+        }
+
+        .footer-links-section ul li a:hover {
+            color: #56ab75;
+            padding-left: 5px;
+        }
+
+        .contact-list li {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            color: rgba(255, 255, 255, 0.6);
+            margin-bottom: 20px;
+            font-size: 0.95rem;
+        }
+
+        .contact-list li i {
+            color: #56ab75;
+            width: 20px;
+        }
+
+        .footer-bottom {
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            padding-top: 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: rgba(255, 255, 255, 0.4);
+            font-size: 0.9rem;
+        }
+
+        .footer-bottom-links {
+            display: flex;
+            gap: 30px;
+        }
+
+        .footer-bottom-links a {
+            color: rgba(255, 255, 255, 0.4);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-bottom-links a:hover {
+            color: #fff;
+        }
+
+        @media (max-width: 992px) {
+            .footer-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .footer-grid {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+            .footer-bottom {
+                flex-direction: column;
+                gap: 20px;
+                text-align: center;
+            }
+        }
+
+/* Premium Toast Notifications */
+.flash-container {
+    position: fixed;
+    top: 90px;
+    right: 30px;
+    z-index: 10000;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    width: auto;
+    max-width: 400px;
+    pointer-events: none;
+    transform: none;
+    left: auto;
+}
+
+.flash-message {
+    pointer-events: auto;
+    background: rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 16px;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+    padding: 18px 25px;
+    margin-bottom: 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    min-width: 300px;
+    animation: toastSlideIn 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    transition: all 0.4s ease;
+    border-left: 5px solid transparent;
+}
+
+.flash-content {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.flash-content i {
+    font-size: 1.5rem;
+}
+
+/* ─── GLOBAL BUTTON TEXT ENFORCEMENT ─────────────────────── */
+.btn-primary, 
+.btn-primary-cta, 
+.btn-premium, 
+.btn-premium-enroll, 
+.btn-sm,
+.register-btn-accent {
+    color: #1a1a1a !important;
+    font-weight: 800 !important;
+}
+
+.alert-success { border-left-color: #56ab75; }
+.alert-success .flash-content i { color: #56ab75; }
+
+.alert-danger, .alert-error { border-left-color: #e74c3c; }
+.alert-danger .flash-content i { color: #e74c3c; }
+
+.alert-info { border-left-color: #3498db; }
+.alert-info .flash-content i { color: #3498db; }
+
+.flash-content span {
+    font-weight: 700;
+    color: #1a1a1a;
+    font-size: 0.95rem;
+}
+
+.btn-close {
+    font-size: 0.8rem;
+    opacity: 0.5;
+    transition: opacity 0.3s;
+}
+
+.btn-close:hover {
+    opacity: 1;
+}
+
+@keyframes toastSlideIn {
+    from {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+.footer-content {
+                gap: 6px;
+            }
+
+            .footer-text {
+                font-size: 0.8rem;
+            }
+
+            .footer-social {
+                gap: 8px;
+            }
+
+            .social-link {
+                width: 28px;
+                height: 28px;
+                font-size: 0.75rem;
+            }
+        }
+

@@ -1,0 +1,50 @@
+<!-- KPI Cards Row -->
+<div class="kpi-row mb-4">
+    <div class="kpi-card-v2">
+        <div class="kpi-icon-v2 blue"><i class="fas fa-users"></i></div>
+        <div class="kpi-data">
+            <span class="kpi-num">{{ stats.total_users }}</span>
+            <span class="kpi-label-v2">Total Members</span>
+        </div>
+        <div class="kpi-footer">
+            <span class="kpi-badge up"><i class="fas fa-arrow-up"></i> 12%</span>
+            <span class="kpi-period">vs last month</span>
+        </div>
+    </div>
+
+    <div class="kpi-card-v2">
+        <div class="kpi-icon-v2 green"><i class="fas fa-dumbbell"></i></div>
+        <div class="kpi-data">
+            <span class="kpi-num">{{ stats.total_registrations }}</span>
+            <span class="kpi-label-v2">Class Bookings</span>
+        </div>
+        <div class="kpi-footer">
+            <span class="kpi-badge up"><i class="fas fa-arrow-up"></i> {{ stats.new_regs_week }}</span>
+            <span class="kpi-period">new this week</span>
+        </div>
+    </div>
+
+    <div class="kpi-card-v2">
+        <div class="kpi-icon-v2 purple"><i class="fas fa-newspaper"></i></div>
+        <div class="kpi-data">
+            <span class="kpi-num">{{ stats.total_blog_posts }}</span>
+            <span class="kpi-label-v2">Blog Articles</span>
+        </div>
+        <div class="kpi-footer">
+            <span class="kpi-badge neutral"><i class="fas fa-eye"></i> {{ stats.total_blog_views }}</span>
+            <span class="kpi-period">total views</span>
+        </div>
+    </div>
+
+    <div class="kpi-card-v2">
+        <div class="kpi-icon-v2 amber"><i class="fas fa-dollar-sign"></i></div>
+        <div class="kpi-data">
+            <span class="kpi-num">$12,450</span>
+            <span class="kpi-label-v2">Monthly Revenue</span>
+        </div>
+        <div class="kpi-footer">
+            <span class="kpi-badge up"><i class="fas fa-arrow-up"></i> 5.2%</span>
+            <span class="kpi-period">vs last month</span>
+        </div>
+    </div>
+</div>

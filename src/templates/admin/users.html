@@ -1,0 +1,173 @@
+{% extends "admin/base.html" %}
+
+{% block title %}Users - Admin Panel{% endblock %}
+{% block page_title %}User Management{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/admin/mgmt-shared.css', v='1.0') }}">
+{% endblock %}
+
+{% block admin_content %}
+<div class="mgmt-card">
+    <!-- Header -->
+    <div class="mgmt-header">
+        <div class="mgmt-title-area">
+            <div class="mgmt-icon blue"><i class="fas fa-users-cog"></i></div>
+            <div>
+                <h4 class="mgmt-title">Registered Members</h4>
+                <p class="mgmt-subtitle">
+                    <span class="live-dot"></span>
+                    {{ users.total if users else 0 }} Active Accounts
+                </p>
+            </div>
+        </div>
+        <div class="mgmt-actions">
+            <div class="search-wrapper">
+                <i class="fas fa-search search-icon"></i>
+                <input type="text" class="search-input" placeholder="Search by name or email…" id="userSearch">
+            </div>
+            <button class="icon-btn" title="Export CSV"><i class="fas fa-download"></i></button>
+        </div>
+    </div>
+
+    <!-- Table -->
+    {% if users and users.items %}
+    <div class="table-responsive">
+        <table class="mgmt-table">
+            <thead>
+                <tr>
+                    <th class="th-first">Member</th>
+                    <th>Full Name</th>
+                    <th>Gender</th>
+                    <th>Role</th>
+                    <th>Plan</th>
+                    <th class="text-center">Bookings</th>
+                    <th class="th-last">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for user in users.items %}
+                <tr>
+                    <td class="td-first">
+                        <div class="user-cell">
+                            <div class="user-ava">
+                                {% if user.profile_image %}
+                                    {% if user.profile_image.startswith('http') %}
+                                        <img src="{{ user.profile_image }}" alt="">
+                                    {% else %}
+                                        <img src="{{ url_for('static', filename='uploads/' + user.profile_image) }}" alt="">
+                                    {% endif %}
+                                {% else %}
+                                    <div class="ava-placeholder">{{ user.first_name[0] if user.first_name else '?' }}</div>
+                                {% endif %}
+                            </div>
+                            <div>
+                                <span class="user-name">{{ user.username }}</span>
+                                <span class="user-email">{{ user.email }}</span>
+                            </div>
+                        </div>
+                    </td>
+                    <td>
+                        <span class="cell-text">{{ 'Administrator' if user.is_admin else user.name }}</span>
+                    </td>
+                    <td>
+                        {% if user.gender %}
+                            {% set g = user.gender.lower() %}
+                            {% if g in ['male', 'მამრობითი'] %}
+                                <span title="Male" style="color: #60a5fa; font-size: 1.1rem;"><i class="fas fa-mars"></i></span>
+                            {% elif g in ['female', 'მდედრობითი'] %}
+                                <span title="Female" style="color: #f472b6; font-size: 1.1rem;"><i class="fas fa-venus"></i></span>
+                            {% else %}
+                                <span title="{{ user.gender }}" style="color: #71717a; font-size: 1rem;"><i class="fas fa-user-tag"></i></span>
+                            {% endif %}
+                        {% else %}
+                            <span class="cell-muted">—</span>
+                        {% endif %}
+                    </td>
+                    <td>
+                        {% if user.is_admin %}
+                            <span class="tag tag-red"><i class="fas fa-shield-alt"></i> Admin</span>
+                        {% else %}
+                            <span class="tag tag-zinc"><i class="fas fa-user"></i> Member</span>
+                        {% endif %}
+                    </td>
+                    <td>
+                        {% set plan = user.subscription_plan or 'free' %}
+                        {% if plan == 'elite' %}
+                            <span class="tag tag-amber"><i class="fas fa-crown"></i> Elite</span>
+                        {% elif plan == 'pro' %}
+                            <span class="tag tag-blue"><i class="fas fa-bolt"></i> Pro</span>
+                        {% else %}
+                            <span class="tag tag-zinc"><i class="fas fa-leaf"></i> Free</span>
+                        {% endif %}
+                    </td>
+                    <td class="text-center">
+                        {% if not user.is_admin %}
+                            <span class="count-badge">{{ user.registrations|length if user.registrations else 0 }}</span>
+                        {% else %}
+                            <span class="cell-muted">—</span>
+                        {% endif %}
+                    </td>
+                    <td class="td-last">
+                        {% if not user.is_admin %}
+                        <div class="action-group">
+                            <a href="{{ url_for('user.view_user_profile', user_id=user.id) }}" class="act-btn" title="View Profile">
+                                <i class="fas fa-user"></i>
+                            </a>
+                            <form method="POST" action="{{ url_for('admin.delete_user', user_id=user.id) }}" class="d-inline">
+                                <button type="submit" class="act-btn danger" title="Delete" onclick="return confirm('Delete user {{ user.username }}?')">
+                                    <i class="fas fa-trash"></i>
+                                </button>
+                            </form>
+                        </div>
+                        {% endif %}
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Pagination -->
+    {% if users.pages > 1 %}
+    <div class="mgmt-footer">
+        <nav>
+            <ul class="mgmt-pagination">
+                {% if users.has_prev %}
+                    <li><a class="page-btn" href="{{ url_for('admin.users', page=users.prev_num) }}"><i class="fas fa-chevron-left"></i></a></li>
+                {% endif %}
+                {% for page_num in users.iter_pages() %}
+                    {% if page_num %}
+                        <li><a class="page-btn {% if page_num == users.page %}active{% endif %}" href="{{ url_for('admin.users', page=page_num) }}">{{ page_num }}</a></li>
+                    {% else %}
+                        <li><span class="page-btn disabled">…</span></li>
+                    {% endif %}
+                {% endfor %}
+                {% if users.has_next %}
+                    <li><a class="page-btn" href="{{ url_for('admin.users', page=users.next_num) }}"><i class="fas fa-chevron-right"></i></a></li>
+                {% endif %}
+            </ul>
+        </nav>
+    </div>
+    {% endif %}
+
+    {% else %}
+    <div class="empty-state">
+        <div class="empty-icon"><i class="fas fa-users"></i></div>
+        <h5>No Members Found</h5>
+        <p>There are currently no registered users in the system.</p>
+    </div>
+    {% endif %}
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+    document.getElementById('userSearch').addEventListener('keyup', function() {
+        const val = this.value.toLowerCase();
+        document.querySelectorAll('.mgmt-table tbody tr').forEach(row => {
+            row.style.display = row.textContent.toLowerCase().includes(val) ? '' : 'none';
+        });
+    });
+</script>
+{% endblock %}

@@ -1,0 +1,115 @@
+{% extends "admin/base.html" %}
+
+{% block title %}Edit Post - Admin Panel{% endblock %}
+{% block page_title %}Edit Article{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/admin/edit_post.css') }}">
+
+{% endblock %}
+
+{% block admin_content %}
+<form method="POST" enctype="multipart/form-data">
+    <div class="row g-4">
+        <!-- Main Content Editor -->
+        <div class="col-lg-8">
+            <div class="editor-container">
+                <div class="p-4 border-bottom" style="background: #18181b; border-color: #27272a !important;">
+                    <label for="title" class="form-label">Post Title</label>
+                    <input type="text" class="form-control form-control-lg border-0 ps-0 fw-bold fs-3" id="title" name="title" value="{{ post.title }}" required placeholder="Enter article title here..." style="box-shadow: none; background: transparent !important; color: #ffffff !important;">
+                </div>
+                <div class="p-0">
+                    <textarea id="content_editor" name="content">{{ post.content }}</textarea>
+                </div>
+            </div>
+            
+            <div class="card border-0 shadow-sm mt-4">
+                <div class="card-body p-4">
+                    <label for="excerpt" class="form-label">Excerpt (Short Summary)</label>
+                    <textarea class="form-control border-light" id="excerpt" name="excerpt" rows="3" placeholder="Write a short summary...">{{ post.excerpt }}</textarea>
+                </div>
+            </div>
+        </div>
+
+        <!-- Sidebar Actions & Settings -->
+        <div class="col-lg-4">
+            <div class="card border-0 shadow-sm mb-4" style="border-radius: 20px !important;">
+                <div class="card-header bg-transparent border-0 pt-4 px-4">
+                    <h6 class="fw-bold text-white mb-0">Publishing Settings</h6>
+                </div>
+                <div class="card-body p-4">
+                    <div class="d-grid gap-3">
+                        <div class="form-check form-switch p-0 d-flex justify-content-between align-items-center">
+                            <label class="form-check-label fw-bold text-white" for="published">Published</label>
+                            <input class="form-check-input ms-0" type="checkbox" id="published" name="published" {{ 'checked' if post.published else '' }} style="width: 45px; height: 22px;">
+                        </div>
+                        <div class="small text-muted border-top pt-2 mt-2">
+                            <div><i class="fas fa-eye me-2"></i> {{ post.views or 0 }} views</div>
+                            <div class="mt-1"><i class="fas fa-calendar me-2"></i> Created: {{ post.created_at.strftime('%d %b, %Y') }}</div>
+                        </div>
+                        <hr class="my-2 opacity-5">
+                        <button type="submit" class="btn btn-primary py-3 fw-bold rounded-pill shadow-sm"><i class="fas fa-save me-2"></i>Save Changes</button>
+                        {% if post.published %}
+                        <a href="{{ url_for('blog.post_detail', slug=post.slug) }}" target="_blank" class="btn btn-light py-2 fw-bold rounded-pill border text-primary small">View Live Post</a>
+                        {% endif %}
+                        <a href="{{ url_for('admin.blog_management') }}" class="btn btn-link text-muted small mt-2">Back to Catalog</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card border-0 shadow-sm" style="border-radius: 20px !important;">
+                <div class="card-header bg-transparent border-0 pt-4 px-4">
+                    <h6 class="fw-bold text-white mb-0">Featured Image</h6>
+                </div>
+                <div class="card-body p-4 text-center">
+                    <label for="featured_image" class="image-preview-wrapper" id="imagePreviewLabel">
+                        {% if post.featured_image %}
+                            <img id="imagePreview" src="{{ url_for('static', filename='images/blog/' + post.featured_image) }}" alt="Preview">
+                            <div class="placeholder" id="imagePlaceholder" style="display: none;">
+                                <i class="fas fa-cloud-upload-alt fa-3x mb-2 text-primary opacity-50"></i>
+                                <p class="mb-0 small fw-bold">Click to change</p>
+                            </div>
+                        {% else %}
+                            <div class="placeholder" id="imagePlaceholder">
+                                <i class="fas fa-cloud-upload-alt fa-3x mb-2 text-primary opacity-50"></i>
+                                <p class="mb-0 small fw-bold">Click to upload</p>
+                            </div>
+                            <img id="imagePreview" src="#" alt="Preview" style="display: none;">
+                        {% endif %}
+                    </label>
+                    <input type="file" id="featured_image" name="featured_image" accept="image/*" class="d-none" onchange="previewImage(this)">
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+{% endblock %}
+
+{% block extra_js %}
+<script src="https://cdn.ckeditor.com/ckeditor5/40.0.0/classic/ckeditor.js"></script>
+<script>
+    let editor;
+    ClassicEditor
+        .create(document.querySelector('#content_editor'), {
+            toolbar: [ 'heading', '|', 'bold', 'italic', 'link', 'bulletedList', 'numberedList', 'blockQuote', 'insertTable', 'undo', 'redo' ]
+        })
+        .then(newEditor => {
+            editor = newEditor;
+        })
+        .catch(error => {
+            console.error(error);
+        });
+
+    function previewImage(input) {
+        if (input.files && input.files[0]) {
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                document.getElementById('imagePreview').src = e.target.result;
+                document.getElementById('imagePreview').style.display = 'block';
+                document.getElementById('imagePlaceholder').style.display = 'none';
+            }
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+</script>
+{% endblock %}

@@ -1,0 +1,202 @@
+{% extends "admin/base.html" %}
+
+{% block title %}Create New Post - Admin Panel{% endblock %}
+{% block page_title %}New Article{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/admin/create_post_simple.css', v='2.0') }}">
+{% endblock %}
+
+{% block admin_content %}
+<form method="POST" enctype="multipart/form-data" id="createPostForm">
+<div class="create-layout">
+
+    <!-- Left: Main Editor -->
+    <div class="editor-col">
+
+        <!-- Title Block -->
+        <div class="editor-block title-block">
+            <div class="block-label">
+                <i class="fas fa-heading"></i>
+                <span>Post Title</span>
+                <span class="required-star">*</span>
+            </div>
+            <input type="text" id="title" name="title" required
+                   class="title-input"
+                   placeholder="Enter your article title…">
+            <div class="title-counter"><span id="titleCount">0</span>/120</div>
+        </div>
+
+        <!-- Rich Editor -->
+        <div class="editor-block content-block">
+            <div class="block-label">
+                <i class="fas fa-align-left"></i>
+                <span>Content</span>
+                <span class="required-star">*</span>
+            </div>
+            <div class="editor-wrap">
+                <textarea id="content_editor" name="content"></textarea>
+            </div>
+        </div>
+
+        <!-- Excerpt -->
+        <div class="editor-block">
+            <div class="block-label">
+                <i class="fas fa-quote-right"></i>
+                <span>Excerpt</span>
+                <span class="optional-tag">Optional</span>
+            </div>
+            <textarea id="excerpt" name="excerpt" class="excerpt-input" rows="3"
+                      placeholder="Short summary shown in blog listings (auto-generated if empty)…"></textarea>
+        </div>
+    </div>
+
+    <!-- Right: Sidebar -->
+    <div class="sidebar-col">
+
+        <!-- Publish Box -->
+        <div class="sidebar-block">
+            <div class="sidebar-block-header">
+                <i class="fas fa-rocket"></i>
+                <span>Publishing</span>
+            </div>
+            <div class="sidebar-block-body">
+                <!-- Visibility Toggle -->
+                <div class="toggle-row">
+                    <div class="toggle-info">
+                        <span class="toggle-label">Public Visibility</span>
+                        <span class="toggle-hint">Make article visible to everyone</span>
+                    </div>
+                    <label class="toggle-switch">
+                        <input type="checkbox" id="published" name="published" checked>
+                        <span class="toggle-slider"></span>
+                    </label>
+                </div>
+
+                <!-- Publish Status Indicator -->
+                <div class="status-row" id="statusRow">
+                    <span class="status-dot live"></span>
+                    <span class="status-text" id="statusText">Will be published</span>
+                </div>
+
+                <div class="divider"></div>
+
+                <!-- Actions -->
+                <button type="submit" class="publish-btn" id="submitBtn">
+                    <i class="fas fa-paper-plane"></i>
+                    <span>Publish Article</span>
+                </button>
+                <a href="{{ url_for('admin.blog_management') }}" class="cancel-btn">
+                    <i class="fas fa-arrow-left"></i>
+                    Back to Catalog
+                </a>
+            </div>
+        </div>
+
+        <!-- Featured Image Box -->
+        <div class="sidebar-block">
+            <div class="sidebar-block-header">
+                <i class="fas fa-image"></i>
+                <span>Featured Image</span>
+            </div>
+            <div class="sidebar-block-body">
+                <label for="featured_image" class="img-upload-area" id="imgUploadArea">
+                    <div class="img-placeholder" id="imgPlaceholder">
+                        <i class="fas fa-cloud-upload-alt"></i>
+                        <span>Click to upload</span>
+                        <small>PNG, JPG, WEBP · Max 5MB</small>
+                        <small class="img-hint">Recommended: 1200×630px</small>
+                    </div>
+                    <img id="imgPreview" src="#" alt="" style="display:none;">
+                </label>
+                <input type="file" id="featured_image" name="featured_image"
+                       accept="image/*" class="d-none" onchange="previewImage(this)">
+                <button type="button" class="remove-img-btn" id="removeImgBtn"
+                        onclick="removeImage()" style="display:none;">
+                    <i class="fas fa-times-circle"></i> Remove Image
+                </button>
+            </div>
+        </div>
+
+        <!-- SEO Tips Card -->
+        <div class="sidebar-block tips-block">
+            <div class="sidebar-block-header">
+                <i class="fas fa-lightbulb"></i>
+                <span>Writing Tips</span>
+            </div>
+            <div class="sidebar-block-body">
+                <ul class="tips-list">
+                    <li><i class="fas fa-check-circle"></i> Use a compelling headline (50-70 chars)</li>
+                    <li><i class="fas fa-check-circle"></i> Add a featured image for better engagement</li>
+                    <li><i class="fas fa-check-circle"></i> Write an excerpt to improve SEO</li>
+                    <li><i class="fas fa-check-circle"></i> Break content into short paragraphs</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+</form>
+{% endblock %}
+
+{% block extra_js %}
+<script src="https://cdn.ckeditor.com/ckeditor5/40.0.0/classic/ckeditor.js"></script>
+<script>
+    let editor;
+
+    // Title character counter
+    const titleInput = document.getElementById('title');
+    const titleCount = document.getElementById('titleCount');
+    titleInput.addEventListener('input', function() {
+        titleCount.textContent = this.value.length;
+        titleCount.style.color = this.value.length > 100 ? '#f87171' : '#71717a';
+    });
+
+    // CKEditor init
+    ClassicEditor.create(document.querySelector('#content_editor'), {
+        placeholder: 'Start writing your fitness article here…',
+        toolbar: ['heading','|','bold','italic','link','bulletedList','numberedList','blockQuote','|','insertTable','undo','redo']
+    }).then(e => { editor = e; }).catch(console.error);
+
+    // Publish toggle status
+    const publishedToggle = document.getElementById('published');
+    const statusDot = document.querySelector('.status-dot');
+    const statusText = document.getElementById('statusText');
+    const submitBtn = document.getElementById('submitBtn');
+    const submitLabel = submitBtn.querySelector('span');
+
+    publishedToggle.addEventListener('change', function() {
+        if (this.checked) {
+            statusDot.className = 'status-dot live';
+            statusText.textContent = 'Will be published';
+            submitLabel.textContent = 'Publish Article';
+        } else {
+            statusDot.className = 'status-dot draft';
+            statusText.textContent = 'Will be saved as draft';
+            submitLabel.textContent = 'Save Draft';
+        }
+    });
+
+    // Image preview
+    function previewImage(input) {
+        if (input.files && input.files[0]) {
+            const reader = new FileReader();
+            reader.onload = e => {
+                document.getElementById('imgPreview').src = e.target.result;
+                document.getElementById('imgPreview').style.display = 'block';
+                document.getElementById('imgPlaceholder').style.display = 'none';
+                document.getElementById('removeImgBtn').style.display = 'flex';
+                document.getElementById('imgUploadArea').style.borderStyle = 'solid';
+            };
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+
+    function removeImage() {
+        document.getElementById('featured_image').value = '';
+        document.getElementById('imgPreview').style.display = 'none';
+        document.getElementById('imgPlaceholder').style.display = 'flex';
+        document.getElementById('removeImgBtn').style.display = 'none';
+        document.getElementById('imgUploadArea').style.borderStyle = 'dashed';
+    }
+</script>
+{% endblock %}

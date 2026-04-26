@@ -1,0 +1,1069 @@
+/*
+ * ============================================================
+ *  DARK MODE — Material Design Elevation System
+ *  Applied via: body.dark-mode (set from user preference)
+ *  Palette:
+ *    Background:  #121212
+ *    Surface 1:   #1E1E1E  (cards, navs, modals)
+ *    Surface 2:   #242424  (inputs, hover states)
+ *    Border:      #2C2C2C
+ *    Text Hi:     rgba(255,255,255,0.87)
+ *    Text Med:    rgba(255,255,255,0.60)
+ *    Text Dis:    rgba(255,255,255,0.38)
+ *    Accent:      #5ebd83  (desaturated green)
+ * ============================================================
+ */
+
+/* ─── TOKENS ──────────────────────────────────────────────── */
+body.dark-mode {
+    --dm-bg:          #121212;
+    --dm-surface-1:   #1E1E1E;
+    --dm-surface-2:   #242424;
+    --dm-border:      #2C2C2C;
+    --dm-text-hi:     rgba(255,255,255,0.87);
+    --dm-text-med:    rgba(255,255,255,0.60);
+    --dm-text-dis:    rgba(255,255,255,0.38);
+    --dm-accent:      #56ab75;
+    --dm-accent-glow: rgba(86, 171, 117, 0.05);
+
+    /* Navbar overrides */
+    --accent-green:   #56ab75;
+    --navbar-glow:    rgba(86, 171, 117, 0.08);
+
+    /* Map to existing app variables */
+    --primary-color:  #56ab75;
+    --primary-dark:   #469163;
+    --primary-rgb:    86, 171, 117;
+    --primary-glow:   rgba(86, 171, 117, 0.08);
+    --text-dark:      var(--dm-text-hi);
+    --text-muted:     var(--dm-text-med);
+    --light-bg:       var(--dm-bg);
+    --card-bg:        var(--dm-surface-1);
+    --white:          var(--dm-surface-1);
+
+    /* About page variables */
+    --about-bg:        var(--dm-bg);
+    --about-text:      var(--dm-text-hi);
+    --about-muted:     var(--dm-text-med);
+    --about-card-bg:   var(--dm-surface-1);
+    --about-border:    var(--dm-border);
+    --about-accent:    #0d0f14;
+    --about-primary-glow: rgba(86, 171, 117, 0.08);
+
+    background-color: var(--dm-bg);
+    color: var(--dm-text-hi);
+}
+
+/* ─── TYPOGRAPHY ─────────────────────────────────────────── */
+body.dark-mode h1,
+body.dark-mode h2,
+body.dark-mode h3,
+body.dark-mode h4,
+body.dark-mode h5,
+body.dark-mode h6,
+body.dark-mode strong,
+body.dark-mode b,
+body.dark-mode label,
+body.dark-mode .form-label {
+    color: var(--dm-text-hi) !important;
+}
+
+body.dark-mode p,
+body.dark-mode li,
+body.dark-mode span:not(.brand-text),
+body.dark-mode small,
+body.dark-mode .text-muted,
+body.dark-mode .text-secondary {
+    color: var(--dm-text-med) !important;
+}
+
+/* Preserve accent links */
+body.dark-mode a:not(.btn):not(.nav-link):not(.settings-tab-item):not(.footer-logo) {
+    color: var(--dm-accent);
+}
+
+/* ─── GLOBAL BACKGROUNDS ─────────────────────────────────── */
+body.dark-mode,
+body.dark-mode .main-content,
+body.dark-mode main,
+body.dark-mode .section,
+body.dark-mode .container-fluid,
+body.dark-mode section {
+    background-color: var(--dm-bg) !important;
+    color: var(--dm-text-hi) !important;
+}
+
+/* ─── AUTH PAGES (Login / Register / Forgot Password) ────── */
+body.dark-mode .form-page {
+    background-color: var(--dm-bg) !important;
+    background-image: none !important;  /* Remove forest photo */
+    background: var(--dm-bg) !important;
+}
+
+/* Override rgba(255,255,255,0.95) and rgba(248,252,248,0.85) */
+body.dark-mode .register-form {
+    background: var(--dm-surface-1) !important;
+    background-color: var(--dm-surface-1) !important;
+    border: 1px solid var(--dm-border) !important;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.6) !important;
+    backdrop-filter: none !important;
+}
+
+body.dark-mode .form-header h1,
+body.dark-mode .form-header .title {
+    color: var(--dm-text-hi) !important;
+}
+
+body.dark-mode .form-header .subtitle {
+    color: var(--dm-text-med) !important;
+}
+
+body.dark-mode .input-with-icon input {
+    background-color: var(--dm-surface-2) !important;
+    border: 1px solid var(--dm-border) !important;
+    color: var(--dm-text-hi) !important;
+}
+
+body.dark-mode .input-with-icon input:focus {
+    border-color: var(--dm-accent) !important;
+    box-shadow: 0 0 0 3px var(--dm-accent-glow) !important;
+}
+
+body.dark-mode .btn-google {
+    background-color: var(--dm-surface-2) !important;
+    border: 1px solid var(--dm-border) !important;
+    color: var(--dm-text-hi) !important;
+}
+
+body.dark-mode .btn-google:hover {
+    background-color: var(--dm-border) !important;
+    color: var(--dm-text-hi) !important;
+}
+
+body.dark-mode .social-divider::before,
+body.dark-mode .social-divider::after {
+    border-color: var(--dm-border) !important;
+}
+
+body.dark-mode .social-divider span {
+    color: var(--dm-text-dis) !important;
+}
+
+body.dark-mode .form-footer,
+body.dark-mode .form-footer p {
+    color: var(--dm-text-med) !important;
+}
+
+
+/* ─── PROFILE PAGE ───────────────────────────────────────── */
+body.dark-mode .profile-page {
+    background: var(--dm-bg) !important;
+    background-image: none !important;
+}
+
+/* Override rgba(255,255,255,0.95) hardcoded in profile.css */
+body.dark-mode .profile-card,
+body.dark-mode .profile-page .profile-card,
+body.dark-mode .registrations-section,
+body.dark-mode .profile-page .registrations-section {
+    background: var(--dm-surface-1) !important;
+    background-color: var(--dm-surface-1) !important;
+    border: 1px solid var(--dm-border) !important;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.5) !important;
+    color: var(--dm-text-hi) !important;
+}
+
+/* Override hardcoded white (#fff) in registration-card */
+body.dark-mode .registration-card,
+body.dark-mode .profile-page .registration-card {
+    background: var(--dm-surface-2) !important;
+    background-color: var(--dm-surface-2) !important;
+    border: 1px solid var(--dm-border) !important;
+    color: var(--dm-text-hi) !important;
+}
+
+body.dark-mode .profile-header,
+body.dark-mode .section-header,
+body.dark-mode .section-header.border-bottom {
+    border-color: var(--dm-border) !important;
+}
+
+body.dark-mode .info-item {
+    background: var(--dm-surface-2) !important;
+    background-color: var(--dm-surface-2) !important;
+    border-color: var(--dm-border) !important;
+    border-left-color: var(--dm-accent) !important;
+}
+
+body.dark-mode .info-item:hover {
+    background: #2a2a2a !important;
+    background-color: #2a2a2a !important;
+}
+
+/* Override #f8fafc and white in no-registrations */
+body.dark-mode .no-registrations {
+    background: var(--dm-surface-2) !important;
+    background-color: var(--dm-surface-2) !important;
+    border-color: var(--dm-border) !important;
+}
+
+/* Override white for back-link */
+body.dark-mode .back-to-profile-link {
+    background: var(--dm-surface-1) !important;
+    background-color: var(--dm-surface-1) !important;
+    border-color: var(--dm-border) !important;
+    color: var(--dm-text-med) !important;
+}
+
+/* Override #f0f4ff for edit trigger */
+body.dark-mode .edit-profile-trigger {
+    background: var(--dm-surface-2) !important;
+    color: var(--dm-accent) !important;
+}
+
+/* Detail icons override #f0f4ff */
+body.dark-mode .detail-icon {
+    background: var(--dm-surface-1) !important;
+}
+
+body.dark-mode .info-label {
+    color: var(--dm-text-dis) !important;
+}
+
+body.dark-mode .info-value {
+    color: var(--dm-text-hi) !important;
+}
+
+body.dark-mode .registration-card {
+    background-color: var(--dm-surface-2) !important;
+    border-color: var(--dm-border) !important;
+}
+
+body.dark-mode .registration-card:hover {
+    border-color: var(--dm-accent) !important;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.4) !important;
+}
+
+body.dark-mode .registration-header,
+body.dark-mode .registration-actions {
+    border-color: var(--dm-border) !important;
+}
+
+body.dark-mode .detail-icon {
+    background-color: var(--dm-surface-1) !important;
+}
+
+body.dark-mode .detail-label {
+    color: var(--dm-text-dis) !important;
+}
+
+body.dark-mode .detail-value {
+    color: var(--dm-text-hi) !important;
+}
+
+body.dark-mode .no-registrations {
+    background-color: var(--dm-surface-2) !important;
+    border-color: var(--dm-border) !important;
+}
+
+body.dark-mode .back-to-profile-link {
+    background-color: var(--dm-surface-1) !important;
+    border-color: var(--dm-border) !important;
+    color: var(--dm-text-med) !important;
+}
+
+/* ─── SETTINGS PAGE ──────────────────────────────────────── */
+body.dark-mode .settings-nav {
+    background-color: var(--dm-surface-1) !important;
+    border: 1px solid var(--dm-border) !important;
+}
+
+body.dark-mode .settings-content-wrapper {
+    background-color: var(--dm-surface-1) !important;
+    border: 1px solid var(--dm-border) !important;
+}
+
+body.dark-mode .settings-tab-item {
+    color: var(--dm-text-med) !important;
+}
+
+body.dark-mode .settings-tab-item:hover,
+body.dark-mode .settings-tab-item.active {
+    color: var(--dm-accent) !important;
+    background-color: rgba(94,189,131,0.08) !important;
+    border-left-color: var(--dm-accent) !important;
+}
+
+body.dark-mode .settings-title {
+    color: var(--dm-text-hi) !important;
+}
+
+body.dark-mode .settings-subtitle {
+    color: var(--dm-text-med) !important;
+}
+
+/* Settings — Muscle Grid */
+body.dark-mode .muscle-tag {
+    background-color: var(--dm-surface-2) !important;
+    border-color: var(--dm-border) !important;
+    color: var(--dm-text-hi) !important;
+}
+
+body.dark-mode .muscle-tag i {
+    color: var(--dm-text-dis) !important;
+}
+
+body.dark-mode .recovery-plan-box {
+    background-color: var(--dm-surface-2) !important;
+    border-left-color: var(--dm-accent) !important;
+}
+
+/* Settings — Cards */
+body.dark-mode .app-integration-card {
+    background-color: var(--dm-surface-2) !important;
+    border-color: var(--dm-border) !important;
+}
+
+body.dark-mode .badge-card {
+    background-color: var(--dm-surface-2) !important;
+    border-color: var(--dm-border) !important;
+}
+
+/* Settings — Pricing Cards */
+body.dark-mode .p-card {
+    background-color: var(--dm-surface-1) !important;
+    border-color: var(--dm-border) !important;
+    color: var(--dm-text-hi) !important;
+}
+
+body.dark-mode .p-features li {
+    color: var(--dm-text-med) !important;
+}
+
+/* Settings — Data/Danger zones */
+body.dark-mode .data-export {
+    background-color: rgba(52,152,219,0.08) !important;
+    border-color: rgba(52,152,219,0.15) !important;
+}
+
+body.dark-mode .danger-zone {
+    background-color: rgba(231,76,60,0.05) !important;
+    border-color: rgba(231,76,60,0.15) !important;
+}
+
+/* ─── ABOUT PAGE ─────────────────────────────────────────── */
+body.dark-mode .company-info,
+body.dark-mode .services-section {
+    background-color: var(--dm-bg) !important;
+}
+
+body.dark-mode .team-section {
+    background-color: #161616 !important;
+}
+
+body.dark-mode .company-stats-card {
+    background-color: var(--dm-surface-1) !important;
+    border-color: var(--dm-border) !important;
+}
+
+body.dark-mode .service-card {
+    background-color: var(--dm-surface-1) !important;
+    border-color: var(--dm-border) !important;
+}
+
+body.dark-mode .service-card:hover {
+    box-shadow: 0 20px 40px rgba(0,0,0,0.4) !important;
+    border-color: var(--dm-accent) !important;
+}
+
+body.dark-mode .service-icon {
+    background-color: var(--dm-surface-2) !important;
+}
+
+body.dark-mode .service-icon svg {
+    fill: var(--dm-text-med) !important;
+}
+
+body.dark-mode .stats-center {
+    border-color: var(--dm-border) !important;
+}
+
+body.dark-mode .vision-list li {
+    color: var(--dm-text-hi) !important;
+}
+
+/* ─── GLOBAL FORMS ───────────────────────────────────────── */
+body.dark-mode .form-control,
+body.dark-mode .form-select,
+body.dark-mode input:not([type="submit"]):not([type="button"]):not([type="hidden"]):not([type="checkbox"]):not([type="radio"]),
+body.dark-mode select,
+body.dark-mode textarea {
+    background-color: var(--dm-surface-2) !important;
+    border: 1px solid var(--dm-border) !important;
+    color: var(--dm-text-hi) !important;
+}
+
+body.dark-mode .form-control:focus,
+body.dark-mode .form-select:focus,
+body.dark-mode input:focus,
+body.dark-mode select:focus,
+body.dark-mode textarea:focus {
+    background-color: var(--dm-surface-2) !important;
+    border-color: var(--dm-accent) !important;
+    color: var(--dm-text-hi) !important;
+    box-shadow: 0 0 0 3px var(--dm-accent-glow) !important;
+}
+
+body.dark-mode .input-group-text {
+    background-color: var(--dm-surface-1) !important;
+    border-color: var(--dm-border) !important;
+    color: var(--dm-text-med) !important;
+}
+
+/* ─── HR / DIVIDERS ──────────────────────────────────────── */
+body.dark-mode hr {
+    border-color: var(--dm-border) !important;
+    opacity: 1 !important;
+}
+
+/* ─── BLOG PAGE ──────────────────────────────────────────── */
+body.dark-mode .blog-card,
+body.dark-mode .blog-post-card {
+    background-color: var(--dm-surface-1) !important;
+    border-color: var(--dm-border) !important;
+}
+
+/* ─── MODALS & DROPDOWNS ─────────────────────────────────── */
+body.dark-mode .modal-content {
+    background-color: var(--dm-surface-1) !important;
+    border-color: var(--dm-border) !important;
+}
+
+body.dark-mode .modal-header,
+body.dark-mode .modal-footer {
+    border-color: var(--dm-border) !important;
+}
+
+body.dark-mode .dropdown-menu {
+    background-color: var(--dm-surface-1) !important;
+    border: 1px solid var(--dm-border) !important;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.5) !important;
+}
+
+body.dark-mode .dropdown-item {
+    color: var(--dm-text-med) !important;
+}
+
+body.dark-mode .dropdown-item:hover,
+body.dark-mode .dropdown-item:focus {
+    background-color: var(--dm-surface-2) !important;
+    color: var(--dm-text-hi) !important;
+}
+
+body.dark-mode .dropdown-divider {
+    border-color: var(--dm-border) !important;
+}
+
+/* ─── FLASH MESSAGES ─────────────────────────────────────── */
+body.dark-mode .flash-message {
+    background: var(--dm-surface-1) !important;
+    border-color: var(--dm-border) !important;
+}
+
+/* ─── CONTACT PAGE ───────────────────────────────────────── */
+body.dark-mode .contact-section {
+    background-color: var(--dm-bg) !important;
+}
+
+body.dark-mode .contact-info-item {
+    background-color: var(--dm-surface-1) !important;
+    border: 1px solid var(--dm-border) !important;
+}
+
+body.dark-mode .contact-form-container {
+    background-color: var(--dm-surface-1) !important;
+    border: 1px solid var(--dm-border) !important;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.4) !important;
+}
+
+body.dark-mode .contact-hero {
+    background-color: #1a1a1a !important; /* Slightly lighter than base for hero */
+}
+
+/* ─── EXERCISES PAGE ─────────────────────────────────────── */
+body.dark-mode .exercises-hero {
+    background-color: #1a1a1a !important;
+}
+
+body.dark-mode .filter-section {
+    background-color: var(--dm-surface-1) !important;
+    border: 1px solid var(--dm-border) !important;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.3) !important;
+}
+
+body.dark-mode .exercise-card {
+    background-color: var(--dm-surface-1) !important;
+    border-color: var(--dm-border) !important;
+    color: var(--dm-text-hi) !important;
+}
+
+body.dark-mode .exercise-card:hover {
+    border-color: var(--dm-accent) !important;
+    transform: translateY(-5px) !important;
+    box-shadow: 0 12px 24px rgba(0,0,0,0.5) !important;
+}
+
+body.dark-mode .exercise-meta span {
+    background-color: var(--dm-surface-2) !important;
+    color: var(--dm-text-med) !important;
+}
+
+body.dark-mode .search-box input {
+    background-color: var(--dm-surface-2) !important;
+    border-color: var(--dm-border) !important;
+    color: var(--dm-text-hi) !important;
+}
+
+/* ─── BLOG PAGE ──────────────────────────────────────────── */
+body.dark-mode .blog-hero {
+    background-color: #1a1a1a !important;
+}
+
+body.dark-mode .blog-search-section {
+    background-color: var(--dm-surface-1) !important;
+    border-bottom: 1px solid var(--dm-border) !important;
+}
+
+body.dark-mode .category-btn {
+    background-color: var(--dm-surface-2) !important;
+    border: 1px solid var(--dm-border) !important;
+    color: var(--dm-text-med) !important;
+}
+
+body.dark-mode .category-btn:hover,
+body.dark-mode .category-btn.active {
+    background-color: var(--dm-accent) !important;
+    color: white !important;
+    border-color: var(--dm-accent) !important;
+}
+
+body.dark-mode .blog-card-content {
+    background-color: var(--dm-surface-1) !important;
+    border-top: 1px solid var(--dm-border) !important;
+}
+
+body.dark-mode .blog-card-footer {
+    border-top: 1px solid var(--dm-border) !important;
+    color: var(--dm-text-dis) !important;
+}
+
+/* ─── CONTACT PAGE ───────────────────────────────────────── */
+body.dark-mode .contact-page {
+    background: var(--dm-bg) !important;
+}
+
+body.dark-mode .contact-header h1 {
+    color: var(--dm-text-hi) !important;
+}
+
+body.dark-mode .contact-header p {
+    color: var(--dm-text-med) !important;
+}
+
+body.dark-mode .contact-glass-card {
+    background: var(--dm-surface-1) !important;
+    border-color: var(--dm-border) !important;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5) !important;
+}
+
+body.dark-mode .contact-info-item {
+    background: var(--dm-surface-2) !important;
+    border-color: var(--dm-border) !important;
+}
+
+body.dark-mode .contact-info-item:hover {
+    background: #2a2a2a !important;
+    border-color: var(--dm-accent) !important;
+}
+
+body.dark-mode .info-text-box p {
+    color: var(--dm-text-hi) !important;
+}
+
+body.dark-mode .custom-input-box input,
+body.dark-mode .custom-input-box textarea {
+    background: var(--dm-surface-2) !important;
+    border-color: var(--dm-border) !important;
+    color: var(--dm-text-hi) !important;
+}
+
+body.dark-mode .custom-input-box input:focus,
+body.dark-mode .custom-input-box textarea:focus {
+    background: var(--dm-surface-2) !important;
+    border-color: var(--dm-accent) !important;
+}
+
+/* ─── EXERCISES PAGE ─────────────────────────────────────── */
+body.dark-mode .exercise-library-header {
+    background: var(--dm-bg) !important;
+    border-bottom: 1px solid var(--dm-border) !important;
+}
+
+body.dark-mode .library-title,
+body.dark-mode .library-subtitle {
+    color: var(--dm-text-hi) !important;
+}
+
+body.dark-mode .search-filter-container {
+    background: var(--dm-surface-1) !important;
+    border: 1px solid var(--dm-border) !important;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.3) !important;
+}
+
+body.dark-mode .search-input,
+body.dark-mode .filter-select {
+    background: var(--dm-surface-2) !important;
+    border-color: var(--dm-border) !important;
+    color: var(--dm-text-hi) !important;
+}
+
+body.dark-mode .exercise-card {
+    background: var(--dm-surface-2) !important; /* Lighter background as requested */
+    border: 1px solid var(--dm-border) !important;
+}
+
+body.dark-mode .card-content,
+body.dark-mode .card-image-container {
+    background: var(--dm-surface-2) !important;
+    border-color: var(--dm-border) !important;
+}
+
+body.dark-mode .exercise-img,
+body.dark-mode .gallery-card img {
+    mix-blend-mode: normal !important;
+    /* Removed filter: invert() because these are actual photos, not transparent illustrations */
+    border-radius: 8px; /* Optional: adds a nice touch to the photos */
+}
+
+body.dark-mode .card-content {
+    color: var(--dm-text-hi) !important;
+}
+
+/* Fix for badges on detail page and exercise cards (Beginner, Intermediate, etc.) */
+body.dark-mode .badge,
+body.dark-mode .card-badge,
+body.dark-mode .exercise-meta span,
+body.dark-mode .tag {
+    color: #ffffff !important; /* Force white text on badges in dark mode */
+    background-color: var(--dm-surface-2) !important;
+    border: 1px solid var(--dm-border) !important;
+}
+
+/* ─── HOME PAGE & ABOUT PAGE HOVER REFINEMENTS ───────────── */
+body.dark-mode .program-card:hover,
+body.dark-mode .feature-card:hover,
+body.dark-mode .pricing-card:hover,
+body.dark-mode .service-card:hover {
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.8) !important;
+    border-color: var(--dm-border) !important;
+}
+
+/* Beautiful custom hover for Team Members */
+body.dark-mode .team-member {
+    transition: transform 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+
+body.dark-mode .team-member:hover {
+    transform: translateY(-8px);
+}
+
+body.dark-mode .team-member:hover .team-photo {
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6), 0 0 0 2px var(--dm-accent) !important;
+}
+
+body.dark-mode .team-member h3 {
+    transition: color 0.3s ease;
+}
+
+body.dark-mode .team-member:hover h3 {
+    color: var(--dm-accent) !important;
+}
+
+body.dark-mode .feature-card:hover .feature-icon,
+body.dark-mode .service-card:hover .service-icon {
+    box-shadow: 0 0 15px rgba(94, 189, 131, 0.2) !important; /* Soft, subdued glow */
+}
+
+/* Remove green glow from social icons */
+body.dark-mode .social-icon-btn:hover {
+    background: var(--dm-surface-2) !important;
+    color: var(--dm-text-hi) !important;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5) !important;
+}
+
+/* Fix for primary buttons (green background) having low contrast or overridden text colors */
+body.dark-mode .btn-primary-cta,
+body.dark-mode .btn-premium,
+body.dark-mode .btn-premium-enroll,
+body.dark-mode .btn-primary {
+    color: #1a1a1a !important; /* High contrast dark text on the green background */
+    font-weight: 800 !important;
+}
+
+body.dark-mode .btn-secondary-cta {
+    color: var(--dm-text-hi) !important;
+}
+
+/* ─── HOME PAGE BEAUTIFICATION (JOIN BUTTON & STATS) ─────── */
+
+/* Elite Programs "Join" button */
+body.dark-mode .btn-sm {
+    background: var(--dm-accent) !important;
+    color: #1a1a1a !important;
+    border: none !important;
+    font-weight: 800;
+    box-shadow: 0 4px 15px rgba(94, 189, 131, 0.15) !important;
+    transition: all 0.3s ease;
+}
+
+body.dark-mode .btn-sm:hover {
+    background: #6fcd94 !important; /* slightly lighter green on hover */
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(94, 189, 131, 0.3) !important;
+}
+
+body.dark-mode .icon-btn {
+    border-color: rgba(255, 255, 255, 0.1) !important;
+    color: var(--dm-text-med) !important;
+}
+
+body.dark-mode .icon-btn:hover {
+    background: var(--dm-surface-2) !important;
+    color: var(--dm-accent) !important;
+}
+
+/* Stats section boxes */
+body.dark-mode .stats-section .stat-box {
+    background: rgba(255, 255, 255, 0.03) !important; /* Glass effect */
+    border: 1px solid rgba(255, 255, 255, 0.05) !important;
+    backdrop-filter: blur(10px) !important;
+    border-radius: 16px !important;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5) !important;
+    padding: 30px !important;
+    transition: transform 0.3s ease;
+}
+
+body.dark-mode .stats-section .stat-box:hover {
+    transform: translateY(-5px);
+    border-color: rgba(94, 189, 131, 0.2) !important;
+    background: rgba(255, 255, 255, 0.05) !important;
+}
+
+body.dark-mode .program-image {
+    filter: brightness(0.85) contrast(1.1);
+    transition: all 0.4s ease;
+}
+
+body.dark-mode .program-card:hover .program-image {
+    filter: brightness(0.9) contrast(1.1); /* Prevents the image from lighting up too much on hover */
+}
+
+body.dark-mode .team-photo img {
+    filter: brightness(0.85) grayscale(20%);
+}
+
+body.dark-mode .team-member:hover .team-photo img {
+    filter: brightness(0.95) grayscale(0%); /* Soft transition */
+}
+
+/* ─── EXERCISE DETAIL PAGE ───────────────────────────────── */
+body.dark-mode .exercise-detail-section {
+    background: var(--dm-bg) !important;
+}
+
+body.dark-mode .premium-breadcrumb {
+    color: var(--dm-text-med) !important;
+}
+
+body.dark-mode .premium-breadcrumb a {
+    color: var(--dm-text-med) !important;
+}
+
+body.dark-mode .premium-breadcrumb a:hover {
+    color: var(--dm-accent) !important;
+}
+
+body.dark-mode .premium-title,
+body.dark-mode .section-heading,
+body.dark-mode .section-title {
+    color: var(--dm-text-hi) !important;
+}
+
+body.dark-mode .muscle-info-card,
+body.dark-mode .premium-tips-card,
+body.dark-mode .premium-instructions,
+body.dark-mode .gallery-card {
+    background: var(--dm-surface-1) !important;
+    border: 1px solid var(--dm-border) !important;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.3) !important;
+}
+
+body.dark-mode .stat-box {
+    background: var(--dm-surface-1) !important;
+    border: 1px solid var(--dm-border) !important;
+}
+
+body.dark-mode .stat-label {
+    color: var(--dm-text-med) !important;
+}
+
+body.dark-mode .stat-value {
+    color: var(--dm-text-hi) !important;
+}
+
+body.dark-mode .group-label {
+    color: var(--dm-text-hi) !important;
+}
+
+body.dark-mode .tips-list li,
+body.dark-mode .premium-list li span {
+    color: var(--dm-text-med) !important;
+}
+
+body.dark-mode .nav-btn {
+    background: var(--dm-surface-2) !important;
+    color: var(--dm-text-hi) !important;
+    border: 1px solid var(--dm-border) !important;
+}
+
+body.dark-mode .nav-btn:hover {
+    background: var(--dm-accent) !important;
+    color: white !important;
+}
+
+body.dark-mode .search-form {
+    background: var(--dm-surface-1) !important;
+    border-radius: 16px;
+}
+
+body.dark-mode .exercise-name {
+    color: var(--dm-text-hi) !important;
+}
+
+/* ─── BLOG POST DETAIL PAGE ──────────────────────────────── */
+body.dark-mode .article-hero {
+    background: var(--dm-bg) !important;
+    border-bottom-color: var(--dm-border) !important;
+}
+
+body.dark-mode .article-title {
+    color: var(--dm-text-hi) !important;
+}
+
+body.dark-mode .article-category {
+    background: var(--dm-surface-2) !important;
+}
+
+body.dark-mode .meta-avatar {
+    background: var(--dm-surface-2) !important;
+    color: var(--dm-text-hi) !important;
+}
+
+body.dark-mode .article-content {
+    color: var(--dm-text-med) !important;
+}
+
+body.dark-mode .article-content h1,
+body.dark-mode .article-content h2,
+body.dark-mode .article-content h3,
+body.dark-mode .article-content h4,
+body.dark-mode .article-content h5,
+body.dark-mode .article-content h6,
+body.dark-mode .article-content strong,
+body.dark-mode .article-content b {
+    color: var(--dm-text-hi) !important;
+}
+
+body.dark-mode .article-footer {
+    border-top-color: var(--dm-border) !important;
+}
+
+body.dark-mode .btn-back {
+    background: var(--dm-surface-2) !important;
+    color: var(--dm-text-hi) !important;
+}
+
+body.dark-mode .btn-back:hover {
+    background: var(--dm-accent) !important;
+    color: white !important;
+}
+
+body.dark-mode .muscle-tag {
+    background: var(--dm-surface-2) !important;
+    color: var(--dm-text-med) !important;
+}
+
+/* ─── BLOG PAGE ──────────────────────────────────────────── */
+body.dark-mode .blog-header-section {
+    background: var(--dm-bg) !important;
+    border-bottom: 1px solid var(--dm-border) !important;
+}
+
+body.dark-mode .blog-title {
+    color: var(--dm-text-hi) !important;
+}
+
+body.dark-mode .blog-subtitle {
+    color: var(--dm-text-med) !important;
+}
+
+body.dark-mode .post-card {
+    background: var(--dm-surface-1) !important;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.3) !important;
+}
+
+body.dark-mode .post-card-title {
+    color: var(--dm-text-hi) !important;
+}
+
+body.dark-mode .post-card-excerpt {
+    color: var(--dm-text-med) !important;
+}
+
+body.dark-mode .post-badge {
+    background: var(--dm-surface-2) !important;
+    color: var(--dm-text-hi) !important;
+}
+
+body.dark-mode .blog-pagination a,
+body.dark-mode .blog-pagination span {
+    background: var(--dm-surface-1) !important;
+    border-color: var(--dm-border) !important;
+    color: var(--dm-text-med) !important;
+}
+
+body.dark-mode .post-footer {
+    border-top-color: var(--dm-border) !important;
+}
+
+/* Blog Filter Bar (Targeting inline styles) */
+body.dark-mode section[style*="background:#f8fafc"] {
+    background: var(--dm-surface-1) !important;
+    border-bottom-color: var(--dm-border) !important;
+}
+
+body.dark-mode input[style*="background:white"],
+body.dark-mode button[style*="background:white"] {
+    background: var(--dm-surface-2) !important;
+    border-color: var(--dm-border) !important;
+    color: var(--dm-text-hi) !important;
+}
+
+/* ─── ABOUT PAGE ─────────────────────────────────────────── */
+body.dark-mode .company-info,
+body.dark-mode .team-section {
+    background-color: var(--dm-bg) !important;
+}
+
+body.dark-mode .company-stats-card {
+    background-color: var(--dm-surface-1) !important;
+    border-color: var(--dm-border) !important;
+}
+
+body.dark-mode .stats-center {
+    border-top-color: var(--dm-border) !important;
+}
+
+body.dark-mode .service-card {
+    background-color: var(--dm-surface-1) !important;
+    border-color: var(--dm-border) !important;
+}
+
+body.dark-mode .service-card:hover {
+    border-color: var(--dm-accent) !important;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.5) !important;
+}
+
+body.dark-mode .service-icon {
+    background-color: var(--dm-surface-2) !important;
+}
+
+body.dark-mode .team-photo {
+    background-color: var(--dm-surface-2) !important;
+}
+
+/* Fix for any white/light containers in About or other pages */
+body.dark-mode section[style*="background:#f1f5f9"],
+body.dark-mode section[style*="background:#f8fafc"],
+body.dark-mode div[style*="background:white"] {
+    background-color: var(--dm-bg) !important;
+}
+
+/* ─── SCROLLBAR (subtle) ─────────────────────────────────── */
+body.dark-mode ::-webkit-scrollbar {
+    width: 8px;
+    background: var(--dm-bg);
+}
+body.dark-mode ::-webkit-scrollbar-thumb {
+    background: var(--dm-border);
+    border-radius: 4px;
+}
+body.dark-mode ::-webkit-scrollbar-thumb:hover {
+    background: #3c3c3c;
+}
+
+/* ─── SETTINGS PAGE OVERRIDES ───────────────────────────── */
+body.dark-mode .settings-nav,
+body.dark-mode .settings-content-wrapper {
+    background: var(--dm-surface-1) !important;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.4) !important;
+}
+
+body.dark-mode .settings-tab-item:hover, 
+body.dark-mode .settings-tab-item.active {
+    background: rgba(86, 171, 117, 0.08) !important;
+}
+
+body.dark-mode .form-control {
+    background: var(--dm-surface-2) !important;
+    border-color: var(--dm-border) !important;
+    color: var(--dm-text-hi) !important;
+}
+
+body.dark-mode .form-control:focus {
+    background: var(--dm-surface-2) !important;
+    border-color: var(--dm-accent) !important;
+}
+
+body.dark-mode .input-group-text {
+    background: var(--dm-surface-2) !important;
+    border-color: var(--dm-border) !important;
+    color: var(--dm-text-med) !important;
+}
+
+/* Ensure Download button text is readable */
+body.dark-mode .btn-save,
+body.dark-mode a.btn-save {
+    color: #ffffff !important;
+}
+
+body.dark-mode .data-export {
+    background: rgba(52, 152, 219, 0.08) !important;
+    border-color: rgba(52, 152, 219, 0.2) !important;
+}
+
+body.dark-mode .danger-zone {
+    background: rgba(231, 76, 60, 0.05) !important;
+    border-color: rgba(231, 76, 60, 0.2) !important;
+}
+
+body.dark-mode .app-integration-card,
+body.dark-mode .badge-card {
+    background: var(--dm-surface-2) !important;
+    border-color: var(--dm-border) !important;
+}
+
+body.dark-mode .p-card:not(.popular) {
+    background: var(--dm-surface-1) !important;
+    border-color: var(--dm-border) !important;
+}

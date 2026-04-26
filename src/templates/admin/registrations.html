@@ -1,0 +1,148 @@
+{% extends "admin/base.html" %}
+
+{% block title %}Registrations - Admin Panel{% endblock %}
+{% block page_title %}Class Bookings{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/admin/mgmt-shared.css', v='1.0') }}">
+{% endblock %}
+
+{% block admin_content %}
+<div class="mgmt-card">
+    <!-- Header -->
+    <div class="mgmt-header">
+        <div class="mgmt-title-area">
+            <div class="mgmt-icon green"><i class="fas fa-file-signature"></i></div>
+            <div>
+                <h4 class="mgmt-title">Class Bookings</h4>
+                <p class="mgmt-subtitle">
+                    <span class="live-dot"></span>
+                    {{ registrations.total if registrations else 0 }} Active Registrations
+                </p>
+            </div>
+        </div>
+        <div class="mgmt-actions">
+            <div class="search-wrapper">
+                <i class="fas fa-search search-icon"></i>
+                <input type="text" class="search-input" placeholder="Search bookings…" id="regSearch">
+            </div>
+            <button class="icon-btn" title="Export CSV"><i class="fas fa-download"></i></button>
+        </div>
+    </div>
+
+    <!-- Table -->
+    {% if registrations and registrations.items %}
+    <div class="table-responsive">
+        <table class="mgmt-table">
+            <thead>
+                <tr>
+                    <th class="th-first">Member</th>
+                    <th>Program</th>
+                    <th>Schedule</th>
+                    <th>Registered</th>
+                    <th class="th-last">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for reg in registrations.items %}
+                <tr>
+                    <td class="td-first">
+                        <div class="user-cell">
+                            <div class="user-ava">
+                                <div class="ava-placeholder">{{ reg.full_name[0] if reg.full_name else '?' }}</div>
+                            </div>
+                            <div>
+                                <span class="user-name">{{ reg.full_name }}</span>
+                                <span class="user-email"><i class="fas fa-phone-alt me-1"></i>{{ reg.phone_number }}</span>
+                            </div>
+                        </div>
+                    </td>
+                    <td>
+                        {% set prog = reg.program|lower %}
+                        {% if 'yoga' in prog %}
+                            <span class="tag tag-purple"><i class="fas fa-spa"></i> {{ reg.program }}</span>
+                        {% elif 'fit' in prog %}
+                            <span class="tag tag-blue"><i class="fas fa-dumbbell"></i> {{ reg.program }}</span>
+                        {% elif 'cross' in prog %}
+                            <span class="tag tag-amber"><i class="fas fa-fire"></i> {{ reg.program }}</span>
+                        {% elif 'box' in prog %}
+                            <span class="tag tag-red"><i class="fas fa-hand-rock"></i> {{ reg.program }}</span>
+                        {% elif 'swim' in prog %}
+                            <span class="tag tag-blue"><i class="fas fa-swimming-pool"></i> {{ reg.program }}</span>
+                        {% elif 'pilat' in prog or 'zumba' in prog %}
+                            <span class="tag tag-pink"><i class="fas fa-music"></i> {{ reg.program }}</span>
+                        {% else %}
+                            <span class="tag tag-zinc"><i class="fas fa-star"></i> {{ reg.program }}</span>
+                        {% endif %}
+                    </td>
+                    <td>
+                        {% if reg.preferred_time %}
+                            <span class="tag tag-zinc"><i class="fas fa-clock"></i> {{ reg.preferred_time }}</span>
+                        {% else %}
+                            <span class="cell-muted">Flexible</span>
+                        {% endif %}
+                    </td>
+                    <td>
+                        <div>
+                            <span class="cell-text">{{ reg.created_at.strftime('%Y-%m-%d') }}</span>
+                            <span class="user-email">{{ reg.created_at.strftime('%H:%M') }}</span>
+                        </div>
+                    </td>
+                    <td class="td-last">
+                        <div class="action-group">
+                            <form method="POST" action="{{ url_for('admin.delete_registration', reg_id=reg.id) }}" class="d-inline">
+                                <button type="submit" class="act-btn danger" title="Delete" onclick="return confirm('Delete this registration?')">
+                                    <i class="fas fa-trash"></i>
+                                </button>
+                            </form>
+                        </div>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Pagination -->
+    {% if registrations.pages > 1 %}
+    <div class="mgmt-footer">
+        <nav>
+            <ul class="mgmt-pagination">
+                {% if registrations.has_prev %}
+                    <li><a class="page-btn" href="{{ url_for('admin.registrations', page=registrations.prev_num) }}"><i class="fas fa-chevron-left"></i></a></li>
+                {% endif %}
+                {% for page_num in registrations.iter_pages() %}
+                    {% if page_num %}
+                        <li><a class="page-btn {% if page_num == registrations.page %}active{% endif %}" href="{{ url_for('admin.registrations', page=page_num) }}">{{ page_num }}</a></li>
+                    {% else %}
+                        <li><span class="page-btn disabled">…</span></li>
+                    {% endif %}
+                {% endfor %}
+                {% if registrations.has_next %}
+                    <li><a class="page-btn" href="{{ url_for('admin.registrations', page=registrations.next_num) }}"><i class="fas fa-chevron-right"></i></a></li>
+                {% endif %}
+            </ul>
+        </nav>
+    </div>
+    {% endif %}
+
+    {% else %}
+    <div class="empty-state">
+        <div class="empty-icon"><i class="fas fa-calendar-times"></i></div>
+        <h5>No Registrations Yet</h5>
+        <p>Members haven't signed up for any classes yet.</p>
+    </div>
+    {% endif %}
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+    document.getElementById('regSearch').addEventListener('keyup', function() {
+        const val = this.value.toLowerCase();
+        document.querySelectorAll('.mgmt-table tbody tr').forEach(row => {
+            row.style.display = row.textContent.toLowerCase().includes(val) ? '' : 'none';
+        });
+    });
+</script>
+{% endblock %}

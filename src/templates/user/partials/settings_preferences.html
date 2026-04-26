@@ -1,0 +1,59 @@
+<!-- PREFERENCES SECTION -->
+<div id="preferences" class="settings-section">
+    <h2 class="section-title"><i class="fas fa-sliders-h"></i> App Preferences</h2>
+    <p class="text-muted mb-4">Customize your experience on the platform.</p>
+    
+    <div class="form-group">
+        {{ form.language.label(class="form-label") }}
+        <div class="input-group">
+            <span class="input-group-text"><i class="fas fa-globe"></i></span>
+            {{ form.language(class="form-control form-select") }}
+        </div>
+    </div>
+
+    <h3 class="section-title mt-5" style="font-size: 1.2rem;"><i class="fas fa-robot"></i> Smart Features</h3>
+    <div class="form-group">
+        {{ form.ai_coach_personality.label(class="form-label") }}
+        <div class="input-group">
+            <span class="input-group-text"><i class="fas fa-brain"></i></span>
+            {{ form.ai_coach_personality(class="form-control form-select") }}
+        </div>
+        <small class="text-muted mt-2 d-block">Choose how your AI assistant talks to you during workouts.</small>
+    </div>
+
+    <h3 class="section-title mt-5" style="font-size: 1.2rem;"><i class="fas fa-lock"></i> Privacy & Notifications</h3>
+
+    <div class="row">
+        <div class="col-md-6">
+            <div class="form-group">
+                {{ form.weekly_digest.label(class="form-label") }}
+                <div class="input-group">
+                    <span class="input-group-text"><i class="fas fa-chart-line"></i></span>
+                    {{ form.weekly_digest(class="form-control form-select") }}
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="form-group">
+                {{ form.email_notifications.label(class="form-label") }}
+                <div class="input-group">
+                    <span class="input-group-text"><i class="fas fa-bell"></i></span>
+                    {{ form.email_notifications(class="form-control form-select") }}
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="form-group">
+        {{ form.dark_mode.label(class="form-label") }}
+        <div class="input-group">
+            <span class="input-group-text"><i class="fas fa-moon"></i></span>
+            {{ form.dark_mode(class="form-control form-select") }}
+        </div>
+    </div>
+    
+    <hr class="my-4 opacity-10">
+    <button type="submit" name="submit" class="btn-save">
+        <i class="fas fa-save"></i> Save Preferences
+    </button>
+</div>

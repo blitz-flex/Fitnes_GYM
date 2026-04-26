@@ -1,0 +1,48 @@
+{% extends "admin/base.html" %}
+
+{% block title %}Analytics - Admin Panel{% endblock %}
+{% block page_title %}Advanced Analytics{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/admin/statistics.css', v='6.1') }}">
+{% endblock %}
+
+{% block admin_content %}
+<!-- Date Filter Bar -->
+<div class="filter-bar">
+    <div class="d-flex align-items-center gap-3">
+        <div class="header-icon-box">
+            <i class="fas fa-chart-line"></i>
+        </div>
+        <div>
+            <h4 class="fw-bold text-white mb-0">Analytics Overview</h4>
+            <p class="text-zinc-400 small mb-0">Real-time gym performance metrics</p>
+        </div>
+    </div>
+    <div class="date-filter-group">
+        <button class="date-btn {% if stats.current_range == 7 %}active{% endif %}" data-range="7">Last 7 Days</button>
+        <button class="date-btn {% if stats.current_range == 30 %}active{% endif %}" data-range="30">Last 30 Days</button>
+        <button class="date-btn {% if stats.current_range == 90 %}active{% endif %}" data-range="90">Quarter</button>
+    </div>
+</div>
+
+{% include 'admin/partials/stats_kpis.html' %}
+{% include 'admin/partials/stats_charts_row.html' %}
+{% include 'admin/partials/stats_demographics_row.html' %}
+
+{% endblock %}
+
+{% block extra_js %}
+<script src="{{ url_for('static', filename='js/admin/statistics.js') }}"></script>
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+    initStatisticsCharts({
+        currentRange: {{ stats.current_range }},
+        chartData: {{ stats.chart_data | tojson }},
+        programLabels: {{ stats.program_labels | tojson }},
+        programData: {{ stats.program_data | tojson }},
+        baseUrl: "{{ url_for('admin.statistics') }}"
+    });
+});
+</script>
+{% endblock %}

@@ -1,0 +1,16 @@
+{% extends "partials/base.html" %}
+{% block title %}About Us{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/main/about.css', v='2.0') }}">
+{% endblock %}
+
+{% block content %}
+<main>
+    {% include 'main/partials/about_hero.html' %}
+    {% include 'main/partials/about_info.html' %}
+    {% include 'main/partials/about_services.html' %}
+    {% include 'main/partials/about_team.html' %}
+    {% include 'main/partials/about_cta.html' %}
+</main>
+{% endblock %}

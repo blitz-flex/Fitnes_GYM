@@ -1,0 +1,61 @@
+<!-- STEP 2: Personal Info -->
+<div class="step" id="step-2">
+    <div class="form-row">
+        <div class="form-group">
+            <label class="form-label"><i class="fas fa-calendar"></i> Birthdate <span class="required-mark">*</span></label>
+            <div class="input-wrapper">
+                {{ form.birthdate(class="form-control" + (" is-invalid" if form.birthdate.errors else "")) }}
+                <i class="input-icon fas fa-calendar"></i>
+            </div>
+            {% for error in form.birthdate.errors %}<div class="invalid-feedback">{{ error }}</div>{% endfor %}
+        </div>
+        <div class="form-group">
+            <label class="form-label"><i class="fas fa-venus-mars"></i> Gender <span class="required-mark">*</span></label>
+            <div class="input-wrapper">
+                {{ form.gender(class="form-select" + (" is-invalid" if form.gender.errors else "")) }}
+            </div>
+            {% for error in form.gender.errors %}<div class="invalid-feedback">{{ error }}</div>{% endfor %}
+        </div>
+    </div>
+
+    <div class="fitness-grid">
+        <div class="form-group">
+            <label class="form-label"><i class="fas fa-weight"></i> Weight (kg) <span class="required-mark">*</span></label>
+            <div class="input-wrapper">
+                {{ form.weight(class="form-control" + (" is-invalid" if form.weight.errors else ""), placeholder="e.g. 75") }}
+                <i class="input-icon fas fa-weight"></i>
+            </div>
+            {% for error in form.weight.errors %}<div class="invalid-feedback">{{ error }}</div>{% endfor %}
+        </div>
+        <div class="form-group">
+            <label class="form-label"><i class="fas fa-ruler-vertical"></i> Height (cm) <span class="required-mark">*</span></label>
+            <div class="input-wrapper">
+                {{ form.height(class="form-control" + (" is-invalid" if form.height.errors else ""), placeholder="e.g. 175") }}
+                <i class="input-icon fas fa-ruler-vertical"></i>
+            </div>
+            {% for error in form.height.errors %}<div class="invalid-feedback">{{ error }}</div>{% endfor %}
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label class="form-label"><i class="fas fa-image"></i> Profile Photo (optional)</label>
+        <div class="file-upload-area" id="fileUploadArea">
+            {{ form.profile_image(class="file-input", id="profile_image", accept="image/*") }}
+            <div class="file-upload-icon"><i class="fas fa-cloud-upload-alt"></i></div>
+            <div class="file-upload-text"><strong>Click or drag & drop</strong><br>PNG, JPG (Max 5MB)</div>
+        </div>
+        <div class="file-preview" id="filePreview">
+            <img src="" alt="Preview" class="preview-image" id="previewImage">
+            <div class="preview-info">
+                <div class="preview-name" id="previewName"></div>
+                <div class="preview-size" id="previewSize"></div>
+            </div>
+            <button type="button" class="preview-remove" onclick="removeFile()"><i class="fas fa-times"></i></button>
+        </div>
+    </div>
+
+    <div class="step-nav">
+        <button type="button" class="btn-back" onclick="goToStep(2, 1)"><i class="fas fa-arrow-left me-2"></i> Back</button>
+        <button type="button" class="btn-next" onclick="goToStep(2, 3)">Continue <i class="fas fa-arrow-right ms-2"></i></button>
+    </div>
+</div>

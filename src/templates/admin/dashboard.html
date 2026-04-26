@@ -1,0 +1,56 @@
+{% extends "admin/base.html" %}
+
+{% block title %}Dashboard - Admin Panel{% endblock %}
+{% block page_title %}Control Center{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/admin/dashboard.css') }}">
+{% endblock %}
+
+{% block admin_content %}
+
+<!-- Welcome + Actions Bar -->
+<div class="welcome-bar mb-4">
+    <div class="d-flex align-items-center gap-3">
+        <div class="welcome-icon-box">
+            <i class="fas fa-tachometer-alt"></i>
+        </div>
+        <div>
+            <h4 class="fw-bold text-white mb-0">Welcome back, Admin! 👋</h4>
+            <p class="text-zinc-400 small mb-0">Here's what's happening with your gym today.</p>
+        </div>
+    </div>
+    <div class="quick-actions">
+        <a href="{{ url_for('admin.create_post') }}" class="quick-btn primary">
+            <i class="fas fa-plus"></i> New Post
+        </a>
+        <a href="{{ url_for('admin.users') }}" class="quick-btn ghost">
+            <i class="fas fa-users"></i> Manage Users
+        </a>
+        <button class="quick-btn ghost" onclick="location.reload()">
+            <i class="fas fa-sync-alt"></i> Refresh
+        </button>
+    </div>
+</div>
+
+{% include 'admin/partials/dashboard_stats.html' %}
+{% include 'admin/partials/dashboard_main_grid.html' %}
+{% include 'admin/partials/dashboard_secondary_grid.html' %}
+{% include 'admin/partials/dashboard_bottom_row.html' %}
+
+{% endblock %}
+
+{% block extra_js %}
+<script src="{{ url_for('static', filename='js/admin/dashboard.js') }}"></script>
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+    initDashboardCharts({
+        totalUsers: parseInt('{{ stats.total_users or 0 }}'),
+        planLabels: [{% for plan, cnt in stats.plan_counts %}"{{ (plan or 'free')|capitalize }}"{% if not loop.last %},{% endif %}{% endfor %}],
+        planData: [{% for plan, cnt in stats.plan_counts %}{{ cnt }}{% if not loop.last %},{% endif %}{% endfor %}],
+        maleCount: {{ stats.male_count or 0 }},
+        femaleCount: {{ stats.female_count or 0 }}
+    });
+});
+</script>
+{% endblock %}

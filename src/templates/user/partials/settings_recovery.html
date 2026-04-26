@@ -1,0 +1,35 @@
+<!-- RECOVERY SECTION -->
+<div id="recovery" class="settings-section">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <div>
+            <h2 class="section-title"><i class="fas fa-hand-holding-heart"></i> Recovery & Soreness</h2>
+            <p class="text-muted">Tap a muscle to set soreness intensity. We'll adjust your AI coach advice.</p>
+        </div>
+        <button type="button" onclick="clearSoreness()" class="btn btn-sm btn-outline-danger rounded-10">Clear All</button>
+    </div>
+
+    <div class="muscle-grid">
+        {% for muscle in ['Chest', 'Back', 'Shoulders', 'Biceps', 'Triceps', 'Quads', 'Hamstrings', 'Glutes', 'Abs', 'Calves'] %}
+            <div class="muscle-tag" onclick="toggleMuscle(this, '{{ muscle }}')" data-muscle="{{ muscle }}" data-intensity="none">
+                <i class="fas fa-dumbbell"></i>
+                <span class="fw-bold small">{{ muscle }}</span>
+                <div class="intensity-dots">
+                    <div class="dot"></div><div class="dot"></div><div class="dot"></div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+
+    <div id="recovery-plan" class="recovery-plan-box" style="display: none;">
+        <h4 class="fw-black text-dark"><i class="fas fa-notes-medical"></i> Personalized Recovery Plan</h4>
+        <div id="recovery-content" class="mt-3 text-secondary line-height-relaxed">
+            <!-- Dynamic Content -->
+        </div>
+    </div>
+
+    {{ form.sore_muscles(id="sore-muscles-input", type="hidden") }}
+    
+    <button type="submit" name="submit" class="btn-save mt-4">
+        <i class="fas fa-save"></i> Save Settings
+    </button>
+</div>

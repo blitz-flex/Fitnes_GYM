@@ -1,0 +1,62 @@
+{% extends "partials/base.html" %}
+
+{% block title %}Account Settings - GYM{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/user/profile.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/exercise/style.css', v='2.1') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/user/settings.css') }}">
+
+{% endblock %}
+
+{% block content %}
+<div class="settings-container">
+    <div class="settings-layout">
+        <!-- Sidebar Navigation -->
+        <nav class="settings-nav">
+            <h3 class="fw-bold mb-4 px-3 text-dark fs-5">Settings</h3>
+            <a class="settings-tab-item active" onclick="switchTab('fitness', this)" id="tab-fitness">
+                <i class="fas fa-dumbbell"></i> Fitness Profile
+            </a>
+            <a class="settings-tab-item" onclick="switchTab('preferences', this)" id="tab-preferences">
+                <i class="fas fa-sliders-h"></i> Preferences
+            </a>
+            <a class="settings-tab-item" onclick="switchTab('recovery', this)" id="tab-recovery">
+                <i class="fas fa-hand-holding-heart"></i> Recovery
+            </a>
+            <a class="settings-tab-item" onclick="switchTab('apps', this)" id="tab-apps">
+                <i class="fas fa-plug"></i> Connected Apps
+            </a>
+            <a class="settings-tab-item" onclick="switchTab('subscription', this)" id="tab-subscription">
+                <i class="fas fa-credit-card"></i> Subscription
+            </a>
+            <a class="settings-tab-item" onclick="switchTab('achievements', this)" id="tab-achievements">
+                <i class="fas fa-medal"></i> Achievements
+            </a>
+            <a class="settings-tab-item" onclick="switchTab('security', this)" id="tab-security">
+                <i class="fas fa-shield-alt"></i> Security
+            </a>
+        </nav>
+
+        <!-- Content Area -->
+        <div class="settings-content-wrapper">
+            <form method="POST" action="{{ url_for('user.settings') }}" class="settings-form">
+                {{ form.csrf_token }}
+                
+                {% include 'user/partials/settings_fitness.html' %}
+                {% include 'user/partials/settings_preferences.html' %}
+                {% include 'user/partials/settings_recovery.html' %}
+            </form>
+
+            {% include 'user/partials/settings_apps.html' %}
+            {% include 'user/partials/settings_subscription.html' %}
+            {% include 'user/partials/settings_achievements.html' %}
+            {% include 'user/partials/settings_security.html' %}
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script src="{{ url_for('static', filename='js/user/settings.js') }}"></script>
+{% endblock %}

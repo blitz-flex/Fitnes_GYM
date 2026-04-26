@@ -1,0 +1,22 @@
+{% extends "partials/base.html" %}
+{% block title %}Fitness Club | Transform Your Life{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/main/index.css', v='2.0') }}">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+{% endblock %}
+
+{% block content %}
+{% include 'main/partials/index_hero.html' %}
+{% include 'main/partials/index_features.html' %}
+{% include 'main/partials/index_programs.html' %}
+{% include 'main/partials/index_pricing.html' %}
+{% include 'main/partials/index_testimonials.html' %}
+{% include 'main/partials/index_cta.html' %}
+{% include 'main/partials/index_faq.html' %}
+{% include 'main/partials/index_modal.html' %}
+{% endblock %}
+
+{% block extra_js %}
+<script src="{{ url_for('static', filename='js/main/index.js') }}"></script>
+{% endblock %}

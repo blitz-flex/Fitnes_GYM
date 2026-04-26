@@ -1,0 +1,412 @@
+/* Clean Admin Base Styles */
+
+body.dark-mode { 
+    background-color: #09090b !important; /* Premium Zinc Background */
+}
+        
+.admin-wrapper {
+    display: flex;
+    min-height: 100vh;
+    background-color: #09090b;
+    padding-top: 20px; /* Reduced gap from navbar to content */
+}
+
+/* Sidebar Styling */
+.admin-sidebar {
+    width: 260px;
+    background-color: #09090b;
+    border-right: 1px solid #1c1c1f;
+    position: fixed;
+    top: 75px; /* Positioned below the navbar */
+    bottom: 0;
+    z-index: 100;
+    transition: all 0.3s ease;
+    padding: 20px 0;
+}
+
+.sidebar-nav {
+    display: flex;
+    flex-direction: column;
+    padding: 0 15px;
+    gap: 6px;
+}
+
+.sidebar-link {
+    display: flex;
+    align-items: center;
+    padding: 14px 20px;
+    color: #a1a1aa !important;
+    text-decoration: none;
+    border-radius: 12px;
+    font-weight: 500;
+    transition: all 0.2s ease;
+    font-size: 0.95rem;
+}
+
+.sidebar-link i {
+    width: 24px;
+    margin-right: 12px;
+    font-size: 1.1rem;
+    text-align: center;
+}
+
+.sidebar-link:hover {
+    color: #ffffff !important;
+    background-color: rgba(255, 255, 255, 0.05);
+}
+
+.sidebar-link.active {
+    background-color: #10b981 !important;
+    color: #ffffff !important;
+    box-shadow: 0 4px 12px rgba(16, 185, 129, 0.2);
+}
+
+/* Main Content Styling */
+.admin-main {
+    flex: 1;
+    margin-left: 260px; /* Same as sidebar width */
+    background-color: #0c0c0e; /* Slightly lighter than pitch black */
+    min-height: calc(100vh - 80px);
+    display: flex;
+    flex-direction: column;
+}
+
+.admin-content-container {
+    padding: 25px 40px; /* Reduced vertical padding */
+    max-width: 1400px;
+    flex-grow: 1;
+}
+
+        /* Premium Zinc Cards */
+        .card { 
+            background: rgba(28, 28, 31, 0.6) !important; 
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.05) !important; 
+            box-shadow: 0 20px 40px rgba(0,0,0,0.4) !important; 
+            color: #f4f4f5 !important; 
+            border-radius: 24px !important; 
+            overflow: hidden;
+        }
+        
+/* Dashboard Specific Refinements */
+.premium-welcome-card {
+    background: linear-gradient(135deg, #1c1c1f 0%, #09090b 100%) !important;
+    border: 1px solid #27272a !important;
+}
+
+.welcome-icon-box {
+    width: 52px;
+    height: 52px;
+    background-color: rgba(16, 185, 129, 0.1);
+    color: #10b981;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    border: 1px solid rgba(16, 185, 129, 0.2);
+}
+
+.btn-green-action {
+    background-color: #10b981;
+    color: #000 !important;
+    font-weight: 700;
+    border: none;
+    transition: all 0.2s ease;
+}
+
+.btn-green-action:hover {
+    background-color: #059669;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
+}
+
+.btn-white-action {
+    background-color: #ffffff;
+    color: #000 !important;
+    font-weight: 700;
+    border: none;
+    transition: all 0.2s ease;
+}
+
+.btn-white-action:hover {
+    background-color: #f4f4f5;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(255, 255, 255, 0.2);
+}
+
+/* KPI Cards */
+.kpi-card {
+    background-color: #1c1c1f !important;
+    border: 1px solid #27272a !important;
+    transition: all 0.3s ease;
+}
+
+.kpi-card:hover {
+    transform: translateY(-5px);
+    border-color: #3f3f46 !important;
+}
+
+.kpi-icon-box {
+    width: 64px;
+    height: 64px;
+    border-radius: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.8rem;
+}
+
+.bg-purple-soft { background-color: rgba(139, 92, 246, 0.1); color: #8b5cf6; }
+.bg-green-soft { background-color: rgba(16, 185, 129, 0.1); color: #10b981; }
+.bg-teal-soft { background-color: rgba(20, 184, 166, 0.1); color: #14b8a6; }
+
+.kpi-label {
+    color: #a1a1aa;
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+}
+
+.kpi-value {
+    color: #ffffff;
+    font-weight: 800;
+    font-size: 2rem;
+}
+
+/* Activity Feed */
+.activity-card {
+    background-color: #1c1c1f !important;
+    border: 1px solid #27272a !important;
+}
+
+.activity-icon-sm {
+    width: 40px;
+    height: 40px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.border-zinc-light {
+    border-color: #27272a !important;
+}
+
+.chart-card {
+    background-color: #1c1c1f !important;
+    border: 1px solid #27272a !important;
+}
+
+.btn-zinc-light {
+    background-color: #27272a;
+    border-color: #3f3f46;
+    color: #ffffff;
+}
+        
+        /* Action Buttons */
+        .action-btn {
+            width: 36px;
+            height: 36px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background: #1c1c1f;
+            border: 1px solid #27272a;
+            border-radius: 10px;
+            color: #a1a1aa !important;
+            transition: all 0.2s ease;
+        }
+        .action-btn:hover {
+            background: #27272a;
+            color: #ffffff !important;
+            transform: translateY(-2px);
+            border-color: #3f3f46;
+        }
+        .action-btn.text-danger:hover {
+            background: rgba(239, 68, 68, 0.1);
+            color: #ef4444 !important;
+            border-color: rgba(239, 68, 68, 0.2);
+        }
+
+        .btn-primary { background: #10b981; border: none; font-weight: 600; }
+        .btn-primary:hover { background: #059669; }
+        
+        .form-label { color: #f4f4f5 !important; font-weight: 600; margin-bottom: 8px; }
+        .form-control { background-color: #09090b !important; border-color: #27272a !important; color: #ffffff !important; border-radius: 12px; padding: 12px 15px; }
+        .form-control:focus { background-color: #09090b !important; border-color: #10b981 !important; color: #ffffff !important; box-shadow: 0 0 0 2px rgba(16, 185, 129, 0.1) !important; }
+        
+        .badge { font-weight: 600; padding: 6px 12px; border-radius: 6px; }
+        .bg-success { background-color: rgba(16, 185, 129, 0.1) !important; color: #10b981 !important; border: 1px solid rgba(16, 185, 129, 0.2); }
+        .bg-primary { background-color: rgba(59, 130, 246, 0.1) !important; color: #3b82f6 !important; border: 1px solid rgba(59, 130, 246, 0.2); }
+        .bg-danger { background-color: rgba(239, 68, 68, 0.1) !important; color: #ef4444 !important; border: 1px solid rgba(239, 68, 68, 0.2); }
+        .bg-warning { background-color: rgba(245, 158, 11, 0.1) !important; color: #f59e0b !important; border: 1px solid rgba(245, 158, 11, 0.2); }
+        
+        .avatar-sm { width: 38px; height: 38px; border-radius: 10px; object-fit: cover; }
+        .avatar-icon-sm { width: 38px; height: 38px; border-radius: 10px; background: #1c1c1f; display: flex; align-items: center; justify-content: center; color: #71717a; }
+
+        /* Mobile Responsiveness Improvements */
+        @media (max-width: 991px) {
+            .admin-sidebar {
+                left: -260px;
+                transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+                top: 0;
+                height: 100vh;
+                padding-top: 80px;
+            }
+            
+            .admin-sidebar.active {
+                left: 0;
+            }
+            
+            .admin-main {
+                margin-left: 0 !important;
+                padding: 20px !important;
+            }
+            
+            .admin-wrapper {
+                margin-top: 60px;
+            }
+            
+            /* Sidebar Toggle for Mobile */
+            .sidebar-toggle-btn {
+                display: block !important;
+                position: fixed;
+                bottom: 20px;
+                right: 20px;
+                width: 50px;
+                height: 50px;
+                background: #ffffff;
+                color: #000;
+                border-radius: 50%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                z-index: 1001;
+                box-shadow: 0 4px 20px rgba(0,0,0,0.5);
+                border: none;
+                font-size: 1.2rem;
+            }
+
+            .sidebar-overlay {
+                display: none;
+                position: fixed;
+                top: 0;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                background: rgba(0,0,0,0.7);
+                z-index: 99;
+                backdrop-filter: blur(4px);
+            }
+
+            .sidebar-overlay.active {
+                display: block;
+            }
+        }
+
+        .sidebar-toggle-btn { display: none; }
+
+        .text-muted { color: #a1a1aa !important; }
+        .bg-zinc { background-color: #09090b !important; }
+        .bg-zinc-card { background-color: #1c1c1f !important; }
+        .text-zinc { color: #f4f4f5 !important; }
+        .bg-light { background-color: #18181b !important; }
+        .border { border-color: #27272a !important; }
+
+        /* Search Box Styles */
+        .search-box {
+            max-width: 300px;
+        }
+        
+        .search-box .input-group-text {
+            border-top-left-radius: 12px;
+            border-bottom-left-radius: 12px;
+            padding-left: 15px;
+        }
+        
+        .search-box .form-control {
+            border-top-right-radius: 12px !important;
+            border-bottom-right-radius: 12px !important;
+            font-size: 0.85rem;
+            border-left: none !important;
+        }
+        
+        .search-box:focus-within .input-group-text,
+        .search-box:focus-within .form-control {
+            border-color: rgba(255, 255, 255, 0.3) !important;
+            background: rgba(255, 255, 255, 0.05) !important;
+        }
+
+        /* Premium Table Aesthetics */
+        .table-premium {
+            background: transparent !important;
+            border-collapse: separate;
+            border-spacing: 0 8px;
+            margin-top: -8px;
+        }
+
+        .table-premium th {
+            background-color: transparent !important;
+            color: #a1a1aa !important;
+            font-weight: 700 !important;
+            text-transform: uppercase !important;
+            font-size: 0.7rem !important;
+            letter-spacing: 1.5px !important;
+            padding: 15px 25px !important;
+            border: none !important;
+        }
+
+        .table-premium td {
+            padding: 20px 25px !important;
+            color: #f4f4f5 !important;
+            border-top: 1px solid rgba(255, 255, 255, 0.03) !important;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.03) !important;
+            vertical-align: middle !important;
+            background: rgba(255, 255, 255, 0.02) !important;
+            transition: all 0.3s ease;
+        }
+
+        .table-premium td:first-child {
+            border-left: 1px solid rgba(255, 255, 255, 0.03) !important;
+            border-top-left-radius: 16px;
+            border-bottom-left-radius: 16px;
+        }
+
+        .table-premium td:last-child {
+            border-right: 1px solid rgba(255, 255, 255, 0.03) !important;
+            border-top-right-radius: 16px;
+            border-bottom-right-radius: 16px;
+        }
+
+        .table-premium tr {
+            transition: all 0.3s ease;
+        }
+
+        .table-premium tr:hover td {
+            background-color: rgba(255, 255, 255, 0.03) !important;
+        }
+
+        .table-premium {
+            background-color: #1c1c1f !important;
+            border-color: #27272a !important;
+        }
+
+        .action-btn-zinc {
+            width: 32px;
+            height: 32px;
+            border-radius: 8px;
+            background: #27272a;
+            border: 1px solid #3f3f46;
+            color: #a1a1aa !important;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s ease;
+        }
+
+        .action-btn-zinc:hover {
+            background: #3f3f46;
+            color: #ffffff !important;
+            transform: translateY(-2px);
+        }

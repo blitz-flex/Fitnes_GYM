@@ -1,0 +1,84 @@
+<!-- SECURITY SECTION -->
+<div id="security" class="settings-section">
+    <form method="POST" action="{{ url_for('user.settings') }}" class="settings-form">
+        {{ security_form.csrf_token }}
+        <h2 class="section-title"><i class="fas fa-shield-alt"></i> Security & Privacy</h2>
+        <p class="text-muted mb-4">Manage your login credentials and account security.</p>
+        
+        <div class="form-group">
+            {{ security_form.email.label(class="form-label") }}
+            <div class="input-group">
+                <span class="input-group-text"><i class="fas fa-envelope"></i></span>
+                {{ security_form.email(class="form-control", placeholder="Email address") }}
+            </div>
+        </div>
+
+        <div class="form-group">
+            {{ security_form.current_password.label(class="form-label") }}
+            <div class="input-group">
+                <span class="input-group-text"><i class="fas fa-key"></i></span>
+                {{ security_form.current_password(class="form-control", placeholder="Current password") }}
+                <span class="input-group-text pointer" onclick="togglePassword(this)"><i class="fas fa-eye password-toggle"></i></span>
+            </div>
+            <small class="text-muted">Required to save any security changes.</small>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    {{ security_form.new_password.label(class="form-label") }}
+                    <div class="input-group">
+                        {{ security_form.new_password(class="form-control", placeholder="New password") }}
+                        <span class="input-group-text pointer" onclick="togglePassword(this)"><i class="fas fa-eye password-toggle"></i></span>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    {{ security_form.confirm_password.label(class="form-label") }}
+                    <div class="input-group">
+                        {{ security_form.confirm_password(class="form-control", placeholder="Confirm new password") }}
+                        <span class="input-group-text pointer" onclick="togglePassword(this)"><i class="fas fa-eye password-toggle"></i></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <button type="submit" name="submit_security" class="btn-save btn-security-save">
+            <i class="fas fa-check-circle"></i> Save Security Changes
+        </button>
+    </form>
+
+    <hr class="my-5 opacity-10">
+    
+    <!-- DATA EXPORT -->
+    <div class="data-export-box">
+        <h3 class="section-title export-heading"><i class="fas fa-file-download"></i> Export Your Data</h3>
+        <p class="text-muted mb-4">Download a copy of your fitness metrics, preferences, and account data in JSON format.</p>
+        <a href="{{ url_for('user.export_data') }}" class="btn-save btn-export-json" target="_blank">
+            <i class="fas fa-download"></i> Download JSON
+        </a>
+    </div>
+
+    <!-- DANGER ZONE -->
+    <div class="danger-zone-box">
+        <h3 class="danger-heading">
+            <i class="fas fa-exclamation-triangle"></i> Danger Zone
+        </h3>
+        <p class="text-muted mb-4">Once you delete your account, there is no going back. Please be certain.</p>
+        
+        <form method="POST" action="{{ url_for('user.settings') }}">
+            {{ delete_form.csrf_token }}
+            <div class="form-group">
+                {{ delete_form.password.label(class="form-label") }}
+                <div class="input-group">
+                    {{ delete_form.password(class="form-control", placeholder="Password confirmation") }}
+                    <span class="input-group-text pointer" onclick="togglePassword(this)"><i class="fas fa-eye password-toggle"></i></span>
+                </div>
+            </div>
+            <button type="submit" name="submit_delete" class="btn-save btn-danger-delete" onclick="return confirm('Are you absolutely sure you want to permanently delete your account? This action is irreversible.');">
+                <i class="fas fa-trash-alt"></i> Delete My Account
+            </button>
+        </form>
+    </div>
+</div>

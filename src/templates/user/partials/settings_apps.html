@@ -1,0 +1,77 @@
+<!-- CONNECTED APPS SECTION -->
+<div id="apps" class="settings-section">
+    <h2 class="section-title"><i class="fas fa-plug"></i> Connected Apps & Devices</h2>
+    <p class="text-muted mb-4">Sync your workouts, music, and health data automatically.</p>
+
+    <div class="app-integration-card">
+        <div class="d-flex align-items-center gap-3">
+            <div class="app-icon spotify">
+                <i class="fab fa-spotify"></i>
+            </div>
+            <div>
+                <h4 class="m-0 fw-bold">Spotify</h4>
+                <p class="m-0 text-muted small">Control your workout playlists directly.</p>
+            </div>
+        </div>
+        {% if current_user.spotify_connected %}
+            <form class="integration-form" method="POST" action="{{ url_for('user.toggle_integration', integration='spotify') }}">
+                <input type="hidden" name="csrf_token" value="{{ form.csrf_token._value() }}">
+                <button type="submit" class="btn toggle-btn btn-outline-danger integration-btn">
+                    Disconnect
+                </button>
+            </form>
+        {% else %}
+            <a href="{{ url_for('user.authorize_app', app_name='spotify') }}" class="btn btn-primary integration-btn">
+                Connect
+            </a>
+        {% endif %}
+    </div>
+
+    <div class="app-integration-card">
+        <div class="d-flex align-items-center gap-3">
+            <div class="app-icon health">
+                <i class="fas fa-heartbeat"></i>
+            </div>
+            <div>
+                <h4 class="m-0 fw-bold">Apple Health</h4>
+                <p class="m-0 text-muted small">Sync your daily steps and active calories.</p>
+            </div>
+        </div>
+        {% if current_user.apple_health_connected %}
+            <form class="integration-form" method="POST" action="{{ url_for('user.toggle_integration', integration='apple_health') }}">
+                <input type="hidden" name="csrf_token" value="{{ form.csrf_token._value() }}">
+                <button type="submit" class="btn toggle-btn btn-outline-danger integration-btn">
+                    Disconnect
+                </button>
+            </form>
+        {% else %}
+            <a href="{{ url_for('user.authorize_app', app_name='apple_health') }}" class="btn btn-primary integration-btn">
+                Connect
+            </a>
+        {% endif %}
+    </div>
+
+    <div class="app-integration-card">
+        <div class="d-flex align-items-center gap-3">
+            <div class="app-icon google">
+                <i class="fab fa-google"></i>
+            </div>
+            <div>
+                <h4 class="m-0 fw-bold">Google Fit</h4>
+                <p class="m-0 text-muted small">Import activities and heart rate data.</p>
+            </div>
+        </div>
+        {% if current_user.google_fit_connected %}
+            <form class="integration-form" method="POST" action="{{ url_for('user.toggle_integration', integration='google_fit') }}">
+                <input type="hidden" name="csrf_token" value="{{ form.csrf_token._value() }}">
+                <button type="submit" class="btn toggle-btn btn-outline-danger integration-btn">
+                    Disconnect
+                </button>
+            </form>
+        {% else %}
+            <a href="{{ url_for('user.authorize_app', app_name='google_fit') }}" class="btn btn-primary integration-btn">
+                Connect
+            </a>
+        {% endif %}
+    </div>
+</div>

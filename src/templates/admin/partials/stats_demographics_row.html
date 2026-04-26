@@ -1,0 +1,77 @@
+<!-- Secondary Grid: Distribution & Goals -->
+<div class="stats-secondary-grid">
+    <!-- Program Distribution -->
+    <div class="chart-card">
+        <div class="chart-header">
+            <div>
+                <h6 class="chart-title">Program Popularity</h6>
+                <p class="chart-subtitle">Class distribution</p>
+            </div>
+        </div>
+        <div class="chart-body">
+            <div class="doughnut-container">
+                <canvas id="programPieChart"></canvas>
+                <div class="doughnut-center">
+                    <span class="total-val">{{ stats.total_registrations }}</span>
+                    <span class="total-lbl">Bookings</span>
+                </div>
+            </div>
+            <div class="program-legend-grid mt-4">
+                {% for label in stats.program_labels %}
+                <div class="legend-item">
+                    <span class="legend-color"></span>
+                    <span class="legend-text">{{ label }}</span>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+
+    <!-- Key Performance Goals -->
+    <div class="chart-card">
+        <div class="chart-header">
+            <div>
+                <h6 class="chart-title">Monthly Objectives</h6>
+                <p class="chart-subtitle">Progress vs targets</p>
+            </div>
+        </div>
+        <div class="chart-body">
+            {% set member_pct = (stats.total_users / 200 * 100)|round|int %}
+            {% set revenue_pct = 65 %}
+            {% set blog_pct = (stats.total_blog_posts / 20 * 100)|round|int %}
+
+            <div class="goal-item">
+                <div class="goal-header">
+                    <span class="goal-name">New Member Growth</span>
+                    <span class="goal-pct color-blue">{{ member_pct }}%</span>
+                </div>
+                <div class="goal-track">
+                    <div class="goal-fill bg-gradient-blue" style="width: {{ [member_pct, 100]|min }}%;"></div>
+                </div>
+                <span class="goal-detail">{{ stats.total_users }} / 200 members</span>
+            </div>
+
+            <div class="goal-item">
+                <div class="goal-header">
+                    <span class="goal-name">Revenue Target</span>
+                    <span class="goal-pct color-green">{{ revenue_pct }}%</span>
+                </div>
+                <div class="goal-track">
+                    <div class="goal-fill bg-gradient-green" style="width: {{ revenue_pct }}%;"></div>
+                </div>
+                <span class="goal-detail">$12,450 / $20,000</span>
+            </div>
+
+            <div class="goal-item">
+                <div class="goal-header">
+                    <span class="goal-name">Content Plan</span>
+                    <span class="goal-pct color-amber">{{ blog_pct }}%</span>
+                </div>
+                <div class="goal-track">
+                    <div class="goal-fill bg-gradient-amber" style="width: {{ [blog_pct, 100]|min }}%;"></div>
+                </div>
+                <span class="goal-detail">{{ stats.total_blog_posts }} / 20 articles</span>
+            </div>
+        </div>
+    </div>
+</div>

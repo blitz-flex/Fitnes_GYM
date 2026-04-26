@@ -1,0 +1,90 @@
+<!-- KPI Cards -->
+<div class="kpi-grid">
+    <div class="kpi-card">
+        <div class="kpi-icon blue">
+            <i class="fas fa-users"></i>
+        </div>
+        <div class="kpi-body">
+            <span class="kpi-label">Active Members</span>
+            <div class="kpi-value-row">
+                <span class="kpi-value">{{ stats.total_users }}</span>
+                <span class="kpi-trend up"><i class="fas fa-arrow-up"></i> 12%</span>
+            </div>
+            <div class="kpi-sparkline">
+                <div class="spark-bar" style="height: 40%;"></div>
+                <div class="spark-bar" style="height: 60%;"></div>
+                <div class="spark-bar" style="height: 45%;"></div>
+                <div class="spark-bar" style="height: 70%;"></div>
+                <div class="spark-bar" style="height: 55%;"></div>
+                <div class="spark-bar" style="height: 80%;"></div>
+                <div class="spark-bar" style="height: 90%;"></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="kpi-card">
+        <div class="kpi-icon green">
+            <i class="fas fa-dollar-sign"></i>
+        </div>
+        <div class="kpi-body">
+            <span class="kpi-label">Monthly Revenue</span>
+            <div class="kpi-value-row">
+                <span class="kpi-value">$12,450</span>
+                <span class="kpi-trend up"><i class="fas fa-arrow-up"></i> 5.2%</span>
+            </div>
+            <div class="kpi-sparkline">
+                <div class="spark-bar green" style="height: 50%;"></div>
+                <div class="spark-bar green" style="height: 65%;"></div>
+                <div class="spark-bar green" style="height: 55%;"></div>
+                <div class="spark-bar green" style="height: 75%;"></div>
+                <div class="spark-bar green" style="height: 60%;"></div>
+                <div class="spark-bar green" style="height: 85%;"></div>
+                <div class="spark-bar green" style="height: 95%;"></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="kpi-card">
+        <div class="kpi-icon purple">
+            <i class="fas fa-calendar-check"></i>
+        </div>
+        <div class="kpi-body">
+            <span class="kpi-label">Selected Period Bookings</span>
+            <div class="kpi-value-row">
+                <span class="kpi-value">{{ stats.new_regs_range }}</span>
+                <span class="kpi-trend up"><i class="fas fa-arrow-up"></i> 8%</span>
+            </div>
+            <div class="kpi-sparkline">
+                <div class="spark-bar purple" style="height: 30%;"></div>
+                <div class="spark-bar purple" style="height: 50%;"></div>
+                <div class="spark-bar purple" style="height: 70%;"></div>
+                <div class="spark-bar purple" style="height: 40%;"></div>
+                <div class="spark-bar purple" style="height: 80%;"></div>
+                <div class="spark-bar purple" style="height: 60%;"></div>
+                <div class="spark-bar purple" style="height: 75%;"></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="kpi-card">
+        <div class="kpi-icon amber">
+            <i class="fas fa-user-plus"></i>
+        </div>
+        <div class="kpi-body">
+            <span class="kpi-label">New Sign-ups</span>
+            <div class="kpi-value-row">
+                <span class="kpi-value">{{ stats.total_registrations }}</span>
+                <span class="kpi-trend up"><i class="fas fa-arrow-up"></i> 18%</span>
+            </div>
+            <div class="kpi-sparkline">
+                <div class="spark-bar amber" style="height: 45%;"></div>
+                <div class="spark-bar amber" style="height: 55%;"></div>
+                <div class="spark-bar amber" style="height: 35%;"></div>
+                <div class="spark-bar amber" style="height: 65%;"></div>
+                <div class="spark-bar amber" style="height: 75%;"></div>
+                <div class="spark-bar amber" style="height: 60%;"></div>
+                <div class="spark-bar amber" style="height: 90%;"></div>
+            </div>
+        </div>
+    </div>
+</div>

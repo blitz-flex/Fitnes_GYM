@@ -1,0 +1,93 @@
+<!-- FITNESS PROFILE SECTION -->
+<div id="fitness" class="settings-section active">
+    <h2 class="section-title"><i class="fas fa-heartbeat"></i> Body Metrics & Goals</h2>
+    <p class="text-muted mb-4">Keep this up to date to get the best recommendations.</p>
+    
+    <div class="input-grid">
+        <div class="form-group">
+            {{ form.weight.label(class="form-label") }}
+            <div class="input-group">
+                <span class="input-group-text"><i class="fas fa-weight"></i></span>
+                {{ form.weight(class="form-control", placeholder="e.g. 75.5") }}
+            </div>
+        </div>
+        <div class="form-group">
+            {{ form.height.label(class="form-label") }}
+            <div class="input-group">
+                <span class="input-group-text"><i class="fas fa-ruler-vertical"></i></span>
+                {{ form.height(class="form-control", placeholder="e.g. 180") }}
+            </div>
+        </div>
+    </div>
+
+    <div class="input-grid">
+        <div class="form-group">
+            {{ form.target_weight.label(class="form-label") }}
+            <div class="input-group">
+                <span class="input-group-text"><i class="fas fa-bullseye"></i></span>
+                {{ form.target_weight(class="form-control", placeholder="e.g. 70") }}
+            </div>
+        </div>
+        <div class="form-group">
+            {{ form.age.label(class="form-label") }}
+            <div class="input-group">
+                <span class="input-group-text"><i class="fas fa-birthday-cake"></i></span>
+                {{ form.age(class="form-control", placeholder="Age") }}
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-6">
+            <div class="form-group">
+                {{ form.gender.label(class="form-label") }}
+                <div class="input-group">
+                    <span class="input-group-text"><i class="fas fa-venus-mars"></i></span>
+                    {{ form.gender(class="form-control form-select") }}
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="form-group">
+                {{ form.fitness_level.label(class="form-label") }}
+                <div class="input-group">
+                    <span class="input-group-text"><i class="fas fa-signal"></i></span>
+                    {{ form.fitness_level(class="form-control form-select") }}
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="form-group">
+        {{ form.fitness_goal.label(class="form-label") }}
+        <div class="input-group">
+            <span class="input-group-text"><i class="fas fa-trophy"></i></span>
+            {{ form.fitness_goal(class="form-control form-select") }}
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-8">
+            <div class="form-group">
+                {{ form.activity_level.label(class="form-label") }}
+                <div class="input-group">
+                    <span class="input-group-text"><i class="fas fa-running"></i></span>
+                    {{ form.activity_level(class="form-control form-select") }}
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="form-group">
+                {{ form.workout_frequency.label(class="form-label") }}
+                <div class="input-group">
+                    <span class="input-group-text"><i class="fas fa-calendar-check"></i></span>
+                    {{ form.workout_frequency(class="form-control", placeholder="Days/week") }}
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <button type="submit" name="submit" class="btn-save">
+        <i class="fas fa-save"></i> Save Fitness Profile
+    </button>
+</div>

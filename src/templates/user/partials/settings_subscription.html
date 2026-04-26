@@ -1,0 +1,103 @@
+<!-- SUBSCRIPTION SECTION -->
+<div id="subscription" class="settings-section">
+    <h2 class="section-title"><i class="fas fa-credit-card"></i> Subscription & Billing</h2>
+    
+    {% if current_user.subscription_plan != 'free' and current_user.subscription_end_date %}
+        <div class="active-subscription-card premium-membership">
+            <div class="d-flex justify-content-between align-items-start mb-4">
+                <div>
+                    <span class="sub-status-badge">Active Membership</span>
+                    <h3 class="plan-name-large">{{ current_user.subscription_plan.upper() }} PLAN</h3>
+                </div>
+                <div class="text-end">
+                    <p class="billing-label">Next Billing Date</p>
+                    <h4 class="fw-bold">{{ current_user.subscription_end_date.strftime('%B %d, %Y') }}</h4>
+                </div>
+            </div>
+
+            <div class="row g-4">
+                <div class="col-md-4">
+                    <div class="sub-info-box">
+                        <p class="sub-info-label">Status</p>
+                        <h5 class="status-active"><i class="fas fa-check-circle"></i> Active & Healthy</h5>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="sub-info-box">
+                        <p class="sub-info-label">Payment Method</p>
+                        <h5 class="fw-bold m-0"><i class="fab fa-cc-visa"></i> Visa •••• 4242</h5>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="sub-info-box">
+                        <p class="sub-info-label">Renewal</p>
+                        <h5 class="fw-bold m-0">Auto-renew ON</h5>
+                    </div>
+                </div>
+            </div>
+
+            <div class="sub-card-footer mt-4 pt-4">
+                <a href="#" class="btn btn-outline-light rounded-12 fw-bold px-4 py-2" onclick="alert('Billing management portal is under maintenance. Please try again later.'); return false;">Manage Billing</a>
+                
+                <form action="{{ url_for('user.cancel_subscription') }}" method="POST" onsubmit="return confirm('Are you sure you want to cancel your premium subscription?');" class="d-inline">
+                    <input type="hidden" name="csrf_token" value="{{ form.csrf_token._value() }}">
+                    <button type="submit" class="cancel-sub-btn">Cancel Subscription</button>
+                </form>
+            </div>
+        </div>
+    {% else %}
+        <p class="text-muted mb-4">Manage your membership and explore premium features.</p>
+        
+        <div class="pricing-grid">
+            <!-- Basic Plan -->
+            <div class="p-card">
+                <div class="p-header">
+                    <span class="trial-badge">7-DAY FREE TRIAL</span>
+                    <h3>Basic</h3>
+                    <div class="p-price">80₾<span>/mo</span></div>
+                </div>
+                <ul class="p-features">
+                    <li><i class="fas fa-check"></i> Gym Access (07:00 - 15:00)</li>
+                    <li><i class="fas fa-check"></i> Standard Workouts</li>
+                    <li><i class="fas fa-check"></i> Basic Progress Tracking</li>
+                    <li class="disabled"><i class="fas fa-times"></i> AI Coach Customization</li>
+                    <li class="disabled"><i class="fas fa-times"></i> Unlimited PT Sessions</li>
+                </ul>
+                <a href="{{ url_for('user.checkout', plan_name='basic') }}" class="btn btn-outline-secondary plan-choose-btn">Choose Basic</a>
+            </div>
+
+            <!-- Pro Plan (Popular) -->
+            <div class="p-card popular">
+                <div class="p-badge">Most Popular</div>
+                <div class="p-header">
+                    <h3>Pro</h3>
+                    <div class="p-price">120₾<span>/mo</span></div>
+                </div>
+                <ul class="p-features">
+                    <li><i class="fas fa-check"></i> 24/7 Priority Access</li>
+                    <li><i class="fas fa-check"></i> AI Coach Customization</li>
+                    <li><i class="fas fa-check"></i> Advanced Analytics</li>
+                    <li><i class="fas fa-check"></i> Unlimited Data Export</li>
+                    <li class="disabled"><i class="fas fa-times"></i> Spa & Sauna Access</li>
+                </ul>
+                <a href="{{ url_for('user.checkout', plan_name='pro') }}" class="btn btn-primary plan-choose-btn primary">Upgrade to Pro</a>
+            </div>
+
+            <!-- Elite Plan -->
+            <div class="p-card">
+                <div class="p-header">
+                    <h3>Elite</h3>
+                    <div class="p-price">200₾<span>/mo</span></div>
+                </div>
+                <ul class="p-features">
+                    <li><i class="fas fa-check"></i> 24/7 VIP Access</li>
+                    <li><i class="fas fa-check"></i> Private Locker</li>
+                    <li><i class="fas fa-check"></i> Unlimited PT Sessions</li>
+                    <li><i class="fas fa-check"></i> Spa & Sauna Access</li>
+                    <li><i class="fas fa-check"></i> Nutrition Plans Included</li>
+                </ul>
+                <a href="{{ url_for('user.checkout', plan_name='elite') }}" class="btn btn-outline-dark plan-choose-btn border-2 text-black">Upgrade to Elite</a>
+            </div>
+        </div>
+    {% endif %}
+</div>
