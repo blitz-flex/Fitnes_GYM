@@ -1,9 +1,10 @@
 import os
 from datetime import date
 import uuid
-from flask import render_template, abort, request, redirect, url_for, flash, current_app
+from flask import render_template, abort, request, redirect, url_for, flash, current_app, session
 from flask_login import login_required, current_user
 from werkzeug.utils import secure_filename
+from flask_babel import gettext as _
 from . import user_bp
 from .forms import ProfileUpdateForm
 from ...extensions import db
@@ -98,12 +99,12 @@ def view_user_profile(user_id):
     form = ProfileUpdateForm() # Pass form to avoid UndefinedError in template
 
     program_map = {
-        'yoga': 'Yoga',
-        'crosfit': 'CrossFit',
-        'athletics': 'Athletics',
-        'boxing': 'Boxing',
-        'pilates': 'Pilates',
-        'swimming': 'Swimming'
+        'yoga': _('Yoga'),
+        'crosfit': _('CrossFit'),
+        'athletics': _('Athletics'),
+        'boxing': _('Boxing'),
+        'pilates': _('Pilates'),
+        'swimming': _('Swimming')
     }
 
     return render_template('user/profile.html', user=user, program_map=program_map)
@@ -113,14 +114,14 @@ def view_user_profile(user_id):
 @login_required
 def registrations():
     program_map = {
-        'yoga': 'Yoga',
-        'crosfit': 'CrossFit',
-        'athletics': 'Athletics',
-        'boxing': 'Boxing',
-        'pilates': 'Pilates',
-        'swimming': 'Swimming',
-        'cardio': 'Cardio',
-        'fitness': 'Fitness'
+        'yoga': _('Yoga'),
+        'crosfit': _('CrossFit'),
+        'athletics': _('Athletics'),
+        'boxing': _('Boxing'),
+        'pilates': _('Pilates'),
+        'swimming': _('Swimming'),
+        'cardio': _('Cardio'),
+        'fitness': _('Fitness')
     }
     return render_template('user/registrations.html', user=current_user, program_map=program_map)
 
@@ -154,13 +155,14 @@ def settings():
                 current_user.email_notifications = form.email_notifications.data == '1'
                 current_user.dark_mode = form.dark_mode.data == '1'
                 current_user.language = form.language.data
+                session['language'] = current_user.language
                 
                 db.session.commit()
-                flash('Settings saved successfully!', 'success')
+                flash(_('Settings saved successfully!'), 'success')
                 return redirect(url_for('user.settings'))
             except Exception as e:
                 db.session.rollback()
-                flash('An error occurred while saving settings.', 'danger')
+                flash(_('An error occurred while saving settings.'), 'danger')
                 
         # Handle Password & Email Update
         elif 'submit_security' in request.form and security_form.validate_on_submit():
@@ -182,13 +184,13 @@ def settings():
                     current_user.set_password(security_form.new_password.data)
                 
                 db.session.commit()
-                flash('Security settings updated successfully!', 'success')
+                flash(_('Security settings updated successfully!'), 'success')
                 return redirect(url_for('user.settings'))
             else:
                 if not is_oauth and not security_form.current_password.data:
-                    flash('Current password is required to make changes.', 'danger')
+                    flash(_('Current password is required to make changes.'), 'danger')
                 else:
-                    flash('Incorrect current password.', 'danger')
+                    flash(_('Incorrect current password.'), 'danger')
                 
         # Handle Account Deletion
         elif 'submit_delete' in request.form and delete_form.validate_on_submit():

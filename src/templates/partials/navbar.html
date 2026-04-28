@@ -15,24 +15,24 @@
             <ul class="navbar-nav me-auto">
                 <li class="nav-item">
                     <a class="nav-link" href="{{ url_for('main.index') }}">
-                        <i class="fas fa-home me-1"></i>Home
+                        <i class="fas fa-home me-1"></i>{{ _('Home') }}
                     </a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="{{ url_for('main.about') }}">
-                        <i class="fas fa-info-circle me-1"></i>About
+                        <i class="fas fa-info-circle me-1"></i>{{ _('About') }}
                     </a>
                 </li>
                 {% if current_user.is_authenticated %}
                 <li class="nav-item">
                     <a class="nav-link" href="{{ url_for('exercise.index') }}">
-                        <i class="fas fa-dumbbell me-1"></i>Exercises
+                        <i class="fas fa-dumbbell me-1"></i>{{ _('Exercises') }}
                     </a>
                 </li>
                 {% endif %}
                 <li class="nav-item">
                     <a class="nav-link" href="{{ url_for('blog.index') }}">
-                        <i class="fas fa-blog me-1"></i>Blog
+                        <i class="fas fa-blog me-1"></i>{{ _('Blog') }}
                     </a>
                 </li>
             </ul>
@@ -41,6 +41,33 @@
             <ul class="navbar-nav ms-auto align-items-center">
                 {% if current_user.is_authenticated %}
                 {% if current_user.is_admin %}
+                <!-- Admin & Language Menu -->
+                <li class="nav-item dropdown me-2">
+                    <a class="nav-link dropdown-toggle lang-toggle-btn" href="#" id="langDropdown" role="button"
+                        data-bs-toggle="dropdown" aria-expanded="false">
+                        <div class="lang-box">
+                            <i class="fas fa-globe"></i>
+                            <span class="lang-code">{{ get_locale() | upper }}</span>
+                        </div>
+                    </a>
+                    <ul class="dropdown-menu dropdown-menu-end premium-dropdown lang-dropdown" aria-labelledby="langDropdown">
+                        <li class="dropdown-header">{{ _('Select Language') }}</li>
+                        <li><hr class="dropdown-divider"></li>
+                        <li>
+                            <a class="dropdown-item {% if get_locale() == 'en' %}active-lang{% endif %}" href="{{ url_for('main.set_language', language='en') }}">
+                                <span class="flag-icon">🇺🇸</span> English
+                                {% if get_locale() == 'en' %}<i class="fas fa-check ms-auto text-success small"></i>{% endif %}
+                            </a>
+                        </li>
+                        <li>
+                            <a class="dropdown-item {% if get_locale() == 'ka' %}active-lang{% endif %}" href="{{ url_for('main.set_language', language='ka') }}">
+                                <span class="flag-icon">🇬🇪</span> ქართული
+                                {% if get_locale() == 'ka' %}<i class="fas fa-check ms-auto text-success small"></i>{% endif %}
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
                 <!-- Admin Dropdown Menu -->
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle admin-toggle-btn" href="#" id="adminDropdown" role="button"
@@ -66,7 +93,7 @@
                         </li>
                         <li>
                             <a class="dropdown-item" href="{{ url_for('admin.dashboard') }}">
-                                <i class="fas fa-chart-line dropdown-icon text-success"></i>Dashboard
+                                <i class="fas fa-chart-line dropdown-icon text-success"></i>{{ _('Dashboard') }}
                             </a>
                         </li>
                         <li>
@@ -74,7 +101,7 @@
                         </li>
                         <li>
                             <a class="dropdown-item text-danger" href="{{ url_for('auth.logout') }}">
-                                <i class="fas fa-power-off dropdown-icon"></i>Logout
+                                <i class="fas fa-power-off dropdown-icon"></i>{{ _('Logout') }}
                             </a>
                         </li>
                     </ul>
@@ -104,22 +131,22 @@
                         </li>
                         <li>
                             <a class="dropdown-item" href="{{ url_for('user.profile') }}">
-                                <i class="fas fa-id-card dropdown-icon"></i>Profile
+                                <i class="fas fa-id-card dropdown-icon"></i>{{ _('Profile') }}
                             </a>
                         </li>
                         <li>
                             <a class="dropdown-item" href="{{ url_for('user.registrations') }}">
-                                <i class="fas fa-list-ul dropdown-icon"></i>Registrations
+                                <i class="fas fa-list-ul dropdown-icon"></i>{{ _('Registrations') }}
                             </a>
                         </li>
                         <li>
                             <a class="dropdown-item" href="{{ url_for('user.settings') }}">
-                                <i class="fas fa-cog dropdown-icon"></i>Settings
+                                <i class="fas fa-cog dropdown-icon"></i>{{ _('Settings') }}
                             </a>
                         </li>
                         <li>
                             <a class="dropdown-item" href="{{ url_for('main.contact') }}">
-                                <i class="fas fa-envelope dropdown-icon"></i>Contact
+                                <i class="fas fa-envelope dropdown-icon"></i>{{ _('Contact') }}
                             </a>
                         </li>
                         <li>
@@ -127,7 +154,7 @@
                         </li>
                         <li>
                             <a class="dropdown-item text-danger" href="{{ url_for('auth.logout') }}">
-                                <i class="fas fa-sign-out-alt dropdown-icon"></i>Logout
+                                <i class="fas fa-sign-out-alt dropdown-icon"></i>{{ _('Logout') }}
                             </a>
                         </li>
                     </ul>
@@ -136,7 +163,7 @@
                 {% else %}
                 <li class="nav-item">
                     <a class="nav-link login-btn-glass px-4" href="{{ url_for('auth.login') }}">
-                        <i class="fas fa-sign-in-alt me-2"></i>Login
+                        <i class="fas fa-sign-in-alt me-2"></i>{{ _('Login') }}
                     </a>
                 </li>
                 {% endif %}

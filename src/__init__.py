@@ -10,11 +10,32 @@ def create_app():
     if not os.path.exists(app.config['UPLOAD_FOLDER']):
         os.makedirs(app.config['UPLOAD_FOLDER'])
 
-    from .extensions import db, migrate, login_manager, oauth, mail
+    from .extensions import db, migrate, login_manager, oauth, mail, babel
     db.init_app(app)
     migrate.init_app(app, db)
     login_manager.init_app(app)
     mail.init_app(app)
+    
+    from flask import session, request
+    from flask_login import current_user
+    def get_locale():
+        # 1. Check session (Explicit user choice in current session)
+        lang = session.get('language')
+        if lang:
+            return lang
+            
+        # 2. Check user profile if logged in
+        if current_user.is_authenticated and current_user.language:
+            return current_user.language
+            
+        # 3. Fallback to browser header
+        return request.accept_languages.best_match(['en', 'ka'])
+
+    babel.init_app(app, locale_selector=get_locale)
+    
+    @app.context_processor
+    def inject_locale():
+        return dict(get_locale=get_locale)
     
     if oauth:
         oauth.init_app(app)

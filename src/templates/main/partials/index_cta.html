@@ -3,24 +3,24 @@
     <div class="container cta-container">
         <div class="cta-glass-card">
             <div class="cta-content">
-                <span class="cta-badge">Limited Time Offer</span>
-                <h2>Ready to Transform Your Life?</h2>
-                <p>Join today and get your first personal training session absolutely free. No commitment required, just results.</p>
+                <span class="cta-badge">{{ _('Limited Time Offer') }}</span>
+                <h2>{{ _('Ready to Transform Your Life?') }}</h2>
+                <p>{{ _('Join today and get your first personal training session absolutely free. No commitment required, just results.') }}</p>
                 
                 <div class="cta-actions">
                     <a href="{{ url_for('form.free_session') }}" class="btn-premium">
-                        <span>Start Free Session</span>
+                        <span>{{ _('Start Free Session') }}</span>
                         <i class="fas fa-bolt"></i>
                     </a>
                     <a href="{{ url_for('main.contact') }}" class="btn-glass-outline">
-                        Contact Support
+                        {{ _('Contact Support') }}
                     </a>
                 </div>
 
                 <div class="cta-benefits">
-                    <div class="benefit-item"><i class="fas fa-check-circle"></i> No Contracts</div>
-                    <div class="benefit-item"><i class="fas fa-check-circle"></i> Expert Support</div>
-                    <div class="benefit-item"><i class="fas fa-check-circle"></i> All-Access Pass</div>
+                    <div class="benefit-item"><i class="fas fa-check-circle"></i> {{ _('No Contracts') }}</div>
+                    <div class="benefit-item"><i class="fas fa-check-circle"></i> {{ _('Expert Support') }}</div>
+                    <div class="benefit-item"><i class="fas fa-check-circle"></i> {{ _('All-Access Pass') }}</div>
                 </div>
             </div>
         </div>

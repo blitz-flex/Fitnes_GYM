@@ -30,14 +30,14 @@ def init_db_command():
 
     # 2. Create 12 Sample Users
     names = [
-        ("George", "Kakhidze", "male"), ("Nino", "Beridze", "female"),
+        ("George", "Kakhidze", "male"), ("Nino", "Beridze", "female"), 
         ("David", "Nozadze", "male"), ("Anna", "Maisuradze", "female"),
         ("Levan", "Sharikadze", "male"), ("Mariam", "Ghvinadze", "female"),
         ("Lasha", "Bekauri", "male"), ("Salome", "Pkhakadze", "female"),
         ("Irakli", "Kobakhidze", "male"), ("Tamari", "Lomidze", "female"),
         ("Zura", "Japaridze", "male"), ("Eka", "Beselia", "female")
     ]
-
+    
     sample_users = []
     for i, (fname, lname, gender) in enumerate(names):
         username = f"user{i+1}"
@@ -55,20 +55,20 @@ def init_db_command():
             user.set_password("password123")
             db.session.add(user)
             sample_users.append(user)
-
+    
     db.session.commit() # Save users to get IDs
 
     # 3. Create 12 Program Registrations
     programs = ["Yoga", "CrossFit", "Boxing", "Fitness", "Swimming", "Pilates", "Zumba"]
     times = ["08:00", "10:00", "14:00", "18:00", "20:00"]
-
+    
     # Refresh users from DB
     all_users = UserAccount.query.filter(UserAccount.username != 'admin').all()
-
+    
     for i in range(12):
         # Assign first 2 users to 2 programs each, others to 1
         user = all_users[i % len(all_users)]
-
+        
         reg = ProgramRegistration(
             user_id=user.id,
             full_name=f"{user.first_name} {user.last_name}",

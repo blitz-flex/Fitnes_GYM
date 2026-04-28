@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="{{ get_locale() }}">
 
 <head>
     <meta charset="UTF-8">
@@ -91,8 +91,7 @@
                         <i class="fas fa-dumbbell me-2"></i>GYM
                     </a>
                     <p class="footer-desc">
-                        Pushing boundaries and redefining fitness excellence since 2025. Join our elite community and
-                        transform your life with science-backed training.
+                        {{ _('Pushing boundaries and redefining fitness excellence since 2025. Join our elite community and transform your life with science-backed training.') }}
                     </p>
                     <div class="footer-social-new">
                         <a href="https://facebook.com" target="_blank" class="social-icon-btn"><i
@@ -108,18 +107,18 @@
 
                 <!-- Quick Links -->
                 <div class="footer-links-section">
-                    <h4>Quick Links</h4>
+                    <h4>{{ _('Quick Links') }}</h4>
                     <ul>
-                        <li><a href="{{ url_for('main.index') }}">Home</a></li>
-                        <li><a href="{{ url_for('main.about') }}">About Us</a></li>
-                        <li><a href="{{ url_for('blog.index') }}">Fitness Blog</a></li>
-                        <li><a href="{{ url_for('main.index') }}#faq">FAQ</a></li>
+                        <li><a href="{{ url_for('main.index') }}">{{ _('Home') }}</a></li>
+                        <li><a href="{{ url_for('main.about') }}">{{ _('About Us') }}</a></li>
+                        <li><a href="{{ url_for('blog.index') }}">{{ _('Fitness Blog') }}</a></li>
+                        <li><a href="{{ url_for('main.index') }}#faq">{{ _('FAQ') }}</a></li>
                     </ul>
                 </div>
 
                 <!-- Contact Info -->
                 <div class="footer-contact-section">
-                    <h4>Get In Touch</h4>
+                    <h4>{{ _('Get In Touch') }}</h4>
                     <ul class="contact-list">
                         <li><i class="fas fa-location-dot"></i> 123 Fitness Ave, Tbilisi</li>
                         <li><i class="fas fa-phone"></i> +995 555 123 456</li>

@@ -1,6 +1,6 @@
 {% extends "partials/base.html" %}
 
-{% block title %}My Profile - Fitness Dashboard{% endblock %}
+{% block title %}{{ _('My Profile') }} - Fitness Dashboard{% endblock %}
 
 {% block extra_css %}
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
@@ -32,7 +32,7 @@
                     
                     {% if current_user.id == user.id and form %}
                     <button type="button" class="btn btn-sm btn-link profile-edit-btn" onclick="toggleEditMode()">
-                        <i class="fas fa-edit"></i> Edit Basic Info
+                        <i class="fas fa-edit"></i> {{ _('Edit Basic Info') }}
                     </button>
 
                     <!-- Edit Form (Hidden) -->
@@ -56,27 +56,27 @@
                                 {{ form.profile_image(class="form-control rounded-10") }}
                             </div>
                             <div class="d-flex gap-2">
-                                <button type="submit" class="btn btn-primary btn-sm rounded-8 flex-fill">Save</button>
-                                <button type="button" class="btn btn-light btn-sm rounded-8 flex-fill" onclick="toggleEditMode()">Cancel</button>
+                                <button type="submit" class="btn btn-primary btn-sm rounded-8 flex-fill">{{ _('Save') }}</button>
+                                <button type="button" class="btn btn-light btn-sm rounded-8 flex-fill" onclick="toggleEditMode()">{{ _('Cancel') }}</button>
                             </div>
                         </form>
                     </div>
                     {% endif %}
                     
                     <div class="subscription-status">
-                        <div class="sub-label">Current Plan</div>
+                        <div class="sub-label">{{ _('Current Plan') }}</div>
                         <div class="sub-plan">{{ user.subscription_plan|upper }}</div>
                         {% if user.subscription_end_date %}
-                            <div class="sub-expiry">Expires: {{ user.subscription_end_date.strftime('%d.%m.%Y') }}</div>
+                            <div class="sub-expiry">{{ _('Expires') }}: {{ user.subscription_end_date.strftime('%d.%m.%Y') }}</div>
                         {% endif %}
                     </div>
 
                     <div class="sidebar-actions mt-4 d-flex flex-column gap-2">
                         <a href="{{ url_for('user.settings') }}" class="btn btn-outline-primary w-100 rounded-12 fw-bold py-3">
-                            <i class="fas fa-cog"></i> Settings
+                            <i class="fas fa-cog"></i> {{ _('Settings') }}
                         </a>
                         <a href="{{ url_for('user.registrations') }}" class="btn btn-light w-100 rounded-12 fw-bold py-3">
-                            <i class="fas fa-list-check"></i> My Registrations
+                            <i class="fas fa-list-check"></i> {{ _('My Registrations') }}
                         </a>
                     </div>
                 </div>
@@ -86,19 +86,19 @@
             <div class="content-column">
                 <div class="stat-card mb-4">
                     <h3 class="fw-black mb-4 d-flex align-items-center gap-2">
-                        <i class="fas fa-chart-bar text-primary"></i> Body Metrics
+                        <i class="fas fa-chart-bar text-primary"></i> {{ _('Body Metrics') }}
                     </h3>
                     <div class="metrics-grid">
                         <div class="metric-box">
-                            <div class="metric-label">Weight</div>
+                            <div class="metric-label">{{ _('Weight') }}</div>
                             <div class="metric-value-large">{{ user.weight or '--' }} <span class="metric-unit">kg</span></div>
                         </div>
                         <div class="metric-box">
-                            <div class="metric-label">Height</div>
+                            <div class="metric-label">{{ _('Height') }}</div>
                             <div class="metric-value-large">{{ user.height or '--' }} <span class="metric-unit">cm</span></div>
                         </div>
                         <div class="metric-box">
-                            <div class="metric-label">BMI Index</div>
+                            <div class="metric-label">{{ _('BMI Index') }}</div>
                             {% if user.weight and user.height %}
                                 {% set height_m = user.height / 100 %}
                                 {% set bmi = user.weight / (height_m * height_m) %}
@@ -114,20 +114,20 @@
                     <!-- Fitness Journey -->
                     <div class="stat-card">
                         <h3 class="fw-black mb-4">
-                            <i class="fas fa-fire text-orange"></i> Fitness Journey
+                            <i class="fas fa-fire text-orange"></i> {{ _('Fitness Journey') }}
                         </h3>
                         <div class="info-rows-container">
                             <div class="info-row">
-                                <span class="info-row-label">Fitness Goal</span>
-                                <span class="metric-pill bg-primary-soft text-primary">{{ user.fitness_goal or 'Not set' }}</span>
+                                <span class="info-row-label">{{ _('Fitness Goal') }}</span>
+                                <span class="metric-pill bg-primary-soft text-primary">{{ _(user.fitness_goal or 'Not set') }}</span>
                             </div>
                             <div class="info-row">
-                                <span class="info-row-label">Fitness Level</span>
-                                <span class="metric-pill">{{ user.fitness_level or 'Beginner' }}</span>
+                                <span class="info-row-label">{{ _('Fitness Level') }}</span>
+                                <span class="metric-pill">{{ _(user.fitness_level or 'Beginner') }}</span>
                             </div>
                             <div class="info-row">
-                                <span class="info-row-label">Weekly Sessions</span>
-                                <span class="metric-pill">{{ user.workout_frequency or 0 }} days/week</span>
+                                <span class="info-row-label">{{ _('Weekly Sessions') }}</span>
+                                <span class="metric-pill">{{ user.workout_frequency or 0 }} {{ _('days/week') }}</span>
                             </div>
                         </div>
                     </div>
@@ -135,20 +135,20 @@
                     <!-- Account Details -->
                     <div class="stat-card">
                         <h3 class="fw-black mb-4">
-                            <i class="fas fa-info-circle text-blue"></i> Basic Info
+                            <i class="fas fa-info-circle text-blue"></i> {{ _('Basic Info') }}
                         </h3>
                         <div class="info-rows-container">
                             <div class="info-row">
-                                <span class="info-row-label">Age</span>
-                                <span class="fw-black">{{ user.age or '--' }} years</span>
+                                <span class="info-row-label">{{ _('Age') }}</span>
+                                <span class="fw-black">{{ user.age or '--' }} {{ _('years') }}</span>
                             </div>
                             <div class="info-row">
-                                <span class="info-row-label">Gender</span>
-                                <span class="fw-black text-capitalize">{{ user.gender or '--' }}</span>
+                                <span class="info-row-label">{{ _('Gender') }}</span>
+                                <span class="fw-black text-capitalize">{{ _(user.gender or '--') }}</span>
                             </div>
                             <div class="info-row">
-                                <span class="info-row-label">Birthdate</span>
-                                <span class="fw-black">{{ user.birthdate.strftime('%d %B, %Y') }}</span>
+                                <span class="info-row-label">{{ _('Birthdate') }}</span>
+                                <span class="fw-black">{{ user.birthdate.strftime('%d %B, %Y') if user.birthdate else '--' }}</span>
                             </div>
                         </div>
                     </div>
@@ -158,22 +158,22 @@
                 <div class="stat-card mt-4">
                     <div class="d-flex justify-content-between align-items-center mb-3">
                         <h3 class="fw-black m-0">
-                            <i class="fas fa-medal text-gold"></i> Recent Achievements
+                            <i class="fas fa-medal text-gold"></i> {{ _('Recent Achievements') }}
                         </h3>
-                        <a href="{{ url_for('user.settings') }}#achievements" class="fw-bold text-primary no-underline">View All</a>
+                        <a href="{{ url_for('user.settings') }}#achievements" class="fw-bold text-primary no-underline">{{ _('View All') }}</a>
                     </div>
                     <div class="achievements-scroll-container">
                         <div class="achievement-card achievement-gold">
                             <i class="fas fa-bolt achievement-icon gold"></i>
-                            <div class="achievement-title">7 Day Streak</div>
+                            <div class="achievement-title">{{ _('7 Day Streak') }}</div>
                         </div>
                         <div class="achievement-card achievement-blue">
                             <i class="fas fa-sun achievement-icon blue"></i>
-                            <div class="achievement-title">Early Bird</div>
+                            <div class="achievement-title">{{ _('Early Bird') }}</div>
                         </div>
                         <div class="achievement-card achievement-locked">
                             <i class="fas fa-lock achievement-icon locked"></i>
-                            <div class="achievement-title">100kg Club</div>
+                            <div class="achievement-title">{{ _('100kg Club') }}</div>
                         </div>
                     </div>
                 </div>

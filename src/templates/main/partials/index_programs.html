@@ -2,8 +2,8 @@
 <section id="programs" class="programs-section">
     <div class="container">
         <div class="section-header">
-            <h2 class="section-title">Elite Programs</h2>
-            <p class="section-subtitle">Discover our specialized training modules designed for all fitness levels.</p>
+            <h2 class="section-title">{{ _('Elite Programs') }}</h2>
+            <p class="section-subtitle">{{ _('Discover our specialized training modules designed for all fitness levels.') }}</p>
         </div>
 
         <div class="programs-grid">
@@ -13,8 +13,8 @@
                     <img src="{{ url_for('static', filename='images/yoga.jpg') }}" alt="Yoga" class="program-image">
                 </div>
                 <div class="program-content">
-                    <h3 class="program-title">Yoga</h3>
-                    <p class="program-description">Harmony of body and mind, flexibility and stress relief.</p>
+                    <h3 class="program-title">{{ _('Yoga') }}</h3>
+                    <p class="program-description">{{ _('Harmony of body and mind, flexibility and stress relief.') }}</p>
                     <div class="program-meta">
                         <span><i class="fas fa-clock"></i> 90 Min</span>
                         <span><i class="fas fa-leaf"></i> Low Impact</span>
@@ -23,7 +23,7 @@
                         <div class="program-price">45₾ <span>/mo</span></div>
                         <div class="program-actions">
                             <button class="icon-btn quick-view-btn" data-program-id="yoga" title="Quick View"><i class="fas fa-eye"></i></button>
-                            <a href="{{ url_for('form.program_registration', program='Yoga') }}" class="btn-sm">Join</a>
+                            <a href="{{ url_for('form.program_registration', program='Yoga') }}" class="btn-sm">{{ _('Join') }}</a>
                         </div>
                     </div>
                 </div>
@@ -36,8 +36,8 @@
                     <div class="program-badge">Popular</div>
                 </div>
                 <div class="program-content">
-                    <h3 class="program-title">Pilates</h3>
-                    <p class="program-description">Muscle strengthening, core stability and body correction.</p>
+                    <h3 class="program-title">{{ _('Pilates') }}</h3>
+                    <p class="program-description">{{ _('Muscle strengthening, core stability and body correction.') }}</p>
                     <div class="program-meta">
                         <span><i class="fas fa-clock"></i> 60 Min</span>
                         <span><i class="fas fa-dumbbell"></i> Medium Intensity</span>
@@ -46,7 +46,7 @@
                         <div class="program-price">60₾ <span>/mo</span></div>
                         <div class="program-actions">
                             <button class="icon-btn quick-view-btn" data-program-id="pilates" title="Quick View"><i class="fas fa-eye"></i></button>
-                            <a href="{{ url_for('form.program_registration', program='Pilates') }}" class="btn-sm">Join</a>
+                            <a href="{{ url_for('form.program_registration', program='Pilates') }}" class="btn-sm">{{ _('Join') }}</a>
                         </div>
                     </div>
                 </div>
@@ -58,8 +58,8 @@
                     <img src="{{ url_for('static', filename='images/cros.jpg') }}" alt="CrossFit" class="program-image">
                 </div>
                 <div class="program-content">
-                    <h3 class="program-title">CrossFit</h3>
-                    <p class="program-description">High-intensity functional workouts for strength and endurance.</p>
+                    <h3 class="program-title">{{ _('CrossFit') }}</h3>
+                    <p class="program-description">{{ _('High-intensity functional workouts for strength and endurance.') }}</p>
                     <div class="program-meta">
                         <span><i class="fas fa-clock"></i> 45 Min</span>
                         <span><i class="fas fa-fire"></i> Extreme</span>
@@ -68,7 +68,7 @@
                         <div class="program-price">80₾ <span>/mo</span></div>
                         <div class="program-actions">
                             <button class="icon-btn quick-view-btn" data-program-id="crossfit" title="Quick View"><i class="fas fa-eye"></i></button>
-                            <a href="{{ url_for('form.program_registration', program='CrossFit') }}" class="btn-sm">Join</a>
+                            <a href="{{ url_for('form.program_registration', program='CrossFit') }}" class="btn-sm">{{ _('Join') }}</a>
                         </div>
                     </div>
                 </div>
@@ -80,8 +80,8 @@
                     <img src="{{ url_for('static', filename='images/sw.jpg') }}" alt="Swimming" class="program-image">
                 </div>
                 <div class="program-content">
-                    <h3 class="program-title">Swimming</h3>
-                    <p class="program-description">Water exercises engaging all muscle groups with zero joint impact.</p>
+                    <h3 class="program-title">{{ _('Swimming') }}</h3>
+                    <p class="program-description">{{ _('Water exercises engaging all muscle groups with zero joint impact.') }}</p>
                     <div class="program-meta">
                         <span><i class="fas fa-clock"></i> 60 Min</span>
                         <span><i class="fas fa-water"></i> Full Body</span>
@@ -90,7 +90,7 @@
                         <div class="program-price">70₾ <span>/mo</span></div>
                         <div class="program-actions">
                             <button class="icon-btn quick-view-btn" data-program-id="swimming" title="Quick View"><i class="fas fa-eye"></i></button>
-                            <a href="{{ url_for('form.program_registration', program='Swimming') }}" class="btn-sm">Join</a>
+                            <a href="{{ url_for('form.program_registration', program='Swimming') }}" class="btn-sm">{{ _('Join') }}</a>
                         </div>
                     </div>
                 </div>
@@ -102,8 +102,8 @@
                     <img src="{{ url_for('static', filename='images/box.jpeg') }}" alt="Boxing" class="program-image">
                 </div>
                 <div class="program-content">
-                    <h3 class="program-title">Boxing</h3>
-                    <p class="program-description">Self-defense, footwork, and intense physical conditioning.</p>
+                    <h3 class="program-title">{{ _('Boxing') }}</h3>
+                    <p class="program-description">{{ _('Self-defense, footwork, and intense physical conditioning.') }}</p>
                     <div class="program-meta">
                         <span><i class="fas fa-clock"></i> 90 Min</span>
                         <span><i class="fas fa-fire"></i> Intense Cardio</span>
@@ -112,7 +112,7 @@
                         <div class="program-price">95₾ <span>/mo</span></div>
                         <div class="program-actions">
                             <button class="icon-btn quick-view-btn" data-program-id="boxing" title="Quick View"><i class="fas fa-eye"></i></button>
-                            <a href="{{ url_for('form.program_registration', program='Boxing') }}" class="btn-sm">Join</a>
+                            <a href="{{ url_for('form.program_registration', program='Boxing') }}" class="btn-sm">{{ _('Join') }}</a>
                         </div>
                     </div>
                 </div>
@@ -124,8 +124,8 @@
                     <img src="{{ url_for('static', filename='images/Athletics.jpeg') }}" alt="Athletics" class="program-image">
                 </div>
                 <div class="program-content">
-                    <h3 class="program-title">Athletics</h3>
-                    <p class="program-description">Classic athletic exercises focused on speed, agility, and stamina.</p>
+                    <h3 class="program-title">{{ _('Athletics') }}</h3>
+                    <p class="program-description">{{ _('Classic athletic exercises focused on speed, agility, and stamina.') }}</p>
                     <div class="program-meta">
                         <span><i class="fas fa-clock"></i> 90 Min</span>
                         <span><i class="fas fa-running"></i> High Energy</span>
@@ -134,7 +134,7 @@
                         <div class="program-price">75₾ <span>/mo</span></div>
                         <div class="program-actions">
                             <button class="icon-btn quick-view-btn" data-program-id="athletics" title="Quick View"><i class="fas fa-eye"></i></button>
-                            <a href="{{ url_for('form.program_registration', program='Athletics') }}" class="btn-sm">Join</a>
+                            <a href="{{ url_for('form.program_registration', program='Athletics') }}" class="btn-sm">{{ _('Join') }}</a>
                         </div>
                     </div>
                 </div>

@@ -2,58 +2,58 @@
 <section class="pricing-section">
     <div class="container">
         <div class="section-header">
-            <h2 class="section-title">Membership Plans</h2>
-            <p class="section-subtitle">Choose the perfect plan to achieve your fitness goals.</p>
+            <h2 class="section-title">{{ _('Membership Plans') }}</h2>
+            <p class="section-subtitle">{{ _('Choose the perfect plan to achieve your fitness goals.') }}</p>
         </div>
 
         <div class="pricing-grid">
             <!-- Basic Plan -->
             <div class="pricing-card">
                 <div class="pricing-header">
-                    <h3>Basic</h3>
+                    <h3>{{ _('Basic') }}</h3>
                     <div class="price">80₾<span>/mo</span></div>
                 </div>
                 <ul class="pricing-features">
-                    <li><i class="fas fa-check"></i> Gym Access (07:00 - 15:00)</li>
-                    <li><i class="fas fa-check"></i> 1 Basic Program</li>
-                    <li><i class="fas fa-check"></i> Locker Room Access</li>
-                    <li class="disabled"><i class="fas fa-times"></i> Personal Trainer</li>
-                    <li class="disabled"><i class="fas fa-times"></i> Spa & Sauna</li>
+                    <li><i class="fas fa-check"></i> {{ _('Gym Access (07:00 - 15:00)') }}</li>
+                    <li><i class="fas fa-check"></i> {{ _('1 Basic Program') }}</li>
+                    <li><i class="fas fa-check"></i> {{ _('Locker Room Access') }}</li>
+                    <li class="disabled"><i class="fas fa-times"></i> {{ _('Personal Trainer') }}</li>
+                    <li class="disabled"><i class="fas fa-times"></i> {{ _('Spa & Sauna') }}</li>
                 </ul>
-                <a href="{{ url_for('user.checkout', plan_name='basic') }}" class="btn-outline w-100">Get Started</a>
+                <a href="{{ url_for('user.checkout', plan_name='basic') }}" class="btn-outline w-100">{{ _('Get Started') }}</a>
             </div>
 
             <!-- Pro Plan (Popular) -->
             <div class="pricing-card popular">
-                <div class="popular-badge">Most Popular</div>
+                <div class="popular-badge">{{ _('Most Popular') }}</div>
                 <div class="pricing-header">
-                    <h3>Pro</h3>
+                    <h3>{{ _('Pro') }}</h3>
                     <div class="price">120₾<span>/mo</span></div>
                 </div>
                 <ul class="pricing-features">
-                    <li><i class="fas fa-check"></i> 24/7 Gym Access</li>
-                    <li><i class="fas fa-check"></i> All Programs Included</li>
-                    <li><i class="fas fa-check"></i> Premium Locker Room</li>
-                    <li><i class="fas fa-check"></i> 1 PT Session / Month</li>
-                    <li class="disabled"><i class="fas fa-times"></i> Spa & Sauna</li>
+                    <li><i class="fas fa-check"></i> {{ _('24/7 Gym Access') }}</li>
+                    <li><i class="fas fa-check"></i> {{ _('All Programs Included') }}</li>
+                    <li><i class="fas fa-check"></i> {{ _('Premium Locker Room') }}</li>
+                    <li><i class="fas fa-check"></i> {{ _('1 PT Session / Month') }}</li>
+                    <li class="disabled"><i class="fas fa-times"></i> {{ _('Spa & Sauna') }}</li>
                 </ul>
-                <a href="{{ url_for('user.checkout', plan_name='pro') }}" class="btn-premium w-100">Get Started</a>
+                <a href="{{ url_for('user.checkout', plan_name='pro') }}" class="btn-premium w-100">{{ _('Get Started') }}</a>
             </div>
 
             <!-- Elite Plan -->
             <div class="pricing-card">
                 <div class="pricing-header">
-                    <h3>Elite</h3>
+                    <h3>{{ _('Elite') }}</h3>
                     <div class="price">200₾<span>/mo</span></div>
                 </div>
                 <ul class="pricing-features">
-                    <li><i class="fas fa-check"></i> 24/7 VIP Access</li>
-                    <li><i class="fas fa-check"></i> All Programs Included</li>
-                    <li><i class="fas fa-check"></i> Private Locker</li>
-                    <li><i class="fas fa-check"></i> Unlimited PT Sessions</li>
-                    <li><i class="fas fa-check"></i> Spa & Sauna Access</li>
+                    <li><i class="fas fa-check"></i> {{ _('24/7 VIP Access') }}</li>
+                    <li><i class="fas fa-check"></i> {{ _('All Programs Included') }}</li>
+                    <li><i class="fas fa-check"></i> {{ _('Private Locker') }}</li>
+                    <li><i class="fas fa-check"></i> {{ _('Unlimited PT Sessions') }}</li>
+                    <li><i class="fas fa-check"></i> {{ _('Spa & Sauna Access') }}</li>
                 </ul>
-                <a href="{{ url_for('user.checkout', plan_name='elite') }}" class="btn-outline w-100">Get Started</a>
+                <a href="{{ url_for('user.checkout', plan_name='elite') }}" class="btn-outline w-100">{{ _('Get Started') }}</a>
             </div>
         </div>
     </div>
@@ -65,15 +65,15 @@
         <div class="stats-wrapper">
             <div class="stat-box">
                 <div class="stat-value">25K+</div>
-                <div class="stat-label">Square Feet Facility</div>
+                <div class="stat-label">{{ _('Square Feet Facility') }}</div>
             </div>
             <div class="stat-box">
                 <div class="stat-value">50+</div>
-                <div class="stat-label">Classes Per Week</div>
+                <div class="stat-label">{{ _('Classes Per Week') }}</div>
             </div>
             <div class="stat-box">
                 <div class="stat-value">100%</div>
-                <div class="stat-label">Client Satisfaction</div>
+                <div class="stat-label">{{ _('Client Satisfaction') }}</div>
             </div>
         </div>
     </div>

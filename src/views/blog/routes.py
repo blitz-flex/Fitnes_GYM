@@ -1,6 +1,7 @@
 import urllib.request
 import json
 import datetime
+import os
 from flask import render_template, request, jsonify, current_app, url_for, abort
 from flask_login import login_required, current_user
 from functools import wraps
@@ -127,7 +128,7 @@ def sync_fitness_news():
 @blog_bp.route('/')
 def index():
     """Blog index page with pagination and filters"""
-    sync_fitness_news()
+    # sync_fitness_news() - Disabled as requested. Only AI/Admin posts allowed now.
 
     page     = request.args.get('page', 1, type=int)
     per_page = 12
@@ -211,6 +212,7 @@ def post_detail(slug):
         
     post = {
         'title': db_post.title,
+        'excerpt': db_post.excerpt,
         'content': db_post.content,
         'featured_image': db_post.featured_image if db_post.featured_image and db_post.featured_image.startswith('http') else (url_for('static', filename='images/blog/' + db_post.featured_image) if db_post.featured_image else 'https://images.unsplash.com/photo-1517836357463-d25dfeac3438?q=80&w=1200'),
         'author_name': author_name,
@@ -219,6 +221,66 @@ def post_detail(slug):
     }
 
     return render_template('blog/post_detail.html', post=post)
+
+def extract_ai_content(text, topic=""):
+    """Robustly extract html_content and excerpt from AI response (JSON or Regex)."""
+    import re as pyre
+    import json as pyjson
+    
+    text = text.strip()
+    # Remove markdown
+    text = pyre.sub(r'^```(?:json|html)?\s*', '', text, flags=pyre.IGNORECASE | pyre.MULTILINE)
+    text = pyre.sub(r'\s*```$', '', text, flags=pyre.IGNORECASE | pyre.MULTILINE)
+    
+    ai_data = {}
+    
+    # Try 1: Balanced brace search and JSON parse
+    # Using a simpler balanced brace search since Python 're' doesn't support recursion
+    try:
+        # Find the first { and matching-ish last }
+        first = text.find('{')
+        last = text.rfind('}')
+        if first != -1 and last != -1:
+            candidate = text[first:last+1]
+            ai_data = pyjson.loads(candidate, strict=False)
+    except:
+        pass
+        
+    # Strategy 2: Direct Regex Extraction (The Tank)
+    if not ai_data.get('html_content'):
+        # Look for "html_content": " and then anything until a " followed by , or }
+        hc_match = pyre.search(r'"html_content":\s*"(.*?)(?<!\\)"', text, pyre.DOTALL)
+        if hc_match:
+            try:
+                val = hc_match.group(1).encode().decode('unicode_escape')
+                ai_data['html_content'] = val
+            except:
+                ai_data['html_content'] = hc_match.group(1)
+                
+    if not ai_data.get('excerpt'):
+        ex_match = pyre.search(r'"excerpt":\s*"(.*?)(?<!\\)"', text, pyre.DOTALL)
+        if ex_match:
+            try:
+                val = ex_match.group(1).encode().decode('unicode_escape')
+                ai_data['excerpt'] = val
+            except:
+                ai_data['excerpt'] = ex_match.group(1)
+                
+    content = ai_data.get('html_content', '')
+    excerpt = ai_data.get('excerpt', topic + "...")
+    
+    # Final cleanup
+    if content:
+        # Basic cleanup
+        content = content.replace('```html', '').replace('```json', '').replace('```', '').strip()
+        # Aggressive removal of redundant headers
+        for _ in range(5):
+            content = pyre.sub(r'^\s*Title:\s*.*?\n+', '', content, flags=pyre.IGNORECASE)
+            content = pyre.sub(r'^\s*#+\s*.*?\n+', '', content, flags=pyre.IGNORECASE)
+            content = content.strip()
+        content = pyre.sub(r'\n{3,}', '\n\n', content)
+        
+    return content, excerpt
 
 @blog_bp.route('/generate-ai-post', methods=['POST'])
 @login_required
@@ -231,10 +293,35 @@ def generate_ai_post():
         return jsonify({'error': 'Unauthorized. Please login.'}), 403
 
     topic = request.json.get('topic')
-    featured_image = request.json.get('image', 'https://images.unsplash.com/photo-1517836357463-d25dfeac3438?q=80&w=1200')
+    category = request.json.get('category', 'Training')
+    featured_image = request.json.get('image')
     
     if not topic:
         return jsonify({'error': 'Topic is required'}), 400
+
+    # Try to fetch a relevant image from NewsAPI based on the topic
+    if not featured_image or 'unsplash' in featured_image:
+        news_api_key = current_app.config.get('NEWS_API_KEY', '')
+        if news_api_key and news_api_key != 'DEMO_MODE':
+            try:
+                import urllib.parse
+                import urllib.request
+                import json
+                query = urllib.parse.quote(f"{topic} fitness")
+                url = f"https://newsapi.org/v2/everything?q={query}&language=en&sortBy=relevance&pageSize=5&apiKey={news_api_key}"
+                req_obj = urllib.request.Request(url, headers={'User-Agent': 'Mozilla/5.0'})
+                with urllib.request.urlopen(req_obj, timeout=5) as response:
+                    news_data = json.loads(response.read().decode())
+                    if news_data.get('status') == 'ok' and news_data.get('articles'):
+                        for article in news_data['articles']:
+                            if article.get('urlToImage'):
+                                featured_image = article['urlToImage']
+                                break
+            except Exception as e:
+                print(f"Failed to fetch dynamic image from NewsAPI: {e}")
+                
+    if not featured_image:
+        featured_image = 'https://images.unsplash.com/photo-1517836357463-d25dfeac3438?q=80&w=1200'
 
     api_key = current_app.config.get('GEMINI_API_KEY')
     if not api_key:
@@ -275,59 +362,100 @@ def generate_ai_post():
                 }
                 
                 model = genai.GenerativeModel(model_name, safety_settings=safety_settings)
+                
+                # Enhanced Expert Persona Prompt
+                prompt_context = ""
+                if category == 'Training':
+                    from ...models.exercise import Exercise
+                    # Try to find a related exercise to ground the AI
+                    import random
+                    exercise = Exercise.query.filter(Exercise.name.ilike(f'%{topic}%')).first()
+                    if not exercise:
+                        # Pick a random exercise to add flavor if topic is generic
+                        all_ex = Exercise.query.limit(50).all()
+                        if all_ex: exercise = random.choice(all_ex)
+                    
+                    if exercise:
+                        prompt_context = f"Reference Data for accuracy: Exercise: {exercise.name}, Primary Muscles: {', '.join(exercise.primary_muscles)}, Level: {exercise.level}. Include these physiological details in your advice. "
+
+                lang_instruction = "IMPORTANT: Write EVERYTHING (title, html_content, excerpt) in English."
+
                 prompt = (
-                    f"Write a professional, highly engaging, and comprehensive fitness blog article about '{topic}'. "
-                    "Output ONLY a JSON object with two fields: "
-                    "1. 'html_content': The full article in raw HTML (using <h2>, <h3>, <p>, <ul>, <li>, <strong>). "
-                    "2. 'excerpt': A short 2-line summary. "
-                    "The article should be at least 600 words with clear headings."
+                    f"You are a world-class Elite Performance Scientist and Peak Performance Coach. {lang_instruction} "
+                    f"Write a sophisticated, academically-rigorous, yet highly engaging expert article about '{topic}' for the '{category}' category. "
+                    f"{prompt_context}"
+                    "Use a professional, authoritative, and clinical yet motivating tone. "
+                    "Include physiological mechanisms, biomechanical insights, and evidence-based protocols. "
+                    "Output exactly ONE SINGLE JSON object. DO NOT include any text before or after the JSON. "
+                    "The JSON must have exactly two fields: "
+                    "1. 'html_content': The full article in raw HTML (using <h2>, <h3>, <p>, <ul>, <li>, <strong>, <blockquote>). "
+                    "Ensure headings are thought-provoking and use sophisticated vocabulary (e.g., instead of 'Tips', use 'Strategic Protocols' or 'Biomechanical Considerations'). "
+                    "2. 'excerpt': A concise, high-level executive summary (2 lines). "
+                    "The article should be approximately 800 words with deep technical detail."
                 )
                 response = model.generate_content(prompt)
                 
                 if response.text:
-                    # Improved Parsing: Use regex to extract JSON block if wrapped in markers
-                    import re as pyre
-                    json_match = pyre.search(r'\{.*\}', response.text, pyre.DOTALL)
-                    if json_match:
-                        raw_text = json_match.group()
-                    else:
-                        raw_text = response.text.replace('```json', '').replace('```', '').strip()
-
-                    try:
-                        import json as pyjson
-                        ai_data = pyjson.loads(raw_text)
-                        content = ai_data.get('html_content', '')
-                        excerpt = ai_data.get('excerpt', topic + "...")
-                        
+                    content, excerpt = extract_ai_content(response.text, topic)
+                    if content:
                         used_model = model_name
                         break
-                    except Exception as parse_error:
-                        # Final fallback: if it's still JSON-like but failed to parse, 
-                        # try to extract content field manually or just use text
-                        print(f"JSON Parse Error: {parse_error}")
-                        if '"html_content":' in response.text:
-                            # Try simple extraction
-                            match = pyre.search(r'"html_content":\s*"(.*?)",', response.text, pyre.DOTALL)
-                            if match:
-                                content = match.group(1).replace('\\n', '\n').replace('\\"', '"')
-                            else:
-                                content = response.text
-                        else:
-                            content = response.text
-                        
-                        excerpt = topic + "..."
-                        used_model = model_name
-                        break
+                
             except Exception as e:
+                print(f"Generation Error: {e}")
                 detailed_errors.append(f"{model_path} Error: {str(e)}")
                 continue
+
+        # --- DeepSeek Fallback ---
+        if not content:
+            deepseek_key = current_app.config.get('DEEPSEEK_API_KEY') or os.environ.get('DEEPSEEK_API_KEY')
+            if deepseek_key:
+                try:
+                    import requests as req
+                    headers = {"Authorization": f"Bearer {deepseek_key}", "Content-Type": "application/json"}
+                    data = {
+                        "model": "deepseek-chat",
+                        "messages": [
+                            {"role": "system", "content": "You are a world-class Elite Coach. Output ONLY JSON with 'html_content' and 'excerpt'."},
+                            {"role": "user", "content": prompt}
+                        ],
+                        "response_format": {"type": "json_object"}
+                    }
+                    ds_response = req.post("https://api.deepseek.com/chat/completions", headers=headers, json=data, timeout=30)
+                    if ds_response.status_code == 200:
+                        ds_data = ds_response.json()
+                        ds_content = ds_data['choices'][0]['message']['content']
+                        content, excerpt = extract_ai_content(ds_content, topic)
+                        if content: used_model = "deepseek-chat (Fallback)"
+                except Exception as ds_err:
+                    detailed_errors.append(f"DeepSeek Exception: {str(ds_err)}")
+
+        # --- Mistral Fallback ---
+        if not content:
+            mistral_key = current_app.config.get('MISTRAL_API_KEY') or os.environ.get('MISTRAL_API_KEY')
+            if mistral_key:
+                try:
+                    import requests as req
+                    headers = {"Authorization": f"Bearer {mistral_key}", "Content-Type": "application/json"}
+                    data = {
+                        "model": "mistral-tiny",
+                        "messages": [
+                            {"role": "system", "content": "You are a world-class Elite Coach. Output ONLY JSON with 'html_content' and 'excerpt'."},
+                            {"role": "user", "content": prompt}
+                        ]
+                    }
+                    m_response = req.post("https://api.mistral.ai/v1/chat/completions", headers=headers, json=data, timeout=30)
+                    if m_response.status_code == 200:
+                        m_data = m_response.json()
+                        m_content = m_data['choices'][0]['message']['content']
+                        content, excerpt = extract_ai_content(m_content, topic)
+                        if content: used_model = "Mistral AI (Fallback)"
+                except Exception as m_err:
+                    detailed_errors.append(f"Mistral Exception: {str(m_err)}")
 
         if not content:
             return jsonify({'error': f"AI Failed. Available models were: {available_models}. Errors: {' | '.join(detailed_errors)}"}), 500
         
-        # Basic cleanup if AI still includes markdown markers
-        content = content.replace('```html', '').replace('```', '').strip()
-
         # Create slug
         slug = topic.lower().replace(' ', '-').replace('/', '-')[:50]
         
@@ -349,7 +477,8 @@ def generate_ai_post():
             content=content,
             excerpt=excerpt,
             slug=slug,
-            featured_image=None, 
+            category=category,
+            featured_image=featured_image,
             author_id=current_user.id,
             author_name='AI Generation',
             published=True
@@ -370,3 +499,54 @@ def generate_ai_post():
     except Exception as e:
         print(f"AI Generation Error (SDK): {str(e)}")
         return jsonify({'error': f"AI Error: {str(e)}"}), 500
+
+@blog_bp.route('/ask-expert', methods=['POST'])
+def ask_expert():
+    """Handles real-time chat with the AI Expert"""
+    question = request.json.get('question')
+    if not question:
+        return jsonify({'error': 'Question is required'}), 400
+
+    api_key = current_app.config.get('GEMINI_API_KEY')
+    answer = None
+
+    if api_key:
+        try:
+            import google.generativeai as genai
+            genai.configure(api_key=api_key)
+            model = genai.GenerativeModel('models/gemini-1.5-flash')
+            prompt = f"You are a world-class Peak Performance Coach and Fitness Expert. Answer the following user question concisely and professionally: '{question}'"
+            response = model.generate_content(prompt)
+            if response.text:
+                answer = response.text
+        except Exception as e:
+            print(f"Gemini Chat Error: {e}")
+
+    # DeepSeek Fallback
+    if not answer:
+        deepseek_key = current_app.config.get('DEEPSEEK_API_KEY') or os.environ.get('DEEPSEEK_API_KEY')
+        if deepseek_key:
+            try:
+                import requests as req
+                headers = {
+                    "Authorization": f"Bearer {deepseek_key}",
+                    "Content-Type": "application/json"
+                }
+                data = {
+                    "model": "deepseek-chat",
+                    "messages": [
+                        {"role": "system", "content": "You are a world-class Peak Performance Coach and Fitness Expert. Answer concisely."},
+                        {"role": "user", "content": question}
+                    ]
+                }
+                ds_response = req.post("https://api.deepseek.com/chat/completions", headers=headers, json=data, timeout=10)
+                if ds_response.status_code == 200:
+                    ds_data = ds_response.json()
+                    answer = ds_data['choices'][0]['message']['content']
+            except Exception as e:
+                print(f"DeepSeek Chat Error: {e}")
+
+    if not answer:
+        return jsonify({'error': 'Expert is currently unavailable. Please try again later.'}), 500
+
+    return jsonify({'success': True, 'answer': answer})

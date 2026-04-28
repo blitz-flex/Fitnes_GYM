@@ -1,7 +1,7 @@
 <!-- PREFERENCES SECTION -->
 <div id="preferences" class="settings-section">
-    <h2 class="section-title"><i class="fas fa-sliders-h"></i> App Preferences</h2>
-    <p class="text-muted mb-4">Customize your experience on the platform.</p>
+    <h2 class="section-title"><i class="fas fa-sliders-h"></i> {{ _('App Preferences') }}</h2>
+    <p class="text-muted mb-4">{{ _('Customize your experience on the platform.') }}</p>
     
     <div class="form-group">
         {{ form.language.label(class="form-label") }}
@@ -11,17 +11,17 @@
         </div>
     </div>
 
-    <h3 class="section-title mt-5" style="font-size: 1.2rem;"><i class="fas fa-robot"></i> Smart Features</h3>
+    <h3 class="section-title mt-5" style="font-size: 1.2rem;"><i class="fas fa-robot"></i> {{ _('Smart Features') }}</h3>
     <div class="form-group">
         {{ form.ai_coach_personality.label(class="form-label") }}
         <div class="input-group">
             <span class="input-group-text"><i class="fas fa-brain"></i></span>
             {{ form.ai_coach_personality(class="form-control form-select") }}
         </div>
-        <small class="text-muted mt-2 d-block">Choose how your AI assistant talks to you during workouts.</small>
+        <small class="text-muted mt-2 d-block">{{ _('Choose how your AI assistant talks to you during workouts.') }}</small>
     </div>
 
-    <h3 class="section-title mt-5" style="font-size: 1.2rem;"><i class="fas fa-lock"></i> Privacy & Notifications</h3>
+    <h3 class="section-title mt-5" style="font-size: 1.2rem;"><i class="fas fa-lock"></i> {{ _('Privacy & Notifications') }}</h3>
 
     <div class="row">
         <div class="col-md-6">
@@ -54,6 +54,6 @@
     
     <hr class="my-4 opacity-10">
     <button type="submit" name="submit" class="btn-save">
-        <i class="fas fa-save"></i> Save Preferences
+        <i class="fas fa-save"></i> {{ _('Save Preferences') }}
     </button>
 </div>

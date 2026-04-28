@@ -96,7 +96,7 @@ def dashboard():
 def users():
     """Manage users"""
     page = request.args.get('page', 1, type=int)
-    users = UserAccount.query.filter(UserAccount.username != 'admin').paginate(
+    users = UserAccount.query.filter(UserAccount.username != 'admin').order_by(desc(UserAccount.id)).paginate(
         page=page, per_page=10, error_out=False)
     return render_template('admin/users.html', users=users)
 

@@ -1,6 +1,6 @@
 {% extends "partials/base.html" %}
 
-{% block title %}Account Settings - GYM{% endblock %}
+{% block title %}{{ _('Account Settings') }} - GYM{% endblock %}
 
 {% block extra_css %}
 <link rel="stylesheet" href="{{ url_for('static', filename='css/user/profile.css') }}">
@@ -14,27 +14,27 @@
     <div class="settings-layout">
         <!-- Sidebar Navigation -->
         <nav class="settings-nav">
-            <h3 class="fw-bold mb-4 px-3 text-dark fs-5">Settings</h3>
+            <h3 class="fw-bold mb-4 px-3 text-dark fs-5">{{ _('Settings') }}</h3>
             <a class="settings-tab-item active" onclick="switchTab('fitness', this)" id="tab-fitness">
-                <i class="fas fa-dumbbell"></i> Fitness Profile
+                <i class="fas fa-dumbbell"></i> {{ _('Fitness Profile') }}
             </a>
             <a class="settings-tab-item" onclick="switchTab('preferences', this)" id="tab-preferences">
-                <i class="fas fa-sliders-h"></i> Preferences
+                <i class="fas fa-sliders-h"></i> {{ _('Preferences') }}
             </a>
             <a class="settings-tab-item" onclick="switchTab('recovery', this)" id="tab-recovery">
-                <i class="fas fa-hand-holding-heart"></i> Recovery
+                <i class="fas fa-hand-holding-heart"></i> {{ _('Recovery') }}
             </a>
             <a class="settings-tab-item" onclick="switchTab('apps', this)" id="tab-apps">
-                <i class="fas fa-plug"></i> Connected Apps
+                <i class="fas fa-plug"></i> {{ _('Connected Apps') }}
             </a>
             <a class="settings-tab-item" onclick="switchTab('subscription', this)" id="tab-subscription">
-                <i class="fas fa-credit-card"></i> Subscription
+                <i class="fas fa-credit-card"></i> {{ _('Subscription') }}
             </a>
             <a class="settings-tab-item" onclick="switchTab('achievements', this)" id="tab-achievements">
-                <i class="fas fa-medal"></i> Achievements
+                <i class="fas fa-medal"></i> {{ _('Achievements') }}
             </a>
             <a class="settings-tab-item" onclick="switchTab('security', this)" id="tab-security">
-                <i class="fas fa-shield-alt"></i> Security
+                <i class="fas fa-shield-alt"></i> {{ _('Security') }}
             </a>
         </nav>
 

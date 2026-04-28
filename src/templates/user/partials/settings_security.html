@@ -2,8 +2,8 @@
 <div id="security" class="settings-section">
     <form method="POST" action="{{ url_for('user.settings') }}" class="settings-form">
         {{ security_form.csrf_token }}
-        <h2 class="section-title"><i class="fas fa-shield-alt"></i> Security & Privacy</h2>
-        <p class="text-muted mb-4">Manage your login credentials and account security.</p>
+        <h2 class="section-title"><i class="fas fa-shield-alt"></i> {{ _('Security & Privacy') }}</h2>
+        <p class="text-muted mb-4">{{ _('Manage your login credentials and account security.') }}</p>
         
         <div class="form-group">
             {{ security_form.email.label(class="form-label") }}
@@ -20,7 +20,7 @@
                 {{ security_form.current_password(class="form-control", placeholder="Current password") }}
                 <span class="input-group-text pointer" onclick="togglePassword(this)"><i class="fas fa-eye password-toggle"></i></span>
             </div>
-            <small class="text-muted">Required to save any security changes.</small>
+            <small class="text-muted">{{ _('Required to save any security changes.') }}</small>
         </div>
 
         <div class="row">
@@ -45,7 +45,7 @@
         </div>
 
         <button type="submit" name="submit_security" class="btn-save btn-security-save">
-            <i class="fas fa-check-circle"></i> Save Security Changes
+            <i class="fas fa-check-circle"></i> {{ _('Save Security Changes') }}
         </button>
     </form>
 
@@ -53,19 +53,19 @@
     
     <!-- DATA EXPORT -->
     <div class="data-export-box">
-        <h3 class="section-title export-heading"><i class="fas fa-file-download"></i> Export Your Data</h3>
-        <p class="text-muted mb-4">Download a copy of your fitness metrics, preferences, and account data in JSON format.</p>
+        <h3 class="section-title export-heading"><i class="fas fa-file-download"></i> {{ _('Export Your Data') }}</h3>
+        <p class="text-muted mb-4">{{ _('Download a copy of your fitness metrics, preferences, and account data in JSON format.') }}</p>
         <a href="{{ url_for('user.export_data') }}" class="btn-save btn-export-json" target="_blank">
-            <i class="fas fa-download"></i> Download JSON
+            <i class="fas fa-download"></i> {{ _('Download JSON') }}
         </a>
     </div>
 
     <!-- DANGER ZONE -->
     <div class="danger-zone-box">
         <h3 class="danger-heading">
-            <i class="fas fa-exclamation-triangle"></i> Danger Zone
+            <i class="fas fa-exclamation-triangle"></i> {{ _('Danger Zone') }}
         </h3>
-        <p class="text-muted mb-4">Once you delete your account, there is no going back. Please be certain.</p>
+        <p class="text-muted mb-4">{{ _('Once you delete your account, there is no going back. Please be certain.') }}</p>
         
         <form method="POST" action="{{ url_for('user.settings') }}">
             {{ delete_form.csrf_token }}
@@ -76,8 +76,8 @@
                     <span class="input-group-text pointer" onclick="togglePassword(this)"><i class="fas fa-eye password-toggle"></i></span>
                 </div>
             </div>
-            <button type="submit" name="submit_delete" class="btn-save btn-danger-delete" onclick="return confirm('Are you absolutely sure you want to permanently delete your account? This action is irreversible.');">
-                <i class="fas fa-trash-alt"></i> Delete My Account
+            <button type="submit" name="submit_delete" class="btn-save btn-danger-delete" onclick="return confirm('{{ _('Are you absolutely sure you want to permanently delete your account? This action is irreversible.') }}');">
+                <i class="fas fa-trash-alt"></i> {{ _('Delete My Account') }}
             </button>
         </form>
     </div>
