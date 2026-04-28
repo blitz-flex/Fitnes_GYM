@@ -1,4 +1,5 @@
 from flask import render_template, redirect, url_for, flash, request
+from flask_babel import _
 from flask_login import login_required, current_user
 from functools import wraps
 from sqlalchemy import desc
@@ -16,14 +17,27 @@ def admin_required(f):
     @wraps(f)
     def decorated_function(*args, **kwargs):
         if not current_user.is_authenticated:
-            flash("Administrative rights required.", "danger")
+            flash(_("Administrative rights required."), "danger")
             return redirect(url_for('auth.login'))
         # Check if user is admin (you can add admin field to User model later)
         if current_user.username not in ['admin', 'administrator']:  # Simple check for now
-            flash("You do not have administrative permissions.", "danger")
+            flash(_("You do not have administrative permissions."), "danger")
             return redirect(url_for('main.index'))
         return f(*args, **kwargs)
     return decorated_function
+
+@admin_bp.context_processor
+def inject_admin_notifications():
+    if current_user.is_authenticated and current_user.username in ['admin', 'administrator']:
+        try:
+            from datetime import timedelta
+            now = datetime.utcnow()
+            half_day_ago = now - timedelta(hours=12)
+            recent_notifications = ProgramRegistration.query.filter(ProgramRegistration.created_at >= half_day_ago).order_by(desc(ProgramRegistration.created_at)).all()
+            return dict(admin_notifications=recent_notifications)
+        except Exception:
+            return dict(admin_notifications=[])
+    return dict(admin_notifications=[])
 
 def allowed_file(filename):
     ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'gif', 'webp'}
@@ -65,13 +79,24 @@ def dashboard():
     gender_counts = db.session.query(
         UserAccount.gender, func.count(UserAccount.id)
     ).filter(UserAccount.gender.isnot(None)).group_by(UserAccount.gender).all()
-    male_count = sum(c[1] for c in gender_counts if c[0] and c[0].lower() in ['male', 'მამრობითი'])
-    female_count = sum(c[1] for c in gender_counts if c[0] and c[0].lower() in ['female', 'მდედრობითი'])
+    male_count = sum(c[1] for c in gender_counts if c[0] and c[0].lower() in ['male', 'მამრობითი', _('male')])
+    female_count = sum(c[1] for c in gender_counts if c[0] and c[0].lower() in ['female', 'მდედრობითი', _('female')])
 
     # Subscription plans
     plan_counts = db.session.query(
         UserAccount.subscription_plan, func.count(UserAccount.id)
     ).group_by(UserAccount.subscription_plan).all()
+
+    # Chart data (daily registrations for the last 14 days)
+    daily_regs = db.session.query(
+        func.date(ProgramRegistration.created_at).label('day'),
+        func.count(ProgramRegistration.id).label('count')
+    ).filter(
+        ProgramRegistration.created_at >= (now - timedelta(days=14))
+    ).group_by(func.date(ProgramRegistration.created_at)).order_by(func.date(ProgramRegistration.created_at)).all()
+
+    chart_labels = [str(d[0]) for d in daily_regs]
+    chart_data = [d[1] for d in daily_regs]
 
     stats = {
         'total_users': total_users,
@@ -86,6 +111,8 @@ def dashboard():
         'male_count': male_count,
         'female_count': female_count,
         'plan_counts': plan_counts,
+        'chart_labels': chart_labels,
+        'chart_data': chart_data,
     }
 
     return render_template('admin/dashboard.html', stats=stats)
@@ -109,12 +136,12 @@ def delete_user(user_id):
 
     # Prevent admin from deleting themselves
     if user.id == current_user.id:
-        flash("You cannot delete your own account.", "danger")
+        flash(_("You cannot delete your own account."), "danger")
         return redirect(url_for('admin.users'))
 
     # Prevent deleting other admins (optional safety measure)
     if user.is_admin:
-        flash("Administrators cannot be deleted.", "danger")
+        flash(_("Administrators cannot be deleted."), "danger")
         return redirect(url_for('admin.users'))
 
     try:
@@ -124,10 +151,10 @@ def delete_user(user_id):
         # Delete the user
         db.session.delete(user)
         db.session.commit()
-        flash(f"User '{user.username}' has been successfully deleted.", "success")
+        flash(_("User '%(username)s' has been successfully deleted.", username=user.username), "success")
     except Exception as e:
         db.session.rollback()
-        flash("An error occurred while deleting the user.", "danger")
+        flash(_("An error occurred while deleting the user."), "danger")
 
     return redirect(url_for('admin.users'))
 
@@ -152,10 +179,10 @@ def delete_registration(reg_id):
     try:
         db.session.delete(registration)
         db.session.commit()
-        flash(f"Registration for '{registration.full_name}' has been successfully deleted.", "success")
+        flash(_("Registration for '%(name)s' has been successfully deleted.", name=registration.full_name), "success")
     except Exception as e:
         db.session.rollback()
-        flash("An error occurred while deleting the registration.", "danger")
+        flash(_("An error occurred while deleting the registration."), "danger")
 
     return redirect(url_for('admin.registrations'))
 
@@ -179,10 +206,10 @@ def delete_post(id):
         post = BlogPost.query.get_or_404(id)
         db.session.delete(post)
         db.session.commit()
-        flash(f"Blog post '{post.title}' has been successfully deleted.", "success")
+        flash(_("Blog post '%(title)s' has been successfully deleted.", title=post.title), "success")
     except Exception as e:
         db.session.rollback()
-        flash("An error occurred while deleting the blog post.", "danger")
+        flash(_("An error occurred while deleting the blog post."), "danger")
 
     return redirect(url_for('admin.blog_management'))
 
@@ -207,11 +234,11 @@ def create_post():
 
         # Simple validation
         if not title:
-            flash('Title is required!', 'danger')
+            flash(_('Title is required!'), 'danger')
             return render_template('admin/create_post_simple.html')
 
         if not content:
-            flash('Content is required!', 'danger')
+            flash(_('Content is required!'), 'danger')
             return render_template('admin/create_post_simple.html')
 
         try:
@@ -259,7 +286,7 @@ def create_post():
 
             print(f"Post saved successfully with ID: {post.id}")
 
-            flash(f'Blog post "{title}" has been successfully created!', 'success')
+            flash(_('Blog post "%(title)s" has been successfully created!', title=title), 'success')
             return redirect(url_for('admin.blog_management'))
 
         except Exception as e:
@@ -267,7 +294,7 @@ def create_post():
             import traceback
             traceback.print_exc()
             db.session.rollback()
-            flash(f'Error: {str(e)}', 'danger')
+            flash(_('Error: %(error)s', error=str(e)), 'danger')
 
     return render_template('admin/create_post_simple.html')
 
@@ -287,11 +314,11 @@ def edit_post(post_id):
 
         # Simple validation
         if not title:
-            flash('Title is required!', 'danger')
+            flash(_('Title is required!'), 'danger')
             return render_template('admin/edit_post.html', post=post)
 
         if not content:
-            flash('Content is required!', 'danger')
+            flash(_('Content is required!'), 'danger')
             return render_template('admin/edit_post.html', post=post)
 
         try:
@@ -329,12 +356,12 @@ def edit_post(post_id):
             post.slug = f"{slugify(title) or 'post'}-{timestamp}"
 
             db.session.commit()
-            flash(f'Blog post "{title}" has been successfully updated!', 'success')
+            flash(_('Blog post "%(title)s" has been successfully updated!', title=title), 'success')
             return redirect(url_for('admin.blog_management'))
 
         except Exception as e:
             db.session.rollback()
-            flash(f'Error: {str(e)}', 'danger')
+            flash(_('Error: %(error)s', error=str(e)), 'danger')
 
     return render_template('admin/edit_post.html', post=post)
 
@@ -425,8 +452,8 @@ def statistics():
     gender_counts = db.session.query(
         UserAccount.gender, func.count(UserAccount.id)
     ).filter(UserAccount.gender.isnot(None)).group_by(UserAccount.gender).all()
-    stats['male_count'] = sum(c[1] for c in gender_counts if c[0] and c[0].lower() in ['male', 'მამრობითი'])
-    stats['female_count'] = sum(c[1] for c in gender_counts if c[0] and c[0].lower() in ['female', 'მდედრობითი'])
+    stats['male_count'] = sum(c[1] for c in gender_counts if c[0] and c[0].lower() in ['male', 'მამრობითი', _('male')])
+    stats['female_count'] = sum(c[1] for c in gender_counts if c[0] and c[0].lower() in ['female', 'მდედრობითი', _('female')])
 
     return render_template('admin/statistics.html', stats=stats)
 
@@ -434,5 +461,7 @@ def statistics():
 @login_required
 @admin_required
 def admin_logout():
-    """Admin panel exit - redirects to main page without logging out user"""
+    """Admin panel exit - logs out the user completely"""
+    from flask_login import logout_user
+    logout_user()
     return redirect(url_for('main.index'))

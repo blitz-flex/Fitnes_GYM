@@ -270,22 +270,23 @@
     }
 }
 
-.footer-content {
-                gap: 6px;
-            }
+@media (max-width: 480px) {
+    .footer-content {
+        gap: 6px;
+    }
 
-            .footer-text {
-                font-size: 0.8rem;
-            }
+    .footer-text {
+        font-size: 0.8rem;
+    }
 
-            .footer-social {
-                gap: 8px;
-            }
+    .footer-social {
+        gap: 8px;
+    }
 
-            .social-link {
-                width: 28px;
-                height: 28px;
-                font-size: 0.75rem;
-            }
-        }
+    .social-link {
+        width: 28px;
+        height: 28px;
+        font-size: 0.75rem;
+    }
+}
 

@@ -1,48 +1,298 @@
-{% extends "partials/base.html" %}
+<!DOCTYPE html>
+<html lang="{{ get_locale() }}">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}{{ _('Admin Panel') }}{% endblock %}</title>
+    <link rel="icon"
+        href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512' fill='%233b82f6'><path d='M495.9 166.6c3.2 8.7 .5 18.4-6.4 24.6l-43.3 39.4c1.1 8.3 1.7 16.8 1.7 25.4s-.6 17.1-1.7 25.4l43.3 39.4c6.9 6.2 9.6 15.9 6.4 24.6c-4.4 11.9-9.7 23.3-15.8 34.3l-4.7 8.1c-6.6 11-14 21.4-22.1 31.2c-5.9 7.2-15.7 9.6-24.5 6.8l-55.7-17.8c-13.4 10.3-28.2 18.9-44 25.4l-12.5 57.1c-2 9.1-9 16.3-18.2 17.8c-13.8 2.3-28 3.5-42.5 3.5s-28.7-1.2-42.5-3.5c-9.2-1.5-16.2-8.7-18.2-17.8l-12.5-57.1c-15.8-6.5-30.6-15.1-44-25.4L83.1 425.9c-8.8 2.8-18.6 .3-24.5-6.8c-8.1-9.8-15.5-20.2-22.1-31.2l-4.7-8.1c-6.1-11-11.4-22.4-15.8-34.3c-3.2-8.7-.5-18.4 6.4-24.6l43.3-39.4C64.6 273.1 64 264.6 64 256s.6-17.1 1.7-25.4L22.4 191.2c-6.9-6.2-9.6-15.9-6.4-24.6c4.4-11.9 9.7-23.3 15.8-34.3l4.7-8.1c6.6-11 14-21.4 22.1-31.2c5.9-7.2 15.7-9.6 24.5-6.8l55.7 17.8c13.4-10.3 28.2-18.9 44-25.4l12.5-57.1c2-9.1 9-16.3 18.2-17.8C227.3 1.2 241.5 0 256 0s28.7 1.2 42.5 3.5c9.2 1.5 16.2 8.7 18.2 17.8l12.5 57.1c15.8 6.5 30.6 15.1 44 25.4l55.7-17.8c8.8-2.8 18.6-.3 24.5 6.8c8.1 9.8 15.5 20.2 22.1 31.2l4.7 8.1c6.1 11 11.4 22.4 15.8 34.3zM256 336a80 80 0 1 0 0-160 80 80 0 1 0 0 160z'/></svg>">
+    
+    <!-- Professional Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Framework -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Core Elite Styles -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/admin/base.css', v='21.0') }}">
+    {% block extra_css %}{% endblock %}
 
-{% block title %}⚙️ Admin Panel{% endblock %}
+    <style>
+        /* Force Critical Layouts */
+        html, body { background-color: var(--bg-deep) !important; color: var(--text-main) !important; margin: 0; padding: 0; overflow-x: hidden; }
+        .admin-layout { display: flex !important; height: 100vh; overflow: hidden; }
+        .admin-viewport { 
+            flex: 1 !important; 
+            margin-left: 280px !important; 
+            display: flex; 
+            flex-direction: column; 
+            background: var(--bg-deep); 
+            height: 100vh; 
+            overflow: hidden; 
+        }
+        .admin-header { 
+            display: flex !important; 
+            align-items: center !important; 
+            justify-content: space-between !important;
+            height: var(--header-h) !important; 
+            padding: 0 40px !important; 
+            gap: 20px !important;
+            flex-shrink: 0;
+            background: var(--header-bg);
+            backdrop-filter: blur(25px);
+            border-bottom: 1px solid var(--border-soft);
+            z-index: 1000;
+        }
+        
+        @media (max-width: 1024px) {
+            .admin-viewport { margin-left: 0 !important; }
+            .admin-header { padding: 0 20px !important; }
+        }
 
-{% block admin_css %}
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/admin/base.css', v='5.0') }}">
-{% endblock %}
+        /* Theme Toggle Icon Specifics */
+        .theme-toggle .fa-sun { display: none; }
+        [data-theme="light"] .theme-toggle .fa-moon { display: none; }
+        [data-theme="light"] .theme-toggle .fa-sun { display: block; }
+        [data-theme="light"] .admin-glow-top, 
+        [data-theme="light"] .admin-glow-bottom { display: none; }
+    </style>
+    <script>
+        // Critical Theme Init to prevent flash
+        (function() {
+            const savedTheme = localStorage.getItem('admin-theme') || 'dark';
+            document.documentElement.setAttribute('data-theme', savedTheme);
+        })();
+    </script>
+</head>
+<body>
 
-{% block content %}
-<div class="admin-wrapper">
+<div class="admin-layout">
+    <!-- Spotlight Background Effects -->
+    <div class="admin-glow-top"></div>
+    <div class="admin-glow-bottom"></div>
+
     <!-- Sidebar -->
     <aside class="admin-sidebar" id="adminSidebar">
+        <div class="sidebar-header">
+            <a href="{{ url_for('admin.dashboard') }}" class="sidebar-logo">
+                <div class="logo-box"><i class="fas fa-terminal"></i></div>
+                <span>{{ _('Admin System') }}</span>
+            </a>
+        </div>
+        
         <nav class="sidebar-nav">
+            <div class="nav-label">{{ _('Main Menu') }}</div>
             <a href="{{ url_for('admin.dashboard') }}" class="sidebar-link {% if request.endpoint == 'admin.dashboard' %}active{% endif %}">
-                <i class="fas fa-th-large"></i> <span>Dashboard</span>
+                <i class="fas fa-columns"></i> <span>{{ _('Dashboard') }}</span>
             </a>
             <a href="{{ url_for('admin.statistics') }}" class="sidebar-link {% if request.endpoint == 'admin.statistics' %}active{% endif %}">
-                <i class="fas fa-chart-pie"></i> <span>Analytics</span>
+                <i class="fas fa-chart-line"></i> <span>{{ _('Analytics') }}</span>
             </a>
-            <a href="{{ url_for('admin.users') }}" class="sidebar-link {% if 'user' in request.endpoint %}active{% endif %}">
-                <i class="fas fa-user-friends"></i> <span>Users</span>
+            
+            <div class="nav-label mt-4">{{ _('Management') }}</div>
+            <a href="{{ url_for('admin.users') }}" class="sidebar-link {% if request.endpoint and 'user' in request.endpoint %}active{% endif %}">
+                <i class="fas fa-users"></i> <span>{{ _('Members') }}</span>
             </a>
             <a href="{{ url_for('admin.registrations') }}" class="sidebar-link {% if request.endpoint == 'admin.registrations' %}active{% endif %}">
-                <i class="fas fa-file-signature"></i> <span>Bookings</span>
+                <i class="fas fa-calendar-check"></i> <span>{{ _('Bookings') }}</span>
             </a>
-            <a href="{{ url_for('admin.blog_management') }}" class="sidebar-link {% if 'blog' in request.endpoint or 'post' in request.endpoint %}active{% endif %}">
-                <i class="fas fa-newspaper"></i> <span>Blog Portal</span>
+            <a href="{{ url_for('admin.blog_management') }}" class="sidebar-link {% if request.endpoint and ('blog' in request.endpoint or 'post' in request.endpoint) %}active{% endif %}">
+                <i class="fas fa-feather-pointed"></i> <span>{{ _('Blog') }}</span>
+            </a>
+
+            <div class="sidebar-spacer"></div>
+            
+            <div class="nav-label">{{ _('Exit') }}</div>
+            <a href="{{ url_for('main.index') }}" class="sidebar-link return-btn">
+                <i class="fas fa-arrow-left"></i> <span>{{ _('Back to Site') }}</span>
             </a>
         </nav>
     </aside>
 
-    <!-- Main Content -->
-    <main class="admin-main">
-        <div class="admin-content-container">
-            {% block admin_content %}{% endblock %}
+    <main class="admin-viewport">
+        <!-- Top Header -->
+        <header class="admin-header">
+            <div class="header-left">
+                <button class="mobile-toggle" id="mobileToggle">
+                    <i class="fas fa-bars-staggered"></i>
+                </button>
+                <div class="breadcrumb-area">
+                    <a href="{{ url_for('admin.dashboard') }}" class="bc-root" title="{{ _('Dashboard Home') }}"><i class="fas fa-home"></i></a>
+                    <i class="fas fa-chevron-right bc-sep"></i>
+                    <span class="bc-current">{% block page_title %}{{ _('Dashboard') }}{% endblock %}</span>
+                </div>
+            </div>
+            
+            <div class="header-center flex-grow-1 d-flex justify-content-center">
+                <div class="header-system-status">
+                    <div class="status-indicator">
+                        <span class="status-dot pulse"></span>
+                        <span class="status-text">{{ _('System Live') }}</span>
+                    </div>
+                    <div class="status-divider"></div>
+                    <div class="status-info">
+                        <i class="far fa-clock"></i>
+                        <span id="headerClock">--:--:--</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="header-right">
+                <div class="header-actions">
+                    <!-- Language Switcher -->
+                    <a href="{{ url_for('main.set_language', language='ka' if get_locale() == 'en' else 'en') }}" class="icon-btn lang-btn text-decoration-none me-3" title="{{ _('Switch Language') }}">
+                        <i class="fas fa-globe"></i>
+                        <span class="ms-1 small fw-bold">{{ get_locale() | upper }}</span>
+                    </a>
+                    <!-- Theme Toggle -->
+                    <button class="icon-btn theme-toggle" id="themeToggle" title="{{ _('Toggle Theme') }}">
+                        <i class="fas fa-moon"></i>
+                        <i class="fas fa-sun"></i>
+                    </button>
+                    <!-- Notifications -->
+                    <div class="dropdown">
+                        <button class="icon-btn position-relative" type="button" data-bs-toggle="dropdown" aria-expanded="false" title="{{ _('Notifications') }}">
+                            <i class="fas fa-bell"></i>
+                            {% if admin_notifications %}
+                                <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger notif-badge-pulse" style="font-size: 0.55rem; padding: 0.25em 0.4em; margin-top: 5px; margin-left: -5px;">
+                                    {{ admin_notifications|length }}
+                                </span>
+                            {% endif %}
+                        </button>
+                        <ul class="dropdown-menu dropdown-menu-end premium-admin-dropdown" style="width: 320px;">
+                            <li class="dropdown-header d-flex justify-content-between align-items-center">
+                                <span class="text-main fw-800">{{ _('Last 12 Hours') }}</span>
+                            </li>
+                            <li><hr class="dropdown-divider"></li>
+                            <div class="notification-list">
+                                {% for note in admin_notifications %}
+                                    <li>
+                                        <a class="dropdown-item px-4 py-3 border-bottom-soft notification-item" href="{{ url_for('admin.registrations') }}">
+                                            <div class="d-flex align-items-start gap-3">
+                                                <div class="notif-icon bg-primary-soft text-primary rounded-circle d-flex align-items-center justify-content-center" style="width: 40px; height: 40px; flex-shrink: 0;">
+                                                    <i class="fas fa-user-plus small"></i>
+                                                </div>
+                                                <div class="flex-grow-1 overflow-hidden">
+                                                    <p class="mb-0 small fw-bold text-white text-truncate">{{ note.full_name }}</p>
+                                                    <p class="mb-0 x-small text-main text-truncate fw-500">{{ _('Joined') }} {{ note.program }}</p>
+                                                    <p class="mb-0 xx-small mt-1 d-flex align-items-center fw-800 text-primary">
+                                                        <i class="far fa-clock me-1"></i>{{ note.created_at.strftime('%H:%M') }}
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </li>
+                                {% else %}
+                                    <li class="px-4 py-5 text-center">
+                                        <div class="mb-2 text-muted opacity-20"><i class="fas fa-bell-slash fa-2x"></i></div>
+                                        <p class="mb-0 text-muted small">{{ _('No activity in last 12h') }}</p>
+                                    </li>
+                                {% endfor %}
+                            </div>
+                        </ul>
+                    </div>
+                    
+                    <!-- Settings Dropdown -->
+                    <div class="dropdown">
+                        <button class="icon-btn" type="button" data-bs-toggle="dropdown" aria-expanded="false" title="{{ _('Settings') }}">
+                            <i class="fas fa-cog"></i>
+                        </button>
+                        <ul class="dropdown-menu dropdown-menu-end premium-admin-dropdown">
+                            <li class="dropdown-header">{{ _('System Settings') }}</li>
+                            <li><a class="dropdown-item" href="#"><i class="fas fa-user-circle"></i> {{ _('Profile Settings') }}</a></li>
+                            <li><a class="dropdown-item" href="#"><i class="fas fa-shield-alt"></i> {{ _('Security') }}</a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li class="dropdown-header">{{ _('Quick Actions') }}</li>
+                            <li><a class="dropdown-item" href="#"><i class="fas fa-broom"></i> {{ _('Clear Cache') }}</a></li>
+                            <li><a class="dropdown-item text-danger" href="{{ url_for('admin.admin_logout') }}"><i class="fas fa-sign-out-alt"></i> {{ _('Exit Admin') }}</a></li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="user-pill">
+                    <div class="user-meta">
+                        <span class="u-name">{{ current_user.username }}</span>
+                        <span class="u-status">{{ _('Online') }}</span>
+                    </div>
+                    <div class="user-avatar">
+                        {% if current_user.profile_image %}
+                            <img src="{{ url_for('static', filename='uploads/' + current_user.profile_image) }}" alt="">
+                        {% else %}
+                            {{ current_user.username[0]|upper }}
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- Main Content Scroller -->
+        <div class="admin-content-scroller">
+            <!-- Flash Messages -->
+            <div class="flash-messages-container px-4 pt-2">
+                {% with messages = get_flashed_messages(with_categories=true) %}
+                    {% if messages %}
+                        {% for category, message in messages %}
+                            <div class="alert alert-{{ category if category != 'message' else 'primary' }} elite-alert alert-dismissible fade show mb-4" role="alert">
+                                <div class="d-flex align-items-center gap-3">
+                                    <div class="alert-icon-box">
+                                        {% if category == 'success' %}<i class="fas fa-check-circle"></i>
+                                        {% elif category == 'danger' %}<i class="fas fa-exclamation-triangle"></i>
+                                        {% elif category == 'warning' %}<i class="fas fa-exclamation-circle"></i>
+                                        {% else %}<i class="fas fa-info-circle"></i>{% endif %}
+                                    </div>
+                                    <div class="alert-text">{{ message }}</div>
+                                </div>
+                                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="alert" aria-label="Close"></button>
+                            </div>
+                        {% endfor %}
+                    {% endif %}
+                {% endwith %}
+            </div>
+
+            <div class="admin-content">
+                {% block admin_content %}{% endblock %}
+            </div>
         </div>
     </main>
 </div>
 
-<!-- Mobile Toggle (if needed) -->
-<div class="sidebar-overlay" id="sidebarOverlay"></div>
-{% endblock %}
+<!-- Scripts -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+    // Sidebar Mobile Toggle
+    document.getElementById('mobileToggle').addEventListener('click', function() {
+        document.getElementById('adminSidebar').classList.toggle('active');
+    });
 
-{% block footer %}{% endblock %}
+    // Header Clock
+    function updateClock() {
+        const now = new Date();
+        const timeStr = now.toLocaleTimeString('en-US', { hour12: false });
+        const clockEl = document.getElementById('headerClock');
+        if (clockEl) clockEl.textContent = timeStr;
+    }
+    setInterval(updateClock, 1000);
+    updateClock();
 
-{% block admin_js %}
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-{% endblock %}
+    // Theme Toggle Logic
+    const themeBtn = document.getElementById('themeToggle');
+    themeBtn.addEventListener('click', () => {
+        const currentTheme = document.documentElement.getAttribute('data-theme');
+        const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+        
+        document.documentElement.setAttribute('data-theme', newTheme);
+        localStorage.setItem('admin-theme', newTheme);
+        
+        // Optional: Trigger custom event for charts to re-render if needed
+        window.dispatchEvent(new Event('themeChanged'));
+    });
+</script>
+{% block extra_js %}{% endblock %}
+
+</body>
+</html>

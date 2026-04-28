@@ -42,31 +42,7 @@
                 {% if current_user.is_authenticated %}
                 {% if current_user.is_admin %}
                 <!-- Admin & Language Menu -->
-                <li class="nav-item dropdown me-2">
-                    <a class="nav-link dropdown-toggle lang-toggle-btn" href="#" id="langDropdown" role="button"
-                        data-bs-toggle="dropdown" aria-expanded="false">
-                        <div class="lang-box">
-                            <i class="fas fa-globe"></i>
-                            <span class="lang-code">{{ get_locale() | upper }}</span>
-                        </div>
-                    </a>
-                    <ul class="dropdown-menu dropdown-menu-end premium-dropdown lang-dropdown" aria-labelledby="langDropdown">
-                        <li class="dropdown-header">{{ _('Select Language') }}</li>
-                        <li><hr class="dropdown-divider"></li>
-                        <li>
-                            <a class="dropdown-item {% if get_locale() == 'en' %}active-lang{% endif %}" href="{{ url_for('main.set_language', language='en') }}">
-                                <span class="flag-icon">🇺🇸</span> English
-                                {% if get_locale() == 'en' %}<i class="fas fa-check ms-auto text-success small"></i>{% endif %}
-                            </a>
-                        </li>
-                        <li>
-                            <a class="dropdown-item {% if get_locale() == 'ka' %}active-lang{% endif %}" href="{{ url_for('main.set_language', language='ka') }}">
-                                <span class="flag-icon">🇬🇪</span> ქართული
-                                {% if get_locale() == 'ka' %}<i class="fas fa-check ms-auto text-success small"></i>{% endif %}
-                            </a>
-                        </li>
-                    </ul>
-                </li>
+
 
                 <!-- Admin Dropdown Menu -->
                 <li class="nav-item dropdown">

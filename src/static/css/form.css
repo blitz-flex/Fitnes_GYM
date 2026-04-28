@@ -506,13 +506,19 @@ body.dark-mode .form-card {
     backdrop-filter: none !important;
 }
 
-body.dark-mode .form-header h1 {
+body.dark-mode .form-header h1,
+body.dark-mode .form-header p {
     color: rgba(255,255,255,0.87) !important;
     text-shadow: none !important;
 }
 
 body.dark-mode .form-header .subtitle {
     color: rgba(255,255,255,0.60) !important;
+}
+
+body.dark-mode .success-icon-header {
+    background: rgba(76, 175, 80, 0.1) !important;
+    color: #4caf50 !important;
 }
 
 body.dark-mode .input-with-icon input,
@@ -528,8 +534,44 @@ body.dark-mode .input-with-icon select:focus {
     box-shadow: 0 0 0 3px rgba(94,189,131,0.20) !important;
 }
 
-body.dark-mode .form-footer {
-    border-top-color: #2C2C2C !important;
+body.dark-mode .choice-button {
+    background: rgba(255, 255, 255, 0.05) !important;
+    color: rgba(255, 255, 255, 0.87) !important;
+    border-color: #2C2C2C !important;
+}
+
+body.dark-mode .choice-button.active {
+    background: #4CAF50 !important;
+    color: white !important;
+    border-color: transparent !important;
+}
+
+body.dark-mode .choice-button:hover:not(.active) {
+    background: rgba(255, 255, 255, 0.1) !important;
+}
+
+body.dark-mode .back-link,
+body.dark-mode .back-button {
+    color: rgba(255, 255, 255, 0.6) !important;
+}
+
+body.dark-mode .back-link:hover,
+body.dark-mode .back-button:hover {
+    color: #4CAF50 !important;
+}
+
+body.dark-mode .form-label, 
+body.dark-mode label {
+    color: rgba(255, 255, 255, 0.87) !important;
+}
+
+body.dark-mode .submit-btn {
+    color: #ffffff !important;
+}
+
+body.dark-mode .success-actions .submit-btn {
+    color: #ffffff !important;
+    font-weight: 800;
 }
 
 body.dark-mode .form-footer p {

@@ -19,17 +19,21 @@ def create_app():
     from flask import session, request
     from flask_login import current_user
     def get_locale():
-        # 1. Check session (Explicit user choice in current session)
+        # 1. Force English for unauthenticated users (Guests)
+        if not current_user.is_authenticated:
+            return 'en'
+            
+        # 2. Check session for authenticated users (Explicit choice)
         lang = session.get('language')
         if lang:
             return lang
             
-        # 2. Check user profile if logged in
-        if current_user.is_authenticated and current_user.language:
+        # 3. Check user profile if logged in
+        if current_user.language:
             return current_user.language
             
-        # 3. Fallback to browser header
-        return request.accept_languages.best_match(['en', 'ka'])
+        # 4. Fallback to English for everyone else
+        return 'en'
 
     babel.init_app(app, locale_selector=get_locale)
     

@@ -3,38 +3,98 @@
 {% block title %}Checkout - GYM{% endblock %}
 
 {% block content %}
-<div class="checkout-container" style="min-height: 100vh; background: #f4f7f6; padding: 120px 20px 80px;">
+<style>
+    .checkout-container {
+        min-height: 100vh;
+        background: #f4f7f6;
+        padding: 120px 20px 80px;
+        transition: background 0.3s;
+    }
+
+    .checkout-card {
+        background: white;
+        border-radius: 24px;
+        padding: 40px;
+        box-shadow: 0 15px 50px rgba(0,0,0,0.05);
+        transition: 0.3s;
+    }
+
+    .summary-card {
+        background: #1a1a1a;
+        color: white;
+        border-radius: 24px;
+        padding: 40px;
+        box-shadow: 0 20px 60px rgba(0,0,0,0.15);
+        position: sticky;
+        top: 120px;
+    }
+
+    .checkout-card h2 { font-weight: 800; margin-bottom: 30px; color: #2d3436; }
+    .checkout-card .form-label { font-weight: 700; color: #4a5568; }
+    .checkout-card .form-control {
+        padding: 14px;
+        border-radius: 12px;
+        border: 2px solid #f0f2f5;
+        background: #f8f9fa;
+        color: #2d3436;
+    }
+
+    /* Dark Mode Overrides */
+    body.dark-mode .checkout-container { background: #121212 !important; }
+    body.dark-mode .checkout-card {
+        background: #1E1E1E !important;
+        border: 1px solid #2C2C2C !important;
+        box-shadow: 0 10px 40px rgba(0,0,0,0.4) !important;
+    }
+    body.dark-mode .checkout-card h2 { color: white !important; }
+    body.dark-mode .checkout-card .form-label { color: rgba(255,255,255,0.87) !important; }
+    body.dark-mode .checkout-card .form-control {
+        background: #242424 !important;
+        border-color: #2C2C2C !important;
+        color: white !important;
+    }
+    body.dark-mode .checkout-card .form-control::placeholder { color: rgba(255,255,255,0.3); }
+    body.dark-mode .secure-info { background: rgba(46, 204, 113, 0.1) !important; }
+
+    body.dark-mode .summary-card {
+        background: #18181b !important;
+        border: 1px solid #27272a !important;
+        box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5) !important;
+    }
+</style>
+
+<div class="checkout-container">
     <div class="container" style="max-width: 1000px;">
         <div class="row g-5">
             <!-- Left Side: Payment Details -->
             <div class="col-lg-7">
-                <div class="checkout-card" style="background: white; border-radius: 24px; padding: 40px; box-shadow: 0 15px 50px rgba(0,0,0,0.05);">
-                    <h2 style="font-weight: 800; margin-bottom: 30px;"><i class="fas fa-credit-card text-primary"></i> Payment Details</h2>
+                <div class="checkout-card">
+                    <h2><i class="fas fa-credit-card text-primary"></i> Payment Details</h2>
                     
                     <form action="{{ url_for('user.process_payment', plan_name=plan_name) }}" method="POST" id="payment-form">
                         <input type="hidden" name="csrf_token" value="{{ form.csrf_token._value() if form else '' }}">
                         
                         <div class="mb-4">
-                            <label class="form-label" style="font-weight: 700;">Cardholder Name</label>
-                            <input type="text" class="form-control" placeholder="John Doe" required style="padding: 14px; border-radius: 12px; border: 2px solid #f0f2f5; background: #f8f9fa;">
+                            <label class="form-label">Cardholder Name</label>
+                            <input type="text" class="form-control" placeholder="John Doe" required>
                         </div>
 
                         <div class="mb-4">
-                            <label class="form-label" style="font-weight: 700;">Card Number</label>
+                            <label class="form-label">Card Number</label>
                             <div class="input-group" style="position: relative;">
-                                <input type="text" class="form-control" placeholder="0000 0000 0000 0000" maxlength="19" required style="padding: 14px; border-radius: 12px; border: 2px solid #f0f2f5; background: #f8f9fa; padding-left: 50px;">
+                                <input type="text" class="form-control" placeholder="0000 0000 0000 0000" maxlength="19" required style="padding-left: 50px;">
                                 <span style="position: absolute; left: 15px; top: 50%; transform: translateY(-50%); z-index: 5; color: #cbd5e0;"><i class="fas fa-credit-card"></i></span>
                             </div>
                         </div>
 
                         <div class="row mb-4">
                             <div class="col-md-6">
-                                <label class="form-label" style="font-weight: 700;">Expiry Date</label>
-                                <input type="text" class="form-control" placeholder="MM / YY" maxlength="5" required style="padding: 14px; border-radius: 12px; border: 2px solid #f0f2f5; background: #f8f9fa;">
+                                <label class="form-label">Expiry Date</label>
+                                <input type="text" class="form-control" placeholder="MM / YY" maxlength="5" required>
                             </div>
                             <div class="col-md-6">
-                                <label class="form-label" style="font-weight: 700;">CVV / CVC</label>
-                                <input type="password" class="form-control" placeholder="***" maxlength="3" required style="padding: 14px; border-radius: 12px; border: 2px solid #f0f2f5; background: #f8f9fa;">
+                                <label class="form-label">CVV / CVC</label>
+                                <input type="password" class="form-control" placeholder="***" maxlength="3" required>
                             </div>
                         </div>
 
@@ -51,7 +111,7 @@
 
             <!-- Right Side: Order Summary -->
             <div class="col-lg-5">
-                <div class="summary-card" style="background: #1a1a1a; color: white; border-radius: 24px; padding: 40px; box-shadow: 0 20px 60px rgba(0,0,0,0.15); position: sticky; top: 120px;">
+                <div class="summary-card">
                     <h3 style="font-weight: 800; margin-bottom: 25px; color: var(--primary-color);">Order Summary</h3>
                     
                     <div style="display: flex; justify-content: space-between; margin-bottom: 20px; padding-bottom: 20px; border-bottom: 1px solid rgba(255,255,255,0.1);">

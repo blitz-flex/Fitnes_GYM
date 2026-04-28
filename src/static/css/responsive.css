@@ -1,0 +1,491 @@
+/* 
+  Master Responsive Layer 
+  Focusing on iPhone SE (375px) and other small screens
+*/
+
+@media (max-width: 480px) {
+
+    /* Global Container Adjustments */
+    .container {
+        padding-left: 15px;
+        padding-right: 15px;
+    }
+
+    /* Typography Overrides */
+    h1,
+    .hero-title {
+        font-size: 2.2rem !important;
+        letter-spacing: -1px !important;
+        line-height: 1.2 !important;
+    }
+
+    .hero-title br {
+        display: none;
+    }
+
+    h2,
+    .section-title,
+    .cta-glass-card h2 {
+        font-size: 1.8rem !important;
+        letter-spacing: -0.5px !important;
+    }
+
+    h3 {
+        font-size: 1.3rem !important;
+    }
+
+    .hero-subtitle,
+    .section-subtitle,
+    .cta-glass-card p {
+        font-size: 0.95rem !important;
+        line-height: 1.5 !important;
+        margin-bottom: 25px !important;
+    }
+
+    /* Navbar Fixes */
+    .premium-nav {
+        padding: 8px 0 !important;
+    }
+
+    .navbar-brand {
+        font-size: 1.1rem !important;
+    }
+
+    .brand-icon {
+        font-size: 1rem !important;
+    }
+
+    .navbar-toggler {
+        padding: 4px 8px !important;
+        font-size: 0.9rem !important;
+        border-color: rgba(255, 255, 255, 0.1) !important;
+    }
+
+    .navbar-collapse {
+        background: rgba(15, 17, 23, 0.98) !important;
+        margin: 10px -15px 0 !important;
+        padding: 20px 15px !important;
+        border-radius: 0 0 20px 20px !important;
+        border-top: 1px solid rgba(255, 255, 255, 0.05) !important;
+    }
+
+    .nav-link {
+        padding: 12px 0 !important;
+    }
+
+    .premium-dropdown {
+        background: rgba(255, 255, 255, 0.03) !important;
+        border: none !important;
+        box-shadow: none !important;
+        margin-top: 0 !important;
+        padding-left: 15px !important;
+    }
+
+    /* Buttons */
+    .hero-buttons,
+    .cta-actions,
+    .cta-buttons {
+        flex-direction: column !important;
+        gap: 12px !important;
+    }
+
+    .btn-premium,
+    .btn-outline,
+    .btn-glass-outline,
+    .btn-primary-cta,
+    .btn-secondary-cta,
+    .submit-btn {
+        width: 100% !important;
+        justify-content: center !important;
+        padding: 14px 24px !important;
+        font-size: 0.95rem !important;
+    }
+
+    /* Hero Section */
+    .hero-section {
+        padding: 90px 0 50px !important;
+        min-height: auto !important;
+        background-attachment: scroll !important;
+        /* Performance on mobile */
+    }
+
+    .hero-badge {
+        margin-bottom: 15px !important;
+        font-size: 0.7rem !important;
+        padding: 6px 12px !important;
+    }
+
+    .hero-stats-mini {
+        margin-top: 30px !important;
+        gap: 12px !important;
+    }
+
+    .mini-stat-card {
+        padding: 10px 15px !important;
+        min-width: 0 !important;
+        flex: 1 1 100% !important;
+    }
+
+    .mini-stat-card strong {
+        font-size: 1.1rem !important;
+    }
+
+    .mini-stat-card .stat-icon {
+        width: 35px !important;
+        height: 35px !important;
+        font-size: 0.9rem !important;
+    }
+
+    /* Features Section */
+    .features-section,
+    .programs-section,
+    .pricing-section,
+    .testimonials-section,
+    .faq-section,
+    .cta-section {
+        padding: 60px 0 !important;
+    }
+
+    .section-header {
+        margin-bottom: 40px !important;
+    }
+
+    .feature-card {
+        padding: 30px 20px !important;
+    }
+
+    /* Programs & Cards */
+    .programs-grid {
+        gap: 20px !important;
+    }
+
+    .program-card {
+        margin-bottom: 0;
+    }
+
+    .program-image-wrapper {
+        height: 180px !important;
+    }
+
+    .program-content {
+        padding: 20px !important;
+    }
+
+    .program-title {
+        font-size: 1.3rem !important;
+    }
+
+    .program-meta {
+        flex-wrap: wrap !important;
+        gap: 8px !important;
+        margin-bottom: 20px !important;
+    }
+
+    .program-price {
+        font-size: 1.4rem !important;
+    }
+
+    /* Stats Section */
+    .stats-section {
+        padding: 50px 0 !important;
+    }
+
+    .stats-wrapper {
+        gap: 30px !important;
+        flex-direction: column !important;
+    }
+
+    .stat-value {
+        font-size: 2.5rem !important;
+    }
+
+    .stat-label {
+        font-size: 0.85rem !important;
+    }
+
+    /* Pricing Section */
+    .pricing-grid {
+        gap: 20px !important;
+    }
+
+    .pricing-card {
+        padding: 30px 20px !important;
+        margin-bottom: 10px;
+    }
+
+    .pricing-card.popular {
+        transform: none !important;
+        margin: 20px 0 !important;
+    }
+
+    .pricing-header .price {
+        font-size: 2.5rem !important;
+    }
+
+    /* Testimonials */
+    .testimonial-card {
+        padding: 25px 20px !important;
+    }
+
+    /* CTA Section */
+    .cta-glass-card {
+        padding: 40px 20px !important;
+        border-radius: 24px !important;
+    }
+
+    .cta-badge {
+        margin-bottom: 20px !important;
+        font-size: 0.8rem !important;
+    }
+
+    .cta-benefits {
+        gap: 12px !important;
+        margin-top: 20px !important;
+        padding-top: 25px !important;
+    }
+
+    /* FAQ Section */
+    .faq-container {
+        gap: 10px !important;
+    }
+
+    .faq-question {
+        padding: 15px 18px !important;
+    }
+
+    .faq-question h3 {
+        font-size: 0.95rem !important;
+    }
+
+    .faq-answer p {
+        font-size: 0.9rem !important;
+    }
+
+    /* About Page Fixes */
+    .about-hero {
+        padding: 80px 15px 50px !important;
+    }
+
+    .about-hero h1 {
+        font-size: 2rem !important;
+    }
+
+    .hero-stat-number {
+        font-size: 2rem !important;
+    }
+
+    .company-info-grid {
+        gap: 30px !important;
+    }
+
+    .company-vision h2 {
+        font-size: 1.6rem !important;
+    }
+
+    .company-stats-card {
+        padding: 20px 15px !important;
+    }
+
+    /* Contact Page Fixes */
+    .contact-hero h1 {
+        font-size: 2rem !important;
+    }
+
+    .contact-container {
+        padding: 20px 0 !important;
+    }
+
+    .contact-card {
+        padding: 20px 15px !important;
+    }
+
+    /* Footer */
+    .premium-footer {
+        padding: 50px 0 30px !important;
+    }
+
+    .footer-grid {
+        grid-template-columns: 1fr !important;
+        text-align: center;
+        gap: 35px !important;
+    }
+
+    .footer-social-new {
+        justify-content: center !important;
+    }
+
+    .contact-list li {
+        justify-content: center !important;
+        font-size: 0.9rem !important;
+    }
+
+    /* Modals */
+    .modal-container {
+        max-width: 100% !important;
+        margin: 0 !important;
+    }
+
+    .modal-header {
+        padding: 20px 15px 10px !important;
+    }
+
+    .modal-body {
+        padding: 0 15px 25px !important;
+    }
+
+    .icon-glow {
+        width: 40px !important;
+        height: 40px !important;
+        font-size: 16px !important;
+    }
+
+    .modal-header h2 {
+        font-size: 1.2rem !important;
+    }
+}
+
+/* Specific iPhone SE / Very Small Device Tweaks */
+@media (max-width: 375px) {
+
+    h1,
+    .hero-title {
+        font-size: 1.9rem !important;
+    }
+
+    .mini-stat-card span {
+        font-size: 0.6rem !important;
+    }
+
+    .program-meta span {
+        font-size: 0.7rem !important;
+        padding: 3px 6px !important;
+    }
+}
+
+/* Authentication Pages (Login/Register) */
+@media (max-width: 480px) {
+    .register-container {
+        padding: 70px 10px 30px !important;
+    }
+
+    .register-card,
+    .auth-card,
+    .login-form,
+    .register-form {
+        padding: 25px 15px !important;
+        border-radius: 16px !important;
+    }
+
+    .register-header h1,
+    .auth-title,
+    .form-header h1 {
+        font-size: 1.6rem !important;
+    }
+
+    .form-row {
+        grid-template-columns: 1fr !important;
+        gap: 0 !important;
+    }
+
+    .fitness-grid,
+    .fitness-goal-cards,
+    .level-cards,
+    .activity-cards {
+        grid-template-columns: 1fr !important;
+    }
+
+    .goal-card,
+    .level-card,
+    .activity-card {
+        padding: 12px !important;
+    }
+}
+
+/* User Profile & Registrations */
+@media (max-width: 992px) {
+    .profile-dashboard-grid {
+        grid-template-columns: 1fr !important;
+    }
+}
+
+@media (max-width: 480px) {
+    .profile-container {
+        padding: 0 15px !important;
+        margin-top: 20px !important;
+    }
+
+    .profile-header {
+        flex-direction: column !important;
+        text-align: center !important;
+        gap: 20px !important;
+    }
+
+    .profile-image,
+    .profile-avatar-icon {
+        width: 100px !important;
+        height: 100px !important;
+        font-size: 2.5rem !important;
+    }
+
+    .profile-info-grid {
+        grid-template-columns: 1fr !important;
+    }
+
+    .registration-header {
+        flex-direction: column !important;
+        align-items: flex-start !important;
+        gap: 10px !important;
+    }
+
+    .registration-actions {
+        flex-direction: column !important;
+    }
+
+    .action-btn {
+        width: 100% !important;
+        justify-content: center !important;
+    }
+
+    .metric-pill {
+        width: 100% !important;
+        justify-content: center !important;
+    }
+}
+
+/* Admin Dashboard Fixes */
+@media (max-width: 480px) {
+    .kpi-num {
+        font-size: 1.5rem !important;
+    }
+
+    .welcome-icon-box {
+        width: 40px !important;
+        height: 40px !important;
+        font-size: 1rem !important;
+    }
+
+    .quick-actions {
+        width: 100%;
+        flex-direction: column;
+    }
+
+    .quick-btn {
+        width: 100%;
+        justify-content: center;
+    }
+
+    .dash-card-header {
+        padding: 15px 15px 0 !important;
+    }
+
+    .dash-card-body {
+        padding: 12px 15px 15px !important;
+    }
+
+    .admin-table-wrapper,
+    .table-responsive {
+        margin: 0 -15px !important;
+        width: calc(100% + 30px) !important;
+        padding: 0 15px !important;
+    }
+}

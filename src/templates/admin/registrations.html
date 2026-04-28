@@ -1,7 +1,7 @@
 {% extends "admin/base.html" %}
 
-{% block title %}Registrations - Admin Panel{% endblock %}
-{% block page_title %}Class Bookings{% endblock %}
+{% block title %}{{ _('Registrations - Admin Panel') }}{% endblock %}
+{% block page_title %}{{ _('Class Bookings') }}{% endblock %}
 
 {% block extra_css %}
 <link rel="stylesheet" href="{{ url_for('static', filename='css/admin/mgmt-shared.css', v='1.0') }}">
@@ -14,19 +14,19 @@
         <div class="mgmt-title-area">
             <div class="mgmt-icon green"><i class="fas fa-file-signature"></i></div>
             <div>
-                <h4 class="mgmt-title">Class Bookings</h4>
+                <h4 class="mgmt-title">{{ _('Class Bookings') }}</h4>
                 <p class="mgmt-subtitle">
                     <span class="live-dot"></span>
-                    {{ registrations.total if registrations else 0 }} Active Registrations
+                    {{ registrations.total if registrations else 0 }} {{ _('Active Registrations') }}
                 </p>
             </div>
         </div>
         <div class="mgmt-actions">
             <div class="search-wrapper">
                 <i class="fas fa-search search-icon"></i>
-                <input type="text" class="search-input" placeholder="Search bookings…" id="regSearch">
+                <input type="text" class="search-input" placeholder="{{ _('Search bookings') }}…" id="regSearch">
             </div>
-            <button class="icon-btn" title="Export CSV"><i class="fas fa-download"></i></button>
+            <button class="icon-btn" title="{{ _('Export CSV') }}"><i class="fas fa-download"></i></button>
         </div>
     </div>
 
@@ -36,11 +36,11 @@
         <table class="mgmt-table">
             <thead>
                 <tr>
-                    <th class="th-first">Member</th>
-                    <th>Program</th>
-                    <th>Schedule</th>
-                    <th>Registered</th>
-                    <th class="th-last">Actions</th>
+                    <th class="th-first">{{ _('Member') }}</th>
+                    <th>{{ _('Program') }}</th>
+                    <th>{{ _('Schedule') }}</th>
+                    <th>{{ _('Registered') }}</th>
+                    <th class="th-last">{{ _('Actions') }}</th>
                 </tr>
             </thead>
             <tbody>
@@ -79,7 +79,7 @@
                         {% if reg.preferred_time %}
                             <span class="tag tag-zinc"><i class="fas fa-clock"></i> {{ reg.preferred_time }}</span>
                         {% else %}
-                            <span class="cell-muted">Flexible</span>
+                            <span class="cell-muted">{{ _('Flexible') }}</span>
                         {% endif %}
                     </td>
                     <td>
@@ -91,7 +91,7 @@
                     <td class="td-last">
                         <div class="action-group">
                             <form method="POST" action="{{ url_for('admin.delete_registration', reg_id=reg.id) }}" class="d-inline">
-                                <button type="submit" class="act-btn danger" title="Delete" onclick="return confirm('Delete this registration?')">
+                                <button type="submit" class="act-btn danger" title="{{ _('Delete') }}" onclick="return confirm('{{ _('Delete registration') }}?')">
                                     <i class="fas fa-trash"></i>
                                 </button>
                             </form>
@@ -129,8 +129,8 @@
     {% else %}
     <div class="empty-state">
         <div class="empty-icon"><i class="fas fa-calendar-times"></i></div>
-        <h5>No Registrations Yet</h5>
-        <p>Members haven't signed up for any classes yet.</p>
+        <h5>{{ _('No Registrations Yet') }}</h5>
+        <p>{{ _("Members haven't signed up for any classes yet.") }}</p>
     </div>
     {% endif %}
 </div>

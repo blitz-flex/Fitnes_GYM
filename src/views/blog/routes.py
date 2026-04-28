@@ -295,6 +295,7 @@ def generate_ai_post():
     topic = request.json.get('topic')
     category = request.json.get('category', 'Training')
     featured_image = request.json.get('image')
+    custom_prompt = request.json.get('custom_prompt', '')
     
     if not topic:
         return jsonify({'error': 'Topic is required'}), 400
@@ -380,18 +381,30 @@ def generate_ai_post():
 
                 lang_instruction = "IMPORTANT: Write EVERYTHING (title, html_content, excerpt) in English."
 
+                # Build the prompt with high priority for custom instructions
+                custom_instruction_block = f"\n[CRITICAL OVERRIDE]: {custom_prompt}\n(Follow the above override even if it contradicts the default style below)\n" if custom_prompt else ""
+
+                # Default requirements - only used if not contradicted by custom_prompt
+                default_requirements = ""
+                if not custom_prompt:
+                    default_requirements = (
+                        "Use an expert yet highly motivational and practical tone suited for gym members and fitness enthusiasts. "
+                        "Focus on actionable advice, workout integration, and real-world results. "
+                        "Length: Approximately 500 words with expert technical detail."
+                    )
+                else:
+                    default_requirements = "If the custom instructions above don't specify length or tone, use a motivational expert tone and aim for 500 words."
+
                 prompt = (
                     f"You are a world-class Elite Performance Scientist and Peak Performance Coach. {lang_instruction} "
-                    f"Write a sophisticated, academically-rigorous, yet highly engaging expert article about '{topic}' for the '{category}' category. "
-                    f"{prompt_context}"
-                    "Use a professional, authoritative, and clinical yet motivating tone. "
-                    "Include physiological mechanisms, biomechanical insights, and evidence-based protocols. "
-                    "Output exactly ONE SINGLE JSON object. DO NOT include any text before or after the JSON. "
+                    f"{custom_instruction_block}"
+                    f"Task: Write an expert article about '{topic}' for the '{category}' category. "
+                    f"Context: {prompt_context} "
+                    f"General Requirements: {default_requirements} "
+                    "Output Format: Output exactly ONE SINGLE JSON object. DO NOT include any text before or after the JSON. "
                     "The JSON must have exactly two fields: "
-                    "1. 'html_content': The full article in raw HTML (using <h2>, <h3>, <p>, <ul>, <li>, <strong>, <blockquote>). "
-                    "Ensure headings are thought-provoking and use sophisticated vocabulary (e.g., instead of 'Tips', use 'Strategic Protocols' or 'Biomechanical Considerations'). "
+                    "1. 'html_content': The article in raw HTML (using <h2>, <h3>, <p>, <ul>, <li>, <strong>, <blockquote>). "
                     "2. 'excerpt': A concise, high-level executive summary (2 lines). "
-                    "The article should be approximately 800 words with deep technical detail."
                 )
                 response = model.generate_content(prompt)
                 

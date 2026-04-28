@@ -1,54 +1,47 @@
-<!-- Main content grid: Chart + Activity -->
-<div class="dash-grid-main mb-4">
-    <!-- Platform Growth Chart -->
-    <div class="dash-card">
-        <div class="dash-card-header">
-            <div>
-                <h6 class="dash-card-title">Platform Growth</h6>
-                <p class="dash-card-sub">Member registration trend</p>
+<div class="row g-4" style="display: flex !important; flex-wrap: wrap !important;">
+    <!-- Growth Chart -->
+    <div class="col-lg-8">
+        <div class="dash-card" style="height: 100% !important; background: rgba(18,18,21,0.85) !important; border: 1px solid rgba(255,255,255,0.05) !important; border-radius: 24px !important; padding: 24px !important;">
+            <div class="d-flex justify-content-between align-items-center mb-4">
+                <div>
+                    <h5 style="font-family: 'Outfit'; font-weight: 700; color: #fff; margin: 0;">{{ _('Platform Growth') }}</h5>
+                    <p style="font-size: 0.85rem; color: #71717a; margin: 0;">{{ _('Member registration trend') }}</p>
+                </div>
+                <div class="range-toggle-group">
+                    <button class="range-btn">1D</button>
+                    <button class="range-btn">7D</button>
+                    <button class="range-btn active">14D</button>
+                    <button class="range-btn">30D</button>
+                </div>
             </div>
-            <div class="date-filter-group-mini">
-                <button class="date-btn-mini" onclick="updateChartRange('1', event)" data-range="1">1D</button>
-                <button class="date-btn-mini" onclick="updateChartRange('7', event)" data-range="7">7D</button>
-                <button class="date-btn-mini active" onclick="updateChartRange('14', event)" data-range="14">14D</button>
-                <button class="date-btn-mini" onclick="updateChartRange('30', event)" data-range="30">30D</button>
+            <div id="growthChart" style="height: 350px; width: 100%;">
+                <!-- Chart Placeholder -->
+                <canvas id="mainGrowthChart"></canvas>
             </div>
-        </div>
-        <div class="dash-card-body chart-area">
-            <canvas id="growthChart"></canvas>
         </div>
     </div>
 
-    <!-- Recent Activity Feed -->
-    <div class="dash-card">
-        <div class="dash-card-header">
-            <div>
-                <h6 class="dash-card-title">Recent Activity</h6>
-                <p class="dash-card-sub">Latest gym registrations</p>
+    <!-- Recent Activity -->
+    <div class="col-lg-4">
+        <div class="dash-card" style="height: 100% !important; background: rgba(18,18,21,0.85) !important; border: 1px solid rgba(255,255,255,0.05) !important; border-radius: 24px !important; padding: 24px !important;">
+            <div class="d-flex justify-content-between align-items-center mb-4">
+                <h5 style="font-family: 'Outfit'; font-weight: 700; color: #fff; margin: 0;">{{ _('Recent Activity') }}</h5>
+                <a href="{{ url_for('admin.registrations') }}" style="font-size: 0.8rem; color: #3b82f6; text-decoration: none; font-weight: 600;">{{ _('View all') }} <i class="fas fa-arrow-right ms-1"></i></a>
             </div>
-            <a href="{{ url_for('admin.registrations') }}" class="view-all-link">View all <i class="fas fa-arrow-right ms-1"></i></a>
-        </div>
-        <div class="dash-card-body">
-            <div class="activity-feed-v2">
-                {% if stats.recent_registrations %}
-                    {% for reg in stats.recent_registrations %}
-                    <div class="activity-row">
-                        <div class="activity-avatar">
-                            <i class="fas fa-running"></i>
-                        </div>
-                        <div class="activity-details">
-                            <span class="activity-name">{{ reg.full_name }}</span>
-                            <span class="activity-meta">Joined <strong>{{ reg.program }}</strong></span>
-                        </div>
-                        <span class="activity-time-badge">{{ reg.created_at.strftime('%d %b') }}</span>
+            
+            <div class="activity-feed-v2" style="display: flex !important; flex-direction: column !important; gap: 12px !important;">
+                {% for reg in stats.recent_registrations %}
+                <div class="activity-row" style="display: flex !important; align-items: center !important; gap: 14px !important; padding: 12px !important; background: rgba(255,255,255,0.02) !important; border-radius: 16px !important; border: 1px solid transparent !important;">
+                    <div class="activity-avatar" style="width: 40px; height: 40px; border-radius: 10px; background: #000; color: #10b981; display: flex; align-items: center; justify-content: center; font-size: 0.8rem; flex-shrink: 0;">
+                        <i class="fas fa-person-running"></i>
                     </div>
-                    {% endfor %}
-                {% else %}
-                    <div class="empty-feed">
-                        <i class="fas fa-history"></i>
-                        <span>No recent activity</span>
+                    <div class="activity-details" style="flex: 1 !important; min-width: 0 !important;">
+                        <div style="font-size: 0.9rem; font-weight: 700; color: #fff; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">{{ reg.full_name }} {{ _('Joined') }}</div>
+                        <div style="font-size: 0.75rem; color: #71717a;">{{ reg.program }}</div>
                     </div>
-                {% endif %}
+                    <div style="font-size: 0.75rem; color: #71717a; font-weight: 600; flex-shrink: 0;">{{ reg.created_at.strftime('%d %b') }}</div>
+                </div>
+                {% endfor %}
             </div>
         </div>
     </div>

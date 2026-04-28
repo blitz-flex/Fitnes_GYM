@@ -1,5 +1,6 @@
 from flask import render_template, request, jsonify, redirect, url_for
 from flask_login import login_required
+from flask_babel import _
 from . import exercise_bp
 from ...models.exercise import Exercise
 from sqlalchemy import or_
@@ -55,8 +56,21 @@ def index():
 def api_program(program_id):
     program = PROGRAM_EXERCISES.get(program_id)
     if not program:
-        return jsonify({"error": "Program not found"}), 404
-    return jsonify(program)
+        return jsonify({"error": _("Program not found")}), 404
+    
+    # Translate content dynamically
+    translated_program = {
+        "title": _(program["title"]),
+        "price": program.get("price", ""),
+        "exercises": [
+            {
+                "name": _(ex["name"]),
+                "desc": _(ex["desc"]),
+                "icon": ex["icon"]
+            } for ex in program["exercises"]
+        ]
+    }
+    return jsonify(translated_program)
 
 @exercise_bp.route('/api/exercises')
 def api_index():

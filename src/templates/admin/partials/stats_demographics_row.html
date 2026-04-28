@@ -4,8 +4,8 @@
     <div class="chart-card">
         <div class="chart-header">
             <div>
-                <h6 class="chart-title">Program Popularity</h6>
-                <p class="chart-subtitle">Class distribution</p>
+                <h6 class="chart-title">{{ _('Program Popularity') }}</h6>
+                <p class="chart-subtitle">{{ _('Class distribution') }}</p>
             </div>
         </div>
         <div class="chart-body">
@@ -13,7 +13,7 @@
                 <canvas id="programPieChart"></canvas>
                 <div class="doughnut-center">
                     <span class="total-val">{{ stats.total_registrations }}</span>
-                    <span class="total-lbl">Bookings</span>
+                    <span class="total-lbl">{{ _('Registrations') }}</span>
                 </div>
             </div>
             <div class="program-legend-grid mt-4">
@@ -31,8 +31,8 @@
     <div class="chart-card">
         <div class="chart-header">
             <div>
-                <h6 class="chart-title">Monthly Objectives</h6>
-                <p class="chart-subtitle">Progress vs targets</p>
+                <h6 class="chart-title">{{ _('Monthly Objectives') }}</h6>
+                <p class="chart-subtitle">{{ _('Progress vs targets') }}</p>
             </div>
         </div>
         <div class="chart-body">
@@ -42,18 +42,18 @@
 
             <div class="goal-item">
                 <div class="goal-header">
-                    <span class="goal-name">New Member Growth</span>
+                    <span class="goal-name">{{ _('New Member Growth') }}</span>
                     <span class="goal-pct color-blue">{{ member_pct }}%</span>
                 </div>
                 <div class="goal-track">
                     <div class="goal-fill bg-gradient-blue" style="width: {{ [member_pct, 100]|min }}%;"></div>
                 </div>
-                <span class="goal-detail">{{ stats.total_users }} / 200 members</span>
+                <span class="goal-detail">{{ stats.total_users }} / 200 {{ _('members') }}</span>
             </div>
 
             <div class="goal-item">
                 <div class="goal-header">
-                    <span class="goal-name">Revenue Target</span>
+                    <span class="goal-name">{{ _('Revenue Target') }}</span>
                     <span class="goal-pct color-green">{{ revenue_pct }}%</span>
                 </div>
                 <div class="goal-track">
@@ -64,13 +64,13 @@
 
             <div class="goal-item">
                 <div class="goal-header">
-                    <span class="goal-name">Content Plan</span>
+                    <span class="goal-name">{{ _('Content Plan') }}</span>
                     <span class="goal-pct color-amber">{{ blog_pct }}%</span>
                 </div>
                 <div class="goal-track">
                     <div class="goal-fill bg-gradient-amber" style="width: {{ [blog_pct, 100]|min }}%;"></div>
                 </div>
-                <span class="goal-detail">{{ stats.total_blog_posts }} / 20 articles</span>
+                <span class="goal-detail">{{ stats.total_blog_posts }} / 20 {{ _('Articles') }}</span>
             </div>
         </div>
     </div>

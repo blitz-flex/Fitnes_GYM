@@ -1,18 +1,17 @@
-# Georgian translations for PROJECT.
+# Translations template for PROJECT.
 # Copyright (C) 2026 ORGANIZATION
 # This file is distributed under the same license as the PROJECT project.
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2026.
 #
+#, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2026-04-28 21:18+0400\n"
-"PO-Revision-Date: 2026-04-27 23:30+0400\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language: ka\n"
-"Language-Team: ka <LL@li.org>\n"
-"Plural-Forms: nplurals=1; plural=0;\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -20,95 +19,95 @@ msgstr ""
 
 #: src/data/program_data.py:5
 msgid "Yoga Program"
-msgstr "იოგას პროგრამა"
+msgstr ""
 
 #: src/data/program_data.py:8
 msgid "Surya Namaskar"
-msgstr "სურია ნამასკარი"
+msgstr ""
 
 #: src/data/program_data.py:8
 msgid "Sun Salutation - restoring energy"
-msgstr "მზის მოლოცვა - ენერგიის აღდგენა"
+msgstr ""
 
 #: src/data/program_data.py:9
 msgid "Adho Mukha Svanasana"
-msgstr "ადჰო მუკა შვანასანა"
+msgstr ""
 
 #: src/data/program_data.py:9
 msgid "Downward Facing Dog"
-msgstr "დაბლა მომზირალი ძაღლი"
+msgstr ""
 
 #: src/data/program_data.py:10
 msgid "Vrikshasana"
-msgstr "ვრიკშასანა"
+msgstr ""
 
 #: src/data/program_data.py:10
 msgid "Tree Pose - for balance"
-msgstr "ხის პოზა - ბალანსისთვის"
+msgstr ""
 
 #: src/data/program_data.py:11
 msgid "Trikonasana"
-msgstr "ტრიკონასანა"
+msgstr ""
 
 #: src/data/program_data.py:11
 msgid "Triangle Pose - stretching"
-msgstr "სამკუთხედის პოზა - გაწელვა"
+msgstr ""
 
 #: src/data/program_data.py:12
 msgid "Savasana"
-msgstr "შავასანა"
+msgstr ""
 
 #: src/data/program_data.py:12
 msgid "Deep relaxation and meditation"
-msgstr "ღრმა რელაქსაცია და მედიტაცია"
+msgstr ""
 
 #: src/data/program_data.py:13
 msgid "Balasana"
-msgstr "ბალასანა"
+msgstr ""
 
 #: src/data/program_data.py:13
 msgid "Child's Pose - resting"
-msgstr "ბავშვის პოზა - დასვენება"
+msgstr ""
 
 #: src/data/program_data.py:14
 msgid "Bhujangasana"
-msgstr "ბჰუჯანგასანა"
+msgstr ""
 
 #: src/data/program_data.py:14
 msgid "Cobra Pose - back strengthening"
-msgstr "კობრას პოზა - ზურგის გამაგრება"
+msgstr ""
 
 #: src/data/program_data.py:15
 msgid "Virabhadrasana"
-msgstr "ვირაბჰადრასანა"
+msgstr ""
 
 #: src/data/program_data.py:15
 msgid "Warrior Pose - endurance"
-msgstr "მეომრის პოზა - გამძლეობა"
+msgstr ""
 
 #: src/data/program_data.py:16
 msgid "Padmasana"
-msgstr "პადმასანა"
+msgstr ""
 
 #: src/data/program_data.py:16
 msgid "Lotus Pose - breathing exercise"
-msgstr "ლოტოსის პოზა - სუნთქვითი ვარჯიში"
+msgstr ""
 
 #: src/data/program_data.py:20
 msgid "Pilates Program"
-msgstr "პილატესის პროგრამა"
+msgstr ""
 
 #: src/data/program_data.py:23
 msgid "The Hundred"
-msgstr "ასეული"
+msgstr ""
 
 #: src/data/program_data.py:23
 msgid "Core and abdominal preparation"
-msgstr "კორპუსის და მუცლის მომზადება"
+msgstr ""
 
 #: src/data/program_data.py:24
 msgid "Single Leg Stretch"
-msgstr "ცალ ფეხზე გაწელვა"
+msgstr ""
 
 #: src/data/program_data.py:24
 msgid "Leg stretch and abdominal press"
@@ -116,509 +115,497 @@ msgstr ""
 
 #: src/data/program_data.py:25
 msgid "The Swan"
-msgstr "გედი"
+msgstr ""
 
 #: src/data/program_data.py:25
 msgid "Back muscle strengthening"
-msgstr "ზურგის კუნთების გაძლიერება"
+msgstr ""
 
 #: src/data/program_data.py:26
 msgid "Plank"
-msgstr "პლანკა"
+msgstr ""
 
 #: src/data/program_data.py:26
 msgid "Static endurance"
-msgstr "სტატიკური გამძლეობა"
+msgstr ""
 
 #: src/data/program_data.py:27
 msgid "Spine Stretch"
-msgstr "ხერხემლის გაწელვა"
+msgstr ""
 
 #: src/data/program_data.py:27
 msgid "For spine flexibility"
-msgstr "ხერხემლის მოქნილობისთვის"
+msgstr ""
 
 #: src/data/program_data.py:28
 msgid "Roll Up"
-msgstr "აწევა"
+msgstr ""
 
 #: src/data/program_data.py:28
 msgid "Full abdominal control"
-msgstr "მუცლის სრული კონტროლი"
+msgstr ""
 
 #: src/data/program_data.py:29
 msgid "Criss-Cross"
-msgstr "ჯვარედინი"
+msgstr ""
 
 #: src/data/program_data.py:29
 msgid "Oblique muscle workout"
-msgstr "ირიბი კუნთების ვარჯიში"
+msgstr ""
 
 #: src/data/program_data.py:30
 msgid "Teaser"
-msgstr "ტიზერი"
+msgstr ""
 
 #: src/data/program_data.py:30
 msgid "Balance and core stabilization"
-msgstr "ბალანსი და კორპუსის სტაბილიზაცია"
+msgstr ""
 
 #: src/data/program_data.py:31
 msgid "Side Kick"
-msgstr "გვერდითი დარტყმა"
+msgstr ""
 
 #: src/data/program_data.py:31
 msgid "Leg and hip muscles"
-msgstr "ფეხის და თეძოს კუნთები"
+msgstr ""
 
 #: src/data/program_data.py:35
 msgid "CrossFit WOD"
-msgstr "CrossFit-ის ვარჯიში"
+msgstr ""
 
 #: src/data/program_data.py:38
 msgid "Thrusters"
-msgstr "თრასტერები"
+msgstr ""
 
 #: src/data/program_data.py:38
 msgid "Combined exercise for strength"
-msgstr "კომბინირებული ვარჯიში ძალისთვის"
+msgstr ""
 
 #: src/data/program_data.py:39
 msgid "Burpees"
-msgstr "ბერპი"
+msgstr ""
 
 #: src/data/program_data.py:39
 msgid "Cardio and endurance"
-msgstr "კარდიო და გამძლეობა"
+msgstr ""
 
 #: src/data/program_data.py:40
 msgid "Box Jumps"
-msgstr "ხტომა ყუთზე"
+msgstr ""
 
 #: src/data/program_data.py:40
 msgid "Explosive power"
-msgstr "ფეთქებადი ძალა"
+msgstr ""
 
 #: src/data/program_data.py:41
 msgid "Kettlebell Swings"
-msgstr "გირის ქნევა"
+msgstr ""
 
 #: src/data/program_data.py:41
 msgid "Dynamic power"
-msgstr "დინამიური ძალა"
+msgstr ""
 
 #: src/data/program_data.py:42
 msgid "Wall Balls"
-msgstr "ბურთის ტყორცნა კედელზე"
+msgstr ""
 
 #: src/data/program_data.py:42
 msgid "Coordination and strength"
-msgstr "კოორდინაცია და ძალა"
+msgstr ""
 
 #: src/data/program_data.py:43
 msgid "Pull-ups"
-msgstr "აზიდვები"
+msgstr ""
 
 #: src/data/program_data.py:43
 msgid "Back and arm strength"
-msgstr "ზურგის და ხელების ძალა"
+msgstr ""
 
 #: src/data/program_data.py:44
 msgid "Double Unders"
-msgstr "ორმაგი გადახტომა"
+msgstr ""
 
 #: src/data/program_data.py:44
 msgid "Jump rope - speed"
-msgstr "სახტუნაო - სისწრაფე"
+msgstr ""
 
 #: src/data/program_data.py:45
 msgid "Deadlift"
-msgstr "ამოწევა (Deadlift)"
+msgstr ""
 
 #: src/data/program_data.py:45
 msgid "Basic strength exercise"
-msgstr "ძირითადი ძალისმიერი ვარჯიში"
+msgstr ""
 
 #: src/data/program_data.py:46
 msgid "Rowing"
-msgstr "ნიჩბოსნობა"
+msgstr ""
 
 #: src/data/program_data.py:46
 msgid "Cardio and full body engagement"
-msgstr "კარდიო და სხეულის სრული ჩართულობა"
+msgstr ""
 
 #: src/data/program_data.py:50
 msgid "Swimming Techniques"
-msgstr "ცურვის ტექნიკა"
+msgstr ""
 
 #: src/data/program_data.py:53
 msgid "Front Crawl Drills"
-msgstr "კროლის სავარჯიშოები"
+msgstr ""
 
 #: src/data/program_data.py:53
 msgid "Freestyle breathing technique"
-msgstr "თავისუფალი სტილის სუნთქვის ტექნიკა"
+msgstr ""
 
 #: src/data/program_data.py:54
 msgid "Butterfly Kick"
-msgstr "ბატერფლაის მოძრაობა"
+msgstr ""
 
 #: src/data/program_data.py:54
 msgid "Butterfly leg movement"
-msgstr "ბატერფლაის ფეხების მოძრაობა"
+msgstr ""
 
 #: src/data/program_data.py:55
 msgid "Tumble Turns"
-msgstr "ბრუნი წყალქვეშ"
+msgstr ""
 
 #: src/data/program_data.py:55
 msgid "Fast underwater turns"
-msgstr "სწრაფი წყალქვეშა მობრუნებები"
+msgstr ""
 
 #: src/data/program_data.py:56
 msgid "Backstroke Balance"
-msgstr "ბალანსი ზურგზე ცურვისას"
+msgstr ""
 
 #: src/data/program_data.py:56
 msgid "Balance while swimming on back"
-msgstr "ბალანსი ზურგზე ცურვის დროს"
+msgstr ""
 
 #: src/data/program_data.py:57
 msgid "Streamline Glide"
-msgstr "ჰიდროდინამიური სრიალი"
+msgstr ""
 
 #: src/data/program_data.py:57
 msgid "Hydrodynamic position"
-msgstr "ჰიდროდინამიური პოზიცია"
+msgstr ""
 
 #: src/data/program_data.py:58
 msgid "Breaststroke Pull"
-msgstr "ბრასის მოსმა"
+msgstr ""
 
 #: src/data/program_data.py:58
 msgid "Breaststroke arm movement"
-msgstr "ბრასის ხელების მოძრაობა"
+msgstr ""
 
 #: src/data/program_data.py:59
 msgid "Dolphin Kick"
-msgstr "დელფინისებური მოძრაობა"
+msgstr ""
 
 #: src/data/program_data.py:59
 msgid "Underwater wave-like body movement"
-msgstr "წყალქვეშა ტალღოვანი მოძრაობა"
+msgstr ""
 
 #: src/data/program_data.py:60
 msgid "High Elbow Catch"
-msgstr "მაღალი იდაყვის დაჭერა"
+msgstr ""
 
 #: src/data/program_data.py:60
 msgid "Proper water catch"
-msgstr "წყლის სწორი ჩაჭიდება"
+msgstr ""
 
 #: src/data/program_data.py:61
 msgid "Sprinting Sets"
-msgstr "სპრინტ სეტები"
+msgstr ""
 
 #: src/data/program_data.py:61
 msgid "Short distance acceleration"
-msgstr "მოკლე მანძილზე აჩქარება"
+msgstr ""
 
 #: src/data/program_data.py:65
 msgid "Boxing Fundamentals"
-msgstr "კრივის საფუძვლები"
+msgstr ""
 
 #: src/data/program_data.py:68
 msgid "Shadow Boxing"
-msgstr "ბრძოლა ლანდთან"
+msgstr ""
 
 #: src/data/program_data.py:68
 msgid "Working on movement and technique"
-msgstr "მოძრაობასა და ტექნიკაზე მუშაობა"
+msgstr ""
 
 #: src/data/program_data.py:69
 msgid "Heavy Bag Work"
-msgstr "მუშაობა მძიმე ტომარაზე"
+msgstr ""
 
 #: src/data/program_data.py:69
 msgid "Punching power"
-msgstr "დარტყმის ძალა"
+msgstr ""
 
 #: src/data/program_data.py:70
 msgid "Footwork Drills"
-msgstr "ფეხებით მუშაობის სავარჯიშოები"
+msgstr ""
 
 #: src/data/program_data.py:70
 msgid "Fast ring movement"
-msgstr "სწრაფი მოძრაობა რინგზე"
+msgstr ""
 
 #: src/data/program_data.py:71
 msgid "Speed Bag"
-msgstr "სწრაფი მსხალი"
+msgstr ""
 
 #: src/data/program_data.py:71
 msgid "Coordination and reaction"
-msgstr "კოორდინაცია და რეაქცია"
+msgstr ""
 
 #: src/data/program_data.py:72
 msgid "Mitt Work"
-msgstr "მუშაობა თათებზე"
+msgstr ""
 
 #: src/data/program_data.py:72
 msgid "Partner work with trainer"
-msgstr "პარტნიორული მუშაობა ტრენერთან"
+msgstr ""
 
 #: src/data/program_data.py:73
 msgid "Slip & Roll"
-msgstr "თავის არიდება და ბრუნი"
+msgstr ""
 
 #: src/data/program_data.py:73
 msgid "Defense techniques"
-msgstr "დაცვის ტექნიკა"
+msgstr ""
 
 #: src/data/program_data.py:74
 msgid "Jump Rope"
-msgstr "სახტუნაო"
+msgstr ""
 
 #: src/data/program_data.py:74
 msgid "Endurance and foot speed"
-msgstr "გამძლეობა და ფეხების სისწრაფე"
+msgstr ""
 
 #: src/data/program_data.py:75
 msgid "Sparring"
-msgstr "სპარინგი"
+msgstr ""
 
 #: src/data/program_data.py:75
 msgid "Controlled fighting"
-msgstr "კონტროლირებადი ბრძოლა"
+msgstr ""
 
 #: src/data/program_data.py:76
 msgid "Core Conditioning"
-msgstr "კორპუსის კონდიცირება"
+msgstr ""
 
 #: src/data/program_data.py:76
 msgid "Abdominal strengthening for punches"
-msgstr "მუცლის პრესის გამაგრება დარტყმებისთვის"
+msgstr ""
 
 #: src/data/program_data.py:80
 msgid "Athletic Training"
-msgstr "ათლეტური ვარჯიში"
+msgstr ""
 
 #: src/data/program_data.py:83
 msgid "Sprints"
-msgstr "სპრინტები"
+msgstr ""
 
 #: src/data/program_data.py:83
 msgid "Maximum speed"
-msgstr "მაქსიმალური სისწრაფე"
+msgstr ""
 
 #: src/data/program_data.py:84
 msgid "Long Jump Drills"
-msgstr "სიგრძეზე ხტომის სავარჯიშოები"
+msgstr ""
 
 #: src/data/program_data.py:84
 msgid "Jumping technique"
-msgstr "ხტომის ტექნიკა"
+msgstr ""
 
 #: src/data/program_data.py:85
 msgid "Plyometrics"
-msgstr "პლიომეტრიკა"
+msgstr ""
 
 #: src/data/program_data.py:85
 msgid "Reactive power"
-msgstr "რეაქტიული ძალა"
+msgstr ""
 
 #: src/data/program_data.py:86
 msgid "Endurance Run"
-msgstr "გამძლეობაზე სირბილი"
+msgstr ""
 
 #: src/data/program_data.py:86
 msgid "Endurance development"
-msgstr "გამძლეობის განვითარება"
+msgstr ""
 
 #: src/data/program_data.py:87
 msgid "Stretching"
-msgstr "გაწელვა"
+msgstr ""
 
 #: src/data/program_data.py:87
 msgid "Recovery and flexibility"
-msgstr "აღდგენა და მოქნილობა"
+msgstr ""
 
 #: src/data/program_data.py:88
 msgid "Hurdles"
-msgstr "თარჯრბენი"
+msgstr ""
 
 #: src/data/program_data.py:88
 msgid "Hurdle running - coordination"
-msgstr "სირბილი ბარიერებით - კოორდინაცია"
+msgstr ""
 
 #: src/data/program_data.py:89
 msgid "High Jump Technique"
-msgstr "სიმაღლეზე ხტომის ტექნიკა"
+msgstr ""
 
 #: src/data/program_data.py:89
 msgid "Vertical explosiveness"
-msgstr "ვერტიკალური ფეთქებადობა"
+msgstr ""
 
 #: src/data/program_data.py:90
 msgid "Agility Ladder"
-msgstr "კოორდინაციის კიბე"
+msgstr ""
 
 #: src/data/program_data.py:90
 msgid "Quick direction changes"
-msgstr "მიმართულების სწრაფი ცვლილება"
+msgstr ""
 
 #: src/data/program_data.py:91
 msgid "Resistance Sprints"
-msgstr "სპრინტები წინააღმდეგობით"
+msgstr ""
 
 #: src/data/program_data.py:91
 msgid "Strength running with resistance"
-msgstr "ძალისმიერი სირბილი წინააღმდეგობით"
+msgstr ""
 
-# ============================================================
-# ADMIN PANEL TRANSLATIONS
 #: src/templates/admin/base.html:6
 msgid "Admin Panel"
-msgstr "ადმინ პანელი"
+msgstr ""
 
 #: src/templates/admin/base.html:84
 msgid "Admin System"
-msgstr "ადმინ სისტემა"
+msgstr ""
 
 #: src/templates/admin/base.html:89
 msgid "Main Menu"
-msgstr "მთავარი მენიუ"
+msgstr ""
 
 #: src/templates/admin/base.html:91 src/templates/admin/base.html:127
 #: src/templates/partials/navbar.html:72
 msgid "Dashboard"
-msgstr "მართვის პანელი"
+msgstr ""
 
 #: src/templates/admin/base.html:94
 msgid "Analytics"
-msgstr "ანალიტიკა"
+msgstr ""
 
 #: src/templates/admin/base.html:97
 msgid "Management"
-msgstr "მართვა"
+msgstr ""
 
 #: src/templates/admin/base.html:99 src/templates/admin/dashboard.html:108
 #: src/templates/admin/partials/dashboard_stats.html:8
 msgid "Members"
-msgstr "წევრები"
+msgstr ""
 
 #: src/templates/admin/base.html:102 src/templates/admin/dashboard.html:243
 #: src/templates/admin/partials/stats_charts_row.html:12
 #: src/templates/admin/statistics.html:153
 msgid "Bookings"
-msgstr "დარეგისტრირებულები"
+msgstr ""
 
 #: src/templates/admin/base.html:105 src/templates/partials/navbar.html:35
 msgid "Blog"
-msgstr "ბლოგი"
+msgstr ""
 
 #: src/templates/admin/base.html:110
 msgid "Exit"
-msgstr "გასვლა"
+msgstr ""
 
 #: src/templates/admin/base.html:112
 msgid "Back to Site"
-msgstr "საიტზე დაბრუნება"
+msgstr ""
 
 #: src/templates/admin/base.html:125
-#, fuzzy
 msgid "Dashboard Home"
-msgstr "მართვის პანელი"
+msgstr ""
 
 #: src/templates/admin/base.html:135
 msgid "System Live"
 msgstr ""
 
 #: src/templates/admin/base.html:148
-#, fuzzy
 msgid "Switch Language"
-msgstr "ენა"
+msgstr ""
 
 #: src/templates/admin/base.html:153
 msgid "Toggle Theme"
 msgstr ""
 
 #: src/templates/admin/base.html:159
-#, fuzzy
 msgid "Notifications"
-msgstr "შეტყობინებები ელ. ფოსტაზე"
+msgstr ""
 
 #: src/templates/admin/base.html:169
 msgid "Last 12 Hours"
-msgstr "ბოლო 12 საათი"
+msgstr ""
 
 #: src/templates/admin/base.html:182 src/templates/admin/dashboard.html:159
 #: src/templates/admin/partials/dashboard_main_grid.html:39
 msgid "Joined"
-msgstr "შემოუერთდა"
+msgstr ""
 
 #: src/templates/admin/base.html:193
 msgid "No activity in last 12h"
-msgstr "ბოლო 12 სთ-ში აქტივობა არ არის"
+msgstr ""
 
 #: src/templates/admin/base.html:202 src/templates/partials/navbar.html:120
 #: src/templates/user/profile.html:76 src/templates/user/settings.html:17
 msgid "Settings"
-msgstr "პარამეტრები"
+msgstr ""
 
 #: src/templates/admin/base.html:206
 msgid "System Settings"
-msgstr "სისტემის პარამეტრები"
+msgstr ""
 
 #: src/templates/admin/base.html:207
 msgid "Profile Settings"
-msgstr "პროფილის პარამეტრები"
+msgstr ""
 
 #: src/templates/admin/base.html:208 src/templates/user/settings.html:37
 msgid "Security"
-msgstr "უსაფრთხოება"
+msgstr ""
 
 #: src/templates/admin/base.html:210
 msgid "Quick Actions"
-msgstr "სწრაფი ქმედებები"
+msgstr ""
 
 #: src/templates/admin/base.html:211
 msgid "Clear Cache"
-msgstr "ქეშის გასუფთავება"
+msgstr ""
 
 #: src/templates/admin/base.html:212
 msgid "Exit Admin"
-msgstr "ადმინ გასვლა"
+msgstr ""
 
 #: src/templates/admin/base.html:220
 msgid "Online"
-msgstr "ონლაინ"
+msgstr ""
 
-# --- Create Post ---
 #: src/templates/admin/blog_management.html:3
-#, fuzzy
 msgid "Blog Management - Admin Panel"
-msgstr "ახალი პოსტი - ადმინ პანელი"
+msgstr ""
 
 #: src/templates/admin/blog_management.html:4
-#, fuzzy
 msgid "Blog Management"
-msgstr "მართვა"
+msgstr ""
 
 #: src/templates/admin/blog_management.html:17
-#, fuzzy
 msgid "Post Catalog"
-msgstr "კატალოგში დაბრუნება"
+msgstr ""
 
 #: src/templates/admin/blog_management.html:19
-#, fuzzy
 msgid "Published Articles"
-msgstr "სტატიის გამოქვეყნება"
+msgstr ""
 
-# --- Dashboard Partials ---
 #: src/templates/admin/blog_management.html:26
-#, fuzzy
 msgid "Search articles"
-msgstr "სტატიები"
+msgstr ""
 
 #: src/templates/admin/blog_management.html:29
 #: src/templates/admin/blog_management.html:115
@@ -628,7 +615,7 @@ msgstr ""
 
 #: src/templates/admin/blog_management.html:32
 msgid "New Post"
-msgstr "ახალი პოსტი"
+msgstr ""
 
 #: src/templates/admin/blog_management.html:43
 msgid "Thumbnail"
@@ -638,68 +625,60 @@ msgstr ""
 #: src/templates/admin/create_post_simple.html:21
 #: src/templates/admin/edit_post.html:18
 msgid "Post Title"
-msgstr "სათაური"
+msgstr ""
 
 #: src/templates/admin/blog_management.html:45
-#, fuzzy
 msgid "Date"
-msgstr "განახლება"
+msgstr ""
 
 #: src/templates/admin/blog_management.html:46
 #: src/templates/admin/edit_post.html:47
 msgid "Views"
-msgstr "ნახვები"
+msgstr ""
 
 #: src/templates/admin/blog_management.html:47
 #: src/templates/user/partials/settings_subscription.html:21
 msgid "Status"
-msgstr "სტატუსი"
+msgstr ""
 
 #: src/templates/admin/blog_management.html:48
 #: src/templates/admin/registrations.html:43 src/templates/admin/users.html:45
-#, fuzzy
 msgid "Actions"
-msgstr "აქტიური"
+msgstr ""
 
 #: src/templates/admin/blog_management.html:82
-#, fuzzy
 msgid "Live"
-msgstr "დონე"
+msgstr ""
 
 #: src/templates/admin/blog_management.html:85
-#, fuzzy
 msgid "Draft"
-msgstr "დრაფტის შენახვა"
+msgstr ""
 
 #: src/templates/admin/blog_management.html:91
-#, fuzzy
 msgid "Edit"
-msgstr "გასვლა"
+msgstr ""
 
 #: src/templates/admin/blog_management.html:96
 #: src/templates/admin/registrations.html:94 src/templates/admin/users.html:118
 #: src/templates/user/registrations.html:88
 msgid "Delete"
-msgstr "წაშლა"
+msgstr ""
 
 #: src/templates/admin/blog_management.html:96
-#, fuzzy
 msgid "Delete post"
-msgstr "წაშლა"
+msgstr ""
 
 #: src/templates/admin/blog_management.html:111
-#, fuzzy
 msgid "No Articles Yet"
-msgstr "სტატიები არ არის"
+msgstr ""
 
 #: src/templates/admin/blog_management.html:112
 msgid "Start sharing knowledge with your community."
 msgstr ""
 
 #: src/templates/admin/blog_management.html:118
-#, fuzzy
 msgid "Write First Article"
-msgstr "ახალი სტატიის დაწერა"
+msgstr ""
 
 #: src/templates/admin/blog_management.html:148
 msgid "e.g. Advanced Yoga Techniques"
@@ -710,18 +689,16 @@ msgid "Training & Technique"
 msgstr ""
 
 #: src/templates/admin/blog_management.html:154
-#, fuzzy
 msgid "Nutrition & Diet"
-msgstr "კვების გეგმები ჩართულია"
+msgstr ""
 
 #: src/templates/admin/blog_management.html:155
 msgid "Cardio & Endurance"
 msgstr ""
 
 #: src/templates/admin/blog_management.html:156
-#, fuzzy
 msgid "Recovery & Sleep"
-msgstr "აღდგენის ზონა"
+msgstr ""
 
 #: src/templates/admin/blog_management.html:157
 msgid "Lifestyle & Habits"
@@ -761,126 +738,124 @@ msgstr ""
 msgid "Connection lost. Try again."
 msgstr ""
 
-# --- Create Post ---
 #: src/templates/admin/create_post_simple.html:3
 msgid "Create New Post - Admin Panel"
-msgstr "ახალი პოსტი - ადმინ პანელი"
+msgstr ""
 
 #: src/templates/admin/create_post_simple.html:4
 msgid "New Article"
-msgstr "ახალი სტატია"
+msgstr ""
 
 #: src/templates/admin/create_post_simple.html:26
 #: src/templates/admin/edit_post.html:19
 msgid "Enter your article title…"
-msgstr "შეიყვანეთ სტატიის სათაური…"
+msgstr ""
 
 #: src/templates/admin/create_post_simple.html:34
 msgid "Content"
-msgstr "კონტენტი"
+msgstr ""
 
 #: src/templates/admin/create_post_simple.html:46
 msgid "Excerpt"
-msgstr "ანოტაცია"
+msgstr ""
 
 #: src/templates/admin/create_post_simple.html:47
 msgid "Optional"
-msgstr "სასურველი"
+msgstr ""
 
 #: src/templates/admin/create_post_simple.html:50
 #: src/templates/admin/edit_post.html:29
 msgid "Short summary, visible in blog listing..."
-msgstr "მოკლე აღწერა, ჩანს ბლოგის ჩამონათვალზე..."
+msgstr ""
 
 #: src/templates/admin/create_post_simple.html:61
 msgid "Publishing"
-msgstr "გამოქვეყნება"
+msgstr ""
 
 #: src/templates/admin/create_post_simple.html:67
 msgid "Public Visibility"
-msgstr "საჯარო ხილვადობა"
+msgstr ""
 
 #: src/templates/admin/create_post_simple.html:68
 msgid "Make article visible to everyone"
-msgstr "სტატია ყველასთვის ხილვადი"
+msgstr ""
 
 #: src/templates/admin/create_post_simple.html:79
 #: src/templates/admin/create_post_simple.html:170
 msgid "Will be published"
-msgstr "გამოქვეყნდება"
+msgstr ""
 
 #: src/templates/admin/create_post_simple.html:87
 #: src/templates/admin/create_post_simple.html:171
 msgid "Publish Article"
-msgstr "სტატიის გამოქვეყნება"
+msgstr ""
 
 #: src/templates/admin/create_post_simple.html:91
 #: src/templates/admin/edit_post.html:55
 msgid "Back to Catalog"
-msgstr "კატალოგში დაბრუნება"
+msgstr ""
 
 #: src/templates/admin/create_post_simple.html:100
 #: src/templates/admin/edit_post.html:62
 msgid "Featured Image"
-msgstr "მთავარი სურათი"
+msgstr ""
 
 #: src/templates/admin/create_post_simple.html:106
 #: src/templates/admin/edit_post.html:75
 msgid "Click to upload"
-msgstr "ატვირთეთ"
+msgstr ""
 
 #: src/templates/admin/create_post_simple.html:107
 msgid "max. 5MB"
-msgstr "მაქს. 5MB"
+msgstr ""
 
 #: src/templates/admin/create_post_simple.html:108
 msgid "Rec.: 1200×630px"
-msgstr "რეკომ.: 1200×630px"
+msgstr ""
 
 #: src/templates/admin/create_post_simple.html:116
 msgid "Remove Image"
-msgstr "სურათის წაშლა"
+msgstr ""
 
 #: src/templates/admin/create_post_simple.html:125
 msgid "Writing Tips"
-msgstr "დაწერის რჩევები"
+msgstr ""
 
 #: src/templates/admin/create_post_simple.html:129
 msgid "Use an engaging title (50-70 chars)"
-msgstr "გამოიყენეთ მიმზიდველი სათაური (50-70 სიმბოლო)"
+msgstr ""
 
 #: src/templates/admin/create_post_simple.html:130
 msgid "Add a featured image for better engagement"
-msgstr "დაამატეთ მთავარი სურათი უკეთესი ჩართულობისთვის"
+msgstr ""
 
 #: src/templates/admin/create_post_simple.html:131
 msgid "Write an excerpt for SEO improvement"
-msgstr "დაწერეთ ანოტაცია SEO-ს გაუმჯობესებისთვის"
+msgstr ""
 
 #: src/templates/admin/create_post_simple.html:132
 msgid "Divide content into short paragraphs"
-msgstr "დაყავით კონტენტი მოკლე აბზაცებად"
+msgstr ""
 
 #: src/templates/admin/create_post_simple.html:174
 msgid "Will be saved as draft"
-msgstr "დრაფტად შეინახება"
+msgstr ""
 
 #: src/templates/admin/create_post_simple.html:175
 msgid "Save Draft"
-msgstr "დრაფტის შენახვა"
+msgstr ""
 
-# --- Dashboard ---
 #: src/templates/admin/dashboard.html:3
 msgid "Control Center"
-msgstr "კონტროლის ცენტრი"
+msgstr ""
 
 #: src/templates/admin/dashboard.html:94
 msgid "Welcome back"
-msgstr "გამარჯობა"
+msgstr ""
 
 #: src/templates/admin/dashboard.html:95
 msgid "Your gym's performance is looking solid today."
-msgstr "დღეს თქვენი პლატფორმა კარგად მუშაობს."
+msgstr ""
 
 #: src/templates/admin/dashboard.html:115
 #: src/templates/admin/partials/dashboard_bottom_row.html:20
@@ -889,70 +864,67 @@ msgstr "დღეს თქვენი პლატფორმა კარგ
 #: src/templates/admin/users.html:44 src/templates/partials/navbar.html:115
 #: src/templates/user/registrations.html:24
 msgid "Registrations"
-msgstr "რეგისტრაციები"
+msgstr ""
 
-# --- Dashboard Partials ---
 #: src/templates/admin/dashboard.html:122
 #: src/templates/admin/partials/dashboard_stats.html:32
 #: src/templates/admin/partials/stats_demographics_row.html:73
 msgid "Articles"
-msgstr "სტატიები"
+msgstr ""
 
 #: src/templates/admin/dashboard.html:129
 #: src/templates/admin/partials/dashboard_stats.html:44
 #: src/templates/admin/partials/stats_charts_row.html:11
 #: src/templates/admin/statistics.html:150
 msgid "Revenue"
-msgstr "შემოსავალი"
+msgstr ""
 
 #: src/templates/admin/dashboard.html:140
-#, fuzzy
 msgid "Platform Performance"
-msgstr "ბოლო 30 დღის შედეგები"
+msgstr ""
 
 #: src/templates/admin/dashboard.html:141
 msgid "Member growth over the last 14 days"
 msgstr ""
 
 #: src/templates/admin/dashboard.html:151
-#, fuzzy
 msgid "Live Activity"
-msgstr "ახლო აქტივობა"
+msgstr ""
 
 #: src/templates/admin/dashboard.html:173
 #: src/templates/admin/partials/dashboard_secondary_grid.html:7
 msgid "Popular Programs"
-msgstr "პოპულარული პროგრამები"
+msgstr ""
 
 #: src/templates/admin/dashboard.html:190
 #: src/templates/admin/partials/dashboard_secondary_grid.html:36
 msgid "Subscription Plans"
-msgstr "სააბონენტო გეგმები"
+msgstr ""
 
 #: src/templates/admin/dashboard.html:191
 #: src/templates/admin/partials/dashboard_secondary_grid.html:37
 msgid "Member tier distribution"
-msgstr "წევრების განაწილება გეგმის მიხედვით"
+msgstr ""
 
 #: src/templates/admin/dashboard.html:198
 #: src/templates/admin/partials/dashboard_secondary_grid.html:60
 msgid "Member Demographics"
-msgstr "წევრების დემოგრაფია"
+msgstr ""
 
 #: src/templates/admin/dashboard.html:199
 #: src/templates/admin/partials/dashboard_secondary_grid.html:61
 msgid "Gender distribution"
-msgstr "სქესის განაწილება"
+msgstr ""
 
 #: src/templates/admin/dashboard.html:231
 #: src/templates/admin/partials/dashboard_bottom_row.html:7
 msgid "Recent Members"
-msgstr "ახალი წევრები"
+msgstr ""
 
 #: src/templates/admin/dashboard.html:232
 #: src/templates/admin/partials/dashboard_bottom_row.html:8
 msgid "Newest registrations"
-msgstr "ახალი ჩარიცხვები"
+msgstr ""
 
 #: src/templates/admin/dashboard.html:234
 #: src/templates/admin/dashboard.html:268
@@ -960,157 +932,141 @@ msgstr "ახალი ჩარიცხვები"
 #: src/templates/admin/partials/dashboard_bottom_row.html:65
 #: src/templates/admin/partials/dashboard_main_grid.html:29
 msgid "View all"
-msgstr "ყველას ნახვა"
+msgstr ""
 
 #: src/templates/admin/dashboard.html:240
 #: src/templates/admin/partials/dashboard_bottom_row.html:17
 #: src/templates/admin/registrations.html:39 src/templates/admin/users.html:39
 #: src/templates/admin/users.html:91
 msgid "Member"
-msgstr "წევრი"
+msgstr ""
 
 #: src/templates/admin/dashboard.html:241
 #: src/templates/admin/partials/dashboard_bottom_row.html:18
 msgid "Username"
-msgstr "მომხმარებელი"
+msgstr ""
 
 #: src/templates/admin/dashboard.html:242
 #: src/templates/admin/partials/dashboard_bottom_row.html:19
 #: src/templates/admin/users.html:43
 msgid "Plan"
-msgstr "გეგმა"
+msgstr ""
 
 #: src/templates/admin/dashboard.html:267
 #: src/templates/admin/partials/dashboard_bottom_row.html:62
 msgid "Latest Articles"
-msgstr "ბოლო სტატიები"
+msgstr ""
 
 #: src/templates/admin/dashboard.html:277
-#, fuzzy
 msgid "views"
-msgstr "ნახვები"
+msgstr ""
 
 #: src/templates/admin/dashboard.html:285
-#, fuzzy
 msgid "No articles yet."
-msgstr "სტატიები არ არის"
+msgstr ""
 
 #: src/templates/admin/dashboard.html:287
-#, fuzzy
 msgid "Create New Article"
-msgstr "ახალი სტატიის დაწერა"
+msgstr ""
 
-# --- Edit Post ---
 #: src/templates/admin/edit_post.html:3
 msgid "Edit Post - Admin Panel"
-msgstr "პოსტის რედაქტირება - ადმინ პანელი"
+msgstr ""
 
 #: src/templates/admin/edit_post.html:4
 msgid "Edit Article"
-msgstr "სტატიის რედაქტირება"
+msgstr ""
 
 #: src/templates/admin/edit_post.html:28
 msgid "Excerpt (Short Summary)"
-msgstr "ანოტაცია (მოკლე აღწერა)"
+msgstr ""
 
 #: src/templates/admin/edit_post.html:38
 msgid "Publishing Settings"
-msgstr "გამოქვეყნების პარამეტრები"
+msgstr ""
 
 #: src/templates/admin/edit_post.html:43
 msgid "Published"
-msgstr "გამოქვეყნებულია"
+msgstr ""
 
 #: src/templates/admin/edit_post.html:48
 msgid "Created"
-msgstr "შექმნილია"
+msgstr ""
 
 #: src/templates/admin/edit_post.html:51
 msgid "Save Changes"
-msgstr "ცვლილების შენახვა"
+msgstr ""
 
 #: src/templates/admin/edit_post.html:53
 msgid "View Live Post"
-msgstr "პოსტის ნახვა"
+msgstr ""
 
 #: src/templates/admin/edit_post.html:70
 msgid "Click to change"
-msgstr "შესაცვლელად დააწკაპეთ"
+msgstr ""
 
-# --- Edit Post ---
 #: src/templates/admin/registrations.html:3
-#, fuzzy
 msgid "Registrations - Admin Panel"
-msgstr "პოსტის რედაქტირება - ადმინ პანელი"
+msgstr ""
 
 #: src/templates/admin/registrations.html:4
 #: src/templates/admin/registrations.html:17
-#, fuzzy
 msgid "Class Bookings"
-msgstr "დარეგისტრირებულები"
+msgstr ""
 
 #: src/templates/admin/registrations.html:20
-#, fuzzy
 msgid "Active Registrations"
-msgstr "რეგისტრაციები"
+msgstr ""
 
 #: src/templates/admin/registrations.html:27
-#, fuzzy
 msgid "Search bookings"
-msgstr "დარეგისტრირებულები"
+msgstr ""
 
 #: src/templates/admin/registrations.html:29 src/templates/admin/users.html:29
-#, fuzzy
 msgid "Export CSV"
-msgstr "ექსპერტი მწვრთნელები"
+msgstr ""
 
 #: src/templates/admin/registrations.html:40
-#, fuzzy
 msgid "Program"
-msgstr "ელიტარული პროგრამები"
+msgstr ""
 
 #: src/templates/admin/registrations.html:41
 #: src/templates/user/registrations.html:47
 msgid "Schedule"
-msgstr "განრიგი"
+msgstr ""
 
 #: src/templates/admin/registrations.html:42
-#, fuzzy
 msgid "Registered"
-msgstr "რეგისტრაციები"
+msgstr ""
 
 #: src/templates/admin/registrations.html:82
 msgid "Flexible"
 msgstr ""
 
 #: src/templates/admin/registrations.html:94
-#, fuzzy
 msgid "Delete registration"
-msgstr "ახალი ჩარიცხვები"
+msgstr ""
 
 #: src/templates/admin/registrations.html:132
-#, fuzzy
 msgid "No Registrations Yet"
-msgstr "რეგისტრაციები"
+msgstr ""
 
 #: src/templates/admin/registrations.html:133
 msgid "Members haven't signed up for any classes yet."
 msgstr ""
 
-# --- Statistics ---
 #: src/templates/admin/statistics.html:3
 msgid "Analytics - Elite Admin"
-msgstr "ანალიტიკა - ადმინ პანელი"
+msgstr ""
 
 #: src/templates/admin/statistics.html:4
 #: src/templates/user/partials/settings_subscription.html:79
 msgid "Advanced Analytics"
-msgstr "გაფართოებული ანალიტიკა"
+msgstr ""
 
 #: src/templates/admin/statistics.html:72
-#, fuzzy
 msgid "Elite Analytics"
-msgstr "ანალიტიკა"
+msgstr ""
 
 #: src/templates/admin/statistics.html:73
 msgid "Advanced business intelligence for your fitness center"
@@ -1120,93 +1076,88 @@ msgstr ""
 #: src/templates/admin/statistics.html:91
 #: src/templates/main/partials/index_hero.html:27
 msgid "Active Members"
-msgstr "აქტიური წევრები"
+msgstr ""
 
 #: src/templates/admin/partials/stats_kpis.html:30
 #: src/templates/admin/statistics.html:104
 msgid "Monthly Revenue"
-msgstr "თვიური შემოსავალი"
+msgstr ""
 
 #: src/templates/admin/statistics.html:117
-#, fuzzy
 msgid "Period Bookings"
-msgstr "დარეგისტრირებულები"
+msgstr ""
 
 #: src/templates/admin/partials/stats_kpis.html:74
 #: src/templates/admin/statistics.html:130
 msgid "New Sign-ups"
-msgstr "ახალი ჩარეგისტრებულები"
+msgstr ""
 
 #: src/templates/admin/partials/stats_charts_row.html:7
 #: src/templates/admin/statistics.html:145
 msgid "Revenue & Bookings Trend"
-msgstr "შემოსავალი და ჩარიცხვების ტრენდი"
+msgstr ""
 
 #: src/templates/admin/partials/stats_charts_row.html:8
 #: src/templates/admin/statistics.html:146
 msgid "Last 30 days performance"
-msgstr "ბოლო 30 დღის შედეგები"
+msgstr ""
 
 #: src/templates/admin/partials/stats_charts_row.html:24
 #: src/templates/admin/statistics.html:164
 msgid "Peak Hours"
-msgstr "პიკის საათები"
+msgstr ""
 
 #: src/templates/admin/partials/stats_charts_row.html:25
 #: src/templates/admin/statistics.html:165
 msgid "Busiest times this week"
-msgstr "ყველაზე დატვირთული დრო ამ კვირაში"
+msgstr ""
 
 #: src/templates/admin/partials/stats_demographics_row.html:7
 #: src/templates/admin/statistics.html:177
 msgid "Program Popularity"
-msgstr "პროგრამის პოპულარობა"
+msgstr ""
 
 #: src/templates/admin/partials/stats_demographics_row.html:8
 #: src/templates/admin/statistics.html:178
 msgid "Class distribution"
-msgstr "კლასის განაწილება"
+msgstr ""
 
 #: src/templates/admin/partials/stats_demographics_row.html:34
 #: src/templates/admin/statistics.html:193
 msgid "Monthly Objectives"
-msgstr "თვიური მიზნები"
+msgstr ""
 
 #: src/templates/admin/partials/stats_demographics_row.html:35
 #: src/templates/admin/statistics.html:194
 msgid "Progress vs targets"
-msgstr "მიზნების შესრულება"
+msgstr ""
 
 #: src/templates/admin/partials/stats_demographics_row.html:45
 #: src/templates/admin/statistics.html:199
 msgid "New Member Growth"
-msgstr "ახალი წევრების ზრდა"
+msgstr ""
 
 #: src/templates/admin/partials/stats_demographics_row.html:56
 #: src/templates/admin/statistics.html:212
 msgid "Revenue Target"
-msgstr "შემოსავლის გეგმა"
+msgstr ""
 
 #: src/templates/admin/partials/stats_demographics_row.html:67
 #: src/templates/admin/statistics.html:225
 msgid "Content Plan"
-msgstr "კონტენტის გეგმა"
+msgstr ""
 
-# --- Edit Post ---
 #: src/templates/admin/users.html:3
-#, fuzzy
 msgid "Users - Admin Panel"
-msgstr "პოსტის რედაქტირება - ადმინ პანელი"
+msgstr ""
 
 #: src/templates/admin/users.html:4
-#, fuzzy
 msgid "User Management"
-msgstr "მართვა"
+msgstr ""
 
 #: src/templates/admin/users.html:17
-#, fuzzy
 msgid "Registered Members"
-msgstr "ახალი წევრები"
+msgstr ""
 
 #: src/templates/admin/users.html:20
 msgid "Active Accounts"
@@ -1218,41 +1169,36 @@ msgstr ""
 
 #: src/templates/admin/users.html:40 src/views/user/forms.py:8
 msgid "Full Name"
-msgstr "სრული სახელი"
+msgstr ""
 
 #: src/templates/admin/users.html:41 src/templates/user/profile.html:146
 #: src/views/user/forms.py:10 src/views/user/forms.py:22
 msgid "Gender"
-msgstr "სქესი"
+msgstr ""
 
 #: src/templates/admin/users.html:42
-#, fuzzy
 msgid "Role"
-msgstr "პროფილი"
+msgstr ""
 
 #: src/templates/admin/users.html:71
-#, fuzzy
 msgid "Administrator"
-msgstr "იოგას მთავარი ინსტრუქტორი"
+msgstr ""
 
 #: src/templates/admin/users.html:89
 msgid "Admin"
-msgstr "ადმინი"
+msgstr ""
 
 #: src/templates/admin/users.html:114
-#, fuzzy
 msgid "View Profile"
-msgstr "ფიტნეს პროფილი"
+msgstr ""
 
 #: src/templates/admin/users.html:118
-#, fuzzy
 msgid "Delete user"
-msgstr "წაშლა"
+msgstr ""
 
 #: src/templates/admin/users.html:157
-#, fuzzy
 msgid "No Members Found"
-msgstr "წევრები არ არის"
+msgstr ""
 
 #: src/templates/admin/users.html:158
 msgid "There are currently no registered users in the system."
@@ -1260,194 +1206,190 @@ msgstr ""
 
 #: src/templates/admin/partials/dashboard_bottom_row.html:50
 msgid "No members yet"
-msgstr "წევრები არ არის"
+msgstr ""
 
 #: src/templates/admin/partials/dashboard_bottom_row.html:63
 msgid "Recent blog content"
-msgstr "ახალი ბლოგის კონტენტი"
+msgstr ""
 
 #: src/templates/admin/partials/dashboard_bottom_row.html:100
 msgid "No articles yet"
-msgstr "სტატიები არ არის"
+msgstr ""
 
 #: src/templates/admin/partials/dashboard_bottom_row.html:104
 msgid "Write New Article"
-msgstr "ახალი სტატიის დაწერა"
+msgstr ""
 
 #: src/templates/admin/partials/dashboard_main_grid.html:7
 msgid "Platform Growth"
-msgstr "პლატფორმის ზრდა"
+msgstr ""
 
 #: src/templates/admin/partials/dashboard_main_grid.html:8
 msgid "Member registration trend"
-msgstr "წევრების რეგისტრაციის ტრენდი"
+msgstr ""
 
 #: src/templates/admin/partials/dashboard_main_grid.html:28
 msgid "Recent Activity"
-msgstr "ახლო აქტივობა"
+msgstr ""
 
 #: src/templates/admin/partials/dashboard_secondary_grid.html:8
 msgid "Bookings per class"
-msgstr "ჩარიცხვა კლასის მიხედვით"
+msgstr ""
 
 #: src/templates/admin/partials/dashboard_secondary_grid.html:27
 msgid "No bookings yet"
-msgstr "ჩარიცხვები არ არის"
+msgstr ""
 
 #: src/templates/admin/partials/dashboard_secondary_grid.html:73
 #: src/templates/admin/partials/stats_demographics_row.html:51
 msgid "members"
-msgstr "წევრი"
+msgstr ""
 
 #: src/templates/admin/partials/dashboard_secondary_grid.html:81
 #: src/views/user/forms.py:11 src/views/user/forms.py:22
 msgid "Male"
-msgstr "მამრობითი"
+msgstr ""
 
 #: src/templates/admin/partials/dashboard_secondary_grid.html:88
 #: src/views/user/forms.py:11 src/views/user/forms.py:22
 msgid "Female"
-msgstr "მდედრობითი"
+msgstr ""
 
 #: src/templates/admin/partials/dashboard_secondary_grid.html:97
 #: src/views/user/forms.py:22
 msgid "Other"
-msgstr "სხვა"
+msgstr ""
 
 #: src/templates/admin/partials/stats_kpis.html:52
 msgid "Selected Period Bookings"
-msgstr "არჩეული პერიოდის ჩარიცხვები"
+msgstr ""
 
 #: src/templates/main/about.html:2
 #: src/templates/main/partials/about_hero.html:5
 #: src/templates/partials/base.html:115
 msgid "About Us"
-msgstr "ჩვენს შესახებ"
+msgstr ""
 
 #: src/templates/main/contact.html:3
 msgid "Contact Us"
-msgstr "დაგვიკავშირდით"
+msgstr ""
 
 #: src/templates/main/contact.html:15 src/templates/partials/base.html:123
 msgid "Get In Touch"
-msgstr "დაგვიკავშირდით"
+msgstr ""
 
 #: src/templates/main/contact.html:16
 msgid ""
 "Ready to transform your life? Our team is here to support your fitness "
 "journey every step of the way."
 msgstr ""
-"მზად ხართ შეცვალოთ თქვენი ცხოვრება? ჩვენი გუნდი მზადაა მხარი დაგიჭიროთ "
-"თქვენს ფიტნეს მოგზაურობაში."
 
 #: src/templates/main/contact.html:25
 msgid "Direct Line"
-msgstr "პირდაპირი ხაზი"
+msgstr ""
 
 #: src/templates/main/contact.html:33
 msgid "Email Support"
-msgstr "ელ. ფოსტით მხარდაჭერა"
+msgstr ""
 
 #: src/templates/main/contact.html:41
 msgid "Our Location"
-msgstr "ჩვენი მდებარეობა"
+msgstr ""
 
 #: src/templates/main/contact.html:42
 msgid "Tbilisi, Georgia"
-msgstr "თბილისი, საქართველო"
+msgstr ""
 
 #: src/templates/main/contact.html:49
 msgid "Working Hours"
-msgstr "სამუშაო საათები"
+msgstr ""
 
 #: src/templates/main/contact.html:50
 msgid "09:00 - 22:00 Daily"
-msgstr "09:00 - 22:00 ყოველდღე"
+msgstr ""
 
 #: src/templates/main/contact.html:59
 msgid "FULL NAME"
-msgstr "სრული სახელი"
+msgstr ""
 
 #: src/templates/main/contact.html:60
 msgid "John Doe"
-msgstr "სახელი გვარი"
+msgstr ""
 
 #: src/templates/main/contact.html:64
 msgid "EMAIL ADDRESS"
-msgstr "ელ. ფოსტის მისამართი"
+msgstr ""
 
 #: src/templates/main/contact.html:69
 msgid "SUBJECT"
-msgstr "თემა"
+msgstr ""
 
 #: src/templates/main/contact.html:70
 msgid "How can we help you?"
-msgstr "რით შეგვიძლია დაგეხმაროთ?"
+msgstr ""
 
 #: src/templates/main/contact.html:74
 msgid "MESSAGE"
-msgstr "შეტყობინება"
+msgstr ""
 
 #: src/templates/main/contact.html:75
 msgid "Describe your inquiry in detail..."
-msgstr "აღწერეთ თქვენი მოთხოვნა დეტალურად..."
+msgstr ""
 
 #: src/templates/main/contact.html:80
 msgid "Send Message"
-msgstr "შეტყობინების გაგზავნა"
+msgstr ""
 
 #: src/templates/main/partials/about_cta.html:4
 msgid "Ready to start your healthy lifestyle?"
-msgstr "მზად ხართ დაიწყოთ ჯანსაღი ცხოვრების წესი?"
+msgstr ""
 
 #: src/templates/main/partials/about_cta.html:6
 msgid "Join our fitness community and start your transformation journey today."
-msgstr "შემოუერთდით ჩვენს ფიტნეს საზოგადოებას და დაიწყეთ ტრანსფორმაცია დღესვე."
+msgstr ""
 
 #: src/templates/main/partials/about_cta.html:7
 msgid ""
 "Our experts are ready to use all their knowledge and experience to help "
 "you achieve your desired results."
-msgstr "ჩვენი ექსპერტები მზად არიან დაგეხმარონ სასურველი შედეგების მიღწევაში."
+msgstr ""
 
 #: src/templates/main/partials/about_cta.html:11
 msgid "Register for a Program"
-msgstr "დარეგისტრირდით პროგრამაზე"
+msgstr ""
 
 #: src/templates/main/partials/about_cta.html:14
 #: src/templates/main/partials/index_faq.html:5
 msgid "Frequently Asked Questions"
-msgstr "ხშირად დასმული კითხვები"
+msgstr ""
 
 #: src/templates/main/partials/about_hero.html:7
 msgid ""
 "We are a modern fitness center combining innovative technologies, a "
 "professional approach, and individual care."
 msgstr ""
-"ჩვენ ვართ თანამედროვე ფიტნეს ცენტრი, რომელიც აერთიანებს ინოვაციურ "
-"ტექნოლოგიებსა და პროფესიონალურ მიდგომას."
 
 #: src/templates/main/partials/about_hero.html:8
 msgid ""
 "Our mission is to create an optimal environment for each client to "
 "develop a healthy lifestyle and achieve their goals."
-msgstr "ჩვენი მისიაა შევქმნათ ოპტიმალური გარემო ჯანსაღი ცხოვრების წესისთვის."
+msgstr ""
 
 #: src/templates/main/partials/about_hero.html:14
 msgid "Years of Experience"
-msgstr "წლების გამოცდილება"
+msgstr ""
 
 #: src/templates/main/partials/about_hero.html:18
 msgid "Satisfied Clients"
-msgstr "კმაყოფილი კლიენტები"
+msgstr ""
 
 #: src/templates/main/partials/about_hero.html:22
 msgid "Success Rate"
-msgstr "წარმატების მაჩვენებელი"
+msgstr ""
 
 #: src/templates/main/partials/about_info.html:7
 msgid "Our Vision and Values"
-msgstr "ჩვენი ხედვა და ღირებულებები"
+msgstr ""
 
 #: src/templates/main/partials/about_info.html:9
 msgid ""
@@ -1456,222 +1398,220 @@ msgid ""
 " inclusive, supportive environment where every member feels comfortable "
 "and develops daily, both physically and mentally."
 msgstr ""
-"ჩვენი ფილოსოფია ეფუძნება რწმენას, რომ ყველას შეუძლია უკეთესი ცხოვრების "
-"მიღწევა სწორი მხარდაჭერით."
 
 #: src/templates/main/partials/about_info.html:12
 msgid "Scientifically Proven Methods"
-msgstr "სამეცნიეროდ დადასტურებული მეთოდები"
+msgstr ""
 
 #: src/templates/main/partials/about_info.html:13
 msgid "Certified Professional Team"
-msgstr "სერტიფიცირებული პროფესიონალთა გუნდი"
+msgstr ""
 
 #: src/templates/main/partials/about_info.html:14
 msgid "Latest Generation European Equipment"
-msgstr "უახლესი თაობის ევროპული აღჭურვილობა"
+msgstr ""
 
 #: src/templates/main/partials/about_info.html:15
 msgid "Continuous Monitoring and Results Analysis"
-msgstr "უწყვეტი მონიტორინგი და შედეგების ანალიზი"
+msgstr ""
 
 #: src/templates/main/partials/about_info.html:16
 msgid "Comfortable and Safe Environment"
-msgstr "კომფორტული და უსაფრთხო გარემო"
+msgstr ""
 
 #: src/templates/main/partials/about_info.html:22
 msgid "Our Achievements and Facts"
-msgstr "ჩვენი მიღწევები და ფაქტები"
+msgstr ""
 
 #: src/templates/main/partials/about_info.html:26
 msgid "Years on the Market"
-msgstr "წელი ბაზარზე"
+msgstr ""
 
 #: src/templates/main/partials/about_info.html:30
 msgid "Satisfied Members"
-msgstr "კმაყოფილი წევრები"
+msgstr ""
 
 #: src/templates/main/partials/about_info.html:34
 msgid "Different Programs"
-msgstr "სხვადასხვა პროგრამა"
+msgstr ""
 
 #: src/templates/main/partials/about_info.html:38
 msgid "Group Classes per Week"
-msgstr "ჯგუფური ვარჯიში კვირაში"
+msgstr ""
 
 #: src/templates/main/partials/about_info.html:44
 msgid "Client Satisfaction Rate"
-msgstr "კლიენტთა კმაყოფილების მაჩვენებელი"
+msgstr ""
 
 #: src/templates/main/partials/about_services.html:5
 msgid "Our Services and Programs"
-msgstr "ჩვენი სერვისები და პროგრამები"
+msgstr ""
 
 #: src/templates/main/partials/about_services.html:6
 msgid "Diverse and innovative approaches for all ages and fitness levels"
-msgstr "მრავალფეროვანი და ინოვაციური მიდგომები ყველა ასაკისთვის"
+msgstr ""
 
 #: src/templates/main/partials/about_services.html:15
 msgid "Personal Training"
-msgstr "პერსონალური ვარჯიში"
+msgstr ""
 
 #: src/templates/main/partials/about_services.html:16
 msgid ""
 "A fully individual approach with a certified trainer, tailored to your "
 "goals, health condition, and personal pace."
-msgstr "ინდივიდუალური მიდგომა სერტიფიცირებულ ტრენერთან ერთად."
+msgstr ""
 
 #: src/templates/main/partials/about_services.html:24
 msgid "Group Classes"
-msgstr "ჯგუფური ვარჯიშები"
+msgstr ""
 
 #: src/templates/main/partials/about_services.html:25
 msgid ""
 "A variety of group workouts: Zumba, Pilates, Yoga, Functional Training, "
 "Strength, and Endurance."
-msgstr "მრავალფეროვანი ჯგუფური ვარჯიშები: ზუმბა, პილატესი, იოგა და სხვა."
+msgstr ""
 
 #: src/templates/main/partials/about_services.html:33
 msgid "Digital Tracking"
-msgstr "ციფრული მონიტორინგი"
+msgstr ""
 
 #: src/templates/main/partials/about_services.html:34
 msgid ""
 "Innovative technologies for precise monitoring of your progress: workout "
 "intensity, heart rate, and calories burned."
-msgstr "ინოვაციური ტექნოლოგიები თქვენი პროგრესის ზუსტი მონიტორინგისთვის."
+msgstr ""
 
 #: src/templates/main/partials/about_services.html:42
 msgid "Wellness Programs"
-msgstr "ველნეს პროგრამები"
+msgstr ""
 
 #: src/templates/main/partials/about_services.html:43
 msgid ""
 "A holistic approach to health: meditation, relaxation, outdoor "
 "activities, and stress management techniques."
-msgstr "ჯანმრთელობისადმი ჰოლისტიკური მიდგომა: მედიტაცია და რელაქსაცია."
+msgstr ""
 
 #: src/templates/main/partials/about_services.html:51
 msgid "Nutrition Consultation"
-msgstr "კვების კონსულტაცია"
+msgstr ""
 
 #: src/templates/main/partials/about_services.html:52
 msgid ""
 "Certified nutritionists will develop personalized meal plans based on "
 "your goals, allergies, and preferences."
-msgstr "სერტიფიცირებული ნუტრიციოლოგები შეგირჩევენ ინდივიდუალურ კვების გეგმას."
+msgstr ""
 
 #: src/templates/main/partials/about_services.html:60
 msgid "24/7 Access"
-msgstr "24/7 წვდომა"
+msgstr ""
 
 #: src/templates/main/partials/about_services.html:61
 msgid ""
 "Complete flexibility - the center is open 24 hours a day, 7 days a week. "
 "A modern security system ensures safety."
-msgstr "სრული მოქნილობა - ცენტრი ღიაა 24 საათი, კვირაში 7 დღე."
+msgstr ""
 
 #: src/templates/main/partials/about_team.html:5
 msgid "Our Expert Team"
-msgstr "ჩვენი ექსპერტთა გუნდი"
+msgstr ""
 
 #: src/templates/main/partials/about_team.html:6
 msgid "Certified specialists dedicated to helping you achieve success"
-msgstr "სერტიფიცირებული სპეციალისტები თქვენი წარმატებისთვის"
+msgstr ""
 
 #: src/templates/main/partials/about_team.html:16
 msgid "Head Yoga Instructor"
-msgstr "იოგას მთავარი ინსტრუქტორი"
+msgstr ""
 
 #: src/templates/main/partials/about_team.html:18
 msgid ""
 "8+ years of experience in Hatha and Vinyasa Yoga. Meditation practitioner"
 " and relaxation therapy specialist."
-msgstr "8+ წლიანი გამოცდილება ჰათჰა და ვინიასა იოგაში."
+msgstr ""
 
 #: src/templates/main/partials/about_team.html:28
 msgid "CrossFit L2 Coach"
-msgstr "კროსფიტის L2 მწვრთნელი"
+msgstr ""
 
 #: src/templates/main/partials/about_team.html:30
 msgid ""
 "Professional athlete and certified trainer in functional workouts and "
 "conditioning."
-msgstr "პროფესიონალი ათლეტი და სერტიფიცირებული ტრენერი."
+msgstr ""
 
 #: src/templates/main/partials/about_team.html:40
 msgid "Boxing & Martial Arts Coach"
-msgstr "კრივისა და საბრძოლო ხელოვნების მწვრთნელი"
+msgstr ""
 
 #: src/templates/main/partials/about_team.html:42
 msgid "Former professional boxer, participant in world-class competitions."
-msgstr "ყოფილი პროფესიონალი მოკრივე."
+msgstr ""
 
 #: src/templates/main/partials/about_team.html:52
 msgid "Dietitian & Nutrition Specialist"
-msgstr "დიეტოლოგი და კვების სპეციალისტი"
+msgstr ""
 
 #: src/templates/main/partials/about_team.html:54
 msgid "Certified clinical dietitian with 10+ years of experience."
-msgstr "სერტიფიცირებული კლინიკური დიეტოლოგი 10+ წლიანი გამოცდილებით."
+msgstr ""
 
 #: src/templates/main/partials/about_team.html:64
 msgid "Pilates & Rehabilitation Therapist"
-msgstr "პილატესისა და რეაბილიტაციის თერაპევტი"
+msgstr ""
 
 #: src/templates/main/partials/about_team.html:66
 msgid "Doctor of Physical Therapy and certified Pilates instructor."
-msgstr "ფიზიკური თერაპიის დოქტორი და პილატესის ინსტრუქტორი."
+msgstr ""
 
 #: src/templates/main/partials/about_team.html:76
 msgid "Zumba & Cardio Instructor"
-msgstr "ზუმბასა და კარდიოს ინსტრუქტორი"
+msgstr ""
 
 #: src/templates/main/partials/about_team.html:78
 msgid "Dance professional and fitness instructor with 6+ years of experience."
-msgstr "ცეკვის პროფესიონალი და ფიტნეს ინსტრუქტორი."
+msgstr ""
 
 #: src/templates/main/partials/index_cta.html:6
 msgid "Limited Time Offer"
-msgstr "შეზღუდული დროის შეთავაზება"
+msgstr ""
 
 #: src/templates/main/partials/index_cta.html:7
 msgid "Ready to Transform Your Life?"
-msgstr "მზად ხართ შეცვალოთ თქვენი ცხოვრება?"
+msgstr ""
 
 #: src/templates/main/partials/index_cta.html:8
 msgid ""
 "Join today and get your first personal training session absolutely free. "
 "No commitment required, just results."
-msgstr "შემოუერთდით დღეს და მიიღეთ პირველი პერსონალური ვარჯიში სრულიად უფასოდ."
+msgstr ""
 
 #: src/templates/main/partials/index_cta.html:12
 msgid "Start Free Session"
-msgstr "დაიწყე უფასო ვარჯიში"
+msgstr ""
 
 #: src/templates/main/partials/index_cta.html:16
 msgid "Contact Support"
-msgstr "მხარდაჭერა"
+msgstr ""
 
 #: src/templates/main/partials/index_cta.html:21
 msgid "No Contracts"
-msgstr "კონტრაქტების გარეშე"
+msgstr ""
 
 #: src/templates/main/partials/index_cta.html:22
 msgid "Expert Support"
-msgstr "ექსპერტების მხარდაჭერა"
+msgstr ""
 
 #: src/templates/main/partials/index_cta.html:23
 msgid "All-Access Pass"
-msgstr "სრული წვდომა"
+msgstr ""
 
 #: src/templates/main/partials/index_faq.html:6
 msgid "Everything you need to know about our memberships and facilities."
-msgstr "ყველაფერი, რაც უნდა იცოდეთ ჩვენი წევრობისა და დარბაზების შესახებ."
+msgstr ""
 
 #: src/templates/main/partials/index_faq.html:12
 msgid "How do I register at the club?"
-msgstr "როგორ დავრეგისტრირდე კლუბში?"
+msgstr ""
 
 #: src/templates/main/partials/index_faq.html:16
 msgid ""
@@ -1679,12 +1619,10 @@ msgid ""
 " our center in person. Our team will contact you within 24 hours to help "
 "you choose the most suitable program."
 msgstr ""
-"რეგისტრაცია მარტივია - შეავსეთ ონლაინ ფორმა ან გვეწვიეთ ცენტრში. ჩვენი "
-"გუნდი 24 საათში დაგიკავშირდებათ."
 
 #: src/templates/main/partials/index_faq.html:22
 msgid "What is the minimum age to train?"
-msgstr "რა არის მინიმალური ასაკი ვარჯიშისთვის?"
+msgstr ""
 
 #: src/templates/main/partials/index_faq.html:26
 msgid ""
@@ -1692,12 +1630,10 @@ msgid ""
 "parental consent is required. We have specially designed safe programs "
 "for all ages."
 msgstr ""
-"ჩვენი ცენტრი იღებს წევრებს 14 წლიდან. 14-18 წლის მოზარდებისთვის საჭიროა "
-"მშობლის თანხმობა."
 
 #: src/templates/main/partials/index_faq.html:32
 msgid "Can I get a personalized training program?"
-msgstr "შემიძლია მივიღო პერსონალური სავარჯიშო პროგრამა?"
+msgstr ""
 
 #: src/templates/main/partials/index_faq.html:36
 msgid ""
@@ -1705,12 +1641,10 @@ msgid ""
 "plan taking into account your goals, physical preparation, and health "
 "condition."
 msgstr ""
-"დიახ, ჩვენი სერტიფიცირებული ინსტრუქტორები შეგირჩევენ ინდივიდუალურ გეგმას "
-"თქვენი მიზნების გათვალისწინებით."
 
 #: src/templates/main/partials/index_faq.html:42
 msgid "How does payment work and what are the prices?"
-msgstr "როგორ ხდება გადახდა და რა არის ფასები?"
+msgstr ""
 
 #: src/templates/main/partials/index_faq.html:46
 msgid ""
@@ -1718,12 +1652,10 @@ msgid ""
 "Prices start from 40₾ per month and depend on the chosen program. We also"
 " offer student and family discounts."
 msgstr ""
-"გადახდა შესაძლებელია ნაღდი ანგარიშსწორებით, ბარათით ან გადარიცხვით. "
-"ფასები იწყება 40₾-დან თვეში."
 
 #: src/templates/main/partials/index_faq.html:52
 msgid "Can I transfer my membership to another person?"
-msgstr "შემიძლია თუ არა ჩემი წევრობის სხვა პირზე გადაცემა?"
+msgstr ""
 
 #: src/templates/main/partials/index_faq.html:56
 msgid ""
@@ -1731,12 +1663,10 @@ msgid ""
 " transferred to anyone else. Progress and health metrics are tracked "
 "individually for each member."
 msgstr ""
-"არა, უსაფრთხოების მიზნით, წევრობა პერსონალურია და მისი გადაცემა სხვა "
-"პირზე დაუშვებელია."
 
 #: src/templates/main/partials/index_faq.html:62
 msgid "Can I bring a guest?"
-msgstr "შემიძლია სტუმრის მოყვანა?"
+msgstr ""
 
 #: src/templates/main/partials/index_faq.html:66
 msgid ""
@@ -1744,85 +1674,73 @@ msgid ""
 " must complete a health questionnaire and sign a safety declaration "
 "before training."
 msgstr ""
-"დიახ, წევრებს შეუძლიათ თვეში ერთხელ სტუმარი უფასოდ მოიყვანონ. სტუმარმა "
-"უნდა შეავსოს ჯანმრთელობის კითხვარი."
 
 #: src/templates/main/partials/index_faq.html:72
 msgid "What programs are recommended for beginners?"
-msgstr "რომელი პროგრამებია რეკომენდებული დამწყებთათვის?"
+msgstr ""
 
 #: src/templates/main/partials/index_faq.html:76
 msgid ""
 "For beginners, we recommend Yoga, Pilates, General Fitness, and Swimming."
 " We offer a free consultation with a trainer for all new members, along "
 "with supervision for the first 3 sessions."
-msgstr "დამწყებთათვის რეკომენდებულია იოგა, პილატესი, ზოგადი ფიტნესი და ცურვა."
+msgstr ""
 
 #: src/templates/main/partials/index_features.html:5
 msgid "Why Choose Us"
-msgstr "რატომ უნდა აგვირჩიოთ ჩვენ"
+msgstr ""
 
 #: src/templates/main/partials/index_features.html:6
 msgid "We provide an unmatched fitness experience tailored to your unique goals."
 msgstr ""
-"ჩვენ გთავაზობთ შეუდარებელ ფიტნეს გამოცდილებას, რომელიც მორგებულია თქვენს "
-"მიზნებზე."
 
 #: src/templates/main/partials/index_features.html:12
 msgid "Modern Equipment"
-msgstr "თანამედროვე აღჭურვილობა"
+msgstr ""
 
 #: src/templates/main/partials/index_features.html:13
 msgid ""
 "Train with industry-leading, biomechanically perfected machines designed "
 "for maximum results."
 msgstr ""
-"ივარჯიშეთ ინდუსტრიის წამყვანი, ბიომექანიკურად სრულყოფილი მანქანებით, "
-"რომილებიც შექმნილია მაქსიმალური შედეგისთვის."
 
 #: src/templates/main/partials/index_features.html:17
 msgid "Expert Trainers"
-msgstr "ექსპერტი ტრენერები"
+msgstr ""
 
 #: src/templates/main/partials/index_features.html:18
 msgid ""
 "Our certified professionals create customized plans and guide you through"
 " every step."
 msgstr ""
-"ჩვენი სერტიფიცირებული პროფესიონალები ქმნიან ინდივიდუალურ გეგმებს და "
-"გიხელმძღვანელებენ ყოველ ნაბიჯზე."
 
 #: src/templates/main/partials/index_features.html:22
 msgid "Nutrition Plans"
-msgstr "კვების გეგმები"
+msgstr ""
 
 #: src/templates/main/partials/index_features.html:23
 msgid ""
 "Fuel your body correctly with personalized dietary strategies formulated "
 "by our experts."
 msgstr ""
-"მიაწოდეთ თქვენს სხეულს სწორი საწვავი ჩვენი ექსპერტების მიერ შემუშავებული "
-"კვების სტრატეგიებით."
 
 #: src/templates/main/partials/index_features.html:27
 msgid "Recovery Zone"
-msgstr "აღდგენის ზონა"
+msgstr ""
 
 #: src/templates/main/partials/index_features.html:28
 msgid ""
 "Accelerate muscle repair with our premium saunas, massage therapies, and "
 "ice baths."
 msgstr ""
-"დააჩქარეთ კუნთების აღდგენა ჩვენი პრემიუმ საუნებით, მასაჟის თერაპიით და "
-"ყინულის აბაზანებით."
 
 #: src/templates/main/partials/index_hero.html:6
 msgid "Push Your Limits."
-msgstr "გააფართოვეთ თქვენი შესაძლებლობები."
+msgstr ""
 
 #: src/templates/main/partials/index_hero.html:7
 msgid "Exceed Your Goals."
-msgstr "გადააჭარბეთ თქვენს მიზნებს."
+msgstr ""
 
 #: src/templates/main/partials/index_hero.html:10
 msgid ""
@@ -1830,150 +1748,147 @@ msgid ""
 "Access state-of-the-art equipment, world-class trainers, and science-"
 "backed programs."
 msgstr ""
-"შემოუერთდით ელიტარულ საზოგადოებას, რომელიც ეძღვნება სხეულისა და გონების "
-"ტრანსფორმაციას."
 
 #: src/templates/main/partials/index_hero.html:14
 msgid "Start Your Journey"
-msgstr "დაიწყე შენი მოგზაურობა"
+msgstr ""
 
 #: src/templates/main/partials/index_hero.html:18
 msgid "Explore Programs"
-msgstr "პროგრამების დათვალიერება"
+msgstr ""
 
 #: src/templates/main/partials/index_hero.html:34
 msgid "Facility Access"
-msgstr "წვდომა დარბაზთან"
+msgstr ""
 
 #: src/templates/main/partials/index_hero.html:41
 msgid "Expert Coaches"
-msgstr "ექსპერტი მწვრთნელები"
+msgstr ""
 
 #: src/templates/main/partials/index_pricing.html:5
-#, fuzzy
 msgid "Membership Plans"
-msgstr "წევრი"
+msgstr ""
 
 #: src/templates/main/partials/index_pricing.html:6
 msgid "Choose the perfect plan to achieve your fitness goals."
-msgstr "შეარჩიეთ იდეალური გეგმა თქვენი მიზნებისთვის."
+msgstr ""
 
 #: src/templates/main/partials/index_pricing.html:13
 #: src/templates/user/partials/settings_subscription.html:56
 msgid "Basic"
-msgstr "სტანდარტული"
+msgstr ""
 
 #: src/templates/main/partials/index_pricing.html:17
 #: src/templates/user/partials/settings_subscription.html:60
 msgid "Gym Access (07:00 - 15:00)"
-msgstr "დარბაზით სარგებლობა (07:00 - 15:00)"
+msgstr ""
 
 #: src/templates/main/partials/index_pricing.html:18
 msgid "1 Basic Program"
-msgstr "1 საბაზისო პროგრამა"
+msgstr ""
 
 #: src/templates/main/partials/index_pricing.html:19
 msgid "Locker Room Access"
-msgstr "გასახდელით სარგებლობა"
+msgstr ""
 
 #: src/templates/main/partials/index_pricing.html:20
 msgid "Personal Trainer"
-msgstr "პირადი ტრენერი"
+msgstr ""
 
 #: src/templates/main/partials/index_pricing.html:21
 #: src/templates/main/partials/index_pricing.html:38
 msgid "Spa & Sauna"
-msgstr "სპა და საუნა"
+msgstr ""
 
 #: src/templates/main/partials/index_pricing.html:23
 #: src/templates/main/partials/index_pricing.html:40
 #: src/templates/main/partials/index_pricing.html:56
 msgid "Get Started"
-msgstr "დაიწყე ახლა"
+msgstr ""
 
 #: src/templates/main/partials/index_pricing.html:28
 #: src/templates/user/partials/settings_subscription.html:71
 msgid "Most Popular"
-msgstr "ყველაზე პოპულარული"
+msgstr ""
 
 #: src/templates/main/partials/index_pricing.html:30
 #: src/templates/user/partials/settings_subscription.html:73
 msgid "Pro"
-msgstr "პროფესიონალი"
+msgstr ""
 
 #: src/templates/main/partials/index_pricing.html:34
 msgid "24/7 Gym Access"
-msgstr "24/7 წვდომა დარბაზთან"
+msgstr ""
 
 #: src/templates/main/partials/index_pricing.html:35
 #: src/templates/main/partials/index_pricing.html:51
 msgid "All Programs Included"
-msgstr "ყველა პროგრამა ჩართულია"
+msgstr ""
 
 #: src/templates/main/partials/index_pricing.html:36
 msgid "Premium Locker Room"
-msgstr "პრემიუმ გასახდელი"
+msgstr ""
 
 #: src/templates/main/partials/index_pricing.html:37
 msgid "1 PT Session / Month"
-msgstr "თვეში 1 პერსონალური ვარჯიში"
+msgstr ""
 
 #: src/templates/main/partials/index_pricing.html:46
 #: src/templates/user/partials/settings_subscription.html:89
 msgid "Elite"
-msgstr "ელიტარული"
+msgstr ""
 
 #: src/templates/main/partials/index_pricing.html:50
 #: src/templates/user/partials/settings_subscription.html:93
 msgid "24/7 VIP Access"
-msgstr "24/7 VIP წვდომა"
+msgstr ""
 
 #: src/templates/main/partials/index_pricing.html:52
 #: src/templates/user/partials/settings_subscription.html:94
 msgid "Private Locker"
-msgstr "პირადი კარადა"
+msgstr ""
 
 #: src/templates/main/partials/index_pricing.html:53
 #: src/templates/user/partials/settings_subscription.html:64
 #: src/templates/user/partials/settings_subscription.html:95
 msgid "Unlimited PT Sessions"
-msgstr "ულიმიტო პერსონალური ვარჯიშები"
+msgstr ""
 
 #: src/templates/main/partials/index_pricing.html:54
 #: src/templates/user/partials/settings_subscription.html:81
 #: src/templates/user/partials/settings_subscription.html:96
 msgid "Spa & Sauna Access"
-msgstr "წვდომა სპასა და საუნასთან"
+msgstr ""
 
 #: src/templates/main/partials/index_pricing.html:68
 msgid "Square Feet Facility"
-msgstr "კვადრატული მეტრი ფართობი"
+msgstr ""
 
 #: src/templates/main/partials/index_pricing.html:72
 msgid "Classes Per Week"
-msgstr "ვარჯიში კვირაში"
+msgstr ""
 
 #: src/templates/main/partials/index_pricing.html:76
 msgid "Client Satisfaction"
-msgstr "კლიენტთა კმაყოფილება"
+msgstr ""
 
 #: src/templates/main/partials/index_programs.html:5
 msgid "Elite Programs"
-msgstr "ელიტარული პროგრამები"
+msgstr ""
 
 #: src/templates/main/partials/index_programs.html:6
 msgid "Discover our specialized training modules designed for all fitness levels."
-msgstr "აღმოაჩინეთ ჩვენი სპეციალიზებული სავარჯიშო მოდულები ყველა დონისთვის."
+msgstr ""
 
 #: src/templates/main/partials/index_programs.html:16
 #: src/views/main/routes.py:22 src/views/user/routes.py:102
 #: src/views/user/routes.py:117
 msgid "Yoga"
-msgstr "იოგა"
+msgstr ""
 
 #: src/templates/main/partials/index_programs.html:17
 msgid "Harmony of body and mind, flexibility and stress relief."
-msgstr "სხეულისა და გონების ჰარმონია, მოქნილობა და სტრესის მოხსნა."
+msgstr ""
 
 #: src/templates/main/partials/index_programs.html:19
 #: src/templates/main/partials/index_programs.html:41
@@ -1982,11 +1897,11 @@ msgstr "სხეულისა და გონების ჰარმონ
 #: src/templates/main/partials/index_programs.html:104
 #: src/templates/main/partials/index_programs.html:125
 msgid "Min"
-msgstr "წთ"
+msgstr ""
 
 #: src/templates/main/partials/index_programs.html:20
 msgid "Low Impact"
-msgstr "დაბალი ინტენსივობა"
+msgstr ""
 
 #: src/templates/main/partials/index_programs.html:24
 #: src/templates/main/partials/index_programs.html:46
@@ -1995,7 +1910,7 @@ msgstr "დაბალი ინტენსივობა"
 #: src/templates/main/partials/index_programs.html:109
 #: src/templates/main/partials/index_programs.html:130
 msgid "Quick View"
-msgstr "სწრაფი ნახვა"
+msgstr ""
 
 #: src/templates/main/partials/index_programs.html:25
 #: src/templates/main/partials/index_programs.html:47
@@ -2004,84 +1919,84 @@ msgstr "სწრაფი ნახვა"
 #: src/templates/main/partials/index_programs.html:110
 #: src/templates/main/partials/index_programs.html:131
 msgid "Join"
-msgstr "გახდი წევრი"
+msgstr ""
 
 #: src/templates/main/partials/index_programs.html:38
 #: src/views/main/routes.py:26 src/views/user/routes.py:106
 #: src/views/user/routes.py:121
 msgid "Pilates"
-msgstr "პილატესი"
+msgstr ""
 
 #: src/templates/main/partials/index_programs.html:39
 msgid "Muscle strengthening, core stability and body correction."
-msgstr "კუნთების გაძლიერება, კორპუსის სტაბილურობა და სხეულის კორექცია."
+msgstr ""
 
 #: src/templates/main/partials/index_programs.html:42
 msgid "Medium"
-msgstr "საშუალო"
+msgstr ""
 
 #: src/templates/main/partials/index_programs.html:59
 #: src/views/main/routes.py:23 src/views/user/routes.py:103
 #: src/views/user/routes.py:118
 msgid "CrossFit"
-msgstr "კროსფიტი"
+msgstr ""
 
 #: src/templates/main/partials/index_programs.html:60
 msgid "High-intensity functional workouts for strength and endurance."
-msgstr "მაღალი ინტენსივობის ფუნქციონალური ვარჯიშები ძალისა და გამძლეობისთვის."
+msgstr ""
 
 #: src/templates/main/partials/index_programs.html:63
 msgid "Extreme"
-msgstr "ექსტრემალური"
+msgstr ""
 
 #: src/templates/main/partials/index_programs.html:80
 #: src/views/main/routes.py:27 src/views/user/routes.py:107
 #: src/views/user/routes.py:122
 msgid "Swimming"
-msgstr "ცურვა"
+msgstr ""
 
 #: src/templates/main/partials/index_programs.html:81
 msgid "Water exercises engaging all muscle groups with zero joint impact."
-msgstr "წყლის ვარჯიშები, რომლებიც რთავს ყველა კუნთს სახსრების დატვირთვის გარეშე."
+msgstr ""
 
 #: src/templates/main/partials/index_programs.html:84
 msgid "Full Body"
-msgstr "მთელი სხეული"
+msgstr ""
 
 #: src/templates/main/partials/index_programs.html:101
 #: src/views/main/routes.py:25 src/views/user/routes.py:105
 #: src/views/user/routes.py:120
 msgid "Boxing"
-msgstr "ბოქსი"
+msgstr ""
 
 #: src/templates/main/partials/index_programs.html:102
 msgid "Self-defense, footwork, and intense physical conditioning."
-msgstr "თავდაცვა, ფეხებით მუშაობა და ინტენსიური ფიზიკური კონდიცირება."
+msgstr ""
 
 #: src/templates/main/partials/index_programs.html:105
 msgid "Intense Cardio"
-msgstr "ინტენსიური კარდიო"
+msgstr ""
 
 #: src/templates/main/partials/index_programs.html:122
 #: src/views/user/routes.py:104 src/views/user/routes.py:119
 msgid "Athletics"
-msgstr "ათლეტიკა"
+msgstr ""
 
 #: src/templates/main/partials/index_programs.html:123
 msgid "Classic athletic exercises focused on speed, agility, and stamina."
-msgstr "კლასიკური ათლეტური ვარჯიშები ორიენტირებული სისწრაფეზე და სიმკვირცხლეზე."
+msgstr ""
 
 #: src/templates/main/partials/index_programs.html:126
 msgid "High Energy"
-msgstr "მაღალი ენერგია"
+msgstr ""
 
 #: src/templates/main/partials/index_testimonials.html:5
 msgid "Success Stories"
-msgstr "წარმატების ისტორიები"
+msgstr ""
 
 #: src/templates/main/partials/index_testimonials.html:6
 msgid "Hear from our members who have transformed their lives with us."
-msgstr "მოისმინეთ ჩვენი წევრებისგან, რომლებმაც შეცვალეს ცხოვრება ჩვენთან ერთად."
+msgstr ""
 
 #: src/templates/main/partials/index_testimonials.html:12
 msgid ""
@@ -2089,12 +2004,10 @@ msgid ""
 "incredibly supportive, and the facilities are always spotless. I've lost "
 "15kg in 4 months!\""
 msgstr ""
-"\"ამ კლუბში გაწევრიანება საუკეთესო გადაწყვეტილება იყო. ტრენერები ძალიან "
-"მხარდაჭერები არიან. 4 თვეში 15 კგ დავიკელი!\""
 
 #: src/templates/main/partials/index_testimonials.html:17
 msgid "Member since 2023"
-msgstr "წევრი 2023 წლიდან"
+msgstr ""
 
 #: src/templates/main/partials/index_testimonials.html:24
 msgid ""
@@ -2102,12 +2015,10 @@ msgid ""
 " everything I need and more. The recovery zone is a game changer for my "
 "performance.\""
 msgstr ""
-"\"როგორც პროფესიონალ ათლეტს, მჭირდება საუკეთესო აღჭურვილობა. ეს დარბაზი "
-"ყველაფერს მაძლევს. აღდგენის ზონა საოცრებაა.\""
 
 #: src/templates/main/partials/index_testimonials.html:29
 msgid "Pro Athlete"
-msgstr "პროფესიონალი ათლეტი"
+msgstr ""
 
 #: src/templates/main/partials/index_testimonials.html:36
 msgid ""
@@ -2115,557 +2026,547 @@ msgid ""
 "here is so welcoming. Every workout is scalable to my level. Highly "
 "recommended!\""
 msgstr ""
-"\"ადრე დარბაზების მერიდებოდა. აქ კროსფიტ საზოგადოება ძალიან თბილია. ყველა"
-" ვარჯიში ჩემს დონეზეა მორგებული.\""
 
 #: src/templates/main/partials/index_testimonials.html:41
 msgid "CrossFit Enthusiast"
-msgstr "კროსფიტის ენთუზიასტი"
+msgstr ""
 
 #: src/templates/partials/base.html:96
 msgid ""
 "Pushing boundaries and redefining fitness excellence since 2025. Join our"
 " elite community and transform your life with science-backed training."
 msgstr ""
-"საზღვრების გაფართოება და ფიტნესის ხელახალი განსაზღვრა 2025 წლიდან. "
-"შემოუერთდით ჩვენს ელიტარულ საზოგადოებას."
 
 #: src/templates/partials/base.html:112
 msgid "Quick Links"
-msgstr "სწრაფი ლინკები"
+msgstr ""
 
 #: src/templates/partials/base.html:114 src/templates/partials/navbar.html:18
 msgid "Home"
-msgstr "მთავარი"
+msgstr ""
 
 #: src/templates/partials/base.html:116
 msgid "Fitness Blog"
-msgstr "ფიტნეს ბლოგი"
+msgstr ""
 
 #: src/templates/partials/base.html:117
 msgid "FAQ"
 msgstr ""
 
 #: src/templates/partials/navbar.html:23
-#, fuzzy
 msgid "About"
-msgstr "ჩვენს შესახებ"
+msgstr ""
 
 #: src/templates/partials/navbar.html:29
 msgid "Exercises"
-msgstr "ვარჯიშები"
+msgstr ""
 
 #: src/templates/partials/navbar.html:80 src/templates/partials/navbar.html:133
 msgid "Logout"
-msgstr "გასვლა"
+msgstr ""
 
 #: src/templates/partials/navbar.html:110
 msgid "Profile"
-msgstr "პროფილი"
+msgstr ""
 
 #: src/templates/partials/navbar.html:125
 msgid "Contact"
-msgstr "კონტაქტი"
+msgstr ""
 
 #: src/templates/partials/navbar.html:142
 msgid "Login"
-msgstr "შესვლა"
+msgstr ""
 
 #: src/templates/user/profile.html:3
 msgid "My Profile"
-msgstr "ჩემი პროფილი"
+msgstr ""
 
 #: src/templates/user/profile.html:35
 msgid "Edit Basic Info"
-msgstr "ინფორმაციის რედაქტირება"
+msgstr ""
 
 #: src/templates/user/profile.html:59
 msgid "Save"
-msgstr "შენახვა"
+msgstr ""
 
 #: src/templates/user/profile.html:60
 msgid "Cancel"
-msgstr "გაუქმება"
+msgstr ""
 
 #: src/templates/user/profile.html:67
 msgid "Current Plan"
-msgstr "მიმდინარე გეგმა"
+msgstr ""
 
 #: src/templates/user/profile.html:70
 msgid "Expires"
-msgstr "ვადა ეწურება"
+msgstr ""
 
 #: src/templates/user/profile.html:79 src/templates/user/registrations.html:3
 #: src/templates/user/registrations.html:16
 msgid "My Registrations"
-msgstr "ჩემი რეგისტრაციები"
+msgstr ""
 
 #: src/templates/user/profile.html:89
 msgid "Body Metrics"
-msgstr "სხეულის მაჩვენებლები"
+msgstr ""
 
 #: src/templates/user/profile.html:93
 msgid "Weight"
-msgstr "წონა"
+msgstr ""
 
 #: src/templates/user/profile.html:97
 msgid "Height"
-msgstr "სიმაღლე"
+msgstr ""
 
 #: src/templates/user/profile.html:101
 msgid "BMI Index"
-msgstr "BMI ინდექსი"
+msgstr ""
 
 #: src/templates/user/profile.html:117
 msgid "Fitness Journey"
-msgstr "ფიტნეს მოგზაურობა"
+msgstr ""
 
 #: src/templates/user/profile.html:121 src/views/user/forms.py:23
 msgid "Fitness Goal"
-msgstr "ფიტნეს მიზანი"
+msgstr ""
 
 #: src/templates/user/profile.html:125 src/views/user/forms.py:35
 msgid "Fitness Level"
-msgstr "ფიტნეს დონე"
+msgstr ""
 
 #: src/templates/user/profile.html:129
 msgid "Weekly Sessions"
-msgstr "კვირეული ვარჯიშები"
+msgstr ""
 
 #: src/templates/user/profile.html:130
 msgid "days/week"
-msgstr "დღე/კვირაში"
+msgstr ""
 
 #: src/templates/user/profile.html:138
 msgid "Basic Info"
-msgstr "ძირითადი ინფორმაცია"
+msgstr ""
 
 #: src/templates/user/profile.html:142 src/views/user/forms.py:21
 msgid "Age"
-msgstr "ასაკი"
+msgstr ""
 
 #: src/templates/user/profile.html:143
 msgid "years"
-msgstr "წელი"
+msgstr ""
 
 #: src/templates/user/profile.html:150
 msgid "Birthdate"
-msgstr "დაბადების თარიღი"
+msgstr ""
 
 #: src/templates/user/profile.html:161
 msgid "Recent Achievements"
-msgstr "ბოლო მიღწევები"
+msgstr ""
 
 #: src/templates/user/profile.html:163
 msgid "View All"
-msgstr "ყველას ნახვა"
+msgstr ""
 
 #: src/templates/user/profile.html:168
 msgid "7 Day Streak"
-msgstr "7-დღიანი სერია"
+msgstr ""
 
 #: src/templates/user/partials/settings_achievements.html:25
 #: src/templates/user/profile.html:172
 msgid "Early Bird"
-msgstr "ადრიანი ჩიტი"
+msgstr ""
 
 #: src/templates/user/partials/settings_achievements.html:37
 #: src/templates/user/profile.html:176
 msgid "100kg Club"
-msgstr "100კგ კლუბი"
+msgstr ""
 
 #: src/templates/user/registrations.html:17
 msgid "All your program registrations"
-msgstr "თქვენი ყველა რეგისტრაცია"
+msgstr ""
 
 #: src/templates/user/registrations.html:48
 #: src/templates/user/registrations.html:56
 #: src/templates/user/registrations.html:64
 #: src/templates/user/registrations.html:72
 msgid "Not specified"
-msgstr "არ არის მითითებული"
+msgstr ""
 
 #: src/templates/user/registrations.html:55
 msgid "Start Date"
-msgstr "დაწყების თარიღი"
+msgstr ""
 
 #: src/templates/user/registrations.html:63
 msgid "Goal"
-msgstr "მიზანი"
+msgstr ""
 
 #: src/templates/user/registrations.html:71
 msgid "Level"
-msgstr "დონე"
+msgstr ""
 
 #: src/templates/user/registrations.html:79
 msgid "Phone"
-msgstr "ტელეფონი"
+msgstr ""
 
 #: src/templates/user/registrations.html:86
 msgid "Are you sure you want to delete this registration?"
-msgstr "დარწმუნებული ხართ, რომ გსურთ ამ რეგისტრაციის წაშლა?"
+msgstr ""
 
 #: src/templates/user/registrations.html:98
 msgid "You don't have any registrations yet"
-msgstr "თქვენ ჯერ არ გაქვთ რეგისტრაციები"
+msgstr ""
 
 #: src/templates/user/registrations.html:105
 msgid "Back to Profile"
-msgstr "პროფილზე დაბრუნება"
+msgstr ""
 
 #: src/templates/user/settings.html:3
 msgid "Account Settings"
-msgstr "ანგარიშის პარამეტრები"
+msgstr ""
 
 #: src/templates/user/settings.html:19
 msgid "Fitness Profile"
-msgstr "ფიტნეს პროფილი"
+msgstr ""
 
 #: src/templates/user/settings.html:22
 msgid "Preferences"
-msgstr "პრეფერენციები"
+msgstr ""
 
 #: src/templates/user/settings.html:25
 msgid "Recovery"
-msgstr "აღდგენა"
+msgstr ""
 
 #: src/templates/user/settings.html:28
 msgid "Connected Apps"
-msgstr "დაკავშირებული აპები"
+msgstr ""
 
 #: src/templates/user/settings.html:31
 msgid "Subscription"
-msgstr "გამოწერა"
+msgstr ""
 
 #: src/templates/user/settings.html:34
 msgid "Achievements"
-msgstr "მიღწევები"
+msgstr ""
 
 #: src/templates/user/partials/settings_achievements.html:3
 msgid "Achievements & Badges"
-msgstr "მიღწევები და სამკერდე ნიშნები"
+msgstr ""
 
 #: src/templates/user/partials/settings_achievements.html:4
 msgid "Track your milestones and show off your fitness journey."
-msgstr "ადევნეთ თვალი თქვენს წარმატებებს."
+msgstr ""
 
 #: src/templates/user/partials/settings_achievements.html:13
-#, fuzzy
 msgid "7-Day Streak"
-msgstr "7-დღიანი სერია"
+msgstr ""
 
 #: src/templates/user/partials/settings_achievements.html:14
 msgid "Completed a workout 7 days in a row."
-msgstr "ვარჯიში ზედიზედ 7 დღის განმავლობაში."
+msgstr ""
 
 #: src/templates/user/partials/settings_achievements.html:26
 msgid "Finished 5 workouts before 8:00 AM."
-msgstr "5 ვარჯიში დილის 8 საათამდე."
+msgstr ""
 
 #: src/templates/user/partials/settings_achievements.html:38
 msgid "Lift 100kg in any compound exercise."
-msgstr "100კგ-ის აწევა ნებისმიერ ვარჯიშში."
+msgstr ""
 
 #: src/templates/user/partials/settings_apps.html:3
 msgid "Connected Apps & Devices"
-msgstr "დაკავშირებული აპები და მოწყობილობები"
+msgstr ""
 
 #: src/templates/user/partials/settings_apps.html:4
 msgid "Sync your workouts, music, and health data automatically."
-msgstr "მოახდინეთ მონაცემების ავტომატური სინქრონიზაცია."
+msgstr ""
 
 #: src/templates/user/partials/settings_apps.html:13
 msgid "Control your workout playlists directly."
-msgstr "მართეთ თქვენი ფლეილისტები პირდაპირ."
+msgstr ""
 
 #: src/templates/user/partials/settings_apps.html:20
 msgid "Disconnect"
-msgstr "გათიშვა"
+msgstr ""
 
 #: src/templates/user/partials/settings_apps.html:25
 msgid "Connect"
-msgstr "დაკავშირება"
+msgstr ""
 
 #: src/templates/user/partials/settings_apps.html:37
 msgid "Sync your daily steps and active calories."
-msgstr "ნაბიჯების და კალორიების სინქრონიზაცია."
+msgstr ""
 
 #: src/templates/user/partials/settings_apps.html:61
 msgid "Import activities and heart rate data."
-msgstr "აქტივობების და პულსის მონაცების იმპორტი."
+msgstr ""
 
 #: src/templates/user/partials/settings_fitness.html:3
 msgid "Body Metrics & Goals"
-msgstr "სხეულის მაჩვენებლები და მიზნები"
+msgstr ""
 
 #: src/templates/user/partials/settings_fitness.html:4
 msgid "Keep this up to date to get the best recommendations."
-msgstr "განაახლეთ მონაცემები საუკეთესო რეკომენდაციებისთვის."
+msgstr ""
 
 #: src/templates/user/partials/settings_fitness.html:91
 msgid "Save Fitness Profile"
-msgstr "ფიტნეს პროფილის შენახვა"
+msgstr ""
 
 #: src/templates/user/partials/settings_preferences.html:3
 msgid "App Preferences"
-msgstr "აპლიკაციის პრეფერენციები"
+msgstr ""
 
 #: src/templates/user/partials/settings_preferences.html:4
 msgid "Customize your experience on the platform."
-msgstr "მოირგეთ პლატფორმა თქვენზე."
+msgstr ""
 
 #: src/templates/user/partials/settings_preferences.html:14
 msgid "Smart Features"
-msgstr "ჭკვიანი ფუნქციები"
+msgstr ""
 
 #: src/templates/user/partials/settings_preferences.html:21
 msgid "Choose how your AI assistant talks to you during workouts."
-msgstr "აირჩიეთ როგორ გესაუბრებათ AI ასისტენტი."
+msgstr ""
 
 #: src/templates/user/partials/settings_preferences.html:24
 msgid "Privacy & Notifications"
-msgstr "კონფიდენციალურობა და შეტყობინებები"
+msgstr ""
 
 #: src/templates/user/partials/settings_preferences.html:57
 msgid "Save Preferences"
-msgstr "პრეფერენციების შენახვა"
+msgstr ""
 
 #: src/templates/user/partials/settings_security.html:5
 msgid "Security & Privacy"
-msgstr "უსაფრთხოება და კონფიდენციალურობა"
+msgstr ""
 
 #: src/templates/user/partials/settings_security.html:6
 msgid "Manage your login credentials and account security."
-msgstr "მართეთ თქვენი პაროლები და უსაფრთხოება."
+msgstr ""
 
 #: src/templates/user/partials/settings_security.html:23
 msgid "Required to save any security changes."
-msgstr "აუცილებელია ნებისმიერი ცვლილების შესანახად."
+msgstr ""
 
 #: src/templates/user/partials/settings_security.html:48
 msgid "Save Security Changes"
-msgstr "უსაფრთხოების ცვლილებების შენახვა"
+msgstr ""
 
 #: src/templates/user/partials/settings_security.html:56
 msgid "Export Your Data"
-msgstr "მონაცემების ექსპორტი"
+msgstr ""
 
 #: src/templates/user/partials/settings_security.html:57
 msgid ""
 "Download a copy of your fitness metrics, preferences, and account data in"
 " JSON format."
-msgstr "ჩამოტვირთეთ თქვენი მონაცემების ასლი JSON ფორმატში."
+msgstr ""
 
 #: src/templates/user/partials/settings_security.html:59
 msgid "Download JSON"
-msgstr "JSON ჩამოტვირთვა"
+msgstr ""
 
 #: src/templates/user/partials/settings_security.html:66
 msgid "Danger Zone"
-msgstr "საშიში ზონა"
+msgstr ""
 
 #: src/templates/user/partials/settings_security.html:68
 msgid "Once you delete your account, there is no going back. Please be certain."
-msgstr "ანგარიშის წაშლის შემდეგ მონაცემების აღდგენა შეუძლებელია."
+msgstr ""
 
 #: src/templates/user/partials/settings_security.html:79
 msgid ""
 "Are you absolutely sure you want to permanently delete your account? This"
 " action is irreversible."
 msgstr ""
-"დარწმუნებული ხართ, რომ გსურთ ანგარიშის სამუდამოდ წაშლა? ეს მოქმედება "
-"შეუქცევადია."
 
 #: src/templates/user/partials/settings_security.html:80
 msgid "Delete My Account"
-msgstr "ჩემი ანგარიშის წაშლა"
+msgstr ""
 
 #: src/templates/user/partials/settings_subscription.html:3
 msgid "Subscription & Billing"
-msgstr "გამოწერა და ანგარიშსწორება"
+msgstr ""
 
 #: src/templates/user/partials/settings_subscription.html:9
 msgid "Active Membership"
-msgstr "აქტიური წევრობა"
+msgstr ""
 
 #: src/templates/user/partials/settings_subscription.html:10
 msgid "PLAN"
-msgstr "გეგმა"
+msgstr ""
 
 #: src/templates/user/partials/settings_subscription.html:13
 msgid "Next Billing Date"
-msgstr "შემდეგი გადახდის თარიღი"
+msgstr ""
 
 #: src/templates/user/partials/settings_subscription.html:22
 msgid "Active & Healthy"
-msgstr "აქტიური და ჯანსაღი"
+msgstr ""
 
 #: src/templates/user/partials/settings_subscription.html:27
 msgid "Payment Method"
-msgstr "გადახდის მეთოდი"
+msgstr ""
 
 #: src/templates/user/partials/settings_subscription.html:33
 msgid "Renewal"
-msgstr "განახლება"
+msgstr ""
 
 #: src/templates/user/partials/settings_subscription.html:34
 msgid "Auto-renew ON"
-msgstr "ავტომატური განახლება ჩართულია"
+msgstr ""
 
 #: src/templates/user/partials/settings_subscription.html:40
 msgid "Billing management portal is under maintenance. Please try again later."
-msgstr "გადახდების პორტალზე მიმდინარეობს ტექნიკური სამუშაოები."
+msgstr ""
 
 #: src/templates/user/partials/settings_subscription.html:40
 msgid "Manage Billing"
-msgstr "გადახდების მართვა"
+msgstr ""
 
 #: src/templates/user/partials/settings_subscription.html:42
 msgid "Are you sure you want to cancel your premium subscription?"
-msgstr "დარწმუნებული ხართ, რომ გსურთ გამოწერის გაუქმება?"
+msgstr ""
 
 #: src/templates/user/partials/settings_subscription.html:44
 msgid "Cancel Subscription"
-msgstr "გამოწერის გაუქმება"
+msgstr ""
 
 #: src/templates/user/partials/settings_subscription.html:49
 msgid "Manage your membership and explore premium features."
-msgstr "მართეთ თქვენი წევრობა და აღმოაჩინეთ პრემიუმ ფუნქციები."
+msgstr ""
 
 #: src/templates/user/partials/settings_subscription.html:55
 msgid "7-DAY FREE TRIAL"
-msgstr "7-დღიანი უფასო პერიოდი"
+msgstr ""
 
 #: src/templates/user/partials/settings_subscription.html:57
 #: src/templates/user/partials/settings_subscription.html:74
 #: src/templates/user/partials/settings_subscription.html:90
 msgid "mo"
-msgstr "თვე"
+msgstr ""
 
 #: src/templates/user/partials/settings_subscription.html:61
 msgid "Standard Workouts"
-msgstr "სტანდარტული ვარჯიშები"
+msgstr ""
 
 #: src/templates/user/partials/settings_subscription.html:62
 msgid "Basic Progress Tracking"
-msgstr "პროგრესის ძირითადი თვალყურისდევნება"
+msgstr ""
 
 #: src/templates/user/partials/settings_subscription.html:63
 #: src/templates/user/partials/settings_subscription.html:78
 msgid "AI Coach Customization"
-msgstr "AI მწვრთნელის პერსონალიზაცია"
+msgstr ""
 
 #: src/templates/user/partials/settings_subscription.html:66
 msgid "Choose Basic"
-msgstr "აირჩიე სტანდარტული"
+msgstr ""
 
 #: src/templates/user/partials/settings_subscription.html:77
 msgid "24/7 Priority Access"
-msgstr "24/7 პრიორიტეტული წვდომა"
+msgstr ""
 
 #: src/templates/user/partials/settings_subscription.html:80
 msgid "Unlimited Data Export"
-msgstr "მონაცემების ულიმიტო ექსპორტი"
+msgstr ""
 
 #: src/templates/user/partials/settings_subscription.html:83
 msgid "Upgrade to Pro"
-msgstr "გადასვლა პრო ვერსიაზე"
+msgstr ""
 
 #: src/templates/user/partials/settings_subscription.html:97
 msgid "Nutrition Plans Included"
-msgstr "კვების გეგმები ჩართულია"
+msgstr ""
 
 #: src/templates/user/partials/settings_subscription.html:99
 msgid "Upgrade to Elite"
-msgstr "გადასვლა ელიტარულზე"
+msgstr ""
 
 #: src/views/admin/routes.py:20
 msgid "Administrative rights required."
-msgstr "საჭიროა ადმინისტრაციული უფლებები."
+msgstr ""
 
 #: src/views/admin/routes.py:24
 msgid "You do not have administrative permissions."
-msgstr "თქვენ არ გაქვთ ადმინისტრაციული ნებართვა."
+msgstr ""
 
 #: src/views/admin/routes.py:82 src/views/admin/routes.py:455
 msgid "male"
-msgstr "მამრობითი"
+msgstr ""
 
 #: src/views/admin/routes.py:83 src/views/admin/routes.py:456
 msgid "female"
-msgstr "მდედრობითი"
+msgstr ""
 
 #: src/views/admin/routes.py:139
 msgid "You cannot delete your own account."
-msgstr "თქვენ არ შეგიძლიათ საკუთარი ანგარიშის წაშლა."
+msgstr ""
 
 #: src/views/admin/routes.py:144
 msgid "Administrators cannot be deleted."
-msgstr "ადმინისტრატორების წაშლა შეუძლებელია."
+msgstr ""
 
 #: src/views/admin/routes.py:154
 #, python-format
 msgid "User '%(username)s' has been successfully deleted."
-msgstr "მომხმარებელი '%(username)s' წარმატებით წაიშალა."
+msgstr ""
 
 #: src/views/admin/routes.py:157
 msgid "An error occurred while deleting the user."
-msgstr "მომხმარებლის წაშლისას მოხდა შეცდომა."
+msgstr ""
 
 #: src/views/admin/routes.py:182
 #, python-format
 msgid "Registration for '%(name)s' has been successfully deleted."
-msgstr "რეგისტრაცია '%(name)s'-სთვის წარმატებით წაიშალა."
+msgstr ""
 
 #: src/views/admin/routes.py:185
 msgid "An error occurred while deleting the registration."
-msgstr "რეგისტრაციის წაშლისას მოხდა შეცდომა."
+msgstr ""
 
 #: src/views/admin/routes.py:209
 #, python-format
 msgid "Blog post '%(title)s' has been successfully deleted."
-msgstr "ბლოგ პოსტი '%(title)s' წარმატებით წაიშალა."
+msgstr ""
 
 #: src/views/admin/routes.py:212
 msgid "An error occurred while deleting the blog post."
-msgstr "ბლოგ პოსტის წაშლისას მოხდა შეცდომა."
+msgstr ""
 
 #: src/views/admin/routes.py:237 src/views/admin/routes.py:317
 msgid "Title is required!"
-msgstr "სათაური აუცილებელია!"
+msgstr ""
 
 #: src/views/admin/routes.py:241 src/views/admin/routes.py:321
 msgid "Content is required!"
-msgstr "კონტენტი აუცილებელია!"
+msgstr ""
 
 #: src/views/admin/routes.py:289
 #, python-format
 msgid "Blog post \"%(title)s\" has been successfully created!"
-msgstr "ბლოგ პოსტი \"%(title)s\" წარმატებით შეიქმნა!"
+msgstr ""
 
 #: src/views/admin/routes.py:297 src/views/admin/routes.py:364
 #, python-format
 msgid "Error: %(error)s"
-msgstr "შეცდომა: %(error)s"
+msgstr ""
 
 #: src/views/admin/routes.py:359
 #, python-format
 msgid "Blog post \"%(title)s\" has been successfully updated!"
-msgstr "ბლოგ პოსტი \"%(title)s\" წარმატებით განახლდა!"
+msgstr ""
 
 #: src/views/exercise/routes.py:59
 msgid "Program not found"
 msgstr ""
 
 #: src/views/exercise/routes.py:63
-#, fuzzy
 msgid "title"
-msgstr "სათაური"
+msgstr ""
 
 #: src/views/exercise/routes.py:67
-#, fuzzy
 msgid "name"
-msgstr "მომხმარებელი"
+msgstr ""
 
 #: src/views/exercise/routes.py:68
 msgid "desc"
@@ -2673,399 +2574,237 @@ msgstr ""
 
 #: src/views/main/routes.py:22 src/views/main/routes.py:26
 msgid "Mon / Wed / Fri"
-msgstr "ორშ / ოთხ / პარ"
+msgstr ""
 
 #: src/views/main/routes.py:23
 msgid "Tue / Thu"
-msgstr "სამ / ხუთ"
+msgstr ""
 
 #: src/views/main/routes.py:24
 msgid "Strength Training"
-msgstr "ძალოვანი ვარჯიში"
+msgstr ""
 
 #: src/views/main/routes.py:24 src/views/main/routes.py:27
 msgid "Every Day"
-msgstr "ყოველ დღე"
+msgstr ""
 
 #: src/views/main/routes.py:25
 msgid "Tue / Thu / Sat"
-msgstr "სამ / ხუთ / შაბ"
+msgstr ""
 
 #: src/views/user/forms.py:9
 msgid "Birth Date"
-msgstr "დაბადების თარიღი"
+msgstr ""
 
 #: src/views/user/forms.py:13
 msgid "Profile Picture"
-msgstr "პროფილის სურათი"
+msgstr ""
 
 #: src/views/user/forms.py:14
 msgid "Images only!"
-msgstr "მხოლოდ სურათები!"
+msgstr ""
 
 #: src/views/user/forms.py:15
 msgid "Update"
-msgstr "განახლება"
+msgstr ""
 
 #: src/views/user/forms.py:18
 msgid "Weight (kg)"
-msgstr "წონა (კგ)"
+msgstr ""
 
 #: src/views/user/forms.py:19
 msgid "Height (cm)"
-msgstr "სიმაღლე (სმ)"
+msgstr ""
 
 #: src/views/user/forms.py:20
 msgid "Target Weight (kg)"
-msgstr "სამიზნე წონა (კგ)"
+msgstr ""
 
 #: src/views/user/forms.py:24
 msgid "Select Goal"
-msgstr "აირჩიეთ მიზანი"
+msgstr ""
 
 #: src/views/user/forms.py:25
 msgid "Weight Loss"
-msgstr "წონის დაკლება"
+msgstr ""
 
 #: src/views/user/forms.py:26
 msgid "Muscle Gain"
-msgstr "კუნთოვანი მასის მომატება"
+msgstr ""
 
 #: src/views/user/forms.py:27
 msgid "Endurance"
-msgstr "გამძლეობა"
+msgstr ""
 
 #: src/views/user/forms.py:28
 msgid "Maintenance"
-msgstr "შენარჩუნება"
+msgstr ""
 
 #: src/views/user/forms.py:29
 msgid "Activity Level"
-msgstr "აქტივობის დონე"
+msgstr ""
 
 #: src/views/user/forms.py:30
 msgid "Select Activity Level"
-msgstr "აირჩიეთ აქტივობის დონე"
+msgstr ""
 
 #: src/views/user/forms.py:31
 msgid "Sedentary"
-msgstr "მჯდომარე"
+msgstr ""
 
 #: src/views/user/forms.py:32
 msgid "Lightly Active"
-msgstr "ნაკლებად აქტიური"
+msgstr ""
 
 #: src/views/user/forms.py:33
 msgid "Moderately Active"
-msgstr "საშუალოდ აქტიური"
+msgstr ""
 
 #: src/views/user/forms.py:34
 msgid "Very Active"
-msgstr "ძალიან აქტიური"
+msgstr ""
 
 #: src/views/user/forms.py:35
 msgid "Beginner"
-msgstr "დამწყები"
+msgstr ""
 
 #: src/views/user/forms.py:35
 msgid "Intermediate"
-msgstr "საშუალო"
+msgstr ""
 
 #: src/views/user/forms.py:35
 msgid "Advanced"
-msgstr "წინწასული"
+msgstr ""
 
 #: src/views/user/forms.py:36
 msgid "Workout Frequency (days/week)"
-msgstr "ვარჯიშის სიხშირე (დღე/კვირაში)"
+msgstr ""
 
 #: src/views/user/forms.py:39
 msgid "Weekly Progress Digest"
-msgstr "ყოველკვირეული პროგრესი"
+msgstr ""
 
 #: src/views/user/forms.py:39 src/views/user/forms.py:43
 msgid "Enabled"
-msgstr "ჩართულია"
+msgstr ""
 
 #: src/views/user/forms.py:39 src/views/user/forms.py:43
 msgid "Disabled"
-msgstr "გამორთულია"
+msgstr ""
 
 #: src/views/user/forms.py:40
 msgid "AI Coach Personality"
-msgstr "AI მწვრთნელის პერსონაჟი"
+msgstr ""
 
 #: src/views/user/forms.py:40
 msgid "Supportive & Friendly"
-msgstr "მხარდამჭერი და მეგობრული"
+msgstr ""
 
 #: src/views/user/forms.py:40
 msgid "Drill Sergeant (Strict)"
-msgstr "მკაცრი ინსტრუქტორი"
+msgstr ""
 
 #: src/views/user/forms.py:40
 msgid "Scientific & Data-Driven"
-msgstr "სამეცნიერო და მონაცემებზე დაფუძნებული"
+msgstr ""
 
 #: src/views/user/forms.py:41
 msgid "Sore Muscles"
-msgstr "დაჭიმული კუნთები"
+msgstr ""
 
 #: src/views/user/forms.py:43
 msgid "Email Notifications"
-msgstr "შეტყობინებები ელ. ფოსტაზე"
+msgstr ""
 
 #: src/views/user/forms.py:44
 msgid "Theme Preference"
-msgstr "თემის არჩევანი"
+msgstr ""
 
 #: src/views/user/forms.py:44
 msgid "Dark Mode"
-msgstr "ბნელი რეჟიმი"
+msgstr ""
 
 #: src/views/user/forms.py:44
 msgid "Light Mode"
-msgstr "ნათელი რეჟიმი"
+msgstr ""
 
 #: src/views/user/forms.py:45
 msgid "Language"
-msgstr "ენა"
+msgstr ""
 
 #: src/views/user/forms.py:45
 msgid "English"
-msgstr "ინგლისური"
+msgstr ""
 
 #: src/views/user/forms.py:45
 msgid "Georgian"
-msgstr "ქართული"
+msgstr ""
 
 #: src/views/user/forms.py:46
 msgid "Save Settings"
-msgstr "პარამეტრების შენახვა"
+msgstr ""
 
 #: src/views/user/forms.py:49
 msgid "Email Address"
-msgstr "ელ. ფოსტის მისამართი"
+msgstr ""
 
 #: src/views/user/forms.py:50
 msgid "Current Password"
-msgstr "მიმდინარე პაროლი"
+msgstr ""
 
 #: src/views/user/forms.py:51
 msgid "New Password"
-msgstr "ახალი პაროლი"
+msgstr ""
 
 #: src/views/user/forms.py:52
 msgid "Password must be at least 8 characters long"
-msgstr "პაროლი უნდა იყოს მინიმუმ 8 სიმბოლო"
+msgstr ""
 
 #: src/views/user/forms.py:54
 msgid "Confirm New Password"
-msgstr "დაადასტურეთ ახალი პაროლი"
+msgstr ""
 
 #: src/views/user/forms.py:56
 msgid "Passwords must match."
-msgstr "პაროლები უნდა ემთხვეოდეს."
+msgstr ""
 
 #: src/views/user/forms.py:58
 msgid "Update Password"
-msgstr "პაროლის განახლება"
+msgstr ""
 
 #: src/views/user/forms.py:61
 msgid "Enter Password to Confirm Deletion"
-msgstr "შეიყვანეთ პაროლი წაშლის დასადასტურებლად"
+msgstr ""
 
 #: src/views/user/forms.py:62
 msgid "Permanently Delete Account"
-msgstr "ანგარიშის სამუდამოდ წაშლა"
+msgstr ""
 
 #: src/views/user/routes.py:123
 msgid "Cardio"
-msgstr "კარდიო"
+msgstr ""
 
 #: src/views/user/routes.py:124
 msgid "Fitness"
-msgstr "ფიტნესი"
+msgstr ""
 
 #: src/views/user/routes.py:161
 msgid "Settings saved successfully!"
-msgstr "პარამეტრები წარმატებით შენახულია!"
+msgstr ""
 
 #: src/views/user/routes.py:165
 msgid "An error occurred while saving settings."
-msgstr "შეცდომა პარამეტრების შენახვისას."
+msgstr ""
 
 #: src/views/user/routes.py:187
 msgid "Security settings updated successfully!"
-msgstr "უსაფრთხოების პარამეტრები წარმატებით განახლდა!"
+msgstr ""
 
 #: src/views/user/routes.py:191
 msgid "Current password is required to make changes."
-msgstr "მიმდინარე პაროლი აუცილებელია ცვლილებებისთვის."
+msgstr ""
 
 #: src/views/user/routes.py:193
 msgid "Incorrect current password."
-msgstr "მიმდინარე პაროლი არასწორია."
-
-#~ msgid "Fitness Insights"
-#~ msgstr "ფიტნეს სიახლეები"
-
-#~ msgid ""
-#~ "Expert advice on training, nutrition, "
-#~ "and lifestyle to help you reach "
-#~ "your peak performance."
-#~ msgstr ""
-#~ "ექსპერტების რჩევები ვარჯიშის, კვების და "
-#~ "ცხოვრების წესის შესახებ, თქვენი პიკის "
-#~ "მისაღწევად."
-
-#~ msgid "Search expert insights..."
-#~ msgstr "მოძებნეთ ექსპერტების რჩევები..."
-
-# --- Users ---
-#~ msgid "Users - Admin Panel"
-#~ msgstr "წევრები - ადმინ პანელი"
-
-#~ msgid "User Management"
-#~ msgstr "წევრების მართვა"
-
-#~ msgid "Registered Members"
-#~ msgstr "დარეგისტრირებული წევრები"
-
-#~ msgid "Active Accounts"
-#~ msgstr "აქტიური ანგარიში"
-
-#~ msgid "Search by name or email"
-#~ msgstr "სახელით ან ელ.ფოსტით ძიება"
-
-#~ msgid "Export CSV"
-#~ msgstr "CSV ექსპორტი"
-
-#~ msgid "Role"
-#~ msgstr "როლი"
-
-#~ msgid "Actions"
-#~ msgstr "მოქმედება"
-
-#~ msgid "Administrator"
-#~ msgstr "ადმინისტრატორი"
-
-#~ msgid "View Profile"
-#~ msgstr "პროფილის ნახვა"
-
-#~ msgid "No Members Found"
-#~ msgstr "წევრები არ არის"
-
-#~ msgid "There are currently no registered users in the system."
-#~ msgstr "სისტემაში ჯერ არ არის დარეგისტრირებული მომხმარებელი."
-
-# --- Registrations ---
-#~ msgid "Registrations - Admin Panel"
-#~ msgstr "დარეგისტრაციები - ადმინ პანელი"
-
-#~ msgid "Class Bookings"
-#~ msgstr "კლასის ჩარიცხვები"
-
-#~ msgid "Active Registrations"
-#~ msgstr "აქტიური ჩანაწერი"
-
-#~ msgid "Search bookings"
-#~ msgstr "ჩარიცხვების ძიება"
-
-#~ msgid "Program"
-#~ msgstr "პროგრამა"
-
-#~ msgid "Registered"
-#~ msgstr "დარეგისტრირდა"
-
-#~ msgid "Flexible"
-#~ msgstr "მოქნილი"
-
-#~ msgid "No Registrations Yet"
-#~ msgstr "ჩარიცხვები არ არის"
-
-#~ msgid "Members haven't signed up for any classes yet."
-#~ msgstr "წევრებს ჯერ არ გაუვლიათ კლასებზე."
-
-# --- Blog Management ---
-#~ msgid "Blog Management - Admin Panel"
-#~ msgstr "ბლოგის მართვა - ადმინ პანელი"
-
-#~ msgid "Blog Management"
-#~ msgstr "ბლოგის მართვა"
-
-#~ msgid "Post Catalog"
-#~ msgstr "პოსტების კატალოგი"
-
-#~ msgid "Published Articles"
-#~ msgstr "გამოქვეყნებული სტატია"
-
-#~ msgid "Search articles"
-#~ msgstr "სტატიების ძიება"
-
-#~ msgid "Thumbnail"
-#~ msgstr "ესკიზი"
-
-#~ msgid "Date"
-#~ msgstr "თარიღი"
-
-#~ msgid "Live"
-#~ msgstr "აქტიური"
-
-#~ msgid "Draft"
-#~ msgstr "დრაფტი"
-
-#~ msgid "Edit"
-#~ msgstr "რედაქტირება"
-
-#~ msgid "No Articles Yet"
-#~ msgstr "სტატიები არ არის"
-
-#~ msgid "Start sharing knowledge with your community."
-#~ msgstr "გააზიარეთ ცოდნა თქვენს საზოგადოებასთან."
-
-#~ msgid "Write First Article"
-#~ msgstr "პირველი სტატიის დაწერა"
-
-#~ msgid "Delete user"
-#~ msgstr "წაიშალოს მომხმარებელი"
-
-#~ msgid "Delete registration"
-#~ msgstr "წაიშალოს დარეგისტრაცია"
-
-#~ msgid "Delete post"
-#~ msgstr "წაიშალოს ეს პოსტი"
-
-#~ msgid "Search..."
-#~ msgstr "ძიება..."
-
-#~ msgid "Select Language"
-#~ msgstr "ენა"
-
-#~ msgid "No program data available."
-#~ msgstr "მონაცემები არ არის."
-
-#~ msgid "System Health"
-#~ msgstr "სისტემის მდგომარეობა"
-
-#~ msgid "Server Load"
-#~ msgstr "სერვერის დატვირთვა"
-
-#~ msgid "Database"
-#~ msgstr "მონაცემთა ბაზა"
-
-#~ msgid "Active"
-#~ msgstr "აქტიური"
-
-#~ msgid "Analytics Overview"
-#~ msgstr "ანალიტიკის მიმოხილვა"
-
-#~ msgid "Latest statistics for last"
-#~ msgstr "ბოლო სტატისტიკა ბოლო"
-
-#~ msgid "days"
-#~ msgstr "დღისათვის"
-
-#~ msgid "Medium Intensity"
-#~ msgstr "საშუალო"
+msgstr ""
 

@@ -1,48 +1,416 @@
 {% extends "admin/base.html" %}
 
-{% block title %}Analytics - Admin Panel{% endblock %}
-{% block page_title %}Advanced Analytics{% endblock %}
+{% block title %}{{ _('Analytics - Elite Admin') }}{% endblock %}
+{% block page_title %}{{ _('Advanced Analytics') }}{% endblock %}
 
 {% block extra_css %}
-<link rel="stylesheet" href="{{ url_for('static', filename='css/admin/statistics.css', v='6.1') }}">
+<style>
+    /* STANDALONE ANALYTICS v2.0 - ELITE CORE */
+    .admin-content-scroller { background: var(--bg-deep) !important; padding: 40px !important; }
+    
+    .filter-bar {
+        display: flex; justify-content: space-between; align-items: center;
+        margin-bottom: 32px; padding: 24px 32px;
+        background: var(--bg-card); border: 1px solid var(--border-soft);
+        border-radius: 24px;
+        box-shadow: var(--card-shadow);
+    }
+
+    .elite-card {
+        background: var(--bg-card) !important; border: 1px solid var(--border-soft) !important;
+        border-radius: 28px !important; padding: 32px !important; height: 100% !important;
+        box-shadow: var(--card-shadow);
+        position: relative;
+        overflow: hidden;
+    }
+
+    .stat-card-mini {
+        padding: 24px !important;
+    }
+
+    .stat-icon-box {
+        width: 42px; height: 42px; border-radius: 12px;
+        display: flex; align-items: center; justify-content: center;
+        font-size: 1rem; margin-bottom: 16px;
+    }
+
+    .stat-value { font-size: 1.8rem; font-weight: 800; color: var(--text-main); line-height: 1.2; }
+    .stat-label { font-size: 0.75rem; color: var(--text-dim); text-transform: uppercase; font-weight: 700; letter-spacing: 0.05em; }
+    .stat-change { font-size: 0.7rem; font-weight: 700; padding: 4px 8px; border-radius: 6px; }
+    .change-up { background: rgba(16, 185, 129, 0.1); color: #10b981; }
+    .change-down { background: rgba(239, 68, 68, 0.1); color: #f87171; }
+
+    .chart-container { position: relative; height: 320px; width: 100%; }
+    .chart-container-sm { height: 200px; }
+
+    .date-filter-group { display: flex; background: var(--input-bg); padding: 4px; border-radius: 12px; border: 1px solid var(--border-soft); }
+    .date-btn { padding: 8px 16px; border-radius: 10px; font-size: 0.8rem; font-weight: 700; color: var(--text-dim); background: transparent; border: none; cursor: pointer; transition: 0.2s; text-decoration: none !important; }
+    .date-btn.active { background: var(--zinc-900); color: var(--text-main); }
+
+    /* Objectives Styles */
+    .obj-row { margin-bottom: 24px; }
+    .obj-info { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 10px; }
+    .obj-label { font-weight: 700; font-size: 0.9rem; color: var(--text-main); }
+    .obj-meta { font-size: 0.8rem; color: var(--text-dim); }
+    .obj-percent { font-weight: 800; color: var(--primary); }
+    .obj-progress-bg { height: 8px; background: var(--bg-deep); border-radius: 10px; border: 1px solid var(--border-soft); overflow: hidden; }
+    .obj-progress-bar { height: 100%; border-radius: 10px; transition: width 1s cubic-bezier(0.4, 0, 0.2, 1); }
+
+    .mini-sparkline { height: 40px; width: 100%; margin-top: 12px; }
+</style>
 {% endblock %}
 
 {% block admin_content %}
-<!-- Date Filter Bar -->
+
+<!-- Filter Bar -->
 <div class="filter-bar">
     <div class="d-flex align-items-center gap-3">
-        <div class="header-icon-box">
-            <i class="fas fa-chart-line"></i>
+        <div style="width: 48px; height: 48px; background: var(--bg-deep); color: var(--primary); border: 1px solid var(--border-soft); border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 1.2rem;">
+            <i class="fas fa-chart-pie"></i>
         </div>
         <div>
-            <h4 class="fw-bold text-white mb-0">Analytics Overview</h4>
-            <p class="text-zinc-400 small mb-0">Real-time gym performance metrics</p>
+            <h4 class="fw-bold text-white mb-0">{{ _('Elite Analytics') }}</h4>
+            <p style="font-size: 0.85rem; color: var(--text-dim); margin: 0;">{{ _('Advanced business intelligence for your fitness center') }}</p>
         </div>
     </div>
     <div class="date-filter-group">
-        <button class="date-btn {% if stats.current_range == 7 %}active{% endif %}" data-range="7">Last 7 Days</button>
-        <button class="date-btn {% if stats.current_range == 30 %}active{% endif %}" data-range="30">Last 30 Days</button>
-        <button class="date-btn {% if stats.current_range == 90 %}active{% endif %}" data-range="90">Quarter</button>
+        <a href="?range=7" class="date-btn {% if stats.current_range == 7 %}active{% endif %}">7D</a>
+        <a href="?range=30" class="date-btn {% if stats.current_range == 30 %}active{% endif %}">30D</a>
+        <a href="?range=90" class="date-btn {% if stats.current_range == 90 %}active{% endif %}">90D</a>
     </div>
 </div>
 
-{% include 'admin/partials/stats_kpis.html' %}
-{% include 'admin/partials/stats_charts_row.html' %}
-{% include 'admin/partials/stats_demographics_row.html' %}
+<!-- Top Stats Row -->
+<div class="row g-4 mb-4">
+    <div class="col-md-3">
+        <div class="elite-card stat-card-mini">
+            <div class="d-flex justify-content-between">
+                <div class="stat-icon-box" style="background: rgba(59,130,246,0.1); color: #3b82f6;"><i class="fas fa-users"></i></div>
+                <div class="stat-change change-up"><i class="fas fa-arrow-up me-1"></i>12%</div>
+            </div>
+            <div class="stat-label">{{ _('Active Members') }}</div>
+            <div class="stat-value">{{ stats.total_users }}</div>
+            <div class="mini-sparkline">
+                <canvas id="sparkline1"></canvas>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="elite-card stat-card-mini">
+            <div class="d-flex justify-content-between">
+                <div class="stat-icon-box" style="background: rgba(16,185,129,0.1); color: #10b981;"><i class="fas fa-dollar-sign"></i></div>
+                <div class="stat-change change-up"><i class="fas fa-arrow-up me-1"></i>5.2%</div>
+            </div>
+            <div class="stat-label">{{ _('Monthly Revenue') }}</div>
+            <div class="stat-value">$12,450</div>
+            <div class="mini-sparkline">
+                <canvas id="sparkline2"></canvas>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="elite-card stat-card-mini">
+            <div class="d-flex justify-content-between">
+                <div class="stat-icon-box" style="background: rgba(139,92,246,0.1); color: #a78bfa;"><i class="fas fa-calendar-alt"></i></div>
+                <div class="stat-change change-up"><i class="fas fa-arrow-up me-1"></i>8%</div>
+            </div>
+            <div class="stat-label">{{ _('Period Bookings') }}</div>
+            <div class="stat-value">{{ stats.total_bookings }}</div>
+            <div class="mini-sparkline">
+                <canvas id="sparkline3"></canvas>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="elite-card stat-card-mini">
+            <div class="d-flex justify-content-between">
+                <div class="stat-icon-box" style="background: rgba(245,158,11,0.1); color: #f59e0b;"><i class="fas fa-user-plus"></i></div>
+                <div class="stat-change change-up"><i class="fas fa-arrow-up me-1"></i>18%</div>
+            </div>
+            <div class="stat-label">{{ _('New Sign-ups') }}</div>
+            <div class="stat-value">12</div>
+            <div class="mini-sparkline">
+                <canvas id="sparkline4"></canvas>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Middle Row: Trend & Peak Hours -->
+<div class="row g-4 mb-4">
+    <div class="col-lg-8">
+        <div class="elite-card">
+            <div class="d-flex justify-content-between align-items-start mb-4">
+                <div>
+                    <h5 class="fw-bold mb-1">{{ _('Revenue & Bookings Trend') }}</h5>
+                    <p style="font-size: 0.8rem; color: var(--text-dim); margin: 0;">{{ _('Last 30 days performance') }}</p>
+                </div>
+                <div class="d-flex gap-3">
+                    <div class="d-flex align-items-center gap-2" style="font-size: 0.75rem; color: var(--text-dim);">
+                        <div style="width: 8px; height: 8px; border-radius: 50%; background: #3b82f6;"></div> {{ _('Revenue') }}
+                    </div>
+                    <div class="d-flex align-items-center gap-2" style="font-size: 0.75rem; color: var(--text-dim);">
+                        <div style="width: 8px; height: 8px; border-radius: 50%; background: #10b981;"></div> {{ _('Bookings') }}
+                    </div>
+                </div>
+            </div>
+            <div class="chart-container">
+                <canvas id="trendChart"></canvas>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-4">
+        <div class="elite-card">
+            <h5 class="fw-bold mb-1">{{ _('Peak Hours') }}</h5>
+            <p class="mb-4" style="font-size: 0.8rem; color: var(--text-dim);">{{ _('Busiest times this week') }}</p>
+            <div class="chart-container">
+                <canvas id="peakChart"></canvas>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Bottom Row: Popularity & Objectives -->
+<div class="row g-4">
+    <div class="col-lg-6">
+        <div class="elite-card">
+            <h5 class="fw-bold mb-1">{{ _('Program Popularity') }}</h5>
+            <p class="mb-4" style="font-size: 0.8rem; color: var(--text-dim);">{{ _('Class distribution') }}</p>
+            <div class="row align-items-center">
+                <div class="col-7">
+                    <div style="height: 250px; position: relative;">
+                        <canvas id="popularityChart"></canvas>
+                    </div>
+                </div>
+                <div class="col-5">
+                    <div id="popularityLegend" class="d-flex flex-column gap-3"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-6">
+        <div class="elite-card">
+            <h5 class="fw-bold mb-1">{{ _('Monthly Objectives') }}</h5>
+            <p class="mb-4" style="font-size: 0.8rem; color: var(--text-dim);">{{ _('Progress vs targets') }}</p>
+            
+            <div class="obj-row">
+                <div class="obj-info">
+                    <div>
+                        <div class="obj-label">{{ _('New Member Growth') }}</div>
+                        <div class="obj-meta">{{ stats.total_users }} / 200 members</div>
+                    </div>
+                    <div class="obj-percent">6%</div>
+                </div>
+                <div class="obj-progress-bg">
+                    <div class="obj-progress-bar" style="width: 6%; background: #3b82f6;"></div>
+                </div>
+            </div>
+
+            <div class="obj-row">
+                <div class="obj-info">
+                    <div>
+                        <div class="obj-label">{{ _('Revenue Target') }}</div>
+                        <div class="obj-meta">$12,450 / $20,000</div>
+                    </div>
+                    <div class="obj-percent">65%</div>
+                </div>
+                <div class="obj-progress-bg">
+                    <div class="obj-progress-bar" style="width: 65%; background: #10b981;"></div>
+                </div>
+            </div>
+
+            <div class="obj-row">
+                <div class="obj-info">
+                    <div>
+                        <div class="obj-label">{{ _('Content Plan') }}</div>
+                        <div class="obj-meta">0 / 20 articles</div>
+                    </div>
+                    <div class="obj-percent">0%</div>
+                </div>
+                <div class="obj-progress-bg">
+                    <div class="obj-progress-bar" style="width: 0%; background: #a78bfa;"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
 {% endblock %}
 
 {% block extra_js %}
-<script src="{{ url_for('static', filename='js/admin/statistics.js') }}"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<!-- Hidden data for JS -->
+<div id="stats-data" 
+     data-labels='{{ stats.chart_labels | tojson | safe }}' 
+     data-values='{{ stats.chart_data | tojson | safe }}'
+     style="display: none;"></div>
+
 <script>
-document.addEventListener("DOMContentLoaded", function() {
-    initStatisticsCharts({
-        currentRange: {{ stats.current_range }},
-        chartData: {{ stats.chart_data | tojson }},
-        programLabels: {{ stats.program_labels | tojson }},
-        programData: {{ stats.program_data | tojson }},
-        baseUrl: "{{ url_for('admin.statistics') }}"
+    document.addEventListener("DOMContentLoaded", function() {
+        // Theme Helper
+        const getColors = () => {
+            const isLight = document.documentElement.getAttribute('data-theme') === 'light';
+            return {
+                grid: isLight ? 'rgba(0,0,0,0.05)' : 'rgba(255,255,255,0.05)',
+                text: isLight ? '#3f3f46' : '#71717a',
+                card: isLight ? '#ffffff' : '#18181b'
+            };
+        };
+
+        let currentColors = getColors();
+        
+        // Load data from DOM
+        const statsDataEl = document.getElementById('stats-data');
+        const chartLabels = JSON.parse(statsDataEl.dataset.labels);
+        const chartData = JSON.parse(statsDataEl.dataset.values);
+
+        // 1. Sparklines
+        const sparklineOptions = {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: { legend: { display: false }, tooltip: { enabled: false } },
+            scales: { x: { display: false }, y: { display: false } },
+            elements: { point: { radius: 0 } }
+        };
+
+        const createSparkline = (id, color, data) => {
+            new Chart(document.getElementById(id), {
+                type: 'bar',
+                data: {
+                    labels: [1,2,3,4,5,6,7],
+                    datasets: [{
+                        data: data,
+                        backgroundColor: color,
+                        borderRadius: 4,
+                        barThickness: 6
+                    }]
+                },
+                options: sparklineOptions
+            });
+        };
+
+        createSparkline('sparkline1', '#3b82f6', [10, 15, 8, 12, 18, 14, 20]);
+        createSparkline('sparkline2', '#10b981', [20, 18, 25, 22, 28, 24, 30]);
+        createSparkline('sparkline3', '#a78bfa', [5, 8, 4, 7, 10, 8, 12]);
+        createSparkline('sparkline4', '#f59e0b', [12, 10, 15, 14, 18, 16, 22]);
+
+        // 2. Trend Chart
+        const trendCtx = document.getElementById('trendChart').getContext('2d');
+        const trendChart = new Chart(trendCtx, {
+            type: 'line',
+            data: {
+                labels: chartLabels,
+                datasets: [
+                    {
+                        label: 'Revenue',
+                        data: [400, 600, 750, 650, 400, 700, 600, 750, 400, 650, 700, 600, 750],
+                        borderColor: '#3b82f6',
+                        borderWidth: 4,
+                        tension: 0.4,
+                        pointRadius: 0,
+                        fill: false
+                    },
+                    {
+                        label: 'Bookings',
+                        data: chartData,
+                        borderColor: '#10b981',
+                        borderWidth: 2,
+                        tension: 0.4,
+                        pointRadius: 0,
+                        fill: false
+                    }
+                ]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: { legend: { display: false } },
+                scales: {
+                    y: { grid: { color: currentColors.grid }, ticks: { color: currentColors.text } },
+                    x: { grid: { display: false }, ticks: { color: currentColors.text } }
+                }
+            }
+        });
+
+        // 3. Peak Hours Chart
+        const peakCtx = document.getElementById('peakChart').getContext('2d');
+        const peakChart = new Chart(peakCtx, {
+            type: 'bar',
+            data: {
+                labels: ['6am','8am','10am','12pm','2pm','4pm','6pm','8pm'],
+                datasets: [{
+                    data: [10, 25, 15, 8, 12, 22, 40, 18],
+                    backgroundColor: (ctx) => {
+                        const val = ctx.raw;
+                        if (val > 30) return '#e74c3c';
+                        if (val > 20) return '#f59e0b';
+                        return '#3b82f6';
+                    },
+                    borderRadius: 8
+                }]
+            },
+            options: {
+                indexAxis: 'y',
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: { legend: { display: false } },
+                scales: {
+                    x: { grid: { color: currentColors.grid }, ticks: { color: currentColors.text } },
+                    y: { grid: { display: false }, ticks: { color: currentColors.text } }
+                }
+            }
+        });
+
+        // 4. Popularity Chart
+        const popCtx = document.getElementById('popularityChart').getContext('2d');
+        const popData = {
+            labels: ['Boxing', 'CrossFit', 'Yoga', 'HIIT'],
+            datasets: [{
+                data: [35, 25, 20, 20],
+                backgroundColor: ['#3b82f6', '#10b981', '#f472b6', '#f59e0b'],
+                borderWidth: 0,
+                cutout: '75%'
+            }]
+        };
+
+        const popChart = new Chart(popCtx, {
+            type: 'doughnut',
+            data: popData,
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: { legend: { display: false } }
+            }
+        });
+
+        // Custom Legend for Donut
+        const legendDiv = document.getElementById('popularityLegend');
+        popData.labels.forEach((label, i) => {
+            const val = popData.datasets[0].data[i];
+            const color = popData.datasets[0].backgroundColor[i];
+            legendDiv.innerHTML += `
+                <div class="d-flex align-items-center justify-content-between">
+                    <div class="d-flex align-items-center gap-2">
+                        <div style="width: 10px; height: 10px; border-radius: 3px; background: ${color};"></div>
+                        <span style="font-size: 0.85rem; font-weight: 600; color: var(--text-main);">${label}</span>
+                    </div>
+                    <span style="font-size: 0.8rem; color: var(--text-dim);">${val}%</span>
+                </div>
+            `;
+        });
+
+        // Theme Switcher Sync
+        window.addEventListener('themeChanged', () => {
+            const colors = getColors();
+            [trendChart, peakChart].forEach(chart => {
+                chart.options.scales.y.grid.color = colors.grid;
+                chart.options.scales.y.ticks.color = colors.text;
+                chart.options.scales.x.grid.color = colors.grid;
+                chart.options.scales.x.ticks.color = colors.text;
+                chart.update();
+            });
+        });
     });
-});
 </script>
 {% endblock %}

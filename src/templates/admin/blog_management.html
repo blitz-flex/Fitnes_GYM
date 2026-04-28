@@ -1,7 +1,7 @@
 {% extends "admin/base.html" %}
 
-{% block title %}Blog Management - Admin Panel{% endblock %}
-{% block page_title %}Blog Management{% endblock %}
+{% block title %}{{ _('Blog Management - Admin Panel') }}{% endblock %}
+{% block page_title %}{{ _('Blog Management') }}{% endblock %}
 
 {% block extra_css %}
 <link rel="stylesheet" href="{{ url_for('static', filename='css/admin/mgmt-shared.css', v='1.0') }}">
@@ -14,19 +14,22 @@
         <div class="mgmt-title-area">
             <div class="mgmt-icon purple"><i class="fas fa-newspaper"></i></div>
             <div>
-                <h4 class="mgmt-title">Post Catalog</h4>
+                <h4 class="mgmt-title">{{ _('Post Catalog') }}</h4>
                 <p class="mgmt-subtitle">
-                    {{ posts|length if posts else 0 }} Published Articles
+                    {{ posts|length if posts else 0 }} {{ _('Published Articles') }}
                 </p>
             </div>
         </div>
         <div class="mgmt-actions">
             <div class="search-wrapper">
                 <i class="fas fa-search search-icon"></i>
-                <input type="text" class="search-input" placeholder="Search articles…" id="blogSearch">
+                <input type="text" class="search-input" placeholder="{{ _('Search articles') }}…" id="blogSearch">
             </div>
+            <button type="button" class="ai-expert-btn" data-bs-toggle="modal" data-bs-target="#aiExpertModal">
+                <i class="fas fa-brain"></i> {{ _('AI Expert') }}
+            </button>
             <a href="{{ url_for('admin.create_post') }}" class="create-new-btn">
-                <i class="fas fa-plus"></i> New Post
+                <i class="fas fa-plus"></i> {{ _('New Post') }}
             </a>
         </div>
     </div>
@@ -37,12 +40,12 @@
         <table class="mgmt-table">
             <thead>
                 <tr>
-                    <th class="th-first">Thumbnail</th>
-                    <th>Post Title</th>
-                    <th>Date</th>
-                    <th class="text-center">Views</th>
-                    <th>Status</th>
-                    <th class="th-last">Actions</th>
+                    <th class="th-first">{{ _('Thumbnail') }}</th>
+                    <th>{{ _('Post Title') }}</th>
+                    <th>{{ _('Date') }}</th>
+                    <th class="text-center">{{ _('Views') }}</th>
+                    <th>{{ _('Status') }}</th>
+                    <th class="th-last">{{ _('Actions') }}</th>
                 </tr>
             </thead>
             <tbody>
@@ -76,21 +79,21 @@
                     <td>
                         {% if post.published %}
                             <a href="{{ url_for('blog.post_detail', slug=post.slug) }}" target="_blank" style="text-decoration: none;">
-                                <span class="tag tag-green"><i class="fas fa-circle" style="font-size:0.5rem;"></i> Live</span>
+                                <span class="tag tag-green"><i class="fas fa-circle" style="font-size:0.5rem;"></i> {{ _('Live') }}</span>
                             </a>
                         {% else %}
-                            <span class="tag tag-amber"><i class="fas fa-pencil-alt" style="font-size:0.6rem;"></i> Draft</span>
+                            <span class="tag tag-amber"><i class="fas fa-pencil-alt" style="font-size:0.6rem;"></i> {{ _('Draft') }}</span>
                         {% endif %}
                     </td>
                     <td class="td-last">
                         <div class="action-group">
                             {% if post.author_name == 'AI Generation' or not post.author_name or post.author_name == 'Admin' %}
-                            <a href="{{ url_for('admin.edit_post', post_id=post.id) }}" class="act-btn" title="Edit">
+                            <a href="{{ url_for('admin.edit_post', post_id=post.id) }}" class="act-btn" title="{{ _('Edit') }}">
                                 <i class="fas fa-edit"></i>
                             </a>
                             {% endif %}
                             <form method="POST" action="{{ url_for('admin.delete_post', id=post.id) }}" class="d-inline">
-                                <button type="submit" class="act-btn danger" title="Delete" onclick="return confirm('Delete this post?')">
+                                <button type="submit" class="act-btn danger" title="{{ _('Delete') }}" onclick="return confirm('{{ _('Delete post') }}?')">
                                     <i class="fas fa-trash"></i>
                                 </button>
                             </form>
@@ -105,13 +108,74 @@
     {% else %}
     <div class="empty-state">
         <div class="empty-icon"><i class="fas fa-newspaper"></i></div>
-        <h5>No Articles Yet</h5>
-        <p>Start sharing knowledge with your community.</p>
-        <a href="{{ url_for('admin.create_post') }}" class="create-new-btn mt-3" style="width:fit-content; margin: 0 auto;">
-            <i class="fas fa-plus-circle"></i> Write First Article
-        </a>
+        <h5>{{ _('No Articles Yet') }}</h5>
+        <p>{{ _('Start sharing knowledge with your community.') }}</p>
+        <div class="d-flex justify-content-center gap-3 mt-3">
+            <button type="button" class="ai-expert-btn" data-bs-toggle="modal" data-bs-target="#aiExpertModal">
+                <i class="fas fa-brain"></i> {{ _('AI Expert') }}
+            </button>
+            <a href="{{ url_for('admin.create_post') }}" class="create-new-btn">
+                <i class="fas fa-plus-circle"></i> {{ _('Write First Article') }}
+            </a>
+        </div>
     </div>
     {% endif %}
+</div>
+
+<!-- AI Expert Modal -->
+<div class="modal fade" id="aiExpertModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-content ai-modal-content">
+            <div class="modal-body p-0">
+                <div class="ai-expert-card">
+                    <button type="button" class="ai-close-btn" data-bs-dismiss="modal">
+                        <i class="fas fa-times"></i>
+                    </button>
+                    
+                    <div class="ai-card-header">
+                        <div class="ai-icon-box">
+                            <i class="fas fa-brain"></i>
+                        </div>
+                        <div class="ai-text-box">
+                            <h3 class="ai-title">AI Content Expert</h3>
+                            <p class="ai-subtitle">Craft premium, science-backed articles in seconds.</p>
+                        </div>
+                    </div>
+
+                    <div class="ai-form-row">
+                        <div class="ai-input-wrap">
+                            <i class="fas fa-magic ai-input-icon"></i>
+                            <input type="text" id="ai-topic" placeholder="{{ _('e.g. Advanced Yoga Techniques') }}...">
+                        </div>
+                        <div class="ai-select-wrap">
+                            <i class="fas fa-folder ai-input-icon"></i>
+                            <select id="ai-category">
+                                <option value="Training">{{ _('Training & Technique') }}</option>
+                                <option value="Nutrition">{{ _('Nutrition & Diet') }}</option>
+                                <option value="Cardio">{{ _('Cardio & Endurance') }}</option>
+                                <option value="Recovery">{{ _('Recovery & Sleep') }}</option>
+                                <option value="Lifestyle">{{ _('Lifestyle & Habits') }}</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="ai-prompt-row mb-4">
+                        <div class="ai-textarea-wrap">
+                            <i class="fas fa-comment-alt ai-input-icon" style="top: 24px;"></i>
+                            <textarea id="ai-prompt" placeholder="{{ _('Add custom instructions (e.g. Focus on benefits for seniors, use a friendly tone, etc.)') }}..." rows="3"></textarea>
+                        </div>
+                    </div>
+
+                    <button id="generate-ai-btn" class="ai-generate-btn">
+                        <span id="btn-text">{{ _('GENERATE EXPERT POST') }}</span>
+                        <i id="btn-spinner" class="fas fa-circle-notch fa-spin d-none"></i>
+                    </button>
+
+                    <div id="gen-status" class="ai-status-msg d-none"></div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 {% endblock %}
 
@@ -122,6 +186,57 @@
         document.querySelectorAll('.mgmt-table tbody tr').forEach(row => {
             row.style.display = row.textContent.toLowerCase().includes(val) ? '' : 'none';
         });
+    });
+
+    // AI Generation Logic
+    document.getElementById('generate-ai-btn').addEventListener('click', async function() {
+        const topic = document.getElementById('ai-topic').value;
+        const category = document.getElementById('ai-category').value;
+        const customPrompt = document.getElementById('ai-prompt').value;
+        const btn = this;
+        const btnText = document.getElementById('btn-text');
+        const spinner = document.getElementById('btn-spinner');
+        const status = document.getElementById('gen-status');
+
+        if (!topic) return alert('{{ _("Please enter a topic") }}');
+
+        btn.disabled = true;
+        btnText.classList.add('d-none');
+        spinner.classList.remove('d-none');
+        status.classList.remove('d-none');
+        status.className = 'ai-status-msg processing';
+        status.textContent = '{{ _("AI Expert is crafting your masterpiece...") }}';
+
+        try {
+            const response = await fetch("{{ url_for('blog.generate_ai_post') }}", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ 
+                    topic: topic, 
+                    category: category,
+                    custom_prompt: customPrompt
+                })
+            });
+            const data = await response.json();
+
+            if (data.success) {
+                status.className = 'ai-status-msg success';
+                status.textContent = '{{ _("Done! Refreshing catalog...") }}';
+                setTimeout(() => window.location.reload(), 1500);
+            } else {
+                status.className = 'ai-status-msg error';
+                status.textContent = '{{ _("Error") }}: ' + (data.error || '{{ _("Failed to generate") }}');
+                btn.disabled = false;
+                btnText.classList.remove('d-none');
+                spinner.classList.add('d-none');
+            }
+        } catch (e) {
+            status.className = 'ai-status-msg error';
+            status.textContent = '{{ _("Connection lost. Try again.") }}';
+            btn.disabled = false;
+            btnText.classList.remove('d-none');
+            spinner.classList.add('d-none');
+        }
     });
 </script>
 {% endblock %}

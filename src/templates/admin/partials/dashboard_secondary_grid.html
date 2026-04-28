@@ -4,8 +4,8 @@
     <div class="dash-card">
         <div class="dash-card-header">
             <div>
-                <h6 class="dash-card-title">Popular Programs</h6>
-                <p class="dash-card-sub">Bookings per class</p>
+                <h6 class="dash-card-title">{{ _('Popular Programs') }}</h6>
+                <p class="dash-card-sub">{{ _('Bookings per class') }}</p>
             </div>
         </div>
         <div class="dash-card-body">
@@ -24,7 +24,7 @@
                 </div>
                 {% endfor %}
             {% else %}
-                <div class="empty-feed"><i class="fas fa-dumbbell"></i><span>No bookings yet</span></div>
+                <div class="empty-feed"><i class="fas fa-dumbbell"></i><span>{{ _('No bookings yet') }}</span></div>
             {% endif %}
         </div>
     </div>
@@ -33,8 +33,8 @@
     <div class="dash-card">
         <div class="dash-card-header">
             <div>
-                <h6 class="dash-card-title">Subscription Plans</h6>
-                <p class="dash-card-sub">Member tier distribution</p>
+                <h6 class="dash-card-title">{{ _('Subscription Plans') }}</h6>
+                <p class="dash-card-sub">{{ _('Member tier distribution') }}</p>
             </div>
         </div>
         <div class="dash-card-body">
@@ -57,8 +57,8 @@
     <div class="dash-card">
         <div class="dash-card-header">
             <div>
-                <h6 class="dash-card-title">Member Demographics</h6>
-                <p class="dash-card-sub">Gender distribution</p>
+                <h6 class="dash-card-title">{{ _('Member Demographics') }}</h6>
+                <p class="dash-card-sub">{{ _('Gender distribution') }}</p>
             </div>
         </div>
         <div class="dash-card-body">
@@ -70,7 +70,7 @@
                     <canvas id="genderChart"></canvas>
                     <div class="gender-ring-center">
                         <span class="gender-total">{{ total_gendered }}</span>
-                        <span class="gender-total-label">members</span>
+                        <span class="gender-total-label">{{ _('members') }}</span>
                     </div>
                 </div>
                 <div class="gender-breakdown">
@@ -78,14 +78,14 @@
                         <div class="gender-icon male"><i class="fas fa-mars"></i></div>
                         <div>
                             <span class="gender-pct">{{ m_pct }}%</span>
-                            <span class="gender-label">Male ({{ stats.male_count }})</span>
+                            <span class="gender-label">{{ _('Male') }} ({{ stats.male_count }})</span>
                         </div>
                     </div>
                     <div class="gender-stat">
                         <div class="gender-icon female"><i class="fas fa-venus"></i></div>
                         <div>
                             <span class="gender-pct">{{ f_pct }}%</span>
-                            <span class="gender-label">Female ({{ stats.female_count }})</span>
+                            <span class="gender-label">{{ _('Female') }} ({{ stats.female_count }})</span>
                         </div>
                     </div>
                     {% set unknown = stats.total_users - total_gendered %}
@@ -94,7 +94,7 @@
                         <div class="gender-icon neutral"><i class="fas fa-user"></i></div>
                         <div>
                             <span class="gender-pct">{{ (unknown / stats.total_users * 100)|round|int }}%</span>
-                            <span class="gender-label">Not set ({{ unknown }})</span>
+                            <span class="gender-label">{{ _('Other') }} ({{ unknown }})</span>
                         </div>
                     </div>
                     {% endif %}

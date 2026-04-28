@@ -275,8 +275,5 @@ main {
     .carousel-caption h3 {
         font-size: var(--font-size-2xl);
     }
-
-    .carousel-caption p {
-    }
 }
 

@@ -1,7 +1,7 @@
 {% extends "admin/base.html" %}
 
-{% block title %}Users - Admin Panel{% endblock %}
-{% block page_title %}User Management{% endblock %}
+{% block title %}{{ _('Users - Admin Panel') }}{% endblock %}
+{% block page_title %}{{ _('User Management') }}{% endblock %}
 
 {% block extra_css %}
 <link rel="stylesheet" href="{{ url_for('static', filename='css/admin/mgmt-shared.css', v='1.0') }}">
@@ -14,19 +14,19 @@
         <div class="mgmt-title-area">
             <div class="mgmt-icon blue"><i class="fas fa-users-cog"></i></div>
             <div>
-                <h4 class="mgmt-title">Registered Members</h4>
+                <h4 class="mgmt-title">{{ _('Registered Members') }}</h4>
                 <p class="mgmt-subtitle">
                     <span class="live-dot"></span>
-                    {{ users.total if users else 0 }} Active Accounts
+                    {{ users.total if users else 0 }} {{ _('Active Accounts') }}
                 </p>
             </div>
         </div>
         <div class="mgmt-actions">
             <div class="search-wrapper">
                 <i class="fas fa-search search-icon"></i>
-                <input type="text" class="search-input" placeholder="Search by name or email…" id="userSearch">
+                <input type="text" class="search-input" placeholder="{{ _('Search by name or email') }}…" id="userSearch">
             </div>
-            <button class="icon-btn" title="Export CSV"><i class="fas fa-download"></i></button>
+            <button class="icon-btn" title="{{ _('Export CSV') }}"><i class="fas fa-download"></i></button>
         </div>
     </div>
 
@@ -36,13 +36,13 @@
         <table class="mgmt-table">
             <thead>
                 <tr>
-                    <th class="th-first">Member</th>
-                    <th>Full Name</th>
-                    <th>Gender</th>
-                    <th>Role</th>
-                    <th>Plan</th>
-                    <th class="text-center">Bookings</th>
-                    <th class="th-last">Actions</th>
+                    <th class="th-first">{{ _('Member') }}</th>
+                    <th>{{ _('Full Name') }}</th>
+                    <th>{{ _('Gender') }}</th>
+                    <th>{{ _('Role') }}</th>
+                    <th>{{ _('Plan') }}</th>
+                    <th class="text-center">{{ _('Registrations') }}</th>
+                    <th class="th-last">{{ _('Actions') }}</th>
                 </tr>
             </thead>
             <tbody>
@@ -68,7 +68,7 @@
                         </div>
                     </td>
                     <td>
-                        <span class="cell-text">{{ 'Administrator' if user.is_admin else user.name }}</span>
+                        <span class="cell-text">{{ _('Administrator') if user.is_admin else user.name }}</span>
                     </td>
                     <td>
                         {% if user.gender %}
@@ -86,9 +86,9 @@
                     </td>
                     <td>
                         {% if user.is_admin %}
-                            <span class="tag tag-red"><i class="fas fa-shield-alt"></i> Admin</span>
+                            <span class="tag tag-red"><i class="fas fa-shield-alt"></i> {{ _('Admin') }}</span>
                         {% else %}
-                            <span class="tag tag-zinc"><i class="fas fa-user"></i> Member</span>
+                            <span class="tag tag-zinc"><i class="fas fa-user"></i> {{ _('Member') }}</span>
                         {% endif %}
                     </td>
                     <td>
@@ -111,11 +111,11 @@
                     <td class="td-last">
                         {% if not user.is_admin %}
                         <div class="action-group">
-                            <a href="{{ url_for('user.view_user_profile', user_id=user.id) }}" class="act-btn" title="View Profile">
+                            <a href="{{ url_for('user.view_user_profile', user_id=user.id) }}" class="act-btn" title="{{ _('View Profile') }}">
                                 <i class="fas fa-user"></i>
                             </a>
                             <form method="POST" action="{{ url_for('admin.delete_user', user_id=user.id) }}" class="d-inline">
-                                <button type="submit" class="act-btn danger" title="Delete" onclick="return confirm('Delete user {{ user.username }}?')">
+                                <button type="submit" class="act-btn danger" title="{{ _('Delete') }}" onclick="return confirm('{{ _('Delete user') }} {{ user.username }}?')">
                                     <i class="fas fa-trash"></i>
                                 </button>
                             </form>
@@ -154,8 +154,8 @@
     {% else %}
     <div class="empty-state">
         <div class="empty-icon"><i class="fas fa-users"></i></div>
-        <h5>No Members Found</h5>
-        <p>There are currently no registered users in the system.</p>
+        <h5>{{ _('No Members Found') }}</h5>
+        <p>{{ _('There are currently no registered users in the system.') }}</p>
     </div>
     {% endif %}
 </div>

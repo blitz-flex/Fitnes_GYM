@@ -32,6 +32,8 @@ function initQuickView() {
                 const data = await response.json();
                 
                 title.innerText = data.title;
+                const priceTag = document.getElementById('modalPrice');
+                if (priceTag) priceTag.innerText = data.price + ' | ';
                 
                 container.innerHTML = data.exercises.map((ex, index) => `
                     <div class="premium-mini-card" style="animation-delay: ${index * 0.08}s">

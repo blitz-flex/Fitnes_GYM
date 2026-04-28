@@ -24,8 +24,8 @@
 
 /* ── Editor Blocks ───────────────────────────────── */
 .editor-block {
-    background: linear-gradient(170deg, #1c1c1f 0%, #0f0f11 100%);
-    border: 1px solid rgba(255,255,255,0.07);
+    background: var(--bg-card);
+    border: 1px solid var(--border-soft);
     border-radius: 20px;
     overflow: hidden;
     position: relative;
@@ -48,8 +48,8 @@
     font-weight: 800;
     text-transform: uppercase;
     letter-spacing: 0.1em;
-    color: #52525b;
-    border-bottom: 1px solid rgba(255,255,255,0.04);
+    color: var(--text-dim);
+    border-bottom: 1px solid var(--border-soft);
 }
 
 .block-label i { color: #3b82f6; font-size: 0.75rem; }
@@ -80,7 +80,7 @@
     padding: 20px 22px;
     font-size: 1.6rem;
     font-weight: 800;
-    color: #f4f4f5;
+    color: var(--text-main);
     outline: none;
     line-height: 1.3;
     letter-spacing: -0.02em;
@@ -97,7 +97,7 @@
     right: 22px;
     font-size: 0.7rem;
     font-weight: 700;
-    color: #3f3f46;
+    color: var(--text-dim);
 }
 
 /* ── Content Block ───────────────────────────────── */
@@ -110,21 +110,21 @@
 /* CKEditor deep styling */
 .ck.ck-editor__top .ck-sticky-panel .ck-toolbar,
 .ck.ck-toolbar {
-    background: rgba(255,255,255,0.02) !important;
+    background: var(--bg-deep) !important;
     border: none !important;
-    border-bottom: 1px solid rgba(255,255,255,0.05) !important;
+    border-bottom: 1px solid var(--border-soft) !important;
     padding: 8px 16px !important;
 }
 
-.ck.ck-button { color: #71717a !important; border-radius: 8px !important; }
-.ck.ck-button:hover { background: rgba(255,255,255,0.06) !important; color: #f4f4f5 !important; }
-.ck.ck-button.ck-on { background: rgba(59,130,246,0.12) !important; color: #60a5fa !important; }
+.ck.ck-button { color: var(--text-muted) !important; border-radius: 8px !important; }
+.ck.ck-button:hover { background: var(--zinc-900) !important; color: var(--text-main) !important; }
+.ck.ck-button.ck-on { background: rgba(59,130,246,0.12) !important; color: #3b82f6 !important; }
 
 .ck-content,
 .ck.ck-editor__main > .ck-editor__editable {
     background: transparent !important;
     border: none !important;
-    color: #e4e4e7 !important;
+    color: var(--text-main) !important;
     font-size: 1rem !important;
     line-height: 1.8 !important;
     min-height: 380px !important;
@@ -146,7 +146,7 @@
     border: none;
     padding: 18px 22px;
     font-size: 0.9rem;
-    color: #d4d4d8;
+    color: var(--text-main);
     line-height: 1.7;
     resize: none;
     outline: none;
@@ -157,8 +157,8 @@
 
 /* ── Sidebar Blocks ──────────────────────────────── */
 .sidebar-block {
-    background: linear-gradient(170deg, #1c1c1f 0%, #0f0f11 100%);
-    border: 1px solid rgba(255,255,255,0.07);
+    background: var(--bg-card);
+    border: 1px solid var(--border-soft);
     border-radius: 18px;
     overflow: hidden;
     position: relative;
@@ -181,8 +181,8 @@
     font-weight: 800;
     text-transform: uppercase;
     letter-spacing: 0.08em;
-    color: #f4f4f5;
-    border-bottom: 1px solid rgba(255,255,255,0.04);
+    color: var(--text-main);
+    border-bottom: 1px solid var(--border-soft);
 }
 
 .sidebar-block-header i { color: #3b82f6; }
@@ -210,7 +210,7 @@
 
 .toggle-label {
     font-weight: 700;
-    color: #e4e4e7;
+    color: var(--text-main);
     font-size: 0.85rem;
 }
 
@@ -260,9 +260,9 @@
     align-items: center;
     gap: 8px;
     padding: 10px 14px;
-    background: rgba(255,255,255,0.02);
+    background: var(--bg-deep);
     border-radius: 10px;
-    border: 1px solid rgba(255,255,255,0.05);
+    border: 1px solid var(--border-soft);
 }
 
 .status-dot {
@@ -278,13 +278,13 @@
 .status-text {
     font-size: 0.78rem;
     font-weight: 600;
-    color: #a1a1aa;
+    color: var(--text-muted);
 }
 
 /* ── Divider ─────────────────────────────────────── */
 .divider {
     height: 1px;
-    background: rgba(255,255,255,0.05);
+    background: var(--border-soft);
     margin: 2px 0;
 }
 
@@ -321,9 +321,9 @@
     width: 100%;
     padding: 12px;
     border-radius: 12px;
-    background: rgba(255,255,255,0.03);
-    border: 1px solid rgba(255,255,255,0.08);
-    color: #71717a;
+    background: var(--bg-deep);
+    border: 1px solid var(--border-soft);
+    color: var(--text-dim);
     font-weight: 700;
     font-size: 0.82rem;
     text-decoration: none;
@@ -331,8 +331,8 @@
 }
 
 .cancel-btn:hover {
-    background: rgba(255,255,255,0.07);
-    color: #f4f4f5;
+    background: var(--zinc-900);
+    color: var(--text-main);
     text-decoration: none;
 }
 
@@ -340,14 +340,14 @@
 .img-upload-area {
     width: 100%;
     height: 180px;
-    border: 2px dashed rgba(255,255,255,0.1);
+    border: 2px dashed var(--border-bright);
     border-radius: 14px;
     display: flex;
     align-items: center;
     justify-content: center;
     overflow: hidden;
     position: relative;
-    background: rgba(255,255,255,0.01);
+    background: var(--bg-deep);
     cursor: pointer;
     transition: all 0.3s;
 }
@@ -364,12 +364,12 @@
     gap: 6px;
     text-align: center;
     padding: 20px;
-    color: #52525b;
+    color: var(--text-dim);
 }
 
-.img-placeholder i { font-size: 1.8rem; color: #3f3f46; }
-.img-placeholder span { font-size: 0.82rem; font-weight: 700; color: #71717a; }
-.img-placeholder small { font-size: 0.7rem; color: #3f3f46; }
+.img-placeholder i { font-size: 1.8rem; color: var(--text-muted); }
+.img-placeholder span { font-size: 0.82rem; font-weight: 700; color: var(--text-muted); }
+.img-placeholder small { font-size: 0.7rem; color: var(--text-dim); }
 .img-hint { display: block; margin-top: 2px; }
 
 .img-upload-area img {

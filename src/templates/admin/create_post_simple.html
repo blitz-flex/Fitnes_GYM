@@ -1,7 +1,7 @@
 {% extends "admin/base.html" %}
 
-{% block title %}Create New Post - Admin Panel{% endblock %}
-{% block page_title %}New Article{% endblock %}
+{% block title %}{{ _('Create New Post - Admin Panel') }}{% endblock %}
+{% block page_title %}{{ _('New Article') }}{% endblock %}
 
 {% block extra_css %}
 <link rel="stylesheet" href="{{ url_for('static', filename='css/admin/create_post_simple.css', v='2.0') }}">
@@ -18,12 +18,12 @@
         <div class="editor-block title-block">
             <div class="block-label">
                 <i class="fas fa-heading"></i>
-                <span>Post Title</span>
+                <span>{{ _('Post Title') }}</span>
                 <span class="required-star">*</span>
             </div>
             <input type="text" id="title" name="title" required
                    class="title-input"
-                   placeholder="Enter your article title…">
+                   placeholder="{{ _('Enter your article title…') }}">
             <div class="title-counter"><span id="titleCount">0</span>/120</div>
         </div>
 
@@ -31,7 +31,7 @@
         <div class="editor-block content-block">
             <div class="block-label">
                 <i class="fas fa-align-left"></i>
-                <span>Content</span>
+                <span>{{ _('Content') }}</span>
                 <span class="required-star">*</span>
             </div>
             <div class="editor-wrap">
@@ -43,11 +43,11 @@
         <div class="editor-block">
             <div class="block-label">
                 <i class="fas fa-quote-right"></i>
-                <span>Excerpt</span>
-                <span class="optional-tag">Optional</span>
+                <span>{{ _('Excerpt') }}</span>
+                <span class="optional-tag">{{ _('Optional') }}</span>
             </div>
             <textarea id="excerpt" name="excerpt" class="excerpt-input" rows="3"
-                      placeholder="Short summary shown in blog listings (auto-generated if empty)…"></textarea>
+                      placeholder="{{ _('Short summary, visible in blog listing...') }}"></textarea>
         </div>
     </div>
 
@@ -58,14 +58,14 @@
         <div class="sidebar-block">
             <div class="sidebar-block-header">
                 <i class="fas fa-rocket"></i>
-                <span>Publishing</span>
+                <span>{{ _('Publishing') }}</span>
             </div>
             <div class="sidebar-block-body">
                 <!-- Visibility Toggle -->
                 <div class="toggle-row">
                     <div class="toggle-info">
-                        <span class="toggle-label">Public Visibility</span>
-                        <span class="toggle-hint">Make article visible to everyone</span>
+                        <span class="toggle-label">{{ _('Public Visibility') }}</span>
+                        <span class="toggle-hint">{{ _('Make article visible to everyone') }}</span>
                     </div>
                     <label class="toggle-switch">
                         <input type="checkbox" id="published" name="published" checked>
@@ -76,7 +76,7 @@
                 <!-- Publish Status Indicator -->
                 <div class="status-row" id="statusRow">
                     <span class="status-dot live"></span>
-                    <span class="status-text" id="statusText">Will be published</span>
+                    <span class="status-text" id="statusText">{{ _('Will be published') }}</span>
                 </div>
 
                 <div class="divider"></div>
@@ -84,11 +84,11 @@
                 <!-- Actions -->
                 <button type="submit" class="publish-btn" id="submitBtn">
                     <i class="fas fa-paper-plane"></i>
-                    <span>Publish Article</span>
+                    <span>{{ _('Publish Article') }}</span>
                 </button>
                 <a href="{{ url_for('admin.blog_management') }}" class="cancel-btn">
                     <i class="fas fa-arrow-left"></i>
-                    Back to Catalog
+                    {{ _('Back to Catalog') }}
                 </a>
             </div>
         </div>
@@ -97,15 +97,15 @@
         <div class="sidebar-block">
             <div class="sidebar-block-header">
                 <i class="fas fa-image"></i>
-                <span>Featured Image</span>
+                <span>{{ _('Featured Image') }}</span>
             </div>
             <div class="sidebar-block-body">
                 <label for="featured_image" class="img-upload-area" id="imgUploadArea">
                     <div class="img-placeholder" id="imgPlaceholder">
                         <i class="fas fa-cloud-upload-alt"></i>
-                        <span>Click to upload</span>
-                        <small>PNG, JPG, WEBP · Max 5MB</small>
-                        <small class="img-hint">Recommended: 1200×630px</small>
+                        <span>{{ _('Click to upload') }}</span>
+                        <small>PNG, JPG, WEBP · {{ _('max. 5MB') }}</small>
+                        <small class="img-hint">{{ _('Rec.: 1200×630px') }}</small>
                     </div>
                     <img id="imgPreview" src="#" alt="" style="display:none;">
                 </label>
@@ -113,7 +113,7 @@
                        accept="image/*" class="d-none" onchange="previewImage(this)">
                 <button type="button" class="remove-img-btn" id="removeImgBtn"
                         onclick="removeImage()" style="display:none;">
-                    <i class="fas fa-times-circle"></i> Remove Image
+                    <i class="fas fa-times-circle"></i> {{ _('Remove Image') }}
                 </button>
             </div>
         </div>
@@ -122,14 +122,14 @@
         <div class="sidebar-block tips-block">
             <div class="sidebar-block-header">
                 <i class="fas fa-lightbulb"></i>
-                <span>Writing Tips</span>
+                <span>{{ _('Writing Tips') }}</span>
             </div>
             <div class="sidebar-block-body">
                 <ul class="tips-list">
-                    <li><i class="fas fa-check-circle"></i> Use a compelling headline (50-70 chars)</li>
-                    <li><i class="fas fa-check-circle"></i> Add a featured image for better engagement</li>
-                    <li><i class="fas fa-check-circle"></i> Write an excerpt to improve SEO</li>
-                    <li><i class="fas fa-check-circle"></i> Break content into short paragraphs</li>
+                    <li><i class="fas fa-check-circle"></i> {{ _('Use an engaging title (50-70 chars)') }}</li>
+                    <li><i class="fas fa-check-circle"></i> {{ _('Add a featured image for better engagement') }}</li>
+                    <li><i class="fas fa-check-circle"></i> {{ _('Write an excerpt for SEO improvement') }}</li>
+                    <li><i class="fas fa-check-circle"></i> {{ _('Divide content into short paragraphs') }}</li>
                 </ul>
             </div>
         </div>
@@ -167,12 +167,12 @@
     publishedToggle.addEventListener('change', function() {
         if (this.checked) {
             statusDot.className = 'status-dot live';
-            statusText.textContent = 'Will be published';
-            submitLabel.textContent = 'Publish Article';
+            statusText.textContent = {{ _("Will be published")|tojson }};
+            submitLabel.textContent = {{ _("Publish Article")|tojson }};
         } else {
             statusDot.className = 'status-dot draft';
-            statusText.textContent = 'Will be saved as draft';
-            submitLabel.textContent = 'Save Draft';
+            statusText.textContent = {{ _("Will be saved as draft")|tojson }};
+            submitLabel.textContent = {{ _("Save Draft")|tojson }};
         }
     });
 

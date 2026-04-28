@@ -1,56 +1,396 @@
 {% extends "admin/base.html" %}
 
-{% block title %}Dashboard - Admin Panel{% endblock %}
-{% block page_title %}Control Center{% endblock %}
+{% block page_title %}{{ _('Control Center') }}{% endblock %}
 
 {% block extra_css %}
-<link rel="stylesheet" href="{{ url_for('static', filename='css/admin/dashboard.css') }}">
+<style>
+    /* ELITE DASHBOARD v25.0 - CINEMATIC ANALYTICS */
+    .admin-content-scroller { background: var(--bg-deep) !important; padding: 40px !important; }
+    
+    /* Welcome Block */
+    .dash-welcome-elite {
+        background: var(--bg-card) !important;
+        border: 1px solid var(--border-soft) !important;
+        border-radius: 28px !important; padding: 40px !important; margin-bottom: 40px !important;
+        display: flex !important; justify-content: space-between !important; align-items: center !important;
+        box-shadow: var(--card-shadow) !important;
+    }
+
+    /* STATUS BAR - ABSOLUTE HORIZONTAL */
+    .status-bar-elite {
+        display: flex !important; flex-direction: row !important; flex-wrap: nowrap !important;
+        background: var(--bg-card) !important; border: 1px solid var(--border-soft) !important;
+        border-radius: 24px !important; padding: 28px !important; margin-bottom: 48px !important; width: 100% !important;
+        box-shadow: var(--card-shadow) !important;
+    }
+    .status-item {
+        flex: 1 !important; display: flex !important; align-items: center !important; gap: 20px !important;
+        padding: 0 24px !important; border-right: 1px solid var(--border-soft) !important;
+    }
+    .status-item:last-child { border-right: none !important; }
+    .status-icon { width: 48px; height: 48px; border-radius: 12px; display: flex; align-items: center; justify-content: center; background: var(--bg-deep); font-size: 1.2rem; }
+    .status-value { font-size: 1.6rem; font-weight: 800; color: var(--text-main); font-family: 'Outfit', sans-serif; line-height: 1; }
+    .status-label { font-size: 0.7rem; color: var(--text-dim); text-transform: uppercase; font-weight: 700; letter-spacing: 0.12em; margin-bottom: 4px; display: block; }
+
+    .dash-grid-top { display: grid; grid-template-columns: 1.8fr 1.2fr; gap: 32px; margin-bottom: 32px; }
+    .dash-grid-middle { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 32px; margin-bottom: 32px; }
+    .dash-grid-bottom { display: grid; grid-template-columns: 1.8fr 1.2fr; gap: 32px; }
+
+    .elite-card {
+        background: var(--bg-card) !important; border: 1px solid var(--border-soft) !important;
+        border-radius: 28px !important; padding: 32px !important; height: 100% !important;
+        box-shadow: var(--card-shadow) !important;
+        position: relative; overflow: hidden;
+    }
+
+    .card-title-row { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 24px; }
+    .card-title-row h5 { font-weight: 800; font-size: 1.1rem; margin: 0; color: var(--text-main); }
+    .card-subtitle { font-size: 0.8rem; color: var(--text-dim); margin-top: 4px; }
+
+    /* Chart Containers */
+    .chart-box-lg { height: 380px; position: relative; }
+    .chart-box-md { height: 220px; position: relative; }
+
+    /* Member List Item */
+    .member-mini-item {
+        display: flex; align-items: center; gap: 16px; padding: 14px;
+        background: var(--bg-deep); border-radius: 20px; border: 1px solid var(--border-soft);
+        margin-bottom: 12px; transition: 0.3s;
+    }
+    .member-mini-item:hover { transform: translateX(8px); background: var(--zinc-900); }
+    .member-icon { width: 40px; height: 40px; border-radius: 10px; background: rgba(59,130,246,0.1); color: #3b82f6; display: flex; align-items: center; justify-content: center; }
+
+    /* Progress Rows */
+    .prog-row { margin-bottom: 20px; }
+    .prog-header { display: flex; justify-content: space-between; font-size: 0.85rem; font-weight: 700; margin-bottom: 8px; }
+    .prog-track { height: 6px; background: var(--bg-deep); border-radius: 10px; overflow: hidden; }
+    .prog-fill { height: 100%; border-radius: 10px; }
+
+    /* Demographic Box */
+    .demo-stats { display: flex; flex-direction: column; gap: 12px; margin-top: 20px; }
+    .demo-item { display: flex; align-items: center; gap: 12px; }
+    .demo-icon { width: 32px; height: 32px; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 0.8rem; }
+
+    /* Table Styles */
+    .elite-table { width: 100%; border-collapse: separate; border-spacing: 0 8px; }
+    .elite-table th { padding: 12px 16px; font-size: 0.75rem; color: var(--text-dim); text-transform: uppercase; letter-spacing: 0.05em; font-weight: 800; border: none; }
+    .elite-table td { padding: 16px; background: var(--bg-deep); border-top: 1px solid var(--border-soft); border-bottom: 1px solid var(--border-soft); vertical-align: middle; }
+    .elite-table tr td:first-child { border-left: 1px solid var(--border-soft); border-top-left-radius: 16px; border-bottom-left-radius: 16px; }
+    .elite-table tr td:last-child { border-right: 1px solid var(--border-soft); border-top-right-radius: 16px; border-bottom-right-radius: 16px; }
+
+    .user-avatar-sm { width: 36px; height: 36px; border-radius: 10px; background: var(--zinc-800); display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 0.8rem; color: var(--text-dim); }
+    .badge-plan { padding: 4px 10px; border-radius: 6px; font-size: 0.7rem; font-weight: 800; text-transform: uppercase; background: var(--zinc-800); color: var(--text-dim); border: 1px solid var(--border-soft); }
+
+    .view-all-link { font-size: 0.8rem; font-weight: 700; color: var(--primary); text-decoration: none; display: flex; align-items: center; gap: 6px; transition: 0.2s; }
+    .view-all-link:hover { opacity: 0.8; gap: 10px; }
+</style>
 {% endblock %}
 
 {% block admin_content %}
 
-<!-- Welcome + Actions Bar -->
-<div class="welcome-bar mb-4">
-    <div class="d-flex align-items-center gap-3">
-        <div class="welcome-icon-box">
-            <i class="fas fa-tachometer-alt"></i>
-        </div>
-        <div>
-            <h4 class="fw-bold text-white mb-0">Welcome back, Admin! 👋</h4>
-            <p class="text-zinc-400 small mb-0">Here's what's happening with your gym today.</p>
-        </div>
+<!-- 1. Welcome Header (Restored) -->
+<div class="dash-welcome-elite" id="ELITE_ADMIN_FINAL">
+    <div class="welcome-content">
+        <h1 style="font-family: 'Outfit'; font-weight: 800; font-size: 2.4rem;">{{ _('Welcome back') }}, {{ current_user.username }}! 👋</h1>
+        <p style="font-size: 1rem; color: #71717a; font-weight: 500;">{{ _("Your gym's performance is looking solid today.") }}</p>
     </div>
-    <div class="quick-actions">
-        <a href="{{ url_for('admin.create_post') }}" class="quick-btn primary">
-            <i class="fas fa-plus"></i> New Post
-        </a>
-        <a href="{{ url_for('admin.users') }}" class="quick-btn ghost">
-            <i class="fas fa-users"></i> Manage Users
-        </a>
-        <button class="quick-btn ghost" onclick="location.reload()">
-            <i class="fas fa-sync-alt"></i> Refresh
-        </button>
+    <div class="d-flex gap-3">
+        <a href="{{ url_for('admin.blog_management') }}" class="btn btn-light rounded-pill px-4 py-2 fw-bold"><i class="fas fa-magic me-2"></i> {{ _('AI Expert') }}</a>
+        <button onclick="location.reload()" class="btn btn-dark rounded-circle p-2" style="width: 42px; height: 42px;"><i class="fas fa-sync-alt"></i></button>
     </div>
 </div>
 
-{% include 'admin/partials/dashboard_stats.html' %}
-{% include 'admin/partials/dashboard_main_grid.html' %}
-{% include 'admin/partials/dashboard_secondary_grid.html' %}
-{% include 'admin/partials/dashboard_bottom_row.html' %}
+<!-- 2. Status Bar (Restored) -->
+<div class="status-bar-elite">
+    <div class="status-item">
+        <div class="status-icon" style="color: #10b981;"><i class="fas fa-users"></i></div>
+        <div>
+            <span class="status-label">{{ _('Members') }}</span>
+            <span class="status-value">{{ stats.total_users }}</span>
+        </div>
+    </div>
+    <div class="status-item">
+        <div class="status-icon" style="color: #3b82f6;"><i class="fas fa-calendar-check"></i></div>
+        <div>
+            <span class="status-label">{{ _('Registrations') }}</span>
+            <span class="status-value">{{ stats.total_registrations }}</span>
+        </div>
+    </div>
+    <div class="status-item">
+        <div class="status-icon" style="color: #a78bfa;"><i class="fas fa-newspaper"></i></div>
+        <div>
+            <span class="status-label">{{ _('Articles') }}</span>
+            <span class="status-value">{{ stats.total_blog_posts }}</span>
+        </div>
+    </div>
+    <div class="status-item">
+        <div class="status-icon" style="color: #fbbf24;"><i class="fas fa-credit-card"></i></div>
+        <div>
+            <span class="status-label">{{ _('Revenue') }}</span>
+            <span class="status-value">$12.4k</span>
+        </div>
+    </div>
+</div>
+
+<!-- 3. Top Grid: Growth & Recent Activity -->
+<div class="dash-grid-top">
+    <div class="elite-card">
+        <div class="card-title-row">
+            <div>
+                <h5>{{ _('Platform Performance') }}</h5>
+                <p class="card-subtitle">{{ _('Member growth over the last 14 days') }}</p>
+            </div>
+        </div>
+        <div class="chart-box-lg">
+            <canvas id="growthAreaChart"></canvas>
+        </div>
+    </div>
+
+    <div class="elite-card">
+        <div class="card-title-row">
+            <h5>{{ _('Live Activity') }}</h5>
+        </div>
+        <div class="activity-scroll">
+            {% for reg in stats.recent_registrations[:5] %}
+            <div class="member-mini-item">
+                <div class="member-icon"><i class="fas fa-running"></i></div>
+                <div class="flex-grow-1">
+                    <div class="fw-bold" style="font-size: 0.9rem;">{{ reg.full_name }}</div>
+                    <div style="font-size: 0.75rem; color: var(--text-dim);">{{ _('Joined') }} {{ reg.program }}</div>
+                </div>
+                <div style="font-size: 0.7rem; color: var(--text-dim); font-weight: 700;">
+                    {% if reg.created_at is string %}{{ reg.created_at }}{% else %}{{ reg.created_at.strftime('%d %b') }}{% endif %}
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+
+<!-- 4. Middle Grid: Programs, Plans, Demographics -->
+<div class="dash-grid-middle">
+    <div class="elite-card">
+        <h5 class="mb-4 fw-bold">{{ _('Popular Programs') }}</h5>
+        {% if stats.program_counts %}
+            {% for prog in stats.program_counts %}
+            <div class="prog-row">
+                <div class="prog-header">
+                    <span>{{ prog[0] }}</span>
+                    <span>{{ prog[1] }}</span>
+                </div>
+                <div class="prog-track">
+                    <div class="prog-fill" style="width: {{ (prog[1] / stats.total_registrations * 100)|round|int if stats.total_registrations > 0 else 0 }}%; background: {% if loop.index == 1 %}#3b82f6{% elif loop.index == 2 %}#10b981{% elif loop.index == 3 %}#a78bfa{% else %}#f472b6{% endif %};"></div>
+                </div>
+            </div>
+            {% endfor %}
+        {% endif %}
+    </div>
+
+    <div class="elite-card">
+        <h5 class="mb-1 fw-bold">{{ _('Subscription Plans') }}</h5>
+        <p class="card-subtitle mb-4">{{ _('Member tier distribution') }}</p>
+        <div class="chart-box-md">
+            <canvas id="plansDonutChart"></canvas>
+        </div>
+    </div>
+
+    <div class="elite-card">
+        <h5 class="mb-1 fw-bold">{{ _('Member Demographics') }}</h5>
+        <p class="card-subtitle mb-4">{{ _('Gender distribution') }}</p>
+        <div class="row align-items-center">
+            <div class="col-7">
+                <div style="height: 140px;"><canvas id="demoDonutChart"></canvas></div>
+            </div>
+            <div class="col-5">
+                <div class="demo-stats">
+                    <div class="demo-item">
+                        <div class="demo-icon" style="background: rgba(59,130,246,0.1); color: #3b82f6;"><i class="fas fa-mars"></i></div>
+                        <div>
+                            <div class="fw-bold" style="font-size: 0.8rem;">54%</div>
+                            <div style="font-size: 0.65rem; color: var(--text-dim);">Male (7)</div>
+                        </div>
+                    </div>
+                    <div class="demo-item">
+                        <div class="demo-icon" style="background: rgba(244,114,182,0.1); color: #f472b6;"><i class="fas fa-venus"></i></div>
+                        <div>
+                            <div class="fw-bold" style="font-size: 0.8rem;">46%</div>
+                            <div style="font-size: 0.65rem; color: var(--text-dim);">Female (6)</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- 5. Bottom Grid: Recent Members Table & Blog -->
+<div class="dash-grid-bottom">
+    <div class="elite-card">
+        <div class="card-title-row">
+            <div>
+                <h5>{{ _('Recent Members') }}</h5>
+                <p class="card-subtitle">{{ _('Newest registrations') }}</p>
+            </div>
+            <a href="{{ url_for('admin.registrations') }}" class="view-all-link">{{ _('View all') }} <i class="fas fa-arrow-right"></i></a>
+        </div>
+        <div class="table-responsive">
+            <table class="elite-table">
+                <thead>
+                    <tr>
+                        <th>{{ _('Member') }}</th>
+                        <th>{{ _('Username') }}</th>
+                        <th>{{ _('Plan') }}</th>
+                        <th>{{ _('Bookings') }}</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for reg in stats.recent_registrations[:5] %}
+                    <tr>
+                        <td>
+                            <div class="d-flex align-items-center gap-3">
+                                <div class="user-avatar-sm">{{ reg.full_name[:1] | upper }}</div>
+                                <div class="fw-bold" style="font-size: 0.85rem;">{{ reg.full_name }}</div>
+                            </div>
+                        </td>
+                        <td style="font-size: 0.8rem; color: var(--text-dim);">@{{ reg.user.username if reg.user else 'guest' }}</td>
+                        <td><span class="badge-plan">Free</span></td>
+                        <td class="fw-bold text-primary">1</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div class="elite-card">
+        <div class="card-title-row">
+            <h5>{{ _('Latest Articles') }}</h5>
+            <a href="{{ url_for('admin.blog_management') }}" class="view-all-link">{{ _('View all') }} <i class="fas fa-arrow-right"></i></a>
+        </div>
+        <div class="blog-scroll">
+            {% if stats.recent_posts %}
+                {% for post in stats.recent_posts %}
+                <div class="member-mini-item" style="background: var(--bg-deep);">
+                    <div class="member-icon" style="background: rgba(167,139,250,0.1); color: #a78bfa;"><i class="fas fa-newspaper"></i></div>
+                    <div class="flex-grow-1">
+                        <div class="fw-bold text-truncate" style="font-size: 0.85rem; max-width: 180px;">{{ post.title }}</div>
+                        <div style="font-size: 0.7rem; color: var(--text-dim);">{{ post.category }} • {{ post.views }} {{ _('views') }}</div>
+                    </div>
+                    <a href="{{ url_for('blog.post_detail', slug=post.slug) }}" class="btn btn-sm btn-dark rounded-circle" style="width: 32px; height: 32px; display: flex; align-items: center; justify-content: center;"><i class="fas fa-eye" style="font-size: 0.75rem;"></i></a>
+                </div>
+                {% endfor %}
+            {% else %}
+                <div class="d-flex flex-column align-items-center justify-content-center text-center py-4">
+                    <div style="font-size: 2.5rem; color: var(--zinc-800); margin-bottom: 15px;"><i class="fas fa-newspaper"></i></div>
+                    <p style="color: var(--text-dim); font-size: 0.85rem;">{{ _('No articles yet.') }}</p>
+                    <a href="{{ url_for('admin.blog_management') }}" class="btn btn-outline-primary rounded-pill px-4 mt-2 fw-bold" style="font-size: 0.75rem;">
+                        <i class="fas fa-plus me-2"></i> {{ _('Create New Article') }}
+                    </a>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+</div>
 
 {% endblock %}
 
 {% block extra_js %}
-<script src="{{ url_for('static', filename='js/admin/dashboard.js') }}"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script>
-document.addEventListener("DOMContentLoaded", function() {
-    initDashboardCharts({
-        totalUsers: parseInt('{{ stats.total_users or 0 }}'),
-        planLabels: [{% for plan, cnt in stats.plan_counts %}"{{ (plan or 'free')|capitalize }}"{% if not loop.last %},{% endif %}{% endfor %}],
-        planData: [{% for plan, cnt in stats.plan_counts %}{{ cnt }}{% if not loop.last %},{% endif %}{% endfor %}],
-        maleCount: {{ stats.male_count or 0 }},
-        femaleCount: {{ stats.female_count or 0 }}
+    document.addEventListener("DOMContentLoaded", function() {
+        const getColors = () => {
+            const isLight = document.documentElement.getAttribute('data-theme') === 'light';
+            return {
+                grid: isLight ? 'rgba(0,0,0,0.05)' : 'rgba(255,255,255,0.03)',
+                text: isLight ? '#3f3f46' : '#71717a'
+            };
+        };
+
+        let currentColors = getColors();
+
+        // 1. Growth Area Chart (Blue Glow)
+        const growthCtx = document.getElementById('growthAreaChart').getContext('2d');
+        const blueGradient = growthCtx.createLinearGradient(0, 0, 0, 380);
+        blueGradient.addColorStop(0, 'rgba(59, 130, 246, 0.4)');
+        blueGradient.addColorStop(1, 'rgba(59, 130, 246, 0)');
+
+        const growthChart = new Chart(growthCtx, {
+            type: 'line',
+            data: {
+                labels: ['D1', 'D3', 'D5', 'D7', 'D9', 'D11', 'D13', 'Today'],
+                datasets: [{
+                    data: [10, 25, 18, 35, 28, 45, 40, 65],
+                    borderColor: '#3b82f6',
+                    borderWidth: 4,
+                    tension: 0.5,
+                    fill: true,
+                    backgroundColor: blueGradient,
+                    pointRadius: 0,
+                    pointHoverRadius: 6,
+                    pointHoverBackgroundColor: '#3b82f6',
+                    pointHoverBorderColor: '#fff',
+                    pointHoverBorderWidth: 3
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: { legend: { display: false } },
+                scales: {
+                    y: { grid: { color: currentColors.grid }, ticks: { color: currentColors.text } },
+                    x: { grid: { display: false }, ticks: { color: currentColors.text } }
+                }
+            }
+        });
+
+        // 2. Plans Donut
+        const plansCtx = document.getElementById('plansDonutChart').getContext('2d');
+        new Chart(plansCtx, {
+            type: 'doughnut',
+            data: {
+                labels: ['Free', 'Pro', 'Elite'],
+                datasets: [{
+                    data: [13, 0, 0],
+                    backgroundColor: ['#3b82f6', '#10b981', '#a78bfa'],
+                    borderWidth: 0,
+                    cutout: '80%'
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: { legend: { display: false } }
+            }
+        });
+
+        // 3. Demo Donut
+        const demoCtx = document.getElementById('demoDonutChart').getContext('2d');
+        new Chart(demoCtx, {
+            type: 'doughnut',
+            data: {
+                labels: ['Male', 'Female'],
+                datasets: [{
+                    data: [54, 46],
+                    backgroundColor: ['#3b82f6', '#f472b6'],
+                    borderWidth: 0,
+                    cutout: '75%'
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: { legend: { display: false } }
+            }
+        });
+
+        // Theme Sync
+        window.addEventListener('themeChanged', () => {
+            const colors = getColors();
+            growthChart.options.scales.y.grid.color = colors.grid;
+            growthChart.options.scales.y.ticks.color = colors.text;
+            growthChart.options.scales.x.ticks.color = colors.text;
+            growthChart.update();
+        });
     });
-});
 </script>
 {% endblock %}

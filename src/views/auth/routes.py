@@ -77,6 +77,11 @@ def google_authorize():
                 
         login_user(user)
         flash(f'Welcome back, {user.first_name}!', 'success')
+        
+        # Redirect admins to dashboard
+        if user.username in ['admin', 'administrator']:
+            return redirect(url_for('admin.dashboard'))
+            
         return redirect(url_for('main.index'))
     
     flash('Failed to log in with Google.', 'danger')
@@ -155,6 +160,12 @@ def login():
         user = UserAccount.query.filter_by(username=form.username.data).first()
         if user and user.check_password(form.password.data):
             login_user(user, remember=form.remember.data)
+            flash(f'Welcome back, {user.username}!', 'success')
+            
+            # Redirect admins to dashboard
+            if user.username in ['admin', 'administrator']:
+                return redirect(url_for('admin.dashboard'))
+                
             return redirect(url_for('main.index'))
         else:
             if not user:

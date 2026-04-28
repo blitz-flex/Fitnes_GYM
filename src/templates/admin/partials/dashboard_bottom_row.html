@@ -4,20 +4,20 @@
     <div class="dash-card dash-card-wide">
         <div class="dash-card-header">
             <div>
-                <h6 class="dash-card-title">Recent Members</h6>
-                <p class="dash-card-sub">Newest registrations</p>
+                <h6 class="dash-card-title">{{ _('Recent Members') }}</h6>
+                <p class="dash-card-sub">{{ _('Newest registrations') }}</p>
             </div>
-            <a href="{{ url_for('admin.users') }}" class="view-all-link">View all <i class="fas fa-arrow-right ms-1"></i></a>
+            <a href="{{ url_for('admin.users') }}" class="view-all-link">{{ _('View all') }} <i class="fas fa-arrow-right ms-1"></i></a>
         </div>
         <div class="dash-card-body p-0">
             <div class="table-responsive">
                 <table class="mini-table">
                     <thead>
                         <tr>
-                            <th>Member</th>
-                            <th>Username</th>
-                            <th>Plan</th>
-                            <th>Bookings</th>
+                            <th>{{ _('Member') }}</th>
+                            <th>{{ _('Username') }}</th>
+                            <th>{{ _('Plan') }}</th>
+                            <th>{{ _('Registrations') }}</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -47,7 +47,7 @@
                             <td><span class="mini-reg-count">{{ user.registrations|length }}</span></td>
                         </tr>
                         {% else %}
-                        <tr><td colspan="4" class="text-center py-4 text-muted small">No members yet</td></tr>
+                        <tr><td colspan="4" class="text-center py-4 text-muted small">{{ _('No members yet') }}</td></tr>
                         {% endfor %}
                     </tbody>
                 </table>
@@ -59,10 +59,10 @@
     <div class="dash-card">
         <div class="dash-card-header">
             <div>
-                <h6 class="dash-card-title">Latest Articles</h6>
-                <p class="dash-card-sub">Recent blog content</p>
+                <h6 class="dash-card-title">{{ _('Latest Articles') }}</h6>
+                <p class="dash-card-sub">{{ _('Recent blog content') }}</p>
             </div>
-            <a href="{{ url_for('admin.blog_management') }}" class="view-all-link">View all <i class="fas fa-arrow-right ms-1"></i></a>
+            <a href="{{ url_for('admin.blog_management') }}" class="view-all-link">{{ _('View all') }} <i class="fas fa-arrow-right ms-1"></i></a>
         </div>
         <div class="dash-card-body">
             {% if stats.recent_posts %}
@@ -97,11 +97,11 @@
             {% else %}
                 <div class="empty-feed">
                     <i class="fas fa-newspaper"></i>
-                    <span>No articles yet</span>
+                    <span>{{ _('No articles yet') }}</span>
                 </div>
             {% endif %}
             <a href="{{ url_for('admin.create_post') }}" class="create-post-btn mt-3">
-                <i class="fas fa-plus me-2"></i> Write New Article
+                <i class="fas fa-plus me-2"></i> {{ _('Write New Article') }}
             </a>
         </div>
     </div>

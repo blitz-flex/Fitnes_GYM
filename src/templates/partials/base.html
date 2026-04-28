@@ -55,7 +55,9 @@
             }
         })();
     </script>
-    {% include "partials/navbar.html" %}
+    {% block navbar %}
+        {% include "partials/navbar.html" %}
+    {% endblock %}
 
     <!-- Global Flash Messages Container -->
     <div class="flash-container">
