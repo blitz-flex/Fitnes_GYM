@@ -13,7 +13,7 @@ class Config:
     db_url = os.environ.get("DATABASE_URL") or os.environ.get("SQLALCHEMY_DATABASE_URI")
     if db_url and db_url.startswith("postgres://"):
         db_url = db_url.replace("postgres://", "postgresql://", 1)
-    
+
     SQLALCHEMY_DATABASE_URI = db_url or "sqlite:///../instance/app.db"
     SQLALCHEMY_TRACK_MODIFICATIONS = False
 
@@ -30,6 +30,12 @@ class Config:
     MAIL_USERNAME = os.environ.get('MAIL_USERNAME')
     MAIL_PASSWORD = os.environ.get('MAIL_PASSWORD')
     MAIL_DEFAULT_SENDER = os.environ.get('MAIL_DEFAULT_SENDER', 'gym.fitness.reset@gmail.com')
+
+    # AI API Keys
+    GEMINI_API_KEY = os.environ.get("GEMINI_API_KEY")
+    DEEPSEEK_API_KEY = os.environ.get("DEEPSEEK_API_KEY")
+    MISTRAL_API_KEY = os.environ.get("MISTRAL_API_KEY")
+    NEWS_API_KEY = os.environ.get("NEWS_API_KEY")
 
     # Babel Settings
     BABEL_DEFAULT_LOCALE = 'en'
