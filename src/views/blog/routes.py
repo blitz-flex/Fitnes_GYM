@@ -9,134 +9,9 @@ from . import blog_bp
 from ...models.blog import BlogPost
 from ...extensions import db
 
-# Simple cache for NewsAPI to avoid hitting rate limits
-NEWS_CACHE = {
-    'data': None,
-    'timestamp': None
-}
-
-CATEGORY_KEYWORDS = {
-    'Nutrition': ['nutrition', 'diet', 'food', 'meal', 'protein', 'carb', 'fat', 'vitamin', 'supplement', 'calorie',
-                  'eating', 'drink', 'hydrat'],
-    'Recovery': ['recover', 'sleep', 'rest', 'stretch', 'foam', 'injury', 'pain', 'therapy', 'soreness', 'ice bath'],
-    'Cardio': ['cardio', 'running', 'cycling', 'swim', 'hiit', 'endurance', 'marathon', 'jogging', 'aerobic'],
-    'Lifestyle': ['lifestyle', 'mental', 'stress', 'habit', 'motivation', 'mindset', 'wellbeing', 'wellness', 'balance',
-                  'routine'],
-    'Training': ['workout', 'exercise', 'gym', 'strength', 'muscle', 'weight', 'lift', 'squat', 'bench', 'deadlift',
-                 'fitness'],
-}
-
-# Blacklist for non-fitness noise that often slips through API
-NOISE_KEYWORDS_BLACKLIST = [
-    'github', 'api ', 'marketing', 'influencer', 'meta ', 'facebook', 'voyages',
-    'cruise', 'sales report', 'teenage boy', 'hevy-cli', 'pypi', 'counselor',
-    'tech news', 'startup', 'programming', 'developer', 'software'
-]
-
-
-def guess_category(title, description=''):
-    text = (title + ' ' + (description or '')).lower()
-
-    # Strict noise check
-    if any(noise in text for noise in NOISE_KEYWORDS_BLACKLIST):
-        return None
-
-    for cat, kws in CATEGORY_KEYWORDS.items():
-        if any(kw in text for kw in kws):
-            return cat
-    return None
-
-
-def sync_fitness_news():
-    api_key = current_app.config.get('NEWS_API_KEY', '')
-
-    if api_key and api_key != 'DEMO_MODE':
-        now = datetime.datetime.now()
-        if NEWS_CACHE['timestamp']:
-            if (now - NEWS_CACHE['timestamp']).total_seconds() < 600:
-                return
-
-        try:
-            import urllib.parse
-            # Search specifically in titles for highest relevance
-            query = urllib.parse.quote("title:(fitness OR workout OR gym OR exercises OR bodybuilding OR cardio)")
-            url = f"https://newsapi.org/v2/everything?q={query}&language=en&sortBy=publishedAt&pageSize=60&apiKey={api_key}"
-
-            req = urllib.request.Request(url, headers={'User-Agent': 'Mozilla/5.0'})
-            with urllib.request.urlopen(req) as response:
-                data = json.loads(response.read().decode())
-
-                if data.get('status') == 'ok':
-                    from ...models.user import UserAccount
-                    admin = UserAccount.query.filter(UserAccount.username.in_(['admin', 'administrator'])).first()
-                    if not admin: admin = UserAccount.query.first()
-                    if not admin: return
-
-                    for idx, article in enumerate(data.get('articles', [])):
-                        title = article.get('title', '')
-                        desc = article.get('description', '')
-
-                        # Only save if it clearly fits a fitness category and isn't noise
-                        category = guess_category(title, desc)
-                        if not category:
-                            continue
-
-                        if not article.get('urlToImage'):
-                            continue
-
-                        clean_title = title.lower().replace(' ', '-').replace('/', '-')[:30]
-                        slug = f"api-news-{clean_title}"
-
-                        if BlogPost.query.filter_by(slug=slug).first():
-                            continue
-
-                        try:
-                            pub_date_obj = datetime.datetime.strptime(article['publishedAt'], "%Y-%m-%dT%H:%M:%SZ")
-                        except:
-                            pub_date_obj = now
-
-                        import re
-                        raw_content = article.get('content') or desc or ''
-                        clean_content = re.sub(r'\[\+\d+\s+chars\]', '', raw_content).strip()
-
-                        content_html = f"<p>{clean_content}</p><br><p><a href='{article.get('url')}' target='_blank' style='display:inline-block; padding:12px 24px; background:var(--primary-color); color:white; text-decoration:none; border-radius:12px; font-weight:bold;'>Read Full Article</a></p>"
-
-                        new_post = BlogPost(
-                            title=title,
-                            content=content_html,
-                            excerpt=(desc[:150] + '...') if desc else '',
-                            slug=slug,
-                            featured_image=article.get('urlToImage'),
-                            category=category,
-                            author_id=admin.id,
-                            author_name=article.get('author')[:100] if article.get('author') else 'Fitness Expert',
-                            created_at=pub_date_obj,
-                            published=True,
-                            views=1000 + idx * 50
-                        )
-                        db.session.add(new_post)
-
-                    db.session.commit()
-                    NEWS_CACHE['timestamp'] = now
-
-                    # Cleanup: Ensure only 100 latest API posts exist
-                    api_posts = BlogPost.query.filter(BlogPost.slug.like('api-news-%')).order_by(
-                        BlogPost.created_at.desc()).all()
-                    if len(api_posts) > 100:
-                        for p in api_posts[100:]:
-                            db.session.delete(p)
-                        db.session.commit()
-
-        except Exception as e:
-            print(f"NewsAPI Sync Error: {e}")
-            db.session.rollback()
-
-
 @blog_bp.route('/')
 def index():
     """Blog index page with pagination and filters"""
-    # sync_fitness_news() - Disabled as requested. Only AI/Admin posts allowed now.
-
     page = request.args.get('page', 1, type=int)
     per_page = 12
     search = request.args.get('search', '').strip()
@@ -212,14 +87,11 @@ def post_detail(slug):
 
     db_post.increment_views()
 
-    # If it's an API post with a saved author name, use it. Otherwise use 'admin'
-    # Force 'admin' for any administrator
     if db_post.author and db_post.author.is_admin and not db_post.author_name:
         author_name = 'admin'
     else:
         author_name = db_post.author_name if db_post.author_name else (
             db_post.author.name if db_post.author else 'admin')
-        # Safety check for old synced posts
         if author_name in ['Administrator', 'Admin']:
             author_name = 'admin'
 
@@ -250,10 +122,7 @@ def extract_ai_content(text, topic=""):
 
     ai_data = {}
 
-    # Try 1: Balanced brace search and JSON parse
-    # Using a simpler balanced brace search since Python 're' doesn't support recursion
     try:
-        # Find the first { and matching-ish last }
         first = text.find('{')
         last = text.rfind('}')
         if first != -1 and last != -1:
@@ -262,9 +131,7 @@ def extract_ai_content(text, topic=""):
     except:
         pass
 
-    # Strategy 2: Direct Regex Extraction (The Tank)
     if not ai_data.get('html_content'):
-        # Look for "html_content": " and then anything until a " followed by , or }
         hc_match = pyre.search(r'"html_content":\s*"(.*?)(?<!\\)"', text, pyre.DOTALL)
         if hc_match:
             try:
@@ -285,11 +152,8 @@ def extract_ai_content(text, topic=""):
     content = ai_data.get('html_content', '')
     excerpt = ai_data.get('excerpt', topic + "...")
 
-    # Final cleanup
     if content:
-        # Basic cleanup
         content = content.replace('```html', '').replace('```json', '').replace('```', '').strip()
-        # Aggressive removal of redundant headers
         for _ in range(5):
             content = pyre.sub(r'^\s*Title:\s*.*?\n+', '', content, flags=pyre.IGNORECASE)
             content = pyre.sub(r'^\s*#+\s*.*?\n+', '', content, flags=pyre.IGNORECASE)
@@ -305,7 +169,6 @@ def generate_ai_post():
     """Generates a full blog post using Google Gemini AI SDK and saves it to DB"""
     import google.generativeai as genai
 
-    # Simple admin check - allowing current logged in user for testing
     if not current_user.is_authenticated:
         return jsonify({'error': 'Unauthorized. Please login.'}), 403
 
@@ -317,91 +180,89 @@ def generate_ai_post():
     if not topic:
         return jsonify({'error': 'Topic is required'}), 400
 
-    # Try to fetch a relevant image from NewsAPI based on the topic
-    if not featured_image or 'unsplash' in featured_image:
-        news_api_key = current_app.config.get('NEWS_API_KEY', '')
-        if news_api_key and news_api_key != 'DEMO_MODE':
-            try:
-                import urllib.parse
-                import urllib.request
-                import json
-                query = urllib.parse.quote(f"{topic} fitness")
-                url = f"https://newsapi.org/v2/everything?q={query}&language=en&sortBy=relevance&pageSize=5&apiKey={news_api_key}"
-                req_obj = urllib.request.Request(url, headers={'User-Agent': 'Mozilla/5.0'})
-                with urllib.request.urlopen(req_obj, timeout=5) as response:
-                    news_data = json.loads(response.read().decode())
-                    if news_data.get('status') == 'ok' and news_data.get('articles'):
-                        for article in news_data['articles']:
-                            if article.get('urlToImage'):
-                                featured_image = article['urlToImage']
-                                break
-            except Exception as e:
-                print(f"Failed to fetch dynamic image from NewsAPI: {e}")
-
-    if not featured_image:
-        featured_image = 'https://images.unsplash.com/photo-1517836357463-d25dfeac3438?q=80&w=1200'
-
     api_key = current_app.config.get('GEMINI_API_KEY')
     if not api_key:
         return jsonify({'error': 'Gemini API Key is missing in configuration'}), 500
 
-    try:
-        # Configure Gemini SDK
-        genai.configure(api_key=api_key)
+    # Translate topic to English for better image search
+    topic_en = topic
+    if any(ord(c) > 127 for c in topic):
+        try:
+            genai.configure(api_key=api_key)
+            trans_model = genai.GenerativeModel('gemini-1.5-flash')
+            trans_resp = trans_model.generate_content(f"Translate this fitness topic to a short English search keyword: '{topic}'")
+            if trans_resp.text:
+                topic_en = trans_resp.text.strip().replace("'", "").replace('"', '')
+        except:
+            pass
 
-        # Auto-discover available models to avoid 404 errors
+    # Strategy: Fetch image ONLY via Official Unsplash API
+    if not featured_image or 'unsplash.com/photo-1517836357463-d25dfeac3438' in featured_image:
+        import random
+        import urllib.parse
+        import urllib.request
+        import json
+        
+        unsplash_key = current_app.config.get('UNSPLASH_ACCESS_KEY')
+        featured_image = "https://images.unsplash.com/photo-1517836357463-d25dfeac3438?q=80&w=1200" # Default static fallback
+        
+        if unsplash_key and unsplash_key != 'DEMO_MODE':
+            try:
+                query = urllib.parse.quote(f"fitness {topic_en}")
+                url = f"https://api.unsplash.com/search/photos?query={query}&per_page=15&client_id={unsplash_key}"
+                req = urllib.request.Request(url)
+                with urllib.request.urlopen(req, timeout=8) as response:
+                    data = json.loads(response.read().decode())
+                    if data.get('results'):
+                        chosen = random.choice(data['results'][:10])
+                        featured_image = chosen['urls']['regular']
+            except Exception as e:
+                print(f"Unsplash API Error: {e}")
+
+    try:
+        genai.configure(api_key=api_key)
         available_models = []
         try:
             for m in genai.list_models():
                 if 'generateContent' in m.supported_generation_methods:
                     available_models.append(m.name)
-            print(f"Auto-discovered Gemini models: {available_models}")
-        except Exception as e:
-            print(f"Model discovery failed: {e}")
-            # Fallback to defaults if listing fails
+        except:
             available_models = ['models/gemini-1.5-flash', 'models/gemini-pro']
 
         from google.generativeai.types import HarmCategory, HarmBlockThreshold
-
         content = None
         used_model = ""
         detailed_errors = []
 
         for model_path in available_models:
             try:
-                # Clean model name (some return with 'models/' prefix, some without)
                 model_name = model_path.split('/')[-1]
-
                 safety_settings = {
                     HarmCategory.HARM_CATEGORY_HATE_SPEECH: HarmBlockThreshold.BLOCK_NONE,
                     HarmCategory.HARM_CATEGORY_HARASSMENT: HarmBlockThreshold.BLOCK_NONE,
                     HarmCategory.HARM_CATEGORY_SEXUALLY_EXPLICIT: HarmBlockThreshold.BLOCK_NONE,
                     HarmCategory.HARM_CATEGORY_DANGEROUS_CONTENT: HarmBlockThreshold.BLOCK_NONE,
                 }
-
                 model = genai.GenerativeModel(model_name, safety_settings=safety_settings)
 
-                # Enhanced Expert Persona Prompt
                 prompt_context = ""
                 if category == 'Training':
                     from ...models.exercise import Exercise
-                    # Try to find a related exercise to ground the AI
                     import random
                     exercise = Exercise.query.filter(Exercise.name.ilike(f'%{topic}%')).first()
                     if not exercise:
-                        # Pick a random exercise to add flavor if topic is generic
                         all_ex = Exercise.query.limit(50).all()
                         if all_ex: exercise = random.choice(all_ex)
-
                     if exercise:
                         prompt_context = f"Reference Data for accuracy: Exercise: {exercise.name}, Primary Muscles: {', '.join(exercise.primary_muscles)}, Level: {exercise.level}. Include these physiological details in your advice. "
 
-                lang_instruction = "IMPORTANT: Write EVERYTHING (title, html_content, excerpt) in English."
+                from flask_babel import get_locale
+                current_lang = get_locale()
+                lang_name = "Georgian" if current_lang == 'ka' else "English"
+                lang_instruction = f"IMPORTANT: Write EVERYTHING (title, html_content, excerpt) in {lang_name}. Ensure the tone and cultural nuances are appropriate for {lang_name} speakers."
 
-                # Build the prompt with high priority for custom instructions
                 custom_instruction_block = f"\n[CRITICAL OVERRIDE]: {custom_prompt}\n(Follow the above override even if it contradicts the default style below)\n" if custom_prompt else ""
 
-                # Default requirements - only used if not contradicted by custom_prompt
                 default_requirements = ""
                 if not custom_prompt:
                     default_requirements = (
@@ -430,9 +291,7 @@ def generate_ai_post():
                     if content:
                         used_model = model_name
                         break
-
             except Exception as e:
-                print(f"Generation Error: {e}")
                 detailed_errors.append(f"{model_path} Error: {str(e)}")
                 continue
 
@@ -446,14 +305,12 @@ def generate_ai_post():
                     data = {
                         "model": "deepseek-chat",
                         "messages": [
-                            {"role": "system",
-                             "content": "You are a world-class Elite Coach. Output ONLY JSON with 'html_content' and 'excerpt'."},
+                            {"role": "system", "content": "You are a world-class Elite Coach. Output ONLY JSON with 'html_content' and 'excerpt'."},
                             {"role": "user", "content": prompt}
                         ],
                         "response_format": {"type": "json_object"}
                     }
-                    ds_response = req.post("https://api.deepseek.com/chat/completions", headers=headers, json=data,
-                                           timeout=30)
+                    ds_response = req.post("https://api.deepseek.com/chat/completions", headers=headers, json=data, timeout=30)
                     if ds_response.status_code == 200:
                         ds_data = ds_response.json()
                         ds_content = ds_data['choices'][0]['message']['content']
@@ -472,13 +329,11 @@ def generate_ai_post():
                     data = {
                         "model": "mistral-tiny",
                         "messages": [
-                            {"role": "system",
-                             "content": "You are a world-class Elite Coach. Output ONLY JSON with 'html_content' and 'excerpt'."},
+                            {"role": "system", "content": "You are a world-class Elite Coach. Output ONLY JSON with 'html_content' and 'excerpt'."},
                             {"role": "user", "content": prompt}
                         ]
                     }
-                    m_response = req.post("https://api.mistral.ai/v1/chat/completions", headers=headers, json=data,
-                                          timeout=30)
+                    m_response = req.post("https://api.mistral.ai/v1/chat/completions", headers=headers, json=data, timeout=30)
                     if m_response.status_code == 200:
                         m_data = m_response.json()
                         m_content = m_data['choices'][0]['message']['content']
@@ -488,25 +343,19 @@ def generate_ai_post():
                     detailed_errors.append(f"Mistral Exception: {str(m_err)}")
 
         if not content:
-            return jsonify({
-                               'error': f"AI Failed. Available models were: {available_models}. Errors: {' | '.join(detailed_errors)}"}), 500
+            return jsonify({'error': f"AI Failed. Errors: {' | '.join(detailed_errors)}"}), 500
 
-        # Create slug
         slug = topic.lower().replace(' ', '-').replace('/', '-')[:50]
-
-        # Ensure slug uniqueness
         base_slug = slug
         counter = 1
         while BlogPost.query.filter_by(slug=slug).first():
             slug = f"{base_slug}-{counter}"
             counter += 1
 
-        # Extract excerpt
         import re
         clean_text = re.sub('<[^<]+?>', '', content)
         excerpt = clean_text[:200].strip() + "..."
 
-        # Create DB Record
         new_post = BlogPost(
             title=topic,
             content=content,
@@ -519,9 +368,6 @@ def generate_ai_post():
             published=True
         )
 
-        if featured_image and len(featured_image) < 200:
-            new_post.featured_image = featured_image
-
         db.session.add(new_post)
         db.session.commit()
 
@@ -532,7 +378,6 @@ def generate_ai_post():
         })
 
     except Exception as e:
-        print(f"AI Generation Error (SDK): {str(e)}")
         return jsonify({'error': f"AI Error: {str(e)}"}), 500
 
 
@@ -551,8 +396,6 @@ def ask_expert():
         try:
             import google.generativeai as genai
             genai.configure(api_key=api_key)
-
-            # 1. Discover models to avoid 404
             available_models = []
             try:
                 for m in genai.list_models():
@@ -561,12 +404,11 @@ def ask_expert():
             except:
                 available_models = ['models/gemini-1.5-flash', 'models/gemini-pro']
 
-            # 2. Try each model until one works
             for model_path in available_models:
                 try:
                     model_name = model_path.split('/')[-1]
                     model = genai.GenerativeModel(model_name)
-                    prompt = f"You are a world-class Peak Performance Coach and Fitness Expert. Answer concisely (max 3-4 sentences): '{question}'"
+                    prompt = f"You are a world-class Peak Performance Coach and Fitness Expert. Detect the language of the question and respond in that SAME language. Answer concisely (max 3-4 sentences): '{question}'"
                     response = model.generate_content(prompt)
                     if response.text:
                         answer = response.text
@@ -577,7 +419,6 @@ def ask_expert():
         except Exception as e:
             detailed_errors.append(f"Gemini Global: {str(e)}")
 
-    # 3. DeepSeek Fallback
     if not answer:
         deepseek_key = current_app.config.get('DEEPSEEK_API_KEY') or os.environ.get('DEEPSEEK_API_KEY')
         if deepseek_key:
@@ -587,18 +428,16 @@ def ask_expert():
                 data = {
                     "model": "deepseek-chat",
                     "messages": [
-                        {"role": "system", "content": "You are a world-class Fitness Expert. Answer concisely."},
+                        {"role": "system", "content": "You are a world-class Fitness Expert. Respond in the same language as the user. Answer concisely."},
                         {"role": "user", "content": question}
                     ]
                 }
-                ds_response = req.post("https://api.deepseek.com/chat/completions", headers=headers, json=data,
-                                       timeout=10)
+                ds_response = req.post("https://api.deepseek.com/chat/completions", headers=headers, json=data, timeout=10)
                 if ds_response.status_code == 200:
                     answer = ds_response.json()['choices'][0]['message']['content']
             except Exception as e:
                 detailed_errors.append(f"DeepSeek: {str(e)}")
 
-    # 4. Mistral Fallback
     if not answer:
         mistral_key = current_app.config.get('MISTRAL_API_KEY') or os.environ.get('MISTRAL_API_KEY')
         if mistral_key:
@@ -607,10 +446,9 @@ def ask_expert():
                 headers = {"Authorization": f"Bearer {mistral_key}", "Content-Type": "application/json"}
                 data = {
                     "model": "mistral-tiny",
-                    "messages": [{"role": "user", "content": f"As a fitness coach, answer briefly: {question}"}]
+                    "messages": [{"role": "user", "content": f"As a fitness coach, detect the language and answer briefly in that same language: {question}"}]
                 }
-                m_response = req.post("https://api.mistral.ai/v1/chat/completions", headers=headers, json=data,
-                                      timeout=10)
+                m_response = req.post("https://api.mistral.ai/v1/chat/completions", headers=headers, json=data, timeout=10)
                 if m_response.status_code == 200:
                     answer = m_response.json()['choices'][0]['message']['content']
             except Exception as e:
@@ -618,8 +456,6 @@ def ask_expert():
 
     if not answer:
         err_msg = "Expert is currently overloaded. Please try again in a few minutes."
-        if detailed_errors:
-            print(f"DEBUG AI ERRORS: {' | '.join(detailed_errors)}")
         return jsonify({'error': err_msg}), 500
 
     return jsonify({'success': True, 'answer': answer})

@@ -35,7 +35,7 @@ class Config:
     GEMINI_API_KEY = os.environ.get("GEMINI_API_KEY")
     DEEPSEEK_API_KEY = os.environ.get("DEEPSEEK_API_KEY")
     MISTRAL_API_KEY = os.environ.get("MISTRAL_API_KEY")
-    NEWS_API_KEY = os.environ.get("NEWS_API_KEY")
+    UNSPLASH_ACCESS_KEY = os.environ.get("UNSPLASH_ACCESS_KEY")
 
     # Babel Settings
     BABEL_DEFAULT_LOCALE = 'en'
